@@ -4,9 +4,9 @@
 >
 > No gana quien tiene razón. Gana quien hace cambiar de opinión a los demás.
 
-**4 a 8 jugadores (ideal: 4 a 6) · 14+ años · 40 a 50 minutos**
+**4 a 8 jugadores · 14+ años · 40 a 60 minutos**
 
-**Objetivo:** convencer a alguien de cambiar de opinión. Cada vez que lo lográs, te llevás la carta del tema como trofeo. **El primero en juntar 5 cartas gana.**
+**Objetivo:** en cada ronda debaten todos. **El primero que logra que alguien cambie de opinión se lleva la carta del tema.** Gana quien junta 5 cartas.
 
 ---
 
@@ -20,8 +20,7 @@
 | 🟣 Acción | 36 | Cartas que se juegan durante el debate |
 | 🟢 Restricción | 9 | Modo caos (opcional) |
 | ✔/✖ Voto | 9 | Una por jugador: verde (A FAVOR) de un lado y roja (EN CONTRA) del otro |
-| ⚫ Postura | 2 | Sortean qué defiende cada debatiente |
-| Ayuda | 7 | Resumen de una ronda |
+| Ayuda | 9 | Resumen de una ronda |
 
 Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace falta anotar puntos: las cartas de Tema que ganás son tu puntaje.
 
@@ -31,104 +30,84 @@ Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace fal
 
 1. Elijan los niveles de Tema que van a usar y mezclen esos mazos. Una buena noche suele empezar en 🔵 y pasar a 🟠 o 🔴.
 2. Cada jugador recibe **1 carta de Voto** y **3 cartas de Acción**.
-3. El jugador más joven es el primer **moderador**.
+3. El jugador más joven es el primer **lector**. El lector juega como todos; además lee el tema y controla el tiempo.
 
 ---
 
 ## Una ronda
 
-### 1 · Tema y debatientes
-El moderador saca una carta de Tema y la lee en voz alta. Los debatientes se definen por la ubicación en la mesa, **para que todos debatan contra todos** sin anotar nada:
+### 1 · Tema
+El lector saca una carta de Tema y la lee en voz alta.
 
-- **Debatiente 1:** el jugador a la izquierda del moderador.
-- **Debatiente 2:** depende de la vuelta.
-  - **Vuelta 1:** el vecino de la izquierda del debatiente 1.
-  - **Vuelta 2:** el que sigue, salteando a uno.
-  - **Vuelta 3:** salteando a dos, y así sucesivamente.
+### 2 · ¡Opinen!
+Todos, incluido el lector, esconden su carta de Voto entre las manos y eligen qué lado va a quedar arriba. **Votás lo que pensás de verdad.**
 
-Una **vuelta** termina cuando el rol de moderador vuelve a quien empezó la partida. Con un número par de jugadores, la última vuelta dura solo media vuelta, porque si no se repetirían cruces. Después se vuelve a empezar por la vuelta 1.
-
-| Jugadores | Vueltas hasta que todos debatieron con todos | Rondas |
-|---|---|---|
-| 4 | 1 y media | 6 |
-| 5 | 2 | 10 |
-| 6 | 2 y media | 15 |
-| 7 | 3 | 21 |
-| 8 | 3 y media | 28 |
-
-En toda la secuencia, nadie repite rival hasta haber debatido con todos los demás.
-
-### 2 · ¡Opinen! (voto inicial)
-Todos menos los debatientes esconden su carta de Voto entre las manos o debajo de la mesa, eligiendo qué lado va a quedar arriba. El moderador también vota.
-
-El moderador cuenta: **«3, 2, 1… ¡Opinen!»**. Todos golpean la carta contra la mesa **al mismo tiempo**, con el lado que eligieron hacia arriba:
+El lector cuenta: **«3, 2, 1… ¡Opinen!»**. Todos golpean la carta contra la mesa **al mismo tiempo**, con el lado que eligieron hacia arriba:
 
 - **✔ Verde = A FAVOR** de la afirmación
 - **✖ Roja = EN CONTRA**
 
-Nadie puede abstenerse: acá todos son opinólogos. Las cartas quedan sobre la mesa a la vista de todos.
+Nadie puede abstenerse: acá todos son opinólogos. Las cartas quedan sobre la mesa, a la vista, y así se forman los dos bandos.
 
-**Si el voto inicial es unánime**, uno de los debatientes no tendría a nadie para convencer. El moderador descarta ese tema y saca otro, con los mismos debatientes, y se vuelve a votar. Este descarte no gasta el veto de nadie.
+**Si el voto es unánime**, no hay a quién convencer. El lector descarta el tema, saca otro y se vuelve a votar. Este descarte no gasta el veto de nadie.
 
-> **Por qué todos al mismo tiempo:** así nadie copia lo que vota el resto (efecto manada) y los debatientes ven exactamente a quién tienen que convencer.
+> **Por qué todos al mismo tiempo:** así nadie copia lo que vota el resto (efecto manada).
 
-### 3 · Sorteo de posturas
-El moderador mezcla las 2 cartas de Postura y cada debatiente saca una. **Defendés lo que te tocó, lo creas o no.**
+### 3 · Debate (4 minutos)
+El lector pone el cronómetro en **4 minutos**. Habla primero el jugador a su izquierda y después se sigue en orden, dando las vueltas que haga falta:
 
-### 4 · Debate
-El moderador controla el tiempo:
+- Cada intervención dura **hasta 30 segundos**. Si alguien se pasa, el lector lo corta.
+- Podés decir **«paso»** y esperar tu próximo turno.
+- Cada uno argumenta a favor de su bando y trata de convencer a los del bando contrario.
 
-| Fase | Tiempo | Orden |
-|---|---|---|
-| Apertura | 45 s cada uno | Primero A FAVOR, después EN CONTRA |
-| Réplica | 30 s cada uno | Primero EN CONTRA, después A FAVOR |
-| Cierre | 15 s cada uno | Primero A FAVOR, después EN CONTRA |
+> **Consejo:** estar en minoría es una ventaja. Si son 1 contra 5, tenés 5 personas para convencer, y los otros 5 compiten por convencerte a vos.
 
-### 5 · ¡Opinen! (voto final)
-El moderador vuelve a contar: **«3, 2, 1… ¡Opinen!»**. Todos muestran el pulgar **arriba (A FAVOR)** o **abajo (EN CONTRA)** al mismo tiempo.
+### 4 · ¡Me convenciste!
+**En cualquier momento del debate**, incluso en medio de una intervención, un jugador que cambió de opinión da vuelta su carta de Voto y dice: **«¡Me convenciste!»**, nombrando a quien lo convenció. Esa persona tiene que:
 
-Quien cambió de opinión **da vuelta su carta de Voto**. Así se ve en un segundo cuántos cambiaron.
+- ser del **bando al que te pasás**, y
+- **haber hablado en esta ronda**.
 
-### 6 · ¿Quién se lleva la carta?
-**Convencer** a alguien significa que esa persona arrancó del lado contrario al tuyo en el voto inicial y en el voto final se pasó a tu lado.
+Ese jugador se lleva la **carta de Tema** y todo el **pozo**, y la ronda termina en ese momento.
 
-- El debatiente que convenció **a más personas** se lleva la **carta de Tema** y la deja boca arriba frente a él. Es su trofeo.
-- Si **nadie convenció a nadie**, o los dos convencieron a la misma cantidad, la carta va al **pozo**, en el centro de la mesa.
-- El próximo debatiente que gane una carta **se lleva también todo el pozo**.
+**Mente abierta:** quien cambió de opinión roba **1 carta de Acción** como premio por animarse a cambiar. Nadie puede tener más de 5 en la mano.
 
-> **Por qué existe el pozo:** sin él, muchas rondas terminan sin premio y llegar a 5 cartas lleva más de dos horas. Con el pozo, cada carta termina en manos de alguien y la partida dura unas 10 a 14 rondas. Además, las rondas con 2 o 3 cartas en juego se vuelven las más tensas.
+Si dos jugadores cambian de opinión a la vez, cuenta el primero que lo dijo. Si no se puede saber, decide el lector.
 
-Para la ronda siguiente, el rol de moderador pasa al jugador de la izquierda y cada uno repone su mano hasta tener 3 cartas de Acción.
+### 5 · Si nadie cambió
+Si termina el tiempo y nadie cambió de opinión, la carta de Tema va al **pozo**, en el centro de la mesa. **El próximo que convenza a alguien se lleva también todo el pozo.**
+
+> **Por qué existe el pozo:** cada carta termina en manos de alguien y la partida no se alarga. Además, las rondas con 2 o 3 cartas en juego se vuelven las más tensas. Antes de cada debate, el lector anuncia cuántas cartas hay en juego.
+
+Para la ronda siguiente, el rol de lector pasa al jugador de la izquierda y cada uno repone su mano hasta tener 3 cartas de Acción. Si ya tenés más de 3 por Mente abierta, te las quedás.
 
 ---
 
 ## Cartas de Acción
 
-- Las **DEBATIENTE** solo las juegan los debatientes durante su debate. Cada uno puede jugar **hasta 2 por ronda**.
-- Las **PÚBLICO** solo las juegan quienes votan. Cada uno puede jugar **hasta 1 por ronda**.
-- Cuando una carta pausa el reloj, el moderador lo detiene.
+- Cada jugador puede jugar **1 carta de Acción por ronda**.
+- La franja de cada carta dice cuándo se juega: **CUANDO QUIERAS**, **EN TU TURNO**, **AL CONVENCER** o **COMO RESPUESTA**.
+- Cuando una carta pausa el reloj, el lector lo detiene.
 - Las cartas jugadas van al descarte. Si se termina el mazo, se mezcla el descarte.
 
 ## Fin de la partida
 
-Gana el primero en juntar **5 cartas de Tema**. Para una partida corta, jueguen a **3 cartas**.
-
-**Con 7 u 8 jugadores, jueguen en Parejas** (ver Variantes). En individual, cada uno debate muy de vez en cuando y la partida se estira.
+Gana el primero en juntar **5 cartas de Tema**.
 
 ---
 
-## Reglas para que la mesa la pase bien
+## Juego limpio
 
+- **Cambiá solo si de verdad te convencieron.** Cambiar para regalarle la carta a alguien arruina el juego. Para eso existe Mente abierta: cambiar de opinión con honestidad también tiene premio.
 - **Veto:** cada jugador puede descartar **1 tema por partida** sin dar explicaciones. Es clave en mesas mixtas de adolescentes y adultos.
-- **Se ataca la idea, no a la persona.** Si un argumento se pone personal, el moderador puede cortar el turno.
-- **Lo que se dice defendiendo una postura sorteada no es la opinión real de nadie.** Es parte del juego.
+- **Se ataca la idea, no a la persona.** Si un argumento se pone personal, el lector puede cortar el turno.
+- **Lo que se dice en el juego queda en el juego.**
 
 ---
 
 ## Variantes
 
-- **Modo caos:** al principio de cada ronda, el moderador saca una carta de Restricción, que vale para los dos debatientes.
-- **Modo convicción:** no se sortea la postura. Cada debatiente defiende lo que votó en el voto inicial. Si los dos votaron lo mismo, el moderador le asigna el lado contrario a uno de ellos.
-- **Parejas (recomendado con 7 u 8 jugadores):** formen parejas y siéntense alternados (A B C D A B C D). La última media vuelta no se juega, porque enfrentaría a compañeros: se vuelve directo a la vuelta 1. **Los compañeros de los debatientes no votan esa ronda**, para que nadie le regale el voto a su pareja. Las cartas ganadas son de la pareja, y gana la primera en juntar 5. Con 7 jugadores, el séptimo es moderador fijo, vota en todas las rondas y no ocupa lugar en la rotación: el debatiente 1 avanza un lugar por ronda.
-- **Todos contra uno:** un solo debatiente defiende la postura minoritaria del voto inicial contra toda la mesa. Si convence al menos a una persona, se lleva la carta y además la siguiente del mazo.
+- **Partida corta:** gana el primero en juntar 3 cartas.
+- **Modo caos:** al principio de cada ronda, el lector saca una carta de Restricción, que vale para todos los jugadores.
 - **Escalada:** la partida empieza con temas 🔵. Cuando alguien junta 2 cartas se pasa a 🟠, y cuando alguien junta 4, a 🔴.
+- **Debate libre:** sin orden de turnos; habla quien levanta la mano primero. Funciona mejor con 4 o 5 jugadores.

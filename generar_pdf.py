@@ -54,7 +54,6 @@ MAZOS = {
     "profundo": ("PROFUNDO", HexColor("#B3261E"), "TEMA · NIVEL 3"),
     "accion": ("ACCIÓN", HexColor("#6C3FB5"), "CARTA DE ACCIÓN"),
     "restriccion": ("RESTRICCIÓN", HexColor("#11998E"), "MODO CAOS"),
-    "postura": ("POSTURA", TINTA, "SORTEO DE DEBATIENTES"),
     "ayuda": ("AYUDA", HexColor("#4A4A55"), "RESUMEN DEL TURNO"),
 }
 
@@ -181,7 +180,7 @@ def frente_restriccion(texto):
         banda(cv, x, y, color, "RESTRICCIÓN", "MODO CAOS")
         texto_ajustado(cv, texto, x + PAD, y + 20 * mm, CW - 2 * PAD, CH - BANDA - 26 * mm,
                        maximo=16, minimo=10)
-        texto_ajustado(cv, "Vale para los dos debatientes durante toda la ronda.",
+        texto_ajustado(cv, "Vale para todos los jugadores durante toda la ronda.",
                        x + PAD, y + 8 * mm, CW - 2 * PAD, 10 * mm,
                        fuente="Reg", maximo=7.5, minimo=6, color=GRIS)
         pie(cv, x, y)
@@ -203,25 +202,6 @@ def cara_voto(a_favor):
         cv.drawCentredString(x + CW / 2, y + CH / 2 - 14 * mm, etiqueta)
         cv.setFont("Bold", 6.5)
         cv.drawCentredString(x + CW / 2, y + 6 * mm, "VOTO · " + NOMBRE)
-    return dibujar
-
-
-def frente_postura(a_favor):
-    color = VERDE if a_favor else ROJO
-    etiqueta = "✔ A FAVOR" if a_favor else "✖ EN CONTRA"
-
-    def dibujar(cv, x, y):
-        marco(cv, x, y)
-        banda(cv, x, y, TINTA, "POSTURA", "DEBATIENTE")
-        cv.setFillColor(GRIS)
-        cv.setFont("Reg", 9)
-        cv.drawCentredString(x + CW / 2, y + CH - BANDA - 14 * mm, "Te toca defender:")
-        cv.setFillColor(color)
-        cv.setFont("Sym", 17)
-        cv.drawCentredString(x + CW / 2, y + CH / 2 - 2 * mm, etiqueta)
-        texto_ajustado(cv, "Lo creas o no. Convencé a la mesa.", x + PAD, y + 12 * mm,
-                       CW - 2 * PAD, 12 * mm, fuente="Reg", maximo=9, minimo=7, color=GRIS)
-        pie(cv, x, y)
     return dibujar
 
 
@@ -271,13 +251,8 @@ def main():
     # Votos: una carta doble faz por jugador (verde de un lado, roja del otro).
     plan += hojas([cara_voto(True)] * 9, [cara_voto(False)] * 9)
 
-    # Postura (2) + Ayuda (7)
-    pt, pc, ps = MAZOS["postura"]
     at, ac, asub = MAZOS["ayuda"]
-    fr = [frente_postura(True), frente_postura(False)] + [frente_ayuda()] * 7
-    ds = [lambda cv, x, y: dorso(cv, x, y, pc, pt, ps)] * 2 + \
-         [lambda cv, x, y: dorso(cv, x, y, ac, at, asub)] * 7
-    plan += hojas(fr, ds)
+    plan += hojas([frente_ayuda()] * 9, [lambda cv, x, y: dorso(cv, x, y, ac, at, asub)] * 9)
 
     cv = canvas.Canvas(SALIDA, pagesize=A4)
     cv.setTitle("Opinólogos – cartas imprimibles")

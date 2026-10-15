@@ -149,38 +149,36 @@ PROFUNDO = [
     "La tecnología nos hace más libres.",
 ]
 
-# (nombre, quién la juega, texto, copias)
+# (nombre, cuándo se juega, texto, copias)
 ACCION = [
-    ("¡Objeción!", "DEBATIENTE",
-     "Interrumpí al rival: tenés 10 segundos para refutar lo que acaba de decir. Su reloj se pausa.", 4),
-    ("Prórroga", "DEBATIENTE", "Sumá 20 segundos a tu turno.", 4),
-    ("Pregunta trampa", "DEBATIENTE",
-     "Hacele al rival una pregunta de sí o no. Solo puede contestar «sí» o «no», sin explicar.", 3),
-    ("Llamo a un testigo", "DEBATIENTE",
-     "Elegí a alguien del público: argumenta a tu favor durante 20 segundos.", 3),
-    ("Intercambio", "DEBATIENTE",
-     "Jugala antes de la réplica. Los dos debatientes intercambian posturas hasta el final. "
-     "La carta se la lleva quien convenza con su postura nueva.", 2),
-    ("Palabra prohibida", "DEBATIENTE",
-     "Elegí una palabra común («porque», «obvio», «igual»...). Si el rival la dice en su "
+    ("¡Objeción!", "CUANDO QUIERAS",
+     "Interrumpí a quien está hablando: tenés 10 segundos para refutarlo. El reloj se pausa.", 4),
+    ("Prórroga", "EN TU TURNO", "Tu intervención puede durar 30 segundos más.", 3),
+    ("¡Me toca!", "CUANDO QUIERAS",
+     "Hablá ahora, fuera de turno, hasta 20 segundos. Después se sigue el orden normal.", 3),
+    ("Pregunta trampa", "CUANDO QUIERAS",
+     "Hacele a un jugador una pregunta de sí o no. Solo puede contestar «sí» o «no», sin explicar.", 3),
+    ("Pregunta directa", "CUANDO QUIERAS",
+     "Hacele una pregunta a un jugador del otro bando. Tiene que responderla ya, en 15 segundos.", 3),
+    ("Llamo a un aliado", "CUANDO QUIERAS",
+     "Elegí a alguien de tu bando: habla ahora, fuera de turno, durante 20 segundos.", 2),
+    ("Palabra prohibida", "CUANDO QUIERAS",
+     "Elegí a un jugador y una palabra común («porque», «obvio», «igual»...). Si la dice en su "
      "próximo turno, se le termina el turno.", 2),
-    ("Turno relámpago", "DEBATIENTE", "El próximo turno del rival dura la mitad.", 2),
-    ("Espejo", "DEBATIENTE",
-     "Jugala cuando te jueguen una carta: el efecto se le aplica a quien la jugó.", 2),
-    ("Dato duro", "DEBATIENTE",
+    ("Turno relámpago", "CUANDO QUIERAS", "Elegí a un jugador: su próximo turno dura solo 15 segundos.", 2),
+    ("Silencio", "CUANDO QUIERAS", "Elegí a un jugador: pierde su próximo turno.", 2),
+    ("Analogía obligatoria", "CUANDO QUIERAS",
+     "Elegí a un jugador: su próximo argumento tiene que ser una comparación con fútbol, cocina "
+     "o una película. Vos elegís cuál.", 2),
+    ("¡Quiero un ejemplo!", "CUANDO QUIERAS",
+     "Elegí a un jugador: en su próximo turno tiene que dar un ejemplo concreto de la vida real.", 3),
+    ("Dato duro", "EN TU TURNO",
      "Pausá el reloj: tenés 30 segundos para buscar un dato en el celular y leerlo en voz alta.", 2),
-    ("Última palabra", "DEBATIENTE",
-     "Después de los cierres, tenés 10 segundos más. Nadie puede responderte.", 2),
-    ("Analogía obligatoria", "DEBATIENTE",
-     "El rival tiene que explicar su próximo argumento comparándolo con fútbol, cocina o una "
-     "película. Vos elegís cuál.", 2),
-    ("Pregunta del público", "PÚBLICO",
-     "Hacele una pregunta a un debatiente. Tiene 15 segundos para responderla.", 4),
-    ("¡Quiero un ejemplo!", "PÚBLICO",
-     "Un debatiente tiene que dar un ejemplo concreto de la vida real en su próximo turno.", 2),
-    ("Desempate", "PÚBLICO",
-     "Jugala en el voto final. Si los debatientes empatan, vos decidís quién se lleva la carta "
-     "(y el pozo).", 2),
+    ("Espejo", "COMO RESPUESTA",
+     "Jugala cuando te jueguen una carta: el efecto se le aplica a quien la jugó.", 3),
+    ("Golazo", "AL CONVENCER",
+     "Jugala cuando alguien diga «¡Me convenciste!» por vos: además de tu premio, le robás "
+     "1 carta de Tema a cualquier jugador.", 2),
 ]
 
 RESTRICCION = [
@@ -196,12 +194,13 @@ RESTRICCION = [
 ]
 
 AYUDA = [
-    ("1. Tema", "El moderador lee la carta en voz alta."),
-    ("2. ¡Opinen!", "Voto inicial: todos golpean su carta de Voto sobre la mesa al mismo tiempo. "
+    ("1. Tema", "El lector lee la carta en voz alta."),
+    ("2. ¡Opinen!", "Todos golpean su carta de Voto a la vez, con lo que piensan de verdad. "
                      "Si es unánime, cambien de tema."),
-    ("3. Sorteo", "Los debatientes sacan una carta de Postura al azar."),
-    ("4. Debate", "Apertura 45 s · Réplica 30 s · Cierre 15 s (cada uno)."),
-    ("5. ¡Opinen!", "Voto final: pulgar arriba o abajo, al mismo tiempo. Quien cambió, da vuelta su carta."),
-    ("6. Premio", "Quien convenció a más personas se lleva la carta de Tema y el pozo. "
-                  "Si nadie convenció o hay empate, la carta va al pozo. Con 5 cartas, ganás."),
+    ("3. Debate", "4 minutos. En orden, intervenciones de hasta 30 s. Podés pasar."),
+    ("4. ¡Me convenciste!", "Quien cambia de opinión da vuelta su carta y nombra a quien lo "
+                            "convenció. Ese jugador se lleva la carta y el pozo. Quien cambió "
+                            "roba 1 carta de Acción."),
+    ("5. Sin cambios", "Si se termina el tiempo, la carta va al pozo."),
+    ("6. Fin", "Con 5 cartas, ganás."),
 ]

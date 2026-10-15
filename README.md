@@ -2,9 +2,9 @@
 
 > Todos opinan. Pocos convencen.
 
-Juego de cartas de debate para adolescentes y adultos (14+), para jugar en familia o con amigos.
+Juego de cartas de debate para adolescentes y adultos (14+), de 4 a 8 jugadores, para jugar en familia o con amigos.
 
-**No gana quien tiene razón: gana quien hace cambiar de opinión a los demás.** Todos votan A FAVOR o EN CONTRA al mismo tiempo, antes y después de cada debate. Si convencés a alguien de cambiar de opinión, te llevás la carta del tema como trofeo. El primero en juntar 5 cartas gana.
+**No gana quien tiene razón: gana quien hace cambiar de opinión a los demás.** Todos votan A FAVOR o EN CONTRA al mismo tiempo y debaten todos contra todos. El primero que logra que alguien cambie de opinión se lleva la carta del tema. Gana quien junta 5.
 
 - 📖 [Reglamento completo](REGLAMENTO.md)
 - 🖨️ [Cartas imprimibles (PDF)](opinologos-imprimible.pdf): 198 cartas en 44 hojas A4
