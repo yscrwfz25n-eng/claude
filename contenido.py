@@ -197,7 +197,8 @@ RESTRICCION = [
 
 AYUDA = [
     ("1. Tema", "El moderador lee la carta en voz alta."),
-    ("2. ¡Opinen!", "Voto inicial: todos golpean su carta de Voto sobre la mesa al mismo tiempo."),
+    ("2. ¡Opinen!", "Voto inicial: todos golpean su carta de Voto sobre la mesa al mismo tiempo. "
+                     "Si es unánime, cambien de tema."),
     ("3. Sorteo", "Los debatientes sacan una carta de Postura al azar."),
     ("4. Debate", "Apertura 45 s · Réplica 30 s · Cierre 15 s (cada uno)."),
     ("5. ¡Opinen!", "Voto final: pulgar arriba o abajo, al mismo tiempo. Quien cambió, da vuelta su carta."),

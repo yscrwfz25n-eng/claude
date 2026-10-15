@@ -4,7 +4,7 @@
 >
 > No gana quien tiene razón. Gana quien hace cambiar de opinión a los demás.
 
-**3 a 8 jugadores (ideal: 4 a 6) · 14+ años · 40 a 50 minutos**
+**4 a 8 jugadores (ideal: 4 a 6) · 14+ años · 40 a 50 minutos**
 
 **Objetivo:** convencer a alguien de cambiar de opinión. Cada vez que lo lográs, te llevás la carta del tema como trofeo. **El primero en juntar 5 cartas gana.**
 
@@ -37,8 +37,26 @@ Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace fal
 
 ## Una ronda
 
-### 1 · Tema
-El moderador saca una carta de Tema y la lee en voz alta. Los **dos jugadores a su izquierda** son los debatientes de la ronda.
+### 1 · Tema y debatientes
+El moderador saca una carta de Tema y la lee en voz alta. Los debatientes se definen por la ubicación en la mesa, **para que todos debatan contra todos** sin anotar nada:
+
+- **Debatiente 1:** el jugador a la izquierda del moderador.
+- **Debatiente 2:** depende de la vuelta.
+  - **Vuelta 1:** el vecino de la izquierda del debatiente 1.
+  - **Vuelta 2:** el que sigue, salteando a uno.
+  - **Vuelta 3:** salteando a dos, y así sucesivamente.
+
+Una **vuelta** termina cuando el rol de moderador vuelve a quien empezó la partida. Con un número par de jugadores, la última vuelta dura solo media vuelta, porque si no se repetirían cruces. Después se vuelve a empezar por la vuelta 1.
+
+| Jugadores | Vueltas hasta que todos debatieron con todos | Rondas |
+|---|---|---|
+| 4 | 1 y media | 6 |
+| 5 | 2 | 10 |
+| 6 | 2 y media | 15 |
+| 7 | 3 | 21 |
+| 8 | 3 y media | 28 |
+
+En toda la secuencia, nadie repite rival hasta haber debatido con todos los demás.
 
 ### 2 · ¡Opinen! (voto inicial)
 Todos menos los debatientes esconden su carta de Voto entre las manos o debajo de la mesa, eligiendo qué lado va a quedar arriba. El moderador también vota.
@@ -49,6 +67,8 @@ El moderador cuenta: **«3, 2, 1… ¡Opinen!»**. Todos golpean la carta contra
 - **✖ Roja = EN CONTRA**
 
 Nadie puede abstenerse: acá todos son opinólogos. Las cartas quedan sobre la mesa a la vista de todos.
+
+**Si el voto inicial es unánime**, uno de los debatientes no tendría a nadie para convencer. El moderador descarta ese tema y saca otro, con los mismos debatientes, y se vuelve a votar. Este descarte no gasta el veto de nadie.
 
 > **Por qué todos al mismo tiempo:** así nadie copia lo que vota el resto (efecto manada) y los debatientes ven exactamente a quién tienen que convencer.
 
@@ -109,6 +129,6 @@ Gana el primero en juntar **5 cartas de Tema**. Para una partida corta, jueguen 
 
 - **Modo caos:** al principio de cada ronda, el moderador saca una carta de Restricción, que vale para los dos debatientes.
 - **Modo convicción:** no se sortea la postura. Cada debatiente defiende lo que votó en el voto inicial. Si los dos votaron lo mismo, el moderador le asigna el lado contrario a uno de ellos.
-- **Parejas (recomendado con 7 u 8 jugadores):** formen parejas y siéntense alternados (A B C D A B C D), así los dos debatientes de cada ronda siempre son de parejas distintas. **Los compañeros de los debatientes no votan esa ronda**, para que nadie le regale el voto a su pareja. Las cartas ganadas son de la pareja, y gana la primera en juntar 5. Con 7 jugadores, el séptimo es moderador fijo y vota en todas las rondas.
+- **Parejas (recomendado con 7 u 8 jugadores):** formen parejas y siéntense alternados (A B C D A B C D). La última media vuelta no se juega, porque enfrentaría a compañeros: se vuelve directo a la vuelta 1. **Los compañeros de los debatientes no votan esa ronda**, para que nadie le regale el voto a su pareja. Las cartas ganadas son de la pareja, y gana la primera en juntar 5. Con 7 jugadores, el séptimo es moderador fijo, vota en todas las rondas y no ocupa lugar en la rotación: el debatiente 1 avanza un lugar por ronda.
 - **Todos contra uno:** un solo debatiente defiende la postura minoritaria del voto inicial contra toda la mesa. Si convence al menos a una persona, se lleva la carta y además la siguiente del mazo.
 - **Escalada:** la partida empieza con temas 🔵. Cuando alguien junta 2 cartas se pasa a 🟠, y cuando alguien junta 4, a 🔴.
