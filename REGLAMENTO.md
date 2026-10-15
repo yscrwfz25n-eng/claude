@@ -10,13 +10,14 @@
 
 ---
 
-## Componentes (54 cartas)
+## Componentes (100 cartas)
 
 | Mazo | Cartas | Para qué sirve |
 |---|---|---|
-| Tema | 34 | Cada carta trae 3 temas, uno por nivel: 🔵 Calentamiento, 🟠 Picante y 🔴 Profundo (102 temas en total) |
-| Acción | 12 | Cartas que se juegan durante el debate |
+| Tema | 60 | Cada carta trae 3 temas, uno por nivel: 🔵 Calentamiento, 🟠 Picante y 🔴 Profundo (180 temas en total) |
+| Acción | 24 | Cartas que se juegan durante el debate (12 tipos, 2 de cada una) |
 | Voto | 8 | Una por jugador: verde (A FAVOR) de un lado y roja (EN CONTRA) del otro |
+| Ayuda | 8 | Una por jugador, con el resumen de la ronda |
 
 Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace falta anotar puntos: las cartas de Tema que ganás son tu puntaje.
 
@@ -26,7 +27,7 @@ Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace fal
 
 1. Elijan el **nivel** de la partida: 🔵, 🟠 o 🔴. De cada carta se lee solo el tema de ese nivel.
 2. Mezclen el mazo de Tema y el de Acción por separado.
-3. Cada jugador recibe **1 carta de Voto** y **1 carta de Acción**.
+3. Cada jugador recibe **1 carta de Voto**, **1 carta de Ayuda** y **2 cartas de Acción**.
 4. El más joven es el primer **lector**. Juega como todos, pero además lee el tema y controla el tiempo.
 
 ---
@@ -64,14 +65,14 @@ El lector pone el cronómetro en **4 minutos**. **No hay turnos: habla quien qui
 
 Ese jugador se lleva la **carta de Tema** y todo el **pozo**, y la ronda termina en ese momento.
 
-**Mente abierta:** quien cambió de opinión roba **1 carta de Acción** como premio por animarse a cambiar. Nadie puede tener más de 2 en la mano.
+**Mente abierta:** quien cambió de opinión roba **1 carta de Acción** como premio por animarse a cambiar. Nadie puede tener más de 3 en la mano.
 
 Si dos jugadores cambian de opinión a la vez, cuenta el primero que lo dijo. Si no se puede saber, decide el lector.
 
 ### 5 · Si nadie cambió
 Si termina el tiempo y nadie cambió de opinión, la carta de Tema va al **pozo**, en el centro de la mesa. **El próximo que convenza a alguien se lleva también todo el pozo.**
 
-Para la ronda siguiente, el rol de lector pasa al jugador de la izquierda y quien se quedó sin carta de Acción roba 1.
+Para la ronda siguiente, el rol de lector pasa al jugador de la izquierda y cada uno repone su mano hasta tener 2 cartas de Acción.
 
 ---
 

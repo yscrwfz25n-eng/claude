@@ -57,6 +57,7 @@ NIVELES = [
 MAZOS = {
     "tema": ("TEMA", TINTA, "3 NIVELES POR CARTA"),
     "accion": ("ACCIÓN", HexColor("#6C3FB5"), "CARTA DE ACCIÓN"),
+    "ayuda": ("AYUDA", HexColor("#4A4A55"), "RESUMEN DE LA RONDA"),
 }
 
 
@@ -199,6 +200,17 @@ def cara_voto(a_favor):
     return dibujar
 
 
+def frente_ayuda():
+    def dibujar(cv, x, y):
+        marco(cv, x, y)
+        banda(cv, x, y, MAZOS["ayuda"][1], "CÓMO SE JUEGA", "1 RONDA")
+        html = "<br/>".join(f"<font name='Bold'>{t}</font> {d}" for t, d in c.AYUDA)
+        texto_ajustado(cv, html, x + 4 * mm, y + 9 * mm, CW - 8 * mm, CH - BANDA - 12 * mm,
+                       fuente="Reg", maximo=8.5, minimo=6, alineado=0, vcentro=False)
+        pie(cv, x, y)
+    return dibujar
+
+
 # ---------- armado de hojas ----------
 
 def hojas(frentes, dorsos):
@@ -227,6 +239,9 @@ def main():
 
     # Votos: una carta doble faz por jugador (verde de un lado, roja del otro).
     plan += hojas([cara_voto(True)] * 8, [cara_voto(False)] * 8)
+
+    yt, yc, ys = MAZOS["ayuda"]
+    plan += hojas([frente_ayuda()] * 8, [lambda cv, x, y: dorso(cv, x, y, yc, yt, ys)] * 8)
 
     cv = canvas.Canvas(SALIDA, pagesize=A4)
     cv.setTitle("Opinólogos – cartas imprimibles")

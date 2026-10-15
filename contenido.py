@@ -2,7 +2,7 @@
 
 Cada tema es una afirmación: los jugadores votan A FAVOR o EN CONTRA.
 Cada carta de Tema lleva un tema de cada nivel (fila i de cada lista),
-así el mazo entero entra en 54 cartas: 34 Tema + 12 Acción + 8 Voto.
+Mazo de 100 cartas: 60 Tema (180 temas) + 24 Acción + 8 Voto + 8 Ayuda.
 Regla de oro al escribir temas: en una mesa típica, el voto inicial
 debería quedar cerca de 50/50. Si un tema arranca 6 a 0, se descarta.
 """
@@ -42,6 +42,32 @@ CALENTAMIENTO = [
     "Es mejor enterarte de todos los chismes que no enterarte de ninguno.",
     "Las mejores vacaciones son las que no se planifican.",
     "El que pone la música en la previa tiene más poder que el que pone la casa.",
+    "En un apocalipsis zombi, el mejor refugio es un supermercado.",
+    "Si tuvieras que comer una sola comida para siempre, la pizza es la elección correcta.",
+    "Es mejor tener un dragón que ser un dragón.",
+    "Olvidarte el nombre de alguien es peor que saludar a alguien que no te saludaba.",
+    "Vivir siempre con 10 % de batería es peor que vivir con internet lento.",
+    "El que habla en el cine es peor que el que patea el asiento.",
+    "Ver series dobladas es mejor que verlas con subtítulos.",
+    "Sacarse los zapatos en una casa ajena está bien.",
+    "Es mejor ser el primero en irse de una fiesta que el último.",
+    "Leer el final de un libro antes de terminarlo es válido.",
+    "Las remakes de películas siempre son peores que el original.",
+    "Dormir la siesta es una pérdida de tiempo.",
+    "La telepatía es mejor superpoder que la teletransportación.",
+    "Las facturas son mejores que las tortas.",
+    "Ir al cine solo es un planazo.",
+    "La música de antes era mejor que la de ahora.",
+    "Es mejor ser la estrella de un equipo malo que suplente en el mejor equipo.",
+    "Las mascotas deberían poder entrar a los restaurantes.",
+    "Es mejor despertarse temprano que acostarse tarde.",
+    "Ver una película en el cine es mejor que verla en casa.",
+    "Cantar a los gritos en el auto con las ventanillas abiertas es válido.",
+    "Las redes sociales deberían tener un botón de «no me gusta».",
+    "Un día libre es mejor quedarse en casa que salir.",
+    "El fútbol está sobrevalorado.",
+    "La pileta es mejor que el mar.",
+    "Organizar una fiesta es más divertido que ir a una.",
 ]
 
 PICANTE = [
@@ -79,6 +105,32 @@ PICANTE = [
     "Los adolescentes no deberían tener horario para volver a casa.",
     "Stalkear a tu ex en redes es normal.",
     "Elegir una carrera a los 17 años es demasiado pronto.",
+    "La propina debería ser obligatoria.",
+    "A los 18 hay que irse a vivir solo cuanto antes.",
+    "Si tu amigo te pregunta qué pensás de su pareja, tenés que decirle la verdad.",
+    "Las mentiras piadosas son necesarias.",
+    "Contar un secreto está bien si es para ayudar a esa persona.",
+    "Los padres no deberían ser amigos de sus hijos.",
+    "Mentir sobre tu edad en una app de citas está bien.",
+    "Conocer a alguien por una app es igual de válido que conocerlo en persona.",
+    "Hay que llevarse bien con la familia de tu pareja, aunque no te caiga bien.",
+    "Un poco de celos en la pareja es una prueba de amor.",
+    "Tener hijos después de los 40 es mejor que tenerlos de joven.",
+    "Si un amigo te pide que lo cubras con una mentira, hay que hacerlo.",
+    "Pedir algo prestado y no devolverlo es tan grave como robar.",
+    "En una pareja, toda la plata debería ser compartida.",
+    "Está bien no invitar a un familiar a tu casamiento.",
+    "Los hermanos mayores deberían tener más privilegios.",
+    "Es válido cortar con alguien solo porque te aburre.",
+    "Las tareas de la casa deberían pagarse con la mesada.",
+    "Llamar por teléfono sin avisar antes es una falta de respeto.",
+    "Subir fotos de tus amigos sin preguntarles está bien.",
+    "En una entrevista de trabajo hay que ser sincero, aunque te cueste el puesto.",
+    "Hay que contestar los mensajes del jefe fuera del horario de trabajo.",
+    "Ser puntual es más importante que ser divertido.",
+    "Ir a una fiesta donde va a estar tu ex es una mala idea.",
+    "Los amigos de toda la vida valen más que la pareja.",
+    "Los abuelos tienen derecho a malcriar a los nietos.",
 ]
 
 PROFUNDO = [
@@ -116,35 +168,74 @@ PROFUNDO = [
     "Tener hijos es una decisión egoísta.",
     "Alguien que nunca miente no puede tener amigos.",
     "La venganza, a veces, es justicia.",
+    "Conocer tu futuro en detalle arruinaría tu vida.",
+    "Subir tu mente a una computadora para vivir para siempre es una buena idea.",
+    "No necesitar dormir nunca más sería una bendición.",
+    "Todo tiempo pasado fue mejor.",
+    "La tecnología nos hace más libres.",
+    "Es mejor ser un genio incomprendido que una persona común y feliz.",
+    "La felicidad depende más de la suerte que de las decisiones.",
+    "Si nadie se entera, una mentira no hace daño.",
+    "Hay verdades que es mejor no saber nunca.",
+    "Las personas son lo que hacen, no lo que piensan.",
+    "Es justo castigar a alguien por algo que hizo hace 20 años.",
+    "El arte hecho por una inteligencia artificial es arte de verdad.",
+    "Es mejor ser respetado que ser querido.",
+    "Viajar en el tiempo debería estar prohibido, aunque fuera posible.",
+    "Dentro de 100 años la humanidad va a estar mejor que hoy.",
+    "Para ser feliz hay que bajar las expectativas.",
+    "La amistad entre hombres y mujeres existe.",
+    "El destino existe.",
+    "Priorizar tu felicidad por sobre la de tu familia es egoísta.",
+    "Una vida sin sufrimiento no tendría sentido.",
+    "Hay que perdonar aunque el otro no pida perdón.",
+    "Uno nunca termina de conocer a otra persona.",
+    "Vivir el presente es más importante que planear el futuro.",
+    "Si pudieras leer la mente de los demás, lo harías.",
+    "La ambición es más una virtud que un defecto.",
+    "La muerte es lo que le da sentido a la vida.",
 ]
 
-# (nombre, cuándo se juega, texto, copias): una copia de cada una, 12 en total
+# (nombre, cuándo se juega, texto, copias): 12 tipos x 2 = 24 cartas
 ACCION = [
     ("¡Objeción!", "CUANDO QUIERAS",
-     "Interrumpí a quien está hablando: tenés 10 segundos para refutarlo. El reloj se pausa.", 1),
+     "Interrumpí a quien está hablando: tenés 10 segundos para refutarlo. El reloj se pausa.", 2),
     ("Blindaje", "AL HABLAR", "Durante los próximos 30 segundos nadie puede interrumpirte, ni siquiera con cartas como "
-     "¡Objeción! o ¡Me toca!.", 1),
+     "¡Objeción! o ¡Me toca!.", 2),
     ("¡Me toca!", "CUANDO QUIERAS",
-     "Tomá la palabra ya: quien está hablando corta y vos tenés 20 segundos sin interrupciones.", 1),
+     "Tomá la palabra ya: quien está hablando corta y vos tenés 20 segundos sin interrupciones.", 2),
     ("Pregunta trampa", "CUANDO QUIERAS",
-     "Hacele a un jugador una pregunta de sí o no. Solo puede contestar «sí» o «no», sin explicar.", 1),
+     "Hacele a un jugador una pregunta de sí o no. Solo puede contestar «sí» o «no», sin explicar.", 2),
     ("Pregunta directa", "CUANDO QUIERAS",
-     "Hacele una pregunta a un jugador del otro bando. Tiene que responderla ya, en 15 segundos.", 1),
+     "Hacele una pregunta a un jugador del otro bando. Tiene que responderla ya, en 15 segundos.", 2),
     ("Llamo a un aliado", "CUANDO QUIERAS",
-     "Elegí a alguien de tu bando: toma la palabra ya y tiene 20 segundos sin interrupciones.", 1),
+     "Elegí a alguien de tu bando: toma la palabra ya y tiene 20 segundos sin interrupciones.", 2),
     ("Palabra prohibida", "CUANDO QUIERAS",
      "Elegí a un jugador y una palabra común («porque», «obvio», «igual»...). Si la dice antes "
-     "de que termine la ronda, queda callado 30 segundos.", 1),
+     "de que termine la ronda, queda callado 30 segundos.", 2),
     ("Modo relámpago", "CUANDO QUIERAS",
      "Elegí a un jugador: hasta que termine la ronda, cada vez que hable tiene como máximo "
-     "10 segundos.", 1),
-    ("Silencio", "CUANDO QUIERAS", "Elegí a un jugador: no puede hablar durante 30 segundos.", 1),
+     "10 segundos.", 2),
+    ("Silencio", "CUANDO QUIERAS", "Elegí a un jugador: no puede hablar durante 30 segundos.", 2),
     ("Analogía obligatoria", "CUANDO QUIERAS",
      "Elegí a un jugador: la próxima vez que hable, su argumento tiene que ser una comparación "
-     "con fútbol, cocina o una película. Vos elegís cuál.", 1),
+     "con fútbol, cocina o una película. Vos elegís cuál.", 2),
     ("¡Quiero un ejemplo!", "CUANDO QUIERAS",
      "Elegí a un jugador: la próxima vez que hable, tiene que dar un ejemplo concreto de la "
-     "vida real.", 1),
+     "vida real.", 2),
     ("Espejo", "COMO RESPUESTA",
-     "Jugala cuando te jueguen una carta: el efecto se le aplica a quien la jugó.", 1),
+     "Jugala cuando te jueguen una carta: el efecto se le aplica a quien la jugó.", 2),
+]
+
+AYUDA = [
+    ("1. Tema", "El lector lee el tema del nivel elegido."),
+    ("2. ¡Opinen!", "Todos golpean su carta de Voto a la vez, con lo que piensan de verdad. "
+                     "Si es unánime, cambien de tema."),
+    ("3. Debate libre", "4 minutos. Habla quien quiere, de a uno y como máximo 30 s seguidos. "
+                        "Arranca el bando minoritario."),
+    ("4. ¡Me convenciste!", "Quien cambia de opinión da vuelta su carta y nombra a quien lo "
+                            "convenció. Ese jugador se lleva la carta y el pozo. Quien cambió "
+                            "roba 1 carta de Acción."),
+    ("5. Sin cambios", "Si se termina el tiempo, la carta va al pozo."),
+    ("6. Fin", "Con 5 cartas, ganás."),
 ]
