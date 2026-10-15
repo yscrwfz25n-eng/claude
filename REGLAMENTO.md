@@ -4,7 +4,9 @@
 >
 > No gana quien tiene razón. Gana quien hace cambiar de opinión a los demás.
 
-**3 a 8 jugadores (ideal: 5 a 7) · 14+ años · 30 a 45 minutos**
+**3 a 8 jugadores (ideal: 4 a 6) · 14+ años · 40 a 50 minutos**
+
+**Objetivo:** convencer a alguien de cambiar de opinión. Cada vez que lo lográs, te llevás la carta del tema como trofeo. **El primero en juntar 5 cartas gana.**
 
 ---
 
@@ -21,7 +23,7 @@
 | ⚫ Postura | 2 | Sortean qué defiende cada debatiente |
 | Ayuda | 7 | Resumen de una ronda |
 
-Además vas a necesitar un **cronómetro** (el del celular alcanza) y algo para **anotar puntos**: porotos, fichas o papel.
+Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace falta anotar puntos: las cartas de Tema que ganás son tu puntaje.
 
 ---
 
@@ -67,9 +69,14 @@ El moderador vuelve a contar: **«3, 2, 1… ¡Opinen!»**. Todos muestran el pu
 
 Quien cambió de opinión **da vuelta su carta de Voto**. Así se ve en un segundo cuántos cambiaron.
 
-### 6 · Puntos
-- Cada debatiente gana **+1 punto por cada persona que se pasó a su lado**.
-- Si nadie cambió, gana **+1** el debatiente cuya postura tiene mayoría. Si hay empate, nadie suma.
+### 6 · ¿Quién se lleva la carta?
+**Convencer** a alguien significa que esa persona arrancó del lado contrario al tuyo en el voto inicial y en el voto final se pasó a tu lado.
+
+- El debatiente que convenció **a más personas** se lleva la **carta de Tema** y la deja boca arriba frente a él. Es su trofeo.
+- Si **nadie convenció a nadie**, o los dos convencieron a la misma cantidad, la carta va al **pozo**, en el centro de la mesa.
+- El próximo debatiente que gane una carta **se lleva también todo el pozo**.
+
+> **Por qué existe el pozo:** sin él, muchas rondas terminan sin premio y llegar a 5 cartas lleva más de dos horas. Con el pozo, cada carta termina en manos de alguien y la partida dura unas 10 a 14 rondas. Además, las rondas con 2 o 3 cartas en juego se vuelven las más tensas.
 
 Para la ronda siguiente, el rol de moderador pasa al jugador de la izquierda y cada uno repone su mano hasta tener 3 cartas de Acción.
 
@@ -84,9 +91,9 @@ Para la ronda siguiente, el rol de moderador pasa al jugador de la izquierda y c
 
 ## Fin de la partida
 
-Gana el primero en llegar a **7 puntos**. En una partida corta, jueguen una vuelta completa de moderadores y gana quien tenga más puntos.
+Gana el primero en juntar **5 cartas de Tema**. Para una partida corta, jueguen a **3 cartas**.
 
-Si hay **empate**, los empatados debaten un último tema 🔴 y el voto final decide.
+**Con 7 u 8 jugadores, jueguen en Parejas** (ver Variantes). En individual, cada uno debate muy de vez en cuando y la partida se estira.
 
 ---
 
@@ -102,5 +109,6 @@ Si hay **empate**, los empatados debaten un último tema 🔴 y el voto final de
 
 - **Modo caos:** al principio de cada ronda, el moderador saca una carta de Restricción, que vale para los dos debatientes.
 - **Modo convicción:** no se sortea la postura. Cada debatiente defiende lo que votó en el voto inicial. Si los dos votaron lo mismo, el moderador le asigna el lado contrario a uno de ellos.
-- **Todos contra uno:** un solo debatiente defiende la postura minoritaria del voto inicial contra toda la mesa. Gana +2 por cada persona que convence.
-- **Escalada:** la partida empieza con temas 🔵. Cuando alguien llega a 3 puntos se pasa a 🟠, y cuando alguien llega a 5, a 🔴.
+- **Parejas (recomendado con 7 u 8 jugadores):** formen parejas y siéntense alternados (A B C D A B C D), así los dos debatientes de cada ronda siempre son de parejas distintas. **Los compañeros de los debatientes no votan esa ronda**, para que nadie le regale el voto a su pareja. Las cartas ganadas son de la pareja, y gana la primera en juntar 5. Con 7 jugadores, el séptimo es moderador fijo y vota en todas las rondas.
+- **Todos contra uno:** un solo debatiente defiende la postura minoritaria del voto inicial contra toda la mesa. Si convence al menos a una persona, se lleva la carta y además la siguiente del mazo.
+- **Escalada:** la partida empieza con temas 🔵. Cuando alguien junta 2 cartas se pasa a 🟠, y cuando alguien junta 4, a 🔴.

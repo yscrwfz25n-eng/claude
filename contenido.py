@@ -160,7 +160,7 @@ ACCION = [
      "Elegí a alguien del público: argumenta a tu favor durante 20 segundos.", 3),
     ("Intercambio", "DEBATIENTE",
      "Jugala antes de la réplica. Los dos debatientes intercambian posturas hasta el final. "
-     "Los puntos se cuentan con la postura nueva.", 2),
+     "La carta se la lleva quien convenza con su postura nueva.", 2),
     ("Palabra prohibida", "DEBATIENTE",
      "Elegí una palabra común («porque», «obvio», «igual»...). Si el rival la dice en su "
      "próximo turno, se le termina el turno.", 2),
@@ -178,7 +178,9 @@ ACCION = [
      "Hacele una pregunta a un debatiente. Tiene 15 segundos para responderla.", 4),
     ("¡Quiero un ejemplo!", "PÚBLICO",
      "Un debatiente tiene que dar un ejemplo concreto de la vida real en su próximo turno.", 2),
-    ("Voto doble", "PÚBLICO", "Jugala en el voto final: tu cambio de postura vale 2 puntos.", 2),
+    ("Desempate", "PÚBLICO",
+     "Jugala en el voto final. Si los debatientes empatan, vos decidís quién se lleva la carta "
+     "(y el pozo).", 2),
 ]
 
 RESTRICCION = [
@@ -199,5 +201,6 @@ AYUDA = [
     ("3. Sorteo", "Los debatientes sacan una carta de Postura al azar."),
     ("4. Debate", "Apertura 45 s · Réplica 30 s · Cierre 15 s (cada uno)."),
     ("5. ¡Opinen!", "Voto final: pulgar arriba o abajo, al mismo tiempo. Quien cambió, da vuelta su carta."),
-    ("6. Puntos", "+1 al debatiente por cada persona que se pasó a su lado. Gana el primero en llegar a 7."),
+    ("6. Premio", "Quien convenció a más personas se lleva la carta de Tema y el pozo. "
+                  "Si nadie convenció o hay empate, la carta va al pozo. Con 5 cartas, ganás."),
 ]

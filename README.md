@@ -4,7 +4,7 @@
 
 Juego de cartas de debate para adolescentes y adultos (14+), para jugar en familia o con amigos.
 
-**No gana quien tiene razón: gana quien hace cambiar de opinión a los demás.** Todos votan A FAVOR o EN CONTRA al mismo tiempo antes y después de cada debate, y los debatientes suman un punto por cada persona que convencen.
+**No gana quien tiene razón: gana quien hace cambiar de opinión a los demás.** Todos votan A FAVOR o EN CONTRA al mismo tiempo, antes y después de cada debate. Si convencés a alguien de cambiar de opinión, te llevás la carta del tema como trofeo. El primero en juntar 5 cartas gana.
 
 - 📖 [Reglamento completo](REGLAMENTO.md)
 - 🖨️ [Cartas imprimibles (PDF)](opinologos-imprimible.pdf): 198 cartas en 44 hojas A4
