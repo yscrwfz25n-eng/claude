@@ -1,4 +1,4 @@
-"""Contenido de las cartas de TOMÁ POSTURA (14+).
+"""Contenido de las cartas de OPINÓLOGOS (14+).
 
 Cada tema es una afirmación: los jugadores votan A FAVOR o EN CONTRA.
 Regla de oro al escribir temas: en una mesa típica, el voto inicial
@@ -195,9 +195,9 @@ RESTRICCION = [
 
 AYUDA = [
     ("1. Tema", "El moderador lee la carta en voz alta."),
-    ("2. ¡Postura!", "Voto inicial: todos golpean su carta de Voto sobre la mesa al mismo tiempo."),
+    ("2. ¡Opinen!", "Voto inicial: todos golpean su carta de Voto sobre la mesa al mismo tiempo."),
     ("3. Sorteo", "Los debatientes sacan una carta de Postura al azar."),
     ("4. Debate", "Apertura 45 s · Réplica 30 s · Cierre 15 s (cada uno)."),
-    ("5. ¡Postura!", "Voto final: pulgar arriba o abajo, al mismo tiempo. Quien cambió, da vuelta su carta."),
+    ("5. ¡Opinen!", "Voto final: pulgar arriba o abajo, al mismo tiempo. Quien cambió, da vuelta su carta."),
     ("6. Puntos", "+1 al debatiente por cada persona que se pasó a su lado. Gana el primero en llegar a 7."),
 ]

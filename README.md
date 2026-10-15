@@ -1,15 +1,17 @@
-# TOMÁ POSTURA
+# OPINÓLOGOS
+
+> Todos opinan. Pocos convencen.
 
 Juego de cartas de debate para adolescentes y adultos (14+), para jugar en familia o con amigos.
 
 **No gana quien tiene razón: gana quien hace cambiar de opinión a los demás.** Todos votan A FAVOR o EN CONTRA al mismo tiempo antes y después de cada debate, y los debatientes suman un punto por cada persona que convencen.
 
 - 📖 [Reglamento completo](REGLAMENTO.md)
-- 🖨️ [Cartas imprimibles (PDF)](toma-postura-imprimible.pdf): 198 cartas en 44 hojas A4
+- 🖨️ [Cartas imprimibles (PDF)](opinologos-imprimible.pdf): 198 cartas en 44 hojas A4
 
 ## Cómo imprimir
 
-1. Imprimí `toma-postura-imprimible.pdf` en A4, **doble faz, girando por el borde largo** y al **100 %** (sin "ajustar a página").
+1. Imprimí `opinologos-imprimible.pdf` en A4, **doble faz, girando por el borde largo** y al **100 %** (sin "ajustar a página").
 2. Si tu impresora no imprime doble faz, imprimí las hojas impares (frentes) y las pares (dorsos) por separado, y pegalas espalda con espalda.
 3. Cortá siguiendo las marcas de corte. Cada carta mide 63 × 88 mm, el tamaño estándar de las cartas de póker.
 4. Lo ideal es papel de 200 a 300 g o cartulina. Otra opción: imprimir en papel común y meter cada carta en un folio de 63,5 × 88 junto con una carta vieja como respaldo.

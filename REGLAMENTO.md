@@ -1,5 +1,7 @@
-# TOMÁ POSTURA — Reglamento
+# OPINÓLOGOS — Reglamento
 
+> Todos opinan. Pocos convencen.
+>
 > No gana quien tiene razón. Gana quien hace cambiar de opinión a los demás.
 
 **3 a 8 jugadores (ideal: 5 a 7) · 14+ años · 30 a 45 minutos**
@@ -36,15 +38,15 @@ Además vas a necesitar un **cronómetro** (el del celular alcanza) y algo para 
 ### 1 · Tema
 El moderador saca una carta de Tema y la lee en voz alta. Los **dos jugadores a su izquierda** son los debatientes de la ronda.
 
-### 2 · ¡Postura! (voto inicial)
+### 2 · ¡Opinen! (voto inicial)
 Todos menos los debatientes esconden su carta de Voto entre las manos o debajo de la mesa, eligiendo qué lado va a quedar arriba. El moderador también vota.
 
-El moderador cuenta: **«3, 2, 1… ¡Postura!»**. Todos golpean la carta contra la mesa **al mismo tiempo**, con el lado que eligieron hacia arriba:
+El moderador cuenta: **«3, 2, 1… ¡Opinen!»**. Todos golpean la carta contra la mesa **al mismo tiempo**, con el lado que eligieron hacia arriba:
 
 - **✔ Verde = A FAVOR** de la afirmación
 - **✖ Roja = EN CONTRA**
 
-Nadie puede abstenerse: el juego se llama Tomá Postura. Las cartas quedan sobre la mesa a la vista de todos.
+Nadie puede abstenerse: acá todos son opinólogos. Las cartas quedan sobre la mesa a la vista de todos.
 
 > **Por qué todos al mismo tiempo:** así nadie copia lo que vota el resto (efecto manada) y los debatientes ven exactamente a quién tienen que convencer.
 
@@ -60,8 +62,8 @@ El moderador controla el tiempo:
 | Réplica | 30 s cada uno | Primero EN CONTRA, después A FAVOR |
 | Cierre | 15 s cada uno | Primero A FAVOR, después EN CONTRA |
 
-### 5 · ¡Postura! (voto final)
-El moderador vuelve a contar: **«3, 2, 1… ¡Postura!»**. Todos muestran el pulgar **arriba (A FAVOR)** o **abajo (EN CONTRA)** al mismo tiempo.
+### 5 · ¡Opinen! (voto final)
+El moderador vuelve a contar: **«3, 2, 1… ¡Opinen!»**. Todos muestran el pulgar **arriba (A FAVOR)** o **abajo (EN CONTRA)** al mismo tiempo.
 
 Quien cambió de opinión **da vuelta su carta de Voto**. Así se ve en un segundo cuántos cambiaron.
 

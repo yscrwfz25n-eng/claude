@@ -1,6 +1,6 @@
-"""Genera el PDF imprimible de TOMÁ POSTURA.
+"""Genera el PDF imprimible de OPINÓLOGOS.
 
-Uso:  python3 generar_pdf.py  ->  toma-postura-imprimible.pdf
+Uso:  python3 generar_pdf.py  ->  opinologos-imprimible.pdf
 
 Cartas de 63 x 88 mm (tamaño póker), 9 por hoja A4.
 Cada hoja de frentes va seguida de su hoja de dorsos, espejada para
@@ -20,8 +20,9 @@ from reportlab.platypus import Paragraph
 
 import contenido as c
 
-SALIDA = "toma-postura-imprimible.pdf"
-NOMBRE = "TOMÁ POSTURA"
+SALIDA = "opinologos-imprimible.pdf"
+NOMBRE = "OPINÓLOGOS"
+LEMA = "Todos opinan. Pocos convencen."
 
 CW, CH = 63 * mm, 88 * mm
 COLS, ROWS = 3, 3
@@ -128,9 +129,10 @@ def dorso(cv, x, y, color, titulo, subtitulo):
     cv.setLineWidth(1.2)
     cv.roundRect(x + 4 * mm, y + 4 * mm, CW - 8 * mm, CH - 8 * mm, 2 * mm, stroke=1, fill=0)
     cv.setFillColor(white)
-    cv.setFont("Bold", 19)
-    cv.drawCentredString(x + CW / 2, y + CH / 2 + 6 * mm, "TOMÁ")
-    cv.drawCentredString(x + CW / 2, y + CH / 2 - 2 * mm, "POSTURA")
+    cv.setFont("Bold", 18)
+    cv.drawCentredString(x + CW / 2, y + CH / 2 + 4 * mm, NOMBRE)
+    cv.setFont("Reg", 7.5)
+    cv.drawCentredString(x + CW / 2, y + CH / 2 - 2 * mm, LEMA)
     cv.setFont("Bold", 8.5)
     cv.drawCentredString(x + CW / 2, y + CH / 2 - 14 * mm, titulo)
     cv.setFont("Reg", 7)
@@ -278,8 +280,8 @@ def main():
     plan += hojas(fr, ds)
 
     cv = canvas.Canvas(SALIDA, pagesize=A4)
-    cv.setTitle("Tomá Postura – cartas imprimibles")
-    cv.setAuthor("Tomá Postura")
+    cv.setTitle("Opinólogos – cartas imprimibles")
+    cv.setAuthor("Opinólogos")
     total = 0
     for frentes, dorsos in plan:
         for i, dibujar in enumerate(frentes):
