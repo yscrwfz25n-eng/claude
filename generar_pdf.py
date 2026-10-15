@@ -55,7 +55,6 @@ NIVELES = [
 ]
 
 MAZOS = {
-    "tema": ("TEMA", TINTA, ""),
     "accion": ("ACCIÓN", HexColor("#6C3FB5"), "CARTA DE ACCIÓN"),
     "ayuda": ("AYUDA", HexColor("#4A4A55"), "RESUMEN DE LA RONDA"),
 }
@@ -143,27 +142,20 @@ def dorso(cv, x, y, color, titulo, subtitulo):
 
 # ---------- frentes ----------
 
-def frente_tema(numero, temas, lado):
-    """Una cara de carta de Tema: un tema por nivel, se lee solo el del nivel de la partida."""
-    titulo, color, _ = MAZOS["tema"]
+def frente_tema(nivel, numero, texto, lado):
+    """Una cara de carta de Tema: un solo tema, con el color de su nivel."""
+    titulo, color = NIVELES[nivel]
 
     def dibujar(cv, x, y):
         marco(cv, x, y)
         banda(cv, x, y, color, titulo, f"#{numero:02d} · {lado}")
-        alto = (CH - BANDA - 10 * mm) / 3
-        tope = y + CH - BANDA - 1.5 * mm
-        for i, ((nivel, col), texto) in enumerate(zip(NIVELES, temas)):
-            sy = tope - (i + 1) * alto
-            cv.setFillColor(col)
-            cv.rect(x + 3 * mm, sy + 1.5 * mm, 1.6 * mm, alto - 3 * mm, stroke=0, fill=1)
-            cv.setFont("Bold", 6.5)
-            cv.drawString(x + 6.5 * mm, sy + alto - 4.2 * mm, nivel)
-            texto_ajustado(cv, texto, x + 6.5 * mm, sy + 1.5 * mm, CW - 10.5 * mm, alto - 6.5 * mm,
-                           maximo=11, minimo=8, alineado=0)
-            if i < 2:
-                cv.setStrokeColor(CORTE)
-                cv.setLineWidth(0.4)
-                cv.line(x + 3 * mm, sy, x + CW - 3 * mm, sy)
+        texto_ajustado(cv, texto, x + PAD, y + 22 * mm, CW - 2 * PAD, CH - BANDA - 26 * mm,
+                       maximo=17, minimo=10)
+        cv.setFont("Sym", 8)
+        cv.setFillColor(VERDE)
+        cv.drawString(x + PAD, y + 13 * mm, "✔ A FAVOR")
+        cv.setFillColor(ROJO)
+        cv.drawRightString(x + CW - PAD, y + 13 * mm, "EN CONTRA ✖")
         pie(cv, x, y)
     return dibujar
 
@@ -229,11 +221,14 @@ def posicion(idx, espejo=False):
 def main():
     plan = []
 
-    # Cartas de Tema doble faz: la cara A lleva la terna i y la cara B la terna i + mitad.
-    ternas = list(zip(c.CALENTAMIENTO, c.PICANTE, c.PROFUNDO))
-    mitad = len(ternas) // 2
-    fr = [frente_tema(i + 1, ternas[i], "A") for i in range(mitad)]
-    ds = [frente_tema(i + 1, ternas[mitad + i], "B") for i in range(mitad)]
+    # Cartas de Tema doble faz: un tema por cara, las dos caras del mismo nivel.
+    fr, ds, numero = [], [], 0
+    for nivel, temas in enumerate((c.CALENTAMIENTO, c.PICANTE, c.PROFUNDO)):
+        mitad = len(temas) // 2
+        for i in range(mitad):
+            numero += 1
+            fr.append(frente_tema(nivel, numero, temas[i], "A"))
+            ds.append(frente_tema(nivel, numero, temas[mitad + i], "B"))
     plan += hojas(fr, ds)
 
     at, ac, asub = MAZOS["accion"]
