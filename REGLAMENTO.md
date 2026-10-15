@@ -10,7 +10,7 @@
 
 ---
 
-## Componentes (198 cartas)
+## Componentes (189 cartas)
 
 | Mazo | Cartas | Para qué sirve |
 |---|---|---|
@@ -18,7 +18,6 @@
 | 🟠 Tema · Picante | 45 | Vida cotidiana, vínculos y normas sociales |
 | 🔴 Tema · Profundo | 45 | Filosofía, moral y futuro |
 | 🟣 Acción | 36 | Cartas que se juegan durante el debate |
-| 🟢 Restricción | 9 | Modo caos (opcional) |
 | ✔/✖ Voto | 9 | Una por jugador: verde (A FAVOR) de un lado y roja (EN CONTRA) del otro |
 | Ayuda | 9 | Resumen de una ronda |
 
@@ -109,6 +108,5 @@ Gana el primero en juntar **5 cartas de Tema**.
 ## Variantes
 
 - **Partida corta:** gana el primero en juntar 3 cartas.
-- **Modo caos:** al principio de cada ronda, el lector saca una carta de Restricción, que vale para todos los jugadores.
 - **Escalada:** la partida empieza con temas 🔵. Cuando alguien junta 2 cartas se pasa a 🟠, y cuando alguien junta 4, a 🔴.
 - **Con turnos:** para mesas de 7 u 8 o grupos donde siempre hablan los mismos. Se habla en orden desde la izquierda del lector, con intervenciones de hasta 30 segundos, y se puede decir «paso».

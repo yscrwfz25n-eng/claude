@@ -53,7 +53,6 @@ MAZOS = {
     "picante": ("PICANTE", HexColor("#E67E22"), "TEMA · NIVEL 2"),
     "profundo": ("PROFUNDO", HexColor("#B3261E"), "TEMA · NIVEL 3"),
     "accion": ("ACCIÓN", HexColor("#6C3FB5"), "CARTA DE ACCIÓN"),
-    "restriccion": ("RESTRICCIÓN", HexColor("#11998E"), "MODO CAOS"),
     "ayuda": ("AYUDA", HexColor("#4A4A55"), "RESUMEN DEL TURNO"),
 }
 
@@ -172,21 +171,6 @@ def frente_accion(nombre, quien, texto):
     return dibujar
 
 
-def frente_restriccion(texto):
-    _, color, _ = MAZOS["restriccion"]
-
-    def dibujar(cv, x, y):
-        marco(cv, x, y)
-        banda(cv, x, y, color, "RESTRICCIÓN", "MODO CAOS")
-        texto_ajustado(cv, texto, x + PAD, y + 20 * mm, CW - 2 * PAD, CH - BANDA - 26 * mm,
-                       maximo=16, minimo=10)
-        texto_ajustado(cv, "Vale para todos los jugadores durante toda la ronda.",
-                       x + PAD, y + 8 * mm, CW - 2 * PAD, 10 * mm,
-                       fuente="Reg", maximo=7.5, minimo=6, color=GRIS)
-        pie(cv, x, y)
-    return dibujar
-
-
 def cara_voto(a_favor):
     color = VERDE if a_favor else ROJO
     simbolo = "✔" if a_favor else "✖"
@@ -243,10 +227,6 @@ def main():
     titulo, color, sub = MAZOS["accion"]
     fr = [frente_accion(n, q, t) for n, q, t, k in c.ACCION for _ in range(k)]
     plan += hojas(fr, [lambda cv, x, y: dorso(cv, x, y, color, titulo, sub)] * len(fr))
-
-    rt, rc, rs = MAZOS["restriccion"]
-    fr = [frente_restriccion(t) for t in c.RESTRICCION]
-    plan += hojas(fr, [lambda cv, x, y: dorso(cv, x, y, rc, rt, rs)] * len(fr))
 
     # Votos: una carta doble faz por jugador (verde de un lado, roja del otro).
     plan += hojas([cara_voto(True)] * 9, [cara_voto(False)] * 9)

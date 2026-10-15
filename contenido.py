@@ -185,18 +185,6 @@ ACCION = [
      "1 carta de Tema a cualquier jugador.", 2),
 ]
 
-RESTRICCION = [
-    "Argumentá como relator de fútbol.",
-    "Argumentá solo haciendo preguntas.",
-    "Argumentá como vendedor de teletienda a las 3 de la mañana.",
-    "Argumentá como narrador de documental de animales.",
-    "Argumentá rimando al menos una vez por turno.",
-    "Argumentá como abogado de película: «¡Su señoría!».",
-    "Argumentá como si dieras un discurso de casamiento.",
-    "Argumentá sin decir la palabra «yo».",
-    "Argumentá como influencer haciendo un vivo.",
-]
-
 AYUDA = [
     ("1. Tema", "El lector lee la carta en voz alta."),
     ("2. ¡Opinen!", "Todos golpean su carta de Voto a la vez, con lo que piensan de verdad. "
