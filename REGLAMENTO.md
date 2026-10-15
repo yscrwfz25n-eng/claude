@@ -53,12 +53,13 @@ Nadie puede abstenerse: acá todos son opinólogos. Las cartas quedan sobre la m
 
 > **Por qué todos al mismo tiempo:** así nadie copia lo que vota el resto (efecto manada).
 
-### 3 · Debate (4 minutos)
-El lector pone el cronómetro en **4 minutos**. Habla primero el jugador a su izquierda y después se sigue en orden, dando las vueltas que haga falta:
+### 3 · Debate libre (4 minutos)
+El lector pone el cronómetro en **4 minutos**. **No hay turnos: habla quien quiere, cuando quiere.** Cada uno defiende su bando y trata de convencer a los del bando contrario.
 
-- Cada intervención dura **hasta 30 segundos**. Si alguien se pasa, el lector lo corta.
-- Podés decir **«paso»** y esperar tu próximo turno.
-- Cada uno argumenta a favor de su bando y trata de convencer a los del bando contrario.
+- **Arranca el bando minoritario.** Alguien de ese bando dice la primera frase.
+- **Habla uno a la vez.** Si dos empiezan juntos, el lector le da la palabra a uno.
+- **Prioridad al que no habló.** Si alguien todavía no habló en la ronda y levanta la mano, el próximo en hablar es él.
+- **Nada de monólogos.** Nadie puede hablar más de 30 segundos seguidos. Si se pasa, el lector lo corta.
 
 > **Consejo:** estar en minoría es una ventaja. Si son 1 contra 5, tenés 5 personas para convencer, y los otros 5 compiten por convencerte a vos.
 
@@ -86,7 +87,7 @@ Para la ronda siguiente, el rol de lector pasa al jugador de la izquierda y cada
 ## Cartas de Acción
 
 - Cada jugador puede jugar **1 carta de Acción por ronda**.
-- La franja de cada carta dice cuándo se juega: **CUANDO QUIERAS**, **EN TU TURNO**, **AL CONVENCER** o **COMO RESPUESTA**.
+- La franja de cada carta dice cuándo se juega: **CUANDO QUIERAS**, **AL HABLAR** (mientras tenés la palabra), **COMO RESPUESTA** o **AL CONVENCER**.
 - Cuando una carta pausa el reloj, el lector lo detiene.
 - Las cartas jugadas van al descarte. Si se termina el mazo, se mezcla el descarte.
 
@@ -110,4 +111,4 @@ Gana el primero en juntar **5 cartas de Tema**.
 - **Partida corta:** gana el primero en juntar 3 cartas.
 - **Modo caos:** al principio de cada ronda, el lector saca una carta de Restricción, que vale para todos los jugadores.
 - **Escalada:** la partida empieza con temas 🔵. Cuando alguien junta 2 cartas se pasa a 🟠, y cuando alguien junta 4, a 🔴.
-- **Debate libre:** sin orden de turnos; habla quien levanta la mano primero. Funciona mejor con 4 o 5 jugadores.
+- **Con turnos:** para mesas de 7 u 8 o grupos donde siempre hablan los mismos. Se habla en orden desde la izquierda del lector, con intervenciones de hasta 30 segundos, y se puede decir «paso».

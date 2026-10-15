@@ -153,26 +153,30 @@ PROFUNDO = [
 ACCION = [
     ("¡Objeción!", "CUANDO QUIERAS",
      "Interrumpí a quien está hablando: tenés 10 segundos para refutarlo. El reloj se pausa.", 4),
-    ("Prórroga", "EN TU TURNO", "Tu intervención puede durar 30 segundos más.", 3),
+    ("Blindaje", "AL HABLAR", "Durante los próximos 30 segundos nadie puede interrumpirte, ni siquiera con cartas como "
+     "¡Objeción! o ¡Me toca!.", 3),
     ("¡Me toca!", "CUANDO QUIERAS",
-     "Hablá ahora, fuera de turno, hasta 20 segundos. Después se sigue el orden normal.", 3),
+     "Tomá la palabra ya: quien está hablando corta y vos tenés 20 segundos sin interrupciones.", 3),
     ("Pregunta trampa", "CUANDO QUIERAS",
      "Hacele a un jugador una pregunta de sí o no. Solo puede contestar «sí» o «no», sin explicar.", 3),
     ("Pregunta directa", "CUANDO QUIERAS",
      "Hacele una pregunta a un jugador del otro bando. Tiene que responderla ya, en 15 segundos.", 3),
     ("Llamo a un aliado", "CUANDO QUIERAS",
-     "Elegí a alguien de tu bando: habla ahora, fuera de turno, durante 20 segundos.", 2),
+     "Elegí a alguien de tu bando: toma la palabra ya y tiene 20 segundos sin interrupciones.", 2),
     ("Palabra prohibida", "CUANDO QUIERAS",
-     "Elegí a un jugador y una palabra común («porque», «obvio», «igual»...). Si la dice en su "
-     "próximo turno, se le termina el turno.", 2),
-    ("Turno relámpago", "CUANDO QUIERAS", "Elegí a un jugador: su próximo turno dura solo 15 segundos.", 2),
-    ("Silencio", "CUANDO QUIERAS", "Elegí a un jugador: pierde su próximo turno.", 2),
+     "Elegí a un jugador y una palabra común («porque», «obvio», «igual»...). Si la dice antes "
+     "de que termine la ronda, queda callado 30 segundos.", 2),
+    ("Modo relámpago", "CUANDO QUIERAS",
+     "Elegí a un jugador: hasta que termine la ronda, cada vez que hable tiene como máximo "
+     "10 segundos.", 2),
+    ("Silencio", "CUANDO QUIERAS", "Elegí a un jugador: no puede hablar durante 30 segundos.", 2),
     ("Analogía obligatoria", "CUANDO QUIERAS",
-     "Elegí a un jugador: su próximo argumento tiene que ser una comparación con fútbol, cocina "
-     "o una película. Vos elegís cuál.", 2),
+     "Elegí a un jugador: la próxima vez que hable, su argumento tiene que ser una comparación "
+     "con fútbol, cocina o una película. Vos elegís cuál.", 2),
     ("¡Quiero un ejemplo!", "CUANDO QUIERAS",
-     "Elegí a un jugador: en su próximo turno tiene que dar un ejemplo concreto de la vida real.", 3),
-    ("Dato duro", "EN TU TURNO",
+     "Elegí a un jugador: la próxima vez que hable, tiene que dar un ejemplo concreto de la "
+     "vida real.", 3),
+    ("Dato duro", "AL HABLAR",
      "Pausá el reloj: tenés 30 segundos para buscar un dato en el celular y leerlo en voz alta.", 2),
     ("Espejo", "COMO RESPUESTA",
      "Jugala cuando te jueguen una carta: el efecto se le aplica a quien la jugó.", 3),
@@ -197,7 +201,7 @@ AYUDA = [
     ("1. Tema", "El lector lee la carta en voz alta."),
     ("2. ¡Opinen!", "Todos golpean su carta de Voto a la vez, con lo que piensan de verdad. "
                      "Si es unánime, cambien de tema."),
-    ("3. Debate", "4 minutos. En orden, intervenciones de hasta 30 s. Podés pasar."),
+    ("3. Debate", "4 minutos, libre: habla quien quiere, de a uno y máximo 30 s seguidos. Arranca el bando minoritario."),
     ("4. ¡Me convenciste!", "Quien cambia de opinión da vuelta su carta y nombra a quien lo "
                             "convenció. Ese jugador se lleva la carta y el pozo. Quien cambió "
                             "roba 1 carta de Acción."),
