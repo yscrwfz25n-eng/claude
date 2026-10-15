@@ -7,7 +7,7 @@ Juego de cartas de debate para adolescentes y adultos (14+), de 4 a 8 jugadores,
 **No gana quien tiene razón: gana quien hace cambiar de opinión a los demás.** Todos votan A FAVOR o EN CONTRA al mismo tiempo y debaten todos contra todos. El primero que logra que alguien cambie de opinión se lleva la carta del tema. Gana quien junta 5.
 
 - 📖 [Reglamento completo](REGLAMENTO.md)
-- 🖨️ [Cartas imprimibles (PDF)](opinologos-imprimible.pdf): 189 cartas en 42 hojas A4
+- 🖨️ [Cartas imprimibles (PDF)](opinologos-imprimible.pdf): 54 cartas (un mazo estándar) en 14 hojas A4
 
 ## Cómo imprimir
 

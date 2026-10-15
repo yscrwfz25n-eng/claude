@@ -48,12 +48,15 @@ CORTE = HexColor("#C9C9CF")
 VERDE = HexColor("#2E9E5B")
 ROJO = HexColor("#D64545")
 
+NIVELES = [
+    ("CALENTAMIENTO", HexColor("#2F80ED")),
+    ("PICANTE", HexColor("#E67E22")),
+    ("PROFUNDO", HexColor("#B3261E")),
+]
+
 MAZOS = {
-    "calentamiento": ("CALENTAMIENTO", HexColor("#2F80ED"), "TEMA · NIVEL 1"),
-    "picante": ("PICANTE", HexColor("#E67E22"), "TEMA · NIVEL 2"),
-    "profundo": ("PROFUNDO", HexColor("#B3261E"), "TEMA · NIVEL 3"),
+    "tema": ("TEMA", TINTA, "3 NIVELES POR CARTA"),
     "accion": ("ACCIÓN", HexColor("#6C3FB5"), "CARTA DE ACCIÓN"),
-    "ayuda": ("AYUDA", HexColor("#4A4A55"), "RESUMEN DEL TURNO"),
 }
 
 
@@ -139,20 +142,27 @@ def dorso(cv, x, y, color, titulo, subtitulo):
 
 # ---------- frentes ----------
 
-def frente_tema(mazo, numero, texto):
-    titulo, color, _ = MAZOS[mazo]
+def frente_tema(numero, temas):
+    """Una carta con un tema por nivel: se lee solo el del nivel de la partida."""
+    titulo, color, _ = MAZOS["tema"]
 
     def dibujar(cv, x, y):
         marco(cv, x, y)
         banda(cv, x, y, color, titulo, f"#{numero:02d}")
-        caja_y = y + 22 * mm
-        texto_ajustado(cv, texto, x + PAD, caja_y, CW - 2 * PAD, CH - BANDA - 26 * mm,
-                       maximo=17, minimo=10)
-        cv.setFont("Sym", 8)
-        cv.setFillColor(VERDE)
-        cv.drawString(x + PAD, y + 13 * mm, "✔ A FAVOR")
-        cv.setFillColor(ROJO)
-        cv.drawRightString(x + CW - PAD, y + 13 * mm, "EN CONTRA ✖")
+        alto = (CH - BANDA - 10 * mm) / 3
+        tope = y + CH - BANDA - 1.5 * mm
+        for i, ((nivel, col), texto) in enumerate(zip(NIVELES, temas)):
+            sy = tope - (i + 1) * alto
+            cv.setFillColor(col)
+            cv.rect(x + 3 * mm, sy + 1.5 * mm, 1.6 * mm, alto - 3 * mm, stroke=0, fill=1)
+            cv.setFont("Bold", 6.5)
+            cv.drawString(x + 6.5 * mm, sy + alto - 4.2 * mm, nivel)
+            texto_ajustado(cv, texto, x + 6.5 * mm, sy + 1.5 * mm, CW - 10.5 * mm, alto - 6.5 * mm,
+                           maximo=11, minimo=8, alineado=0)
+            if i < 2:
+                cv.setStrokeColor(CORTE)
+                cv.setLineWidth(0.4)
+                cv.line(x + 3 * mm, sy, x + CW - 3 * mm, sy)
         pie(cv, x, y)
     return dibujar
 
@@ -189,17 +199,6 @@ def cara_voto(a_favor):
     return dibujar
 
 
-def frente_ayuda():
-    def dibujar(cv, x, y):
-        marco(cv, x, y)
-        banda(cv, x, y, MAZOS["ayuda"][1], "CÓMO SE JUEGA", "1 RONDA")
-        html = "<br/>".join(f"<font name='Bold'>{t}</font> {d}" for t, d in c.AYUDA)
-        texto_ajustado(cv, html, x + 4 * mm, y + 9 * mm, CW - 8 * mm, CH - BANDA - 12 * mm,
-                       fuente="Reg", maximo=8, minimo=6, alineado=0, vcentro=False)
-        pie(cv, x, y)
-    return dibujar
-
-
 # ---------- armado de hojas ----------
 
 def hojas(frentes, dorsos):
@@ -218,21 +217,16 @@ def posicion(idx, espejo=False):
 def main():
     plan = []
 
-    for mazo, temas in (("calentamiento", c.CALENTAMIENTO), ("picante", c.PICANTE),
-                        ("profundo", c.PROFUNDO)):
-        titulo, color, sub = MAZOS[mazo]
-        fr = [frente_tema(mazo, i + 1, t) for i, t in enumerate(temas)]
-        plan += hojas(fr, [lambda cv, x, y, co=color, ti=titulo, s=sub: dorso(cv, x, y, co, ti, s)] * len(fr))
-
-    titulo, color, sub = MAZOS["accion"]
-    fr = [frente_accion(n, q, t) for n, q, t, k in c.ACCION for _ in range(k)]
+    titulo, color, sub = MAZOS["tema"]
+    fr = [frente_tema(i + 1, t) for i, t in enumerate(zip(c.CALENTAMIENTO, c.PICANTE, c.PROFUNDO))]
     plan += hojas(fr, [lambda cv, x, y: dorso(cv, x, y, color, titulo, sub)] * len(fr))
 
-    # Votos: una carta doble faz por jugador (verde de un lado, roja del otro).
-    plan += hojas([cara_voto(True)] * 9, [cara_voto(False)] * 9)
+    at, ac, asub = MAZOS["accion"]
+    fr = [frente_accion(n, q, t) for n, q, t, k in c.ACCION for _ in range(k)]
+    plan += hojas(fr, [lambda cv, x, y: dorso(cv, x, y, ac, at, asub)] * len(fr))
 
-    at, ac, asub = MAZOS["ayuda"]
-    plan += hojas([frente_ayuda()] * 9, [lambda cv, x, y: dorso(cv, x, y, ac, at, asub)] * 9)
+    # Votos: una carta doble faz por jugador (verde de un lado, roja del otro).
+    plan += hojas([cara_voto(True)] * 8, [cara_voto(False)] * 8)
 
     cv = canvas.Canvas(SALIDA, pagesize=A4)
     cv.setTitle("Opinólogos – cartas imprimibles")
