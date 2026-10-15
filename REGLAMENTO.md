@@ -10,11 +10,11 @@
 
 ---
 
-## Componentes (100 cartas)
+## Componentes (70 cartas)
 
 | Mazo | Cartas | Para qué sirve |
 |---|---|---|
-| Tema | 60 | Cada carta trae 3 temas, uno por nivel: 🔵 Calentamiento, 🟠 Picante y 🔴 Profundo (180 temas en total) |
+| Tema | 30 | Con temas en las dos caras. Cada cara trae 3 temas, uno por nivel: 🔵 Calentamiento, 🟠 Picante y 🔴 Profundo (180 temas en total) |
 | Acción | 24 | Cartas que se juegan durante el debate (12 tipos, 2 de cada una) |
 | Voto | 8 | Una por jugador: verde (A FAVOR) de un lado y roja (EN CONTRA) del otro |
 | Ayuda | 8 | Una por jugador, con el resumen de la ronda |
@@ -26,7 +26,7 @@ Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace fal
 ## Preparación
 
 1. Elijan el **nivel** de la partida: 🔵, 🟠 o 🔴. De cada carta se lee solo el tema de ese nivel.
-2. Mezclen el mazo de Tema y el de Acción por separado.
+2. Mezclen el mazo de Tema y el de Acción por separado. En el mazo de Tema no importa qué cara quede arriba.
 3. Cada jugador recibe **1 carta de Voto**, **1 carta de Ayuda** y **2 cartas de Acción**.
 4. El más joven es el primer **lector**. Juega como todos, pero además lee el tema y controla el tiempo.
 
@@ -35,7 +35,7 @@ Además vas a necesitar un **cronómetro** (el del celular alcanza). No hace fal
 ## Una ronda
 
 ### 1 · Tema
-El lector saca una carta de Tema, lee en voz alta el tema del nivel elegido y anuncia cuántas cartas hay en el pozo.
+El lector saca la carta de arriba del mazo de Tema, **la da vuelta y lee la cara que estaba boca abajo**: así nadie conoce el tema antes de tiempo. Lee en voz alta el tema del nivel elegido y anuncia cuántas cartas hay en el pozo.
 
 ### 2 · ¡Opinen!
 Cada uno, incluido el lector, esconde su carta de Voto entre las manos y elige qué lado va a quedar arriba. **Votás lo que pensás de verdad.**

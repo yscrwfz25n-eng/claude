@@ -2,7 +2,9 @@
 
 Cada tema es una afirmación: los jugadores votan A FAVOR o EN CONTRA.
 Cada carta de Tema lleva un tema de cada nivel (fila i de cada lista),
-Mazo de 100 cartas: 60 Tema (180 temas) + 24 Acción + 8 Voto + 8 Ayuda.
+Cada cara de una carta de Tema lleva un tema de cada nivel, y las cartas
+tienen temas en las dos caras: 30 cartas de Tema = 180 temas.
+Mazo de 70 cartas: 30 Tema + 24 Acción + 8 Voto + 8 Ayuda.
 Regla de oro al escribir temas: en una mesa típica, el voto inicial
 debería quedar cerca de 50/50. Si un tema arranca 6 a 0, se descarta.
 """
