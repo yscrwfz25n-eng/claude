@@ -24,7 +24,7 @@ import generar_pdf as cartas  # fuentes, colores y nombre
 SALIDA = "opinologos-caja.pdf"
 AUTORIA = "un juego de @oficina.grafica_"
 QR_IMAGEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "imagenes", "qr-instagram.png")
-QR_ANCHO = 15 * mm  # 15 mm se escanea bien con cualquier celular
+QR_ANCHO = 22 * mm  # en el lateral entra más grande: se escanea fácil
 
 # Medidas interiores (mm): 63 x 88 de carta + holgura; profundidad para 110 cartas + librito.
 ANCHO, ALTO, PROF = 65 * mm, 90 * mm, 42 * mm
@@ -214,17 +214,11 @@ def frente(cv):
     # Dos cartas de ejemplo: una de Calentamiento y una de Profundo.
     mini_carta(cv, x + W / 2 - 10 * mm, y + 42 * mm, 7, 2, "La plata sí hace la felicidad.", escala=0.7)
     mini_carta(cv, x + W / 2 + 10 * mm, y + 41 * mm, -6, 0, "Messi es mejor que Maradona.", escala=0.7)
-    # Pie: ficha y autoría a la izquierda, QR de Instagram (imagen oficial) a la derecha.
-    m = 6 * mm
-    ancho_img, alto_img = 1393, 1700
-    qr_alto = QR_ANCHO * alto_img / ancho_img
-    cv.drawImage(QR_IMAGEN, x + W - m - QR_ANCHO, y + 4 * mm, QR_ANCHO, qr_alto)
     cv.setFillColor(TINTA)
-    cv.setFont("PopM", 6)
-    cv.drawString(x + m, y + 16.5 * mm, "4 a 8 jugadores")
-    cv.drawString(x + m, y + 12.5 * mm, "14+  ·  40–60 min")
-    cv.setFont("PopSB", 5.6)
-    cv.drawString(x + m, y + 6 * mm, AUTORIA)
+    cv.setFont("PopM", 5.8)
+    cv.drawCentredString(x + W / 2, y + 10 * mm, "4 a 8 jugadores  ·  14+  ·  40–60 min")
+    cv.setFont("PopSB", 5.8)
+    cv.drawCentredString(x + W / 2, y + 5 * mm, AUTORIA)
 
 
 def dorso_caja(cv):
@@ -265,14 +259,17 @@ def laterales(cv):
     cy = (YB + YT) / 2
     girado(cv, X_LAT1 + D / 2, cy, 90, lambda: logo(cv, 0, -3.5 * mm, 19))
 
-    def ficha():
-        cv.setFillColor(TINTA)
-        cv.setFont("PopSB", 8)
-        cv.drawCentredString(0, 1.5 * mm, "4 a 8 jugadores · 14+ · 40–60 min")
-        cv.setFillColor(GRIS)
-        cv.setFont("PopR", 6.5)
-        cv.drawCentredString(0, -4.5 * mm, cartas.LEMA)
-    girado(cv, X_LAT2 + D / 2, cy, 90, ficha)
+    # Segundo lateral: QR oficial de Instagram, derecho para que se escanee fácil.
+    ancho_img, alto_img = 1393, 1700
+    qr_alto = QR_ANCHO * alto_img / ancho_img
+    qx, qy = X_LAT2 + (D - QR_ANCHO) / 2, cy - qr_alto / 2 - 4 * mm
+    cv.drawImage(QR_IMAGEN, qx, qy, QR_ANCHO, qr_alto)
+    cv.setFillColor(TINTA)
+    cv.setFont("PopSB", 7)
+    cv.drawCentredString(X_LAT2 + D / 2, qy + qr_alto + 5 * mm, "seguinos")
+    cv.setFillColor(GRIS)
+    cv.setFont("PopR", 6)
+    cv.drawCentredString(X_LAT2 + D / 2, qy + qr_alto + 1.8 * mm, "en Instagram")
 
 
 def tapas(cv):
