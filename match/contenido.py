@@ -126,7 +126,7 @@ RETOS = [
     ("Tu pareja elige tu foto de perfil por una semana.", False),
     ("Mandale ahora un mensaje con lo que más te gustó de hoy.", False),
     ("Mostrale tus chats archivados de WhatsApp.", False),
-    ("Escribí un piropo y leelo en voz alta.", False),
+    ("Mostrale el último mensaje que mandaste por WhatsApp.", False),
     ("Dale un beso donde elija tu pareja.", True),
     ("Susurrale al oído qué te gustaría hacer esta noche.", True),
     ("Sacate una prenda. La elige tu pareja.", True),
