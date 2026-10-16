@@ -19,7 +19,7 @@ sys.path.insert(0, RAIZ)
 
 import generar_pdf as base  # noqa: E402  (párrafos que se ajustan a la caja)
 from maquetas import PH, PW, c, casilla  # noqa: E402  (fuentes, contenido y casillas)
-from portadas_personalizadas import BORDO, logotipo  # noqa: E402  (logotipo THE / Dating / LIST)
+from portadas_personalizadas import BORDO, cien, logotipo  # noqa: E402  (logotipo THE / Dating / LIST)
 from reportlab.lib.colors import HexColor  # noqa: E402
 from reportlab.lib.units import mm  # noqa: E402
 from reportlab.pdfbase import pdfmetrics  # noqa: E402
@@ -325,18 +325,12 @@ def tapa():
     x_contra, x_lomo, x_tapa = DEMASIA, DEMASIA + tw, DEMASIA + tw + LOMO
     y0 = DEMASIA
 
-    # «100» tono sobre tono en la tapa: sangra hacia abajo y hacia el borde
+    # «100» difuminado en la tapa: sangra hacia abajo y hacia el borde
     cv.saveState()
     pth = cv.beginPath()
     pth.rect(x_tapa, 0, tw + DEMASIA, H)
     cv.clipPath(pth, stroke=0, fill=0)
-    t = cv.beginText()
-    t.setFont("DMSerif", 250)
-    t.setHorizScale(68)
-    t.setFillColor(BORDO.sombra)
-    t.setTextOrigin(x_tapa + 38 * mm, y0 - 12 * mm)
-    t.textOut("100")
-    cv.drawText(t)
+    cien(cv, x_tapa + 38 * mm, y0 - 12 * mm, BORDO)
     cv.restoreState()
 
     # tapa

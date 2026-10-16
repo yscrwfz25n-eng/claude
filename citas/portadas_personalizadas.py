@@ -26,12 +26,14 @@ ANGOSTA = 68  # % de ancho para la serif alta
 
 
 class Tapa:
-    def __init__(self, fondo, tinta, sombra, elastico):
-        self.fondo, self.tinta, self.sombra, self.elastico = map(HexColor, (fondo, tinta, sombra, elastico))
+    def __init__(self, fondo, tinta, sombra, elastico, cien):
+        self.fondo, self.tinta, self.sombra, self.elastico, self.cien = map(
+            HexColor, (fondo, tinta, sombra, elastico, cien))
 
 
-BORDO = Tapa("#5C0F1E", "#EFE3D0", "#68192A", "#151515")
-CREMA = Tapa("#EFE3D0", "#5C0F1E", "#E5D6BF", "#5C0F1E")
+# cien: color del «100» en su parte más visible, antes de difuminarse en el fondo
+BORDO = Tapa("#5C0F1E", "#EFE3D0", "#68192A", "#151515", "#7E2638")
+CREMA = Tapa("#EFE3D0", "#5C0F1E", "#E5D6BF", "#5C0F1E", "#DCC8AA")
 
 
 def serif_alta(cv, texto, cx, y, size, color):
@@ -101,20 +103,33 @@ def elastico(cv, x, y, tapa):
     cv.rect(x + PW - 16 * mm, y, 1.2 * mm, PH, stroke=0, fill=1)
 
 
+def cien(cv, x, y, tapa):
+    """«100» gigante que se difumina hacia arriba: firme abajo, se pierde en el fondo arriba.
+
+    (x, y) es el origen del texto; el que llama define el recorte exterior.
+    """
+    size = 250
+    cv.saveState()
+    t = cv.beginText()
+    t.setFont("DMSerif", size)
+    t.setHorizScale(ANGOSTA)
+    t.setTextRenderMode(7)  # el texto pasa a ser máscara de recorte
+    t.setTextOrigin(x, y)
+    t.textOut("100")
+    cv.drawText(t)
+    alto = size * 0.72  # altura de los números
+    cv.linearGradient(x, y + alto * 0.15, x, y + alto * 0.95, (tapa.cien, tapa.fondo), extend=True)
+    cv.restoreState()  # deshace recorte, modo de texto y escala horizontal
+
+
 def fondo_100(cv, x, y, tapa):
-    """«100» gigante tono sobre tono, cortado por el borde: el detalle de fondo."""
+    """«100» difuminado de fondo, cortado por el borde de la tapa."""
     cv.saveState()
     p = cv.beginPath()
     p.roundRect(x, y, PW, PH, 3 * mm)
     cv.clipPath(p, stroke=0, fill=0)
-    t = cv.beginText()
-    t.setFont("DMSerif", 250)
-    t.setHorizScale(ANGOSTA)
-    t.setFillColor(tapa.sombra)
-    t.setTextOrigin(x + 38 * mm, y - 12 * mm)
-    t.textOut("100")
-    cv.drawText(t)
-    cv.restoreState()  # también deshace la escala horizontal
+    cien(cv, x + 38 * mm, y - 12 * mm, tapa)
+    cv.restoreState()
 
 
 def edicion(cv, x, y, tapa):
