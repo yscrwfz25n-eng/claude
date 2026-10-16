@@ -82,7 +82,7 @@ def cuaderno(cv, x, y, tapa):
     cv.setFillColor(tapa.fondo)
     cv.roundRect(x, y, PW, PH, 3 * mm, stroke=0, fill=1)
     cv.setFillColor(HexColor("#000000"), alpha=0.10)
-    cv.rect(x, y, 3 * mm, PH, stroke=0, fill=1)  # bisagra del lomo
+    cv.rect(x, y + 3 * mm, 3 * mm, PH - 6 * mm, stroke=0, fill=1)  # bisagra del lomo, sin tapar las esquinas
     cv.setFillColor(tapa.elastico)
     cv.rect(x + 30 * mm, y - 9 * mm, 3.2 * mm, 11 * mm, stroke=0, fill=1)  # cinta señaladora
     p = cv.beginPath()
