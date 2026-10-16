@@ -71,10 +71,11 @@ def manuscrita(cv, texto, cx, y, size, color, recorte, angulo=-6):
     cv.restoreState()
 
 
-def logotipo(cv, cx, cy, tapa, escala=1.0):
+def logotipo(cv, cx, cy, tapa, escala=1.0, palabra="Dating"):
+    """Logotipo de la colección «The ___ List»: la palabra del medio cambia en cada tomo."""
     serif_alta(cv, "THE", cx, cy + 14 * mm * escala, 92 * escala, tapa.tinta)
     serif_alta(cv, "LIST", cx, cy - 34 * mm * escala, 92 * escala, tapa.tinta)
-    manuscrita(cv, "Dating", cx + 2 * mm * escala, cy - 8 * mm * escala, 74 * escala, tapa.tinta, tapa.fondo)
+    manuscrita(cv, palabra, cx + 2 * mm * escala, cy - 8 * mm * escala, 74 * escala, tapa.tinta, tapa.fondo)
 
 
 def cuaderno(cv, x, y, tapa):
