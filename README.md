@@ -9,7 +9,15 @@ Juego de cartas de debate para adolescentes y adultos (14+), de 4 a 8 jugadores,
 - 📖 [Reglamento completo](REGLAMENTO.md)
 - 🖨️ [Cartas imprimibles (PDF)](opinologos-imprimible.pdf): 110 cartas en 26 hojas A4
 
-## Cómo imprimir
+## Para mandar a la imprenta
+
+[`opinologos-muestra-imprenta.pdf`](opinologos-muestra-imprenta.pdf) tiene el juego completo en un solo archivo: 26 páginas de cartas (frente y dorso intercalados) y 4 páginas de reglamento. Se genera con:
+
+```bash
+python3 generar_pdf.py && python3 generar_reglamento.py
+```
+
+## Cómo imprimir en casa
 
 1. Imprimí `opinologos-imprimible.pdf` en A4, **doble faz, girando por el borde largo** y al **100 %** (sin "ajustar a página").
 2. Si tu impresora no imprime doble faz, imprimí las hojas impares (frentes) y las pares (dorsos) por separado, y pegalas espalda con espalda.

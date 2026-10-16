@@ -30,6 +30,7 @@ COLS, ROWS = 3, 3
 PW, PH = A4
 MX, MY = (PW - COLS * CW) / 2, (PH - ROWS * CH) / 2
 M = 6 * mm  # margen interno de las cartas
+SANGRADO = 3 * mm  # color extra hacia afuera en las cartas de fondo pleno
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 FUENTES = {
@@ -47,7 +48,6 @@ for alias, ruta in FUENTES.items():
 TINTA = HexColor("#111111")
 GRIS = HexColor("#8C8C8C")
 LINEA = HexColor("#DADADA")
-CORTE = HexColor("#E2E2E2")
 OSCURO = HexColor("#111111")
 GRIS_OSCURO = HexColor("#9A9A9A")
 VIOLETA = HexColor("#6B4EE6")
@@ -77,30 +77,24 @@ def parrafo(cv, html, x, y, w, h, fuente, maximo, minimo, color=TINTA, interline
     p.drawOn(cv, x, oy)
 
 
-def marco(cv, x, y):
-    """Contorno suave para las cartas blancas (guía de corte a mano)."""
-    cv.setStrokeColor(CORTE)
-    cv.setLineWidth(0.5)
-    cv.roundRect(x, y, CW, CH, 3 * mm, stroke=1, fill=0)
-
-
 def fondo(cv, x, y, color):
+    """Fondo pleno con sangrado: invade 3 mm a las vecinas, que en la misma hoja son del mismo color."""
     cv.setFillColor(color)
-    cv.rect(x, y, CW, CH, stroke=0, fill=1)
+    cv.rect(x - SANGRADO, y - SANGRADO, CW + 2 * SANGRADO, CH + 2 * SANGRADO, stroke=0, fill=1)
 
 
 def marcas_de_corte(cv):
     cv.setStrokeColor(GRIS)
     cv.setLineWidth(0.3)
-    largo = 4 * mm
+    largo, sep = 5 * mm, SANGRADO + 1 * mm  # las marcas empiezan afuera del sangrado
     for i in range(COLS + 1):
         x = MX + i * CW
-        cv.line(x, MY - 1 * mm, x, MY - 1 * mm - largo)
-        cv.line(x, PH - MY + 1 * mm, x, PH - MY + 1 * mm + largo)
+        cv.line(x, MY - sep, x, MY - sep - largo)
+        cv.line(x, PH - MY + sep, x, PH - MY + sep + largo)
     for j in range(ROWS + 1):
         y = MY + j * CH
-        cv.line(MX - 1 * mm, y, MX - 1 * mm - largo, y)
-        cv.line(PW - MX + 1 * mm, y, PW - MX + 1 * mm + largo, y)
+        cv.line(MX - sep, y, MX - sep - largo, y)
+        cv.line(PW - MX + sep, y, PW - MX + sep + largo, y)
 
 
 def pie(cv, x, y, color_texto=TINTA, punto=None):
@@ -152,14 +146,8 @@ def cara_tema(nivel, numero, texto, lado):
     nombre, color = NIVELES[nivel]
 
     def dibujar(cv, x, y):
-        marco(cv, x, y)
-        p = cv.beginPath()
-        p.roundRect(x, y, CW, CH, 3 * mm)
-        cv.saveState()
-        cv.clipPath(p, stroke=0, fill=0)
         cv.setFillColor(color)
         cv.rect(x, y + CH - 2.5 * mm, CW, 2.5 * mm, stroke=0, fill=1)
-        cv.restoreState()
         etiqueta(cv, x, y, nombre, color, f"{numero:02d}{lado}")
         parrafo(cv, texto, x + M, y + 22 * mm, CW - 2 * M, CH - 36 * mm, "PopSB", 15.5, 10)
         cv.setFont("PopR", 6.5)
@@ -175,7 +163,6 @@ def cara_tema(nivel, numero, texto, lado):
 
 def frente_accion(nombre, cuando, texto):
     def dibujar(cv, x, y):
-        marco(cv, x, y)
         etiqueta(cv, x, y, "acción · " + cuando.lower(), VIOLETA)
         parrafo(cv, nombre, x + M, y + CH - 30 * mm, CW - 2 * M, 16 * mm, "PopB", 19, 12)
         cv.setFillColor(VIOLETA)
@@ -207,7 +194,6 @@ def cara_voto(a_favor):
 
 def frente_ayuda():
     def dibujar(cv, x, y):
-        marco(cv, x, y)
         etiqueta(cv, x, y, "ayuda · 1 ronda", GRIS)
         cv.setFont("PopB", 14)
         cv.setFillColor(TINTA)
