@@ -1,6 +1,7 @@
 """Maquetas de estilo para MATCH: dos propuestas sobre las mismas 6 cartas.
 
-Uso:  python3 match/maquetas.py  ->  match/estilo-a-noche.png, match/estilo-b-rosa.png
+Uso:  python3 match/maquetas.py  ->  match/estilo-a-noche.png, match/estilo-b-rosa.png,
+      match/estilo-c-pasion.png
 """
 import os
 import subprocess
@@ -141,6 +142,59 @@ class Rosa:
         self.logo(cv, x + M, y + 6 * mm, 9, color=tinta)
 
 
+# ---------------- C · PASIÓN ----------------
+class Pasion:
+    nombre = "C · Pasión"
+    bajada = "Negro, rojo y bordó con detalles en beige. Elegante y sensual, tipo etiqueta de vino."
+    negro = HexColor("#0F0D0D")
+    rojo = HexColor("#C8102E")
+    bordo = HexColor("#5C0F1E")
+    beige = HexColor("#E6D5B8")
+
+    def logo(self, cv, x, y, size, centrado=False, color2=None):
+        ancho = pdfmetrics.stringWidth("match", "DMSerifIt", size)
+        r = size * 0.15
+        total = ancho + r * 5
+        x0 = x - total / 2 if centrado else x
+        cv.setFillColor(self.beige)
+        cv.setFont("DMSerifIt", size)
+        cv.drawString(x0, y, "match")
+        circulos(cv, x0 + ancho + r * 2.9, y + size * 0.32, r, self.beige, color2 or self.rojo,
+                 max(0.6, size * 0.045))
+
+    def marco(self, cv, x, y):
+        cv.setStrokeColor(self.beige)
+        cv.setLineWidth(0.5)
+        cv.roundRect(x + 2.5 * mm, y + 2.5 * mm, CW - 5 * mm, CH - 5 * mm, 2 * mm, stroke=1, fill=0)
+
+    def carta(self, cv, x, y, tipo, quien, hot, texto):
+        fondo = self.bordo if tipo == "reto" or quien == "retos" else self.negro
+        redondeada(cv, x, y, fondo)
+        self.marco(cv, x, y)
+        if tipo == "dorso":
+            self.logo(cv, x + CW / 2, y + CH / 2, 30, centrado=True)
+            cv.setFillColor(self.beige)
+            cv.setFont("PopM", 7.5)
+            cv.drawCentredString(x + CW / 2, y + 10 * mm, quien.upper())
+            cv.setFillColor(self.rojo)
+            cv.circle(x + CW / 2, y + 15 * mm, 0.9 * mm, stroke=0, fill=1)
+            return
+        if tipo == "reto":
+            cv.setFillColor(self.beige)
+            cv.setFont("DMSerifIt", 24)
+            cv.drawString(x + M, y + CH - 19 * mm, "reto")
+            cv.setStrokeColor(self.rojo)
+            cv.setLineWidth(1.2)
+            cv.line(x + M, y + CH - 21.5 * mm, x + M + 12 * mm, y + CH - 21.5 * mm)
+        elif quien == "pareja":
+            pastilla(cv, x + M, y + CH - 13 * mm, "responde tu pareja", self.beige, self.negro)
+        if hot:
+            pastilla(cv, x + CW - M - 10 * mm, y + CH - 13 * mm, "+18", self.rojo, self.beige)
+        base.parrafo(cv, texto, x + M, y + 14 * mm, CW - 2 * M, CH - 40 * mm, "DMSerif", 17, 11,
+                     color=self.beige, vertical="centro", interlineado=1.15)
+        self.logo(cv, x + M, y + 7 * mm, 9)
+
+
 def lamina(estilo, salida_pdf):
     W = 6 * CW + 7 * GAP
     H = CH + 46 * mm
@@ -167,7 +221,8 @@ def lamina(estilo, salida_pdf):
 
 
 if __name__ == "__main__":
-    for clase, nombre in ((Noche, "estilo-a-noche"), (Rosa, "estilo-b-rosa")):
+    for clase, nombre in ((Noche, "estilo-a-noche"), (Rosa, "estilo-b-rosa"),
+                          (Pasion, "estilo-c-pasion")):
         pdf = os.path.join(AQUI, nombre + ".pdf")
         lamina(clase(), pdf)
         subprocess.run(["pdftoppm", "-r", "130", "-png", "-singlefile", pdf, os.path.join(AQUI, nombre)],
