@@ -17,10 +17,12 @@ Juego de cartas de debate para adolescentes y adultos (14+), de 4 a 8 jugadores,
   - [`opinologos-reglamento.pdf`](opinologos-reglamento.pdf): páginas en orden de lectura.
   - [`opinologos-reglamento-imprimir.pdf`](opinologos-reglamento-imprimir.pdf): 1 hoja A4 doble faz (borde largo) con los 3 pliegos armados. Se corta por las marcas, cada pliego se dobla al medio por la marca punteada, se ponen uno dentro del otro (el de la tapa afuera) y se abrochan en el lomo.
 
+- **Caja:** [`opinologos-caja.pdf`](opinologos-caja.pdf). Caja con solapas para cartas + reglamento, interior 65 × 90 × 42 mm, desplegada en una hoja A3. Página 1: arte para imprimir; página 2: arte con el troquel como guía para cortar y doblar a mano; página 3: troquel solo, para plotter.
+
 Se genera todo con:
 
 ```bash
-python3 generar_pdf.py && python3 generar_reglamento.py
+python3 generar_pdf.py && python3 generar_reglamento.py && python3 generar_caja.py
 ```
 
 ## Cómo imprimir en casa
