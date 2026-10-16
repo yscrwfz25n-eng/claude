@@ -8,7 +8,7 @@ Uso:  python3 generar_caja.py  ->  opinologos-caja.pdf
 Interior: ANCHO x ALTO x PROF mm. Si las cartas impresas quedan más gruesas o
 más finas, cambiar PROF y volver a generar.
 """
-import math
+import os
 
 from reportlab.lib.colors import HexColor, white
 from reportlab.lib.enums import TA_LEFT
@@ -23,6 +23,8 @@ import generar_pdf as cartas  # fuentes, colores y nombre
 
 SALIDA = "opinologos-caja.pdf"
 AUTORIA = "un juego de @oficina.grafica_"
+QR_IMAGEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "imagenes", "qr-instagram.png")
+QR_ANCHO = 15 * mm  # 15 mm se escanea bien con cualquier celular
 
 # Medidas interiores (mm): 63 x 88 de carta + holgura; profundidad para 110 cartas + librito.
 ANCHO, ALTO, PROF = 65 * mm, 90 * mm, 42 * mm
@@ -209,15 +211,20 @@ def frente(cv):
     cv.setFillColor(GRIS)
     cv.setFont("PopR", 6.3)
     cv.drawCentredString(x + W / 2, YT - 29 * mm, cartas.LEMA)
-    mini_carta(cv, x + W / 2 - 6 * mm, y + 36 * mm, 8, 2,
-               "Una verdad que duele vale más que una mentira que protege.", escala=0.8)
-    mini_carta(cv, x + W / 2 + 5 * mm, y + 33 * mm, -6, 0, "El ananá en la pizza es una genialidad.",
-               escala=0.8)
+    # Dos cartas de ejemplo: una de Calentamiento y una de Profundo.
+    mini_carta(cv, x + W / 2 - 10 * mm, y + 42 * mm, 7, 2, "La plata sí hace la felicidad.", escala=0.7)
+    mini_carta(cv, x + W / 2 + 10 * mm, y + 41 * mm, -6, 0, "Messi es mejor que Maradona.", escala=0.7)
+    # Pie: ficha y autoría a la izquierda, QR de Instagram (imagen oficial) a la derecha.
+    m = 6 * mm
+    ancho_img, alto_img = 1393, 1700
+    qr_alto = QR_ANCHO * alto_img / ancho_img
+    cv.drawImage(QR_IMAGEN, x + W - m - QR_ANCHO, y + 4 * mm, QR_ANCHO, qr_alto)
     cv.setFillColor(TINTA)
-    cv.setFont("PopM", 5.8)
-    cv.drawCentredString(x + W / 2, y + 10 * mm, "4 a 8 jugadores  ·  14+  ·  40–60 min")
-    cv.setFont("PopSB", 5.8)
-    cv.drawCentredString(x + W / 2, y + 5 * mm, AUTORIA)
+    cv.setFont("PopM", 6)
+    cv.drawString(x + m, y + 16.5 * mm, "4 a 8 jugadores")
+    cv.drawString(x + m, y + 12.5 * mm, "14+  ·  40–60 min")
+    cv.setFont("PopSB", 5.6)
+    cv.drawString(x + m, y + 6 * mm, AUTORIA)
 
 
 def dorso_caja(cv):
