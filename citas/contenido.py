@@ -95,7 +95,7 @@ CATEGORIAS = [
     ("Especiales", [
         "Recrear su primera cita.",
         "Cita sorpresa: uno organiza todo y el otro no sabe nada.",
-        "Cita con un presupuesto mínimo.",
+        "Subirse al primer colectivo que pase y bajarse donde les guste.",
         "Un día diciendo que sí a todo lo que proponga el otro.",
         "Repetir la cita que más les gustó de este libro.",
         "Cambiar roles: cada uno planea el día ideal del otro.",
