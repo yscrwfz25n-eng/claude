@@ -1,4 +1,4 @@
-"""Contenido de MATCH · 100 citas: checklist para parejas (apta para todo público).
+"""Contenido de 100 CITAS: checklist para parejas (apta para todo público).
 
 Cada cita se tilda al hacerla y se completa con fecha y datos.
 """
@@ -22,7 +22,7 @@ CATEGORIAS = [
         "Hornear algo dulce desde cero.",
         "Acampar en el living con carpa y linterna.",
         "Planear el viaje soñado como si salieran mañana.",
-        "Noche de preguntas: jugar a Match.",
+        "Noche de preguntas: hacerse 20 preguntas que nunca se hicieron.",
         "Torneo de videojuegos.",
         "Adoptar una planta y ponerle nombre.",
     ]),
