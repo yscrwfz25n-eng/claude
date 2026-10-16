@@ -1,6 +1,6 @@
 """Genera el PDF imprimible de OPINÓLOGOS (estilo C · Minimal).
 
-Uso:  python3 generar_pdf.py  ->  opinologos-imprimible.pdf
+Uso:  python3 generar_pdf.py  ->  opinologos-muestra-imprenta.pdf (solo cartas)
 
 Cartas de 63 x 88 mm (tamaño póker), 9 por hoja A4.
 Cada hoja de frentes va seguida de su hoja de dorsos, espejada para
@@ -21,7 +21,7 @@ from reportlab.platypus import Paragraph
 
 import contenido as c
 
-SALIDA = "opinologos-imprimible.pdf"
+SALIDA = "opinologos-muestra-imprenta.pdf"
 NOMBRE = "opinólogos"
 LEMA = "todos opinan. pocos convencen."
 
