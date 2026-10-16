@@ -54,7 +54,7 @@ El lector pone el cronómetro en **4 minutos**. **No hay turnos: habla quien qui
 
 - **Arranca el bando minoritario.** Alguien de ese bando dice la primera frase.
 - **Habla uno a la vez.** Si dos empiezan juntos, el lector le da la palabra a uno.
-- **Prioridad al que no habló.** Si alguien todavía no habló en la ronda y levanta la mano, el próximo en hablar es él.
+- **Prioridad al que no habló.** Si alguien todavía no habló en la ronda y levanta la mano, el próximo en hablar es esa persona.
 - **Nada de monólogos.** Nadie puede hablar más de 30 segundos seguidos. Si se pasa, el lector lo corta.
 
 ### 4 · ¡Me convenciste!
