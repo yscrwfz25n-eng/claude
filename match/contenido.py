@@ -138,7 +138,7 @@ RETOS = [
     ("Pasale un hielo por el cuello.", True),
     ("Mordele suavemente el labio.", True),
     ("Durante un minuto tu pareja puede besarte donde quiera y vos no te podés mover.", True),
-    ("Besá a tu pareja como en su primera cita, pero 30 segundos más.", True),
+    ("Besá a tu pareja como en la primera cita de ustedes, pero 30 segundos más.", True),
 ]
 
 INSTRUCCIONES = [
@@ -148,6 +148,6 @@ INSTRUCCIONES = [
     ("Si dice «responde tu pareja»", "La pregunta es sobre vos y tu pareja tiene que adivinar. "
                                     "Si acierta: ¡Match! Si responde mal, levanta un Reto."),
     ("¿No querés responder?", "Levantás un Reto. Si no te animás al Reto, sacá otro."),
-    ("🔥", "Pregunta o reto +18."),
+    ("+18", "Pregunta o reto subido de tono."),
     ("Final", "No hay ganador: se juega hasta que quieran."),
 ]
