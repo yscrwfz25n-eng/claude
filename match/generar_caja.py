@@ -186,7 +186,8 @@ def laterales(cv):
     pad = 2.5 * mm
     cv.setFillColor(P.beige)
     cv.roundRect(qx - pad, qy - pad, qr_ancho + 2 * pad, qr_alto + 2 * pad, 2 * mm, stroke=0, fill=1)
-    cv.drawImage(caja.QR_IMAGEN, qx, qy, qr_ancho, qr_alto, mask="auto")
+    qr = os.path.join(os.path.dirname(AQUI), "imagenes", "qr-instagram-transparente.png")
+    cv.drawImage(qr, qx, qy, qr_ancho, qr_alto, mask="auto")  # fondo transparente: queda sobre el beige
     cv.setFillColor(P.beige)
     cv.setFont("DMSerifIt", 10)
     cv.drawCentredString(X_LAT2 + D / 2, qy + qr_alto + pad + 6 * mm, "seguinos")
