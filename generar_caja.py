@@ -250,9 +250,6 @@ def dorso_caja(cv):
     texto(cv, "<font name='PopSB'>Contiene:</font> 70 cartas de Tema (140 temas), 24 de Acción, "
               "8 de Voto, 8 de Ayuda y reglamento.",
           x + m, y + 14 * mm, W - 2 * m, 7 * mm, size=5.3, color=GRIS)
-    cv.setFillColor(TINTA)
-    cv.setFont("PopSB", 5.5)
-    cv.drawString(x + m, y + 10.5 * mm, AUTORIA)  # arriba de la muesca del pulgar
 
 
 def laterales(cv):
@@ -277,12 +274,9 @@ def tapas(cv):
     girado(cv, X_DORSO + W / 2, YT + D / 2, 180, lambda: logo(cv, 0, -2.5 * mm, 15))
 
     def base():
-        cv.setFillColor(TINTA)
-        cv.setFont("PopSB", 6.5)
-        cv.drawCentredString(0, 1 * mm, AUTORIA)
         cv.setFillColor(GRIS)
-        cv.setFont("PopR", 5.5)
-        cv.drawCentredString(0, -4 * mm, "110 cartas · reglamento")
+        cv.setFont("PopR", 6)
+        cv.drawCentredString(0, -1 * mm, "110 cartas · reglamento")
     girado(cv, X_FRENTE + W / 2, Y0 + T + D / 2, 180, base)
 
 
