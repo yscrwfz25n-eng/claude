@@ -73,7 +73,7 @@ CATEGORIAS = [
     ("Aprender y crear", [
         "Aprender a jugar al truco y jugar un mano a mano.",
         "Tomar una clase de cocina.",
-        "Aprender a andar en rollers.",
+        "Hacer un bautismo de buceo.",
         "Hacer pastas caseras desde cero.",
         "Pintar un cuadro juntos.",
         "Salir a sacar fotos con una consigna.",
@@ -95,7 +95,7 @@ CATEGORIAS = [
     ("Especiales", [
         "Recrear su primera cita.",
         "Cita sorpresa: uno organiza todo y el otro no sabe nada.",
-        "Subirse al primer colectivo que pase y bajarse donde les guste.",
+        "Organizar juntos una cena para sus amigos.",
         "Un día diciendo que sí a todo lo que proponga el otro.",
         "Repetir la cita que más les gustó de este libro.",
         "Cambiar roles: cada uno planea el día ideal del otro.",
