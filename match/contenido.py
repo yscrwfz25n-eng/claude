@@ -125,7 +125,7 @@ RETOS = [
     ("Confesá unos celos que nunca le contaste.", False),
     ("Tu pareja elige tu foto de perfil por una semana.", False),
     ("Mandale ahora un mensaje con lo que más te gustó de hoy.", False),
-    ("Hablá con acento extranjero hasta tu próximo turno.", False),
+    ("Mostrale tus chats archivados de WhatsApp.", False),
     ("Escribí un piropo y leelo en voz alta.", False),
     ("Dale un beso donde elija tu pareja.", True),
     ("Susurrale al oído qué te gustaría hacer esta noche.", True),
