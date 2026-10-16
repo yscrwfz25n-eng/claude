@@ -175,12 +175,12 @@ def tele(cv, cx, cy):
     cv.setFillColor(CREMA)
     cv.circle(-6 * mm, h / 2 + 9 * mm, 1 * mm, stroke=0, fill=1)
     cv.circle(7 * mm, h / 2 + 8 * mm, 1 * mm, stroke=0, fill=1)
-    cv.setFillColor(MENTA)
+    cv.setFillColor(CREMA)
     cv.roundRect(-w / 2, -h / 2, w, h, 3 * mm, stroke=0, fill=1)
     cv.setFillColor(NEGRO)
     cv.roundRect(-w / 2 + 2.5 * mm, -h / 2 + 2.5 * mm, w - 11 * mm, h - 5 * mm, 2.5 * mm, stroke=0, fill=1)
     estrella(cv, -w / 2 + 2.5 * mm + (w - 11 * mm) / 2, 0, 4 * mm, AMARILLO)
-    cv.setFillColor(CREMA)
+    cv.setFillColor(ROJO)
     cv.circle(w / 2 - 4.2 * mm, h / 2 - 6 * mm, 1.6 * mm, stroke=0, fill=1)
     cv.circle(w / 2 - 4.2 * mm, h / 2 - 11 * mm, 1.6 * mm, stroke=0, fill=1)
     cv.setFillColor(NEGRO)
@@ -199,10 +199,10 @@ def tira_de_pelicula(cv, x0, y0, largo, angulo):
     for i in range(int(largo / paso)):
         cv.roundRect(i * paso + 1 * mm, h / 2 - 2.6 * mm, 2 * mm, 1.6 * mm, 0.4 * mm, stroke=0, fill=1)
         cv.roundRect(i * paso + 1 * mm, -h / 2 + 1 * mm, 2 * mm, 1.6 * mm, 0.4 * mm, stroke=0, fill=1)
-    colores = (ROSA, AMARILLO, MENTA, ROJO)
+    colores = (HexColor("#2B3870"), HexColor("#34427E"))  # cuadros apagados, tono sobre tono
     cuadro = 11 * mm
     for i in range(int(largo / (cuadro + 1.5 * mm))):
-        cv.setFillColor(colores[i % 4])
+        cv.setFillColor(colores[i % len(colores)])
         cv.rect(i * (cuadro + 1.5 * mm) + 1 * mm, -3.6 * mm, cuadro, 7.2 * mm, stroke=0, fill=1)
     cv.restoreState()
 
@@ -316,11 +316,10 @@ def tapa(cv, x, y, t=NOCHE):
         q.lineTo(cx + 220 * mm * math.cos(a1), y + 132 * mm + 220 * mm * math.sin(a1))
         q.lineTo(cx + 220 * mm * math.cos(a2), y + 132 * mm + 220 * mm * math.sin(a2))
         q.close()
-        cv.setFillColor(HexColor("#FFFFFF"), alpha=0.035)
+        cv.setFillColor(HexColor("#FFFFFF"), alpha=0.022)
         cv.drawPath(q, stroke=0, fill=1)
     cv.setFillColor(HexColor("#FFFFFF"), alpha=1)
-    for ex, ey, r in ((12, 196, 1.6), (124, 196, 2), (10, 120, 1.4), (126, 112, 1.6), (8, 86, 1.8),
-                      (122, 70, 1.4)):
+    for ex, ey, r in ((12, 196, 1.6), (124, 196, 2), (126, 112, 1.4)):
         estrella(cv, x + ex * mm, y + ey * mm, r * mm, AMARILLO)
     tira_de_pelicula(cv, x - 5 * mm, y + 9 * mm, 170 * mm, 0)
     marquesina(cv, cx, y + 92 * mm, 112 * mm, 78 * mm)
