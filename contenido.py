@@ -37,7 +37,7 @@ CALENTAMIENTO = [
     "Messi es mejor que Maradona.",
     "La Tuli es más linda que la Joaqui.",
     "Lali es mejor artista que Tini.",
-    "Mar del Plata es mejor destino que cualquier playa de Brasil.",
+    "La costa argentina es mejor destino que cualquier playa de Brasil.",
     "Bailar mal en público es mejor que no bailar.",
     "Una película de terror es el mejor plan para una primera cita.",
     "Es mejor enterarte de todos los chismes que no enterarte de ninguno.",
