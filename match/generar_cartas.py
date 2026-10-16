@@ -69,10 +69,10 @@ def marco(cv, x, y):
 
 def pregunta(texto, quien, hot):
     def dibujar(cv, x, y):
-        fondo(cv, x, y, P.negro)
+        fondo(cv, x, y, P.bordo)
         marco(cv, x, y)
         if quien == "pareja":
-            pastilla(cv, x + M, y + CH - 13 * mm, "responde tu pareja", P.beige, P.negro)
+            pastilla(cv, x + M, y + CH - 13 * mm, "responde tu pareja", P.beige, P.bordo)
         if hot:
             pastilla(cv, x + CW - M - 10 * mm, y + CH - 13 * mm, "+18", P.rojo, P.beige)
         base.parrafo(cv, texto, x + M, y + 15 * mm, CW - 2 * M, CH - 37 * mm, "DMSerif", 17, 10,
@@ -83,7 +83,7 @@ def pregunta(texto, quien, hot):
 
 def reto(texto, hot):
     def dibujar(cv, x, y):
-        fondo(cv, x, y, P.bordo)
+        fondo(cv, x, y, P.negro)
         marco(cv, x, y)
         cv.setFillColor(P.beige)
         cv.setFont("DMSerifIt", 24)
@@ -143,10 +143,10 @@ def dorso(nombre, color):
 
 def main():
     fr = [pregunta(t, q, h) for t, q, h in c.PREGUNTAS]
-    plan = base.hojas(fr, [dorso("preguntas", P.negro)] * len(fr))
+    plan = base.hojas(fr, [dorso("preguntas", P.bordo)] * len(fr))
 
     fr = [reto(t, h) for t, h in c.RETOS] + [instrucciones]
-    ds = [dorso("retos", P.bordo)] * len(c.RETOS) + [dorso("cómo jugar", P.negro)]
+    ds = [dorso("retos", P.negro)] * len(c.RETOS) + [dorso("cómo jugar", P.negro)]
     plan += base.hojas(fr, ds)
 
     cv = canvas.Canvas(SALIDA, pagesize=A4)

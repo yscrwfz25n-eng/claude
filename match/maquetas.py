@@ -168,7 +168,7 @@ class Pasion:
         cv.roundRect(x + 2.5 * mm, y + 2.5 * mm, CW - 5 * mm, CH - 5 * mm, 2 * mm, stroke=1, fill=0)
 
     def carta(self, cv, x, y, tipo, quien, hot, texto):
-        fondo = self.bordo if tipo == "reto" or quien == "retos" else self.negro
+        fondo = self.negro if tipo == "reto" or quien == "retos" else self.bordo
         redondeada(cv, x, y, fondo)
         self.marco(cv, x, y)
         if tipo == "dorso":
@@ -187,7 +187,7 @@ class Pasion:
             cv.setLineWidth(1.2)
             cv.line(x + M, y + CH - 21.5 * mm, x + M + 12 * mm, y + CH - 21.5 * mm)
         elif quien == "pareja":
-            pastilla(cv, x + M, y + CH - 13 * mm, "responde tu pareja", self.beige, self.negro)
+            pastilla(cv, x + M, y + CH - 13 * mm, "responde tu pareja", self.beige, self.bordo)
         if hot:
             pastilla(cv, x + CW - M - 10 * mm, y + CH - 13 * mm, "+18", self.rojo, self.beige)
         base.parrafo(cv, texto, x + M, y + 14 * mm, CW - 2 * M, CH - 40 * mm, "DMSerif", 17, 11,
