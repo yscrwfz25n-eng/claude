@@ -11,8 +11,9 @@ Dos mazos mezclados (sin niveles):
 
 # (pregunta, quién responde, es_hot)
 #   "ambos":  la carta no dice nada: responden los dos.
-#   "pareja": la carta dice «responde tu pareja»: la pregunta es sobre quien lee y la
-#             pareja tiene que adivinar. Si falla, levanta un Reto.
+#   "pareja": la carta dice «responde tu pareja»: es algo de quien lee (su comida
+#             favorita, su miedo, lo que prefiere), así que adivina el otro.
+#             Si falla, levanta un Reto.
 PREGUNTAS = [
     ('Contá qué pensaste la primera vez que viste a tu pareja.', "ambos", False),
     ('¿Cuál es mi comida favorita?', "pareja", False),
@@ -67,11 +68,11 @@ PREGUNTAS = [
     ('Contá algo que nunca le contaste a nadie.', "ambos", False),
     ('Contá cómo se llamaba tu primer novio o novia.', "ambos", False),
     ('Contá qué te hace sentir que tu pareja te quiere.', "ambos", False),
-    ('Contá a qué edad diste tu primer beso.', "ambos", False),
+    ('Contá qué te atrajo de tu primer amor.', "ambos", False),
     ('Contá en qué lugar te dieron ganas de besar a tu pareja y no pudiste.', "ambos", True),
     ('¿En qué lugar de la casa prefiero hacerlo?', "pareja", True),
     ('Contá qué aprendiste de una relación pasada que hoy te sirve.', "ambos", False),
-    ('Contá a qué edad fue tu primera vez.', "ambos", True),
+    ('¿Cuál es mi postre favorito?', "pareja", False),
     ('Contá qué es lo que más te costó aceptar de tu pareja.', "ambos", False),
     ('¿A qué famoso o famosa le daría un beso?', "pareja", False),
     ('Contá qué palabra o frase de tu pareja te prende.', "ambos", True),
@@ -93,7 +94,7 @@ PREGUNTAS = [
     ('Contá un sueño que todavía no te animaste a contarle.', "ambos", False),
     ('¿Qué es lo que más valoro en una amistad?', "pareja", False),
     ('Contá qué juego te gustaría probar en la cama.', "ambos", True),
-    ('¿Cuál fue el lugar más raro donde lo hicimos?', "pareja", True),
+    ('¿En qué lugar raro me gustaría hacerlo?', "pareja", True),
     ('Contá algo de una relación pasada que no querés que se repita nunca más.', "ambos", False),
     ('¿Qué regalo me haría más feliz ahora mismo?', "pareja", False),
     ('Contá por qué terminó tu relación anterior.', "ambos", False),
