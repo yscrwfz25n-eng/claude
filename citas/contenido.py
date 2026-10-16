@@ -1,4 +1,4 @@
-"""Contenido de 100 CITAS: checklist para parejas (apta para todo público).
+"""Contenido de THE DATING LIST: checklist de 100 citas para parejas (apta para todo público).
 
 Cada cita se tilda al hacerla y se completa con fecha y datos.
 """
