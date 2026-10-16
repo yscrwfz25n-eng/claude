@@ -54,7 +54,7 @@ PREGUNTAS = [
     ('Contá qué te gustaría que tu pareja te haga y nunca le pediste.', "ambos", True),
     ('¿Qué ropa interior prefiero que uses?', "pareja", True),
     ('Contá cómo te imaginás su vida juntos dentro de diez años.', "ambos", False),
-    ('¿Cuál era mi apodo cuando era chico o chica?', "pareja", False),
+    ('¿Cuál es mi apodo de la infancia?', "pareja", False),
     ('Contá cuál fue la peor forma en que terminaste una relación.', "ambos", False),
     ('¿Qué haría con un día libre sin nadie alrededor?', "pareja", False),
     ('Contá tu recuerdo más hot con tu pareja.', "ambos", True),
