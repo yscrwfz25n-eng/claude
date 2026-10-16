@@ -162,8 +162,7 @@ PROFUNDO = [
 ACCION = [
     ("¡Objeción!", "CUANDO QUIERAS",
      "Interrumpí a quien está hablando: tenés 10 segundos para refutarlo. El reloj se pausa.", 2),
-    ("Blindaje", "AL HABLAR", "Durante los próximos 30 segundos nadie puede interrumpirte, ni siquiera con cartas como "
-     "¡Objeción! o ¡Me toca!.", 2),
+    ("Blindaje", "AL HABLAR", "Durante los próximos 30 segundos nadie puede interrumpirte, ni siquiera con una carta.", 2),
     ("¡Me toca!", "CUANDO QUIERAS",
      "Tomá la palabra ya: quien está hablando corta y vos tenés 20 segundos sin interrupciones.", 2),
     ("Pregunta trampa", "CUANDO QUIERAS",

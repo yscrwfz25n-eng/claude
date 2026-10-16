@@ -1,15 +1,16 @@
-"""Genera el PDF imprimible de OPINÓLOGOS.
+"""Genera el PDF imprimible de OPINÓLOGOS (estilo C · Minimal).
 
 Uso:  python3 generar_pdf.py  ->  opinologos-imprimible.pdf
 
 Cartas de 63 x 88 mm (tamaño póker), 9 por hoja A4.
 Cada hoja de frentes va seguida de su hoja de dorsos, espejada para
 imprimir doble faz girando por el borde largo.
+Tipografías: Poppins (OFL, carpeta fuentes/) y DejaVu Sans para ✔ ✖.
 """
 import os
 
 from reportlab.lib.colors import HexColor, white
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
@@ -21,65 +22,71 @@ from reportlab.platypus import Paragraph
 import contenido as c
 
 SALIDA = "opinologos-imprimible.pdf"
-NOMBRE = "OPINÓLOGOS"
-LEMA = "Todos opinan. Pocos convencen."
+NOMBRE = "opinólogos"
+LEMA = "todos opinan. pocos convencen."
 
 CW, CH = 63 * mm, 88 * mm
 COLS, ROWS = 3, 3
 PW, PH = A4
 MX, MY = (PW - COLS * CW) / 2, (PH - ROWS * CH) / 2
-PAD = 5 * mm
-BANDA = 12 * mm
+M = 6 * mm  # margen interno de las cartas
 
+AQUI = os.path.dirname(os.path.abspath(__file__))
 FUENTES = {
-    "Reg": ["/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"],
-    "Bold": ["/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"],
-    "Sym": ["/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"],
+    "PopR": os.path.join(AQUI, "fuentes", "Poppins-Regular.ttf"),
+    "PopM": os.path.join(AQUI, "fuentes", "Poppins-Medium.ttf"),
+    "PopSB": os.path.join(AQUI, "fuentes", "Poppins-SemiBold.ttf"),
+    "PopB": os.path.join(AQUI, "fuentes", "Poppins-Bold.ttf"),
+    "Sym": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
 }
-for alias, rutas in FUENTES.items():
-    ruta = next((r for r in rutas if os.path.exists(r)), None)
-    if ruta is None:
-        raise SystemExit(f"Falta la fuente para {alias}: instalá fonts-liberation y fonts-dejavu")
+for alias, ruta in FUENTES.items():
+    if not os.path.exists(ruta):
+        raise SystemExit(f"Falta la fuente {ruta}")
     pdfmetrics.registerFont(TTFont(alias, ruta))
 
-TINTA = HexColor("#1E1E24")
-GRIS = HexColor("#8A8A93")
-CORTE = HexColor("#C9C9CF")
-VERDE = HexColor("#2E9E5B")
-ROJO = HexColor("#D64545")
+TINTA = HexColor("#111111")
+GRIS = HexColor("#8C8C8C")
+LINEA = HexColor("#DADADA")
+CORTE = HexColor("#E2E2E2")
+OSCURO = HexColor("#111111")
+GRIS_OSCURO = HexColor("#9A9A9A")
+VIOLETA = HexColor("#6B4EE6")
+VERDE = HexColor("#1F9D5C")
+ROJO = HexColor("#D93A3A")
 
 NIVELES = [
-    ("CALENTAMIENTO", HexColor("#2F80ED")),
-    ("PICANTE", HexColor("#E67E22")),
-    ("PROFUNDO", HexColor("#B3261E")),
+    ("calentamiento", HexColor("#2F6FED")),
+    ("picante", HexColor("#F08A24")),
+    ("profundo", HexColor("#D7263D")),
 ]
 
-MAZOS = {
-    "accion": ("ACCIÓN", HexColor("#6C3FB5"), "CARTA DE ACCIÓN"),
-    "ayuda": ("AYUDA", HexColor("#4A4A55"), "RESUMEN DE LA RONDA"),
-}
 
-
-def texto_ajustado(cv, html, x, y, w, h, fuente="Bold", maximo=17, minimo=8,
-                   color=TINTA, alineado=TA_CENTER, vcentro=True):
-    """Dibuja un párrafo con el tamaño de letra más grande que entra en la caja."""
+def parrafo(cv, html, x, y, w, h, fuente, maximo, minimo, color=TINTA, interlineado=1.22,
+            vertical="arriba"):
+    """Dibuja un párrafo alineado a la izquierda con la letra más grande que entra en la caja."""
     size = maximo
     while True:
-        estilo = ParagraphStyle("p", fontName=fuente, fontSize=size, leading=size * 1.22,
-                                textColor=color, alignment=alineado)
+        estilo = ParagraphStyle("p", fontName=fuente, fontSize=size, leading=size * interlineado,
+                                textColor=color, alignment=TA_LEFT)
         p = Paragraph(html, estilo)
         _, alto = p.wrap(w, h)
         if alto <= h or size <= minimo:
             break
         size -= 0.5
-    oy = y + (h - alto) / 2 if vcentro else y + h - alto
+    oy = y + h - alto if vertical == "arriba" else y + (h - alto) / 2
     p.drawOn(cv, x, oy)
 
 
 def marco(cv, x, y):
+    """Contorno suave para las cartas blancas (guía de corte a mano)."""
     cv.setStrokeColor(CORTE)
-    cv.setLineWidth(0.4)
+    cv.setLineWidth(0.5)
     cv.roundRect(x, y, CW, CH, 3 * mm, stroke=1, fill=0)
+
+
+def fondo(cv, x, y, color):
+    cv.setFillColor(color)
+    cv.rect(x, y, CW, CH, stroke=0, fill=1)
 
 
 def marcas_de_corte(cv):
@@ -96,109 +103,118 @@ def marcas_de_corte(cv):
         cv.line(PW - MX + 1 * mm, y, PW - MX + 1 * mm + largo, y)
 
 
-def banda(cv, x, y, color, izquierda, derecha=""):
-    p = cv.beginPath()
-    r = 3 * mm
-    top = y + CH
-    p.moveTo(x, top - BANDA)
-    p.lineTo(x, top - r)
-    p.arcTo(x, top - 2 * r, x + 2 * r, top, 180, -90)
-    p.lineTo(x + CW - r, top)
-    p.arcTo(x + CW - 2 * r, top - 2 * r, x + CW, top, 90, -90)
-    p.lineTo(x + CW, top - BANDA)
-    p.close()
+def pie(cv, x, y, color_texto=TINTA, punto=None):
+    """Logo chico abajo a la izquierda, con un punto del color del nivel si corresponde."""
+    cv.setFont("PopB", 6.3)
+    cv.setFillColor(color_texto)
+    cv.drawString(x + M, y + 5.5 * mm, NOMBRE)
+    if punto is not None:
+        cv.setFillColor(punto)
+        ancho = pdfmetrics.stringWidth(NOMBRE, "PopB", 6.3)
+        cv.circle(x + M + ancho + 1.3 * mm, y + 6.1 * mm, 0.8 * mm, stroke=0, fill=1)
+
+
+def etiqueta(cv, x, y, izquierda, color, derecha=""):
+    cv.setFont("PopM", 6.3)
     cv.setFillColor(color)
-    cv.drawPath(p, stroke=0, fill=1)
-    cv.setFillColor(white)
-    cv.setFont("Bold", 8.5)
-    cv.drawString(x + PAD, top - BANDA + 4.3 * mm, izquierda)
+    cv.drawString(x + M, y + CH - 10 * mm, izquierda)
     if derecha:
-        cv.setFont("Reg", 7.5)
-        cv.drawRightString(x + CW - PAD, top - BANDA + 4.3 * mm, derecha)
+        cv.setFillColor(GRIS)
+        cv.drawRightString(x + CW - M, y + CH - 10 * mm, derecha)
 
 
-def pie(cv, x, y, texto=NOMBRE):
-    cv.setFillColor(GRIS)
-    cv.setFont("Bold", 6.5)
-    cv.drawCentredString(x + CW / 2, y + 4 * mm, texto)
-
-
-def dorso(cv, x, y, color, titulo, subtitulo):
-    cv.setFillColor(color)
-    cv.rect(x, y, CW, CH, stroke=0, fill=1)
-    cv.setStrokeColor(white)
-    cv.setLineWidth(1.2)
-    cv.roundRect(x + 4 * mm, y + 4 * mm, CW - 8 * mm, CH - 8 * mm, 2 * mm, stroke=1, fill=0)
-    cv.setFillColor(white)
-    cv.setFont("Bold", 18)
-    cv.drawCentredString(x + CW / 2, y + CH / 2 + 4 * mm, NOMBRE)
-    cv.setFont("Reg", 7.5)
-    cv.drawCentredString(x + CW / 2, y + CH / 2 - 2 * mm, LEMA)
-    cv.setFont("Bold", 8.5)
-    cv.drawCentredString(x + CW / 2, y + CH / 2 - 14 * mm, titulo)
-    cv.setFont("Reg", 7)
-    cv.drawCentredString(x + CW / 2, y + CH / 2 - 19 * mm, subtitulo)
+def dorso(palabra, color_palabra):
+    """Dorso oscuro con el logo, los tres puntos de nivel y el nombre del mazo."""
+    def dibujar(cv, x, y):
+        fondo(cv, x, y, OSCURO)
+        cv.setFillColor(white)
+        cv.setFont("PopB", 17)
+        ancho = pdfmetrics.stringWidth(NOMBRE, "PopB", 17)
+        x0 = x + (CW - ancho - 8 * mm) / 2
+        cv.drawString(x0, y + CH / 2, NOMBRE)
+        for i, (_, col) in enumerate(NIVELES):
+            cv.setFillColor(col)
+            cv.circle(x0 + ancho + 1.8 * mm + i * 2.6 * mm, y + CH / 2 + 0.9 * mm, 0.9 * mm,
+                      stroke=0, fill=1)
+        cv.setFillColor(GRIS_OSCURO)
+        cv.setFont("PopR", 7)
+        cv.drawCentredString(x + CW / 2, y + CH / 2 - 7 * mm, LEMA)
+        cv.setFillColor(color_palabra)
+        cv.setFont("PopM", 6.8)
+        cv.drawCentredString(x + CW / 2, y + 8 * mm, palabra)
+    return dibujar
 
 
 # ---------- frentes ----------
 
-def frente_tema(nivel, numero, texto, lado):
-    """Una cara de carta de Tema: un solo tema, con el color de su nivel."""
-    titulo, color = NIVELES[nivel]
+def cara_tema(nivel, numero, texto, lado):
+    """Una cara de carta de Tema: franja y detalles del color del nivel."""
+    nombre, color = NIVELES[nivel]
 
     def dibujar(cv, x, y):
         marco(cv, x, y)
-        banda(cv, x, y, color, titulo, f"#{numero:02d} · {lado}")
-        texto_ajustado(cv, texto, x + PAD, y + 22 * mm, CW - 2 * PAD, CH - BANDA - 26 * mm,
-                       maximo=17, minimo=10)
-        cv.setFont("Sym", 8)
-        cv.setFillColor(VERDE)
-        cv.drawString(x + PAD, y + 13 * mm, "✔ A FAVOR")
-        cv.setFillColor(ROJO)
-        cv.drawRightString(x + CW - PAD, y + 13 * mm, "EN CONTRA ✖")
-        pie(cv, x, y)
+        p = cv.beginPath()
+        p.roundRect(x, y, CW, CH, 3 * mm)
+        cv.saveState()
+        cv.clipPath(p, stroke=0, fill=0)
+        cv.setFillColor(color)
+        cv.rect(x, y + CH - 2.5 * mm, CW, 2.5 * mm, stroke=0, fill=1)
+        cv.restoreState()
+        etiqueta(cv, x, y, nombre, color, f"{numero:02d}{lado}")
+        parrafo(cv, texto, x + M, y + 22 * mm, CW - 2 * M, CH - 36 * mm, "PopSB", 15.5, 10)
+        cv.setFont("PopR", 6.5)
+        cv.setFillColor(TINTA)
+        cv.drawString(x + M, y + 13 * mm, "a favor")
+        cv.drawRightString(x + CW - M, y + 13 * mm, "en contra")
+        cv.setStrokeColor(LINEA)
+        cv.setLineWidth(0.5)
+        cv.line(x + 17 * mm, y + 14.1 * mm, x + CW - 20 * mm, y + 14.1 * mm)
+        pie(cv, x, y, punto=color)
     return dibujar
 
 
-def frente_accion(nombre, quien, texto):
-    _, color, _ = MAZOS["accion"]
-
+def frente_accion(nombre, cuando, texto):
     def dibujar(cv, x, y):
         marco(cv, x, y)
-        banda(cv, x, y, color, "ACCIÓN", quien)
-        texto_ajustado(cv, nombre, x + PAD, y + CH - BANDA - 22 * mm, CW - 2 * PAD, 18 * mm,
-                       maximo=16, minimo=11, color=color)
-        texto_ajustado(cv, texto, x + PAD, y + 12 * mm, CW - 2 * PAD, CH - BANDA - 38 * mm,
-                       fuente="Reg", maximo=11, minimo=8)
+        etiqueta(cv, x, y, "acción · " + cuando.lower(), VIOLETA)
+        parrafo(cv, nombre, x + M, y + CH - 30 * mm, CW - 2 * M, 16 * mm, "PopB", 19, 12)
+        cv.setFillColor(VIOLETA)
+        cv.rect(x + M, y + CH - 33 * mm, 8 * mm, 0.9 * mm, stroke=0, fill=1)
+        parrafo(cv, texto, x + M, y + 12 * mm, CW - 2 * M, CH - 48 * mm, "PopR", 9.5, 7,
+                interlineado=1.4)
         pie(cv, x, y)
     return dibujar
 
 
 def cara_voto(a_favor):
     color = VERDE if a_favor else ROJO
+    palabra = "a favor" if a_favor else "en contra"
     simbolo = "✔" if a_favor else "✖"
-    etiqueta = "A FAVOR" if a_favor else "EN CONTRA"
 
     def dibujar(cv, x, y):
-        cv.setFillColor(color)
-        cv.rect(x, y, CW, CH, stroke=0, fill=1)
+        fondo(cv, x, y, color)
         cv.setFillColor(white)
-        cv.setFont("Sym", 60)
-        cv.drawCentredString(x + CW / 2, y + CH / 2 + 4 * mm, simbolo)
-        cv.setFont("Bold", 21)
-        cv.drawCentredString(x + CW / 2, y + CH / 2 - 14 * mm, etiqueta)
-        cv.setFont("Bold", 6.5)
-        cv.drawCentredString(x + CW / 2, y + 6 * mm, "VOTO · " + NOMBRE)
+        size = 30
+        while pdfmetrics.stringWidth(palabra, "PopB", size) > CW - 2 * M:
+            size -= 1
+        cv.setFont("PopB", size)
+        cv.drawString(x + M, y + CH - 22 * mm, palabra)
+        cv.setFont("Sym", 70)
+        cv.drawRightString(x + CW - 5 * mm, y + 8 * mm, simbolo)
+        pie(cv, x, y, color_texto=white)
     return dibujar
 
 
 def frente_ayuda():
     def dibujar(cv, x, y):
         marco(cv, x, y)
-        banda(cv, x, y, MAZOS["ayuda"][1], "CÓMO SE JUEGA", "1 RONDA")
-        html = "<br/>".join(f"<font name='Bold'>{t}</font> {d}" for t, d in c.AYUDA)
-        texto_ajustado(cv, html, x + 4 * mm, y + 9 * mm, CW - 8 * mm, CH - BANDA - 12 * mm,
-                       fuente="Reg", maximo=8.5, minimo=6, alineado=0, vcentro=False)
+        etiqueta(cv, x, y, "ayuda · 1 ronda", GRIS)
+        cv.setFont("PopB", 14)
+        cv.setFillColor(TINTA)
+        cv.drawString(x + M, y + CH - 19 * mm, "cómo se juega")
+        html = "<br/>".join(f"<font name='PopSB'>{t}</font> {d}" for t, d in c.AYUDA)
+        parrafo(cv, html, x + M, y + 11 * mm, CW - 2 * M, CH - 33 * mm, "PopR", 7.5, 5.5,
+                interlineado=1.3)
         pie(cv, x, y)
     return dibujar
 
@@ -227,19 +243,17 @@ def main():
         mitad = len(temas) // 2
         for i in range(mitad):
             numero += 1
-            fr.append(frente_tema(nivel, numero, temas[i], "A"))
-            ds.append(frente_tema(nivel, numero, temas[mitad + i], "B"))
+            fr.append(cara_tema(nivel, numero, temas[i], "a"))
+            ds.append(cara_tema(nivel, numero, temas[mitad + i], "b"))
     plan += hojas(fr, ds)
 
-    at, ac, asub = MAZOS["accion"]
     fr = [frente_accion(n, q, t) for n, q, t, k in c.ACCION for _ in range(k)]
-    plan += hojas(fr, [lambda cv, x, y: dorso(cv, x, y, ac, at, asub)] * len(fr))
+    plan += hojas(fr, [dorso("acción", VIOLETA)] * len(fr))
 
     # Votos: una carta doble faz por jugador (verde de un lado, roja del otro).
     plan += hojas([cara_voto(True)] * 8, [cara_voto(False)] * 8)
 
-    yt, yc, ys = MAZOS["ayuda"]
-    plan += hojas([frente_ayuda()] * 8, [lambda cv, x, y: dorso(cv, x, y, yc, yt, ys)] * 8)
+    plan += hojas([frente_ayuda()] * 8, [dorso("ayuda", GRIS_OSCURO)] * 8)
 
     cv = canvas.Canvas(SALIDA, pagesize=A4)
     cv.setTitle("Opinólogos – cartas imprimibles")

@@ -16,6 +16,10 @@ Juego de cartas de debate para adolescentes y adultos (14+), de 4 a 8 jugadores,
 3. Cortá siguiendo las marcas de corte. Cada carta mide 63 × 88 mm, el tamaño estándar de las cartas de póker.
 4. Lo ideal es papel de 200 a 300 g o cartulina. Otra opción: imprimir en papel común y meter cada carta en un folio de 63,5 × 88 junto con una carta vieja como respaldo.
 
+## Diseño
+
+Estilo C · Minimal: fondo blanco, un color por nivel (azul calentamiento, naranja picante, rojo profundo) y violeta para las cartas de Acción. Tipografía [Poppins](fuentes/OFL-Poppins.txt) (licencia OFL, libre para imprimir y vender). Las maquetas de los otros estilos están en `estilos/`.
+
 ## Editar el contenido
 
 Todos los textos de las cartas están en [`contenido.py`](contenido.py). Después de cambiarlos, regenerá el PDF:
