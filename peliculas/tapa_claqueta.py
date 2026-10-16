@@ -66,7 +66,7 @@ def texto_en_diagonal(cv):
     cv.rotate(math.degrees(math.atan2(y1 - y0, x1 - x0)))
     cv.setFillColor(NEGRO)
     cv.setFont("PopM", 13)
-    cv.drawString(0, 0, "The Watch List  ·  toma 1 de 100")
+    cv.drawString(0, 0, "toma 1 de 100")
     cv.restoreState()
 
 
