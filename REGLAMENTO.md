@@ -76,6 +76,21 @@ Para la ronda siguiente, el rol de lector pasa al jugador de la izquierda y cada
 
 ---
 
+## Ejemplo de una ronda
+
+Juegan Sofi, Tomi, Marta y Lucas. Sofi es la lectora y hay 1 carta en el pozo.
+
+1. Sofi da vuelta la carta de arriba y lee: **«El que cocina no lava.»**
+2. **¡Opinen!** Sofi, Tomi y Lucas golpean la carta en verde (A FAVOR). Marta, en rojo (EN CONTRA).
+3. Sofi pone 4 minutos. Arranca el bando minoritario: Marta dice que quien cocina sabe cómo dejó la cocina y le toca terminar el trabajo.
+4. Lucas juega **Pregunta trampa**: «Marta, ¿vos lavás cuando cocinás?». Marta solo puede contestar: «Sí».
+5. Tomi defiende que cocinar ya es bastante esfuerzo. Marta insiste: si el otro lava, nadie cuida el desorden que hace.
+6. Al minuto y medio, Tomi da vuelta su carta: **«¡Me convenciste, Marta!»**.
+7. Marta se lleva la carta del tema y la del pozo: ya tiene 2. Tomi roba 1 carta de Acción por **Mente abierta**.
+8. Lucas, a la izquierda de Sofi, pasa a ser el lector de la próxima ronda.
+
+---
+
 ## Cartas de Acción
 
 - Cada jugador puede jugar **1 carta de Acción por ronda**.

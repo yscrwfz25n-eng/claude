@@ -11,7 +11,12 @@ Juego de cartas de debate para adolescentes y adultos (14+), de 4 a 8 jugadores,
 
 ## Para mandar a la imprenta
 
-[`opinologos-muestra-imprenta.pdf`](opinologos-muestra-imprenta.pdf) tiene el juego completo en un solo archivo: 26 páginas de cartas (frente y dorso intercalados) y 4 páginas de reglamento. Se genera con:
+[`opinologos-muestra-imprenta.pdf`](opinologos-muestra-imprenta.pdf) tiene el juego completo en un solo archivo, todo **doble faz por el borde largo**:
+
+- Páginas 1 a 26: las 110 cartas (frente y dorso intercalados).
+- Páginas 27 a 30: el reglamento como librito A5 de 8 páginas. Son 2 hojas A4: se doblan al medio, se ponen una dentro de la otra y se abrochan en el lomo.
+
+También están por separado: [`reglamento-librito-a5.pdf`](reglamento-librito-a5.pdf) (páginas en orden de lectura) y [`reglamento-librito-imprimir.pdf`](reglamento-librito-imprimir.pdf) (las hojas ya armadas). Se genera todo con:
 
 ```bash
 python3 generar_pdf.py && python3 generar_reglamento.py
