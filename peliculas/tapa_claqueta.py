@@ -58,18 +58,6 @@ def claqueta(cv):
                  GRIS)
 
 
-def texto_en_diagonal(cv):
-    x0, y0 = P(150, 406)  # paralelo al borde de la barra, dentro del hueco crema
-    x1, y1 = P(600, 143)
-    cv.saveState()
-    cv.translate(x0, y0)
-    cv.rotate(math.degrees(math.atan2(y1 - y0, x1 - x0)))
-    cv.setFillColor(NEGRO)
-    cv.setFont("PopM", 13)
-    cv.drawString(0, 0, "toma 1 de 100")
-    cv.restoreState()
-
-
 def bloque_inferior(cv):
     x, _ = P(300, 0)
     cv.setFillColor(NARANJA)
@@ -128,7 +116,6 @@ def contenido(cv, x, y, s=0):
     cv.setFillColor(CREMA)
     cv.rect(-s, -s, PW + 2 * s, PH + 2 * s, stroke=0, fill=1)
     claqueta(cv)
-    texto_en_diagonal(cv)
     bloque_inferior(cv)
     textura(cv)
     cv.setFillColor(NEGRO)
