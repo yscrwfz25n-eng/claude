@@ -190,7 +190,7 @@ ACCION = [
 ]
 
 AYUDA = [
-    ("1. Tema", "El lector lee el tema del nivel elegido."),
+    ("1. Tema", "El lector da vuelta la carta de arriba y lee la cara que estaba boca abajo."),
     ("2. ¡Opinen!", "Todos golpean su carta de Voto a la vez, con lo que piensan de verdad. "
                      "Si es unánime, cambien de tema."),
     ("3. Debate libre", "4 minutos. Habla quien quiere, de a uno y como máximo 30 s seguidos. "
