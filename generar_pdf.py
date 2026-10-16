@@ -78,9 +78,19 @@ def parrafo(cv, html, x, y, w, h, fuente, maximo, minimo, color=TINTA, interline
 
 
 def fondo(cv, x, y, color):
-    """Fondo pleno con sangrado: invade 3 mm a las vecinas, que en la misma hoja son del mismo color."""
+    """Fondo pleno con sangrado solo hacia el borde exterior de la grilla.
+
+    Entre cartas vecinas no hay sangrado: el corte es exacto y así una carta de
+    otro color al lado no queda manchada.
+    """
+    def en(a, b):
+        return abs(a - b) < 0.01
+    izq = SANGRADO if en(x, MX) else 0
+    der = SANGRADO if en(x + CW, MX + COLS * CW) else 0
+    aba = SANGRADO if en(y, MY) else 0
+    arr = SANGRADO if en(y + CH, PH - MY) else 0
     cv.setFillColor(color)
-    cv.rect(x - SANGRADO, y - SANGRADO, CW + 2 * SANGRADO, CH + 2 * SANGRADO, stroke=0, fill=1)
+    cv.rect(x - izq, y - aba, CW + izq + der, CH + aba + arr, stroke=0, fill=1)
 
 
 def marcas_de_corte(cv):
