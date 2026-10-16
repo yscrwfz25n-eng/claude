@@ -81,7 +81,7 @@ CATEGORIAS = [
         "Aprender lo básico de un idioma nuevo.",
         "Hacer yoga en pareja.",
         "Armar un mueble o arreglar algo de la casa.",
-        "Usar una cámara descartable un mes y revelar las fotos juntos.",
+        "Ir a un festival.",
         "Hacer empanadas caseras, con repulgue y todo.",
         "Aprender a hacer un asado completo.",
         "Ver un documental y debatirlo.",
