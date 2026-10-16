@@ -195,10 +195,7 @@ def contratapa(cv):
     for n, linea in enumerate(["70 cartas de Tema (140 temas) · 24 de Acción",
                                "8 de Voto · 8 de Ayuda · este reglamento"]):
         cv.drawCentredString(PW / 2, 29 * mm - n * 3.2 * mm, linea)
-    logo(cv, PW / 2, 13 * mm, 9)
-    cv.setFillColor(TINTA)
-    cv.setFont("PopSB", 6)
-    cv.drawCentredString(PW / 2, 7 * mm, AUTORIA)
+    logo(cv, PW / 2, 10 * mm, 9)
 
 
 def numero_pagina(cv, doc):
