@@ -55,44 +55,44 @@ def texto_espaciado(cv, texto, cx, y, fuente, size, espacio, color):
 
 def sala(cv):
     # paredes laterales en perspectiva
-    poligono(cv, [(-5 * mm, 196 * mm), (27 * mm, 162 * mm), (27 * mm, 92 * mm), (-5 * mm, 58 * mm)], PARED)
-    poligono(cv, [(PW + 5 * mm, 196 * mm), (PW - 27 * mm, 162 * mm), (PW - 27 * mm, 92 * mm),
-                  (PW + 5 * mm, 58 * mm)], PARED)
+    poligono(cv, [(-5 * mm, 200 * mm), (17 * mm, 178 * mm), (17 * mm, 86 * mm), (-5 * mm, 64 * mm)], PARED)
+    poligono(cv, [(PW + 5 * mm, 200 * mm), (PW - 17 * mm, 178 * mm), (PW - 17 * mm, 86 * mm),
+                  (PW + 5 * mm, 64 * mm)], PARED)
     # telones a los costados de la pantalla, con pliegues
-    for x0 in (30 * mm, PW - 39 * mm):
+    for x0 in (19 * mm, PW - 28 * mm):
         cv.setFillColor(TELON)
-        cv.rect(x0, 96 * mm, 9 * mm, 60 * mm, stroke=0, fill=1)
+        cv.rect(x0, 90 * mm, 9 * mm, 82 * mm, stroke=0, fill=1)
         cv.setStrokeColor(TELON_PLIEGUE)
         cv.setLineWidth(0.8)
         for k in range(1, 4):
-            cv.line(x0 + k * 2.25 * mm, 96 * mm, x0 + k * 2.25 * mm, 156 * mm)
+            cv.line(x0 + k * 2.25 * mm, 90 * mm, x0 + k * 2.25 * mm, 172 * mm)
     # bambalina con ondas
     cv.setFillColor(TELON)
-    cv.rect(30 * mm, 151 * mm, PW - 60 * mm, 8 * mm, stroke=0, fill=1)
-    n = 11
-    paso = (PW - 60 * mm) / n
+    cv.rect(19 * mm, 166 * mm, PW - 38 * mm, 9 * mm, stroke=0, fill=1)
+    n = 13
+    paso = (PW - 38 * mm) / n
     for i in range(n):
-        cv.circle(30 * mm + paso * (i + 0.5), 151 * mm, paso / 2, stroke=0, fill=1)
+        cv.circle(19 * mm + paso * (i + 0.5), 166 * mm, paso / 2, stroke=0, fill=1)
     cv.setStrokeColor(TELON_PLIEGUE)
     cv.setLineWidth(0.6)
     for i in range(1, n):
-        cv.line(30 * mm + paso * i, 148 * mm, 30 * mm + paso * i, 159 * mm)
+        cv.line(19 * mm + paso * i, 162 * mm, 19 * mm + paso * i, 175 * mm)
     # pantalla
-    sx, sy, sw, sh = 41 * mm, 110 * mm, PW - 82 * mm, 36 * mm
+    sx, sy, sw, sh = 30 * mm, 98 * mm, PW - 60 * mm, 60 * mm
     cv.setFillColor(PANTALLA)
     cv.rect(sx, sy, sw, sh, stroke=0, fill=1)
-    texto_espaciado(cv, "CHECK LIST", CX, sy + sh - 8.5 * mm, "PopM", 7.5, 1.6 * mm, LETRA)
-    texto_espaciado(cv, "100", CX, sy + sh / 2 - 5 * mm, "PopM", 25, 1.4 * mm, LETRA)
-    texto_espaciado(cv, "PELÍCULAS", CX, sy + 5 * mm, "PopM", 12.5, 1.5 * mm, LETRA)
+    texto_espaciado(cv, "CHECK LIST", CX, sy + sh - 13 * mm, "PopM", 9.5, 2 * mm, LETRA)
+    texto_espaciado(cv, "100", CX, sy + sh / 2 - 8 * mm, "PopM", 42, 2 * mm, LETRA)
+    texto_espaciado(cv, "PELÍCULAS", CX, sy + 9 * mm, "PopM", 17, 2 * mm, LETRA)
 
 
 def butacas(cv):
     filas = 10
     for k in range(filas):
         t = k / (filas - 1)
-        base = 101 * mm - (t ** 1.45) * 112 * mm
-        h = (5 + t * 21) * mm
-        w = (6.5 + t * 25) * mm
+        base = 89 * mm - (t ** 1.35) * 96 * mm
+        h = (4 + t * 15) * mm
+        w = (6 + t * 18) * mm
         sep = w * 0.14
         curva = (3 + t * 9) * mm
         x = CX - (w + sep) * 0.5 * (k % 2) - (w + sep) * 12
