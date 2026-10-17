@@ -12,7 +12,7 @@ sys.path[:0] = [RAIZ, os.path.join(RAIZ, "citas")]
 
 import portadas_personalizadas  # noqa: E402,F401  (registra Poppins)
 from reportlab.lib.colors import HexColor  # noqa: E402
-from reportlab.lib.enums import TA_LEFT  # noqa: E402
+from reportlab.lib.enums import TA_CENTER  # noqa: E402
 from reportlab.lib.styles import ParagraphStyle  # noqa: E402
 from reportlab.pdfgen import canvas  # noqa: E402
 from reportlab.platypus import Paragraph  # noqa: E402
@@ -33,7 +33,7 @@ def main():
     cv.setFillColor(HexColor("#FFFFFF"))
     cv.rect(0, 0, W, H, stroke=0, fill=1)
     estilo = ParagraphStyle("f", fontName="PopR", fontSize=19, leading=28, textColor=HexColor("#000000"),
-                            alignment=TA_LEFT)
+                            alignment=TA_CENTER)
     p = Paragraph(f"{FRASE}<br/><br/>{CIERRE}", estilo)
     ancho = W - 110
     _, alto = p.wrap(ancho, H)
