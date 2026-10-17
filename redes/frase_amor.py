@@ -34,7 +34,7 @@ def main():
     cv.rect(0, 0, W, H, stroke=0, fill=1)
     estilo = ParagraphStyle("f", fontName="PopR", fontSize=19, leading=28, textColor=HexColor("#000000"),
                             alignment=TA_CENTER)
-    p = Paragraph(f"{FRASE}<br/><br/>{CIERRE}", estilo)
+    p = Paragraph(f"“{FRASE}<br/><br/>{CIERRE}”", estilo)
     ancho = W - 110
     _, alto = p.wrap(ancho, H)
     p.drawOn(cv, (W - ancho) / 2, (H - alto) / 2)
