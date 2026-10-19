@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Contratapa del ÁLBUM DE VINOS: A5 + 3 mm de sangrado. «A veces es cuestión de tiempo vino»
+     con el estilo de la tapa. El elástico queda del lado izquierdo: el texto arranca después. -->
+<style>
+  @font-face{font-family:Bebas;src:url('../fuentes/BebasNeue-Regular.ttf');}
+  @font-face{font-family:Sacramento;src:url('../fuentes/Sacramento-Regular.ttf');}
+  @font-face{font-family:Karla;src:url('../fuentes/Karla[wght].ttf');font-weight:200 800;}
+  @page{size:154mm 216mm;margin:0;}
+  html,body{margin:0;width:154mm;height:216mm;overflow:hidden;}
+  body{position:relative;background:#F7F2EA;}
+  .capa{position:absolute;left:0;top:0;width:154mm;height:216mm;}
+  .tinta{position:absolute;left:27mm;top:100mm;color:#1B1716;filter:url(#prensa);}
+  .linea{font-family:Bebas;font-size:30mm;line-height:.86;letter-spacing:.2mm;display:flex;align-items:center;height:25mm;white-space:pre;}
+  .o{display:inline-block;box-sizing:border-box;border-radius:50%;border:solid currentColor;width:21mm;height:21mm;border-width:3.3mm;margin:0 .7mm;}
+  .o.acento{position:relative;}
+  .o.acento::after{content:"";position:absolute;left:8mm;top:-7.4mm;width:3mm;height:5.2mm;background:currentColor;transform:skewX(-28deg);}
+  .vino{position:absolute;left:71mm;top:170mm;font-family:Sacramento;font-size:30mm;line-height:1;color:#7A1832;transform:rotate(-7deg);}
+  .pie{position:absolute;left:27mm;top:196mm;width:110mm;display:flex;justify-content:space-between;
+       font-family:Karla;font-size:2.5mm;font-weight:600;letter-spacing:.35mm;color:#1B1716;}
+</style></head><body>
+
+<svg class="capa" viewBox="0 0 154 216" style="mix-blend-mode:multiply">
+  <defs>
+    <filter id="acuarela" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="4" seed="4" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale="7" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.2" result="liso"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="9" result="pig"/>
+      <feColorMatrix in="pig" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.6 0.2" result="pig2"/>
+      <feComposite in="liso" in2="pig2" operator="in" result="b"/>
+      <feMorphology in="liso" operator="erode" radius="0.6" result="e"/>
+      <feComposite in="liso" in2="e" operator="out" result="borde"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="borde"/><feMergeNode in="borde"/></feMerge>
+    </filter>
+    <filter id="salpicado"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="8" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale="1.2" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <g filter="url(#acuarela)" fill="#7A1436">
+    <ellipse cx="80" cy="84" rx="19" ry="12" opacity=".26"/>
+    <ellipse cx="88" cy="80" rx="9" ry="6" opacity=".2"/>
+    <ellipse cx="128" cy="168" rx="12" ry="10" opacity=".26"/>
+  </g>
+  <g filter="url(#acuarela)" fill="none" stroke="#7A1436">
+    <circle cx="132" cy="28" r="15" stroke-width="2" opacity=".36"/>
+  </g>
+  <g filter="url(#salpicado)" fill="#8E1F48" opacity=".75">
+    <circle cx="104" cy="58" r="1.4"/><circle cx="109" cy="54" r=".6"/><circle cx="58" cy="96" r="1"/>
+    <circle cx="52" cy="92" r=".5"/><circle cx="140" cy="150" r=".9"/><circle cx="118" cy="186" r=".6"/>
+  </g>
+</svg>
+
+<!-- copa inclinada con el vino salpicando, como en la referencia -->
+<svg class="capa" viewBox="0 0 154 216">
+  <defs>
+    <filter id="mano"><feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="2" seed="5" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale=".9" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <g filter="url(#mano)" fill="none" stroke="#7A1832" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(70 40) rotate(-18)">
+      <path d="M0 0C-1 18 4 28 12 28C20 28 25 18 24 0"/>
+      <ellipse cx="12" cy="0" rx="12" ry="2.6"/>
+      <path d="M12 28V50"/><path d="M3 52Q12 48 21 52Q12 55 3 52Z"/>
+      <!-- vino moviéndose adentro -->
+      <path d="M1 13Q8 9 13 13T23 11"/>
+      <path d="M2 17q5 2 10 0M3 20q4 2 9 0M5 23q3 1.5 7 0M14 17q4 1 8 -1M14 21q3 1 6 -1" stroke-width=".55"/>
+      <!-- gotas que saltan -->
+      <path d="M8 -6q-2 -4 0 -7q2 3 0 7Z" fill="#7A1832"/>
+      <path d="M15 -5q1 -5 4 -6q0 4 -4 6Z" fill="#7A1832"/>
+    </g>
+    <!-- sacacorchos chico, abajo a la derecha -->
+    <g transform="translate(30 40) rotate(-24) scale(.75)">
+      <path d="M0 4Q12 -2 24 4"/><path d="M12 1.5V10"/>
+      <path d="M12 10q-3.5 1.6 0 3.2q3.5 1.6 0 3.2q-3.5 1.6 0 3.2q3.5 1.6 0 3.2"/>
+    </g>
+  </g>
+  <!-- tachado a mano sobre «TIEMPO» -->
+  <path d="M58 164C80 161 104 163 133 158" fill="none" stroke="#7A1832" stroke-width="2.6" stroke-linecap="round" filter="url(#mano)"/>
+</svg>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="prensa" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="3" seed="11" result="ruido"/>
+    <feColorMatrix in="ruido" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -8 6.1" result="huecos"/>
+    <feComposite in="SourceGraphic" in2="huecos" operator="in" result="tinta"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="2" result="ondas"/>
+    <feDisplacementMap in="tinta" in2="ondas" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<div class="tinta">
+  <div class="linea">A VECES ES</div>
+  <div class="linea">CUESTI<span class="o acento"></span>N</div>
+  <div class="linea">DE TIEMP<span class="o"></span></div>
+</div>
+<div class="vino">vino</div>
+<div class="pie" style="filter:url(#prensa)">
+  <span>ÁLBUM DE VINOS</span>
+  <span>@OFICINA.GRAFICA_</span>
+</div>
+</body></html>

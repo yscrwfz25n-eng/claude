@@ -33,23 +33,22 @@ def pdf_de_imprenta(html="tapa.html", salida=SALIDA, titulo="Álbum de vinos –
     subprocess.run([CHROME, "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
                     "--virtual-time-budget=3000", f"--print-to-pdf={crudo}",
                     "file://" + os.path.join(AQUI, html)], check=True, capture_output=True)
-    lector = PdfReader(crudo)
-    hoja = lector.pages[0]
-    w, h = float(hoja.mediabox.width), float(hoja.mediabox.height)
-    hoja.trimbox = RectangleObject((S, S, w - S, h - S))
-    hoja.bleedbox = RectangleObject((0, 0, w, h))
     escritor = PdfWriter()
-    escritor.add_page(hoja)
+    for hoja in PdfReader(crudo).pages:
+        w, h = float(hoja.mediabox.width), float(hoja.mediabox.height)
+        hoja.trimbox = RectangleObject((S, S, w - S, h - S))
+        hoja.bleedbox = RectangleObject((0, 0, w, h))
+        escritor.add_page(hoja)
     escritor.add_metadata({"/Title": titulo, "/Author": "@oficina.grafica_"})
     with open(salida, "wb") as f:
         escritor.write(f)
-    print("ok", os.path.basename(salida), f"{w / mm:.1f} x {h / mm:.1f} mm")
+    print("ok", os.path.basename(salida), f"{len(escritor.pages)} pág. de {w / mm:.1f} x {h / mm:.1f} mm")
 
 
-def maqueta():
+def maqueta(pdf_arte=SALIDA, png=os.path.join(AQUI, "tapa.png"), espejo=False):
     tmp = tempfile.mkdtemp()
     base = os.path.join(tmp, "arte")
-    subprocess.run(["pdftoppm", "-r", "200", "-png", "-singlefile", SALIDA, base], check=True)
+    subprocess.run(["pdftoppm", "-r", "200", "-png", "-singlefile", pdf_arte, base], check=True)
     arte = Image.open(base + ".png")
     s = round(3 / 25.4 * 200)
     arte.crop((s, s, arte.width - s, arte.height - s)).save(base + "-corte.png")
@@ -59,18 +58,27 @@ def maqueta():
     cv.setFillColor(HexColor("#E6DED1"))
     cv.rect(0, 0, PW + 2 * m, PH + 2 * m, stroke=0, fill=1)
     x, y = m, m + 4 * mm
-    cuaderno(cv, x, y, VINOS)
+
+    def espejado(dibujo):
+        cv.saveState()
+        if espejo:
+            cv.translate(2 * x + PW, 0)
+            cv.scale(-1, 1)
+        dibujo(cv, x, y, VINOS)
+        cv.restoreState()
+
+    espejado(cuaderno)
     cv.saveState()
     p = cv.beginPath()
     p.roundRect(x, y, PW, PH, 3 * mm)
     cv.clipPath(p, stroke=0, fill=0)
     cv.drawImage(base + "-corte.png", x, y, PW, PH)
     cv.restoreState()
-    elastico(cv, x, y, VINOS)
+    espejado(elastico)
     cv.showPage()
     cv.save()
-    subprocess.run(["pdftoppm", "-r", "150", "-png", "-singlefile", pdf, os.path.join(AQUI, "tapa")], check=True)
-    print("ok tapa.png")
+    subprocess.run(["pdftoppm", "-r", "150", "-png", "-singlefile", pdf, png[:-4]], check=True)
+    print("ok", os.path.basename(png))
 
 
 if __name__ == "__main__":
