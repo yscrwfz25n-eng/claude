@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Posteo «Según nuestros cálculos necesitás… una gráfica de confianza», con la identidad de Oficina Gráfica. -->
+<style>
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:LCD;src:url('../../fuentes/VT323-Regular.ttf');}
+  :root{--papel:#EEE7D8;--tinta:#142A40;--noche:#0A1B2B;--medio:#2C6690;--vivo:#1C82D9;--celeste:#9BD0EF;}
+  html,body{margin:0;}
+  .post{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--papel);font-family:Brico;}
+  .pastilla{position:absolute;top:96px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;
+            border:3px solid var(--tinta);border-radius:999px;padding:12px 30px 12px 22px;color:var(--tinta);
+            font-weight:700;font-size:30px;letter-spacing:.06em;}
+  .titulo{position:absolute;top:290px;left:0;right:0;text-align:center;color:var(--tinta);font-weight:800;
+          font-size:104px;line-height:1.02;letter-spacing:-.03em;word-spacing:.06em;}
+  .titulo em{color:var(--vivo);font-style:normal;display:inline-block;transform:skewX(-11deg);}
+
+  /* calculadora */
+  .calc{position:absolute;left:40px;top:560px;width:1000px;height:900px;border-radius:64px;
+        background:linear-gradient(160deg,#3577A6 0%,#2C6690 45%,#245778 100%);
+        box-shadow:inset 0 6px 0 rgba(255,255,255,.18),inset 0 -14px 30px rgba(0,0,0,.25),0 30px 60px rgba(10,27,43,.28);}
+  .solar{position:absolute;right:120px;top:58px;width:250px;height:84px;border-radius:8px;background:var(--noche);
+         display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;box-sizing:border-box;
+         box-shadow:inset 0 3px 6px rgba(0,0,0,.6),0 2px 0 rgba(255,255,255,.12);}
+  .solar i{background:linear-gradient(180deg,#1b3550,#0f2236);border-radius:3px;}
+  .marco{position:absolute;left:70px;right:70px;top:180px;height:270px;border-radius:26px;background:#1E4C6E;
+         box-shadow:inset 0 6px 14px rgba(0,0,0,.45),0 2px 0 rgba(255,255,255,.15);}
+  .lcd{position:absolute;inset:26px;border-radius:12px;background:linear-gradient(180deg,#C9DCE4,#B6CCD6);
+       box-shadow:inset 0 8px 18px rgba(10,27,43,.35);display:flex;align-items:center;justify-content:center;}
+  .lcd span{font-family:LCD;font-size:76px;color:#132A3D;letter-spacing:.02em;text-shadow:3px 3px 0 rgba(19,42,61,.12);}
+  .teclas{position:absolute;left:70px;right:70px;top:500px;display:grid;grid-template-columns:repeat(5,1fr);gap:28px 30px;}
+  .t{height:118px;border-radius:24px;background:linear-gradient(180deg,#F6F0E3,#E3D9C4);color:var(--tinta);
+     display:flex;align-items:center;justify-content:center;font-weight:700;font-size:44px;letter-spacing:-.01em;
+     box-shadow:0 10px 0 #B9AE95,0 16px 22px rgba(10,27,43,.35),inset 0 2px 0 #fff;}
+  .t.op{background:linear-gradient(180deg,#2B8CE0,#1C82D9);color:#fff;box-shadow:0 10px 0 #135C9C,0 16px 22px rgba(10,27,43,.35),inset 0 2px 0 rgba(255,255,255,.35);}
+  .t.chico{font-size:34px;}
+  .t.op{font-size:64px;font-weight:600;}
+  .grano{position:absolute;inset:0;opacity:.4;mix-blend-mode:multiply;pointer-events:none;}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.16  0 0 0 0 0.25  0 0 0 0.5 0"/></filter>
+</svg>
+<div class="post">
+  <div class="pastilla">
+    <svg width="34" height="34" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#142A40" stroke-width="9"/>
+      <line x1="50" y1="2" x2="50" y2="98" stroke="#142A40" stroke-width="9"/><line x1="2" y1="50" x2="98" y2="50" stroke="#142A40" stroke-width="9"/>
+      <circle cx="50" cy="50" r="12" fill="#1C82D9"/></svg>
+    OFICINA GRÁFICA
+  </div>
+  <div class="titulo">Según nuestros<br><em>cálculos</em> necesitás…</div>
+  <div class="calc">
+    <div class="solar"><i></i><i></i><i></i><i></i></div>
+    <div class="marco"><div class="lcd"><span>una gráfica de confianza</span></div></div>
+    <div class="teclas">
+      <div class="t chico">CMYK</div><div class="t chico">RGB</div><div class="t chico">DPI</div><div class="t chico">PDF</div><div class="t op">÷</div>
+      <div class="t">7</div><div class="t">8</div><div class="t">9</div><div class="t">%</div><div class="t op">×</div>
+      <div class="t">4</div><div class="t">5</div><div class="t">6</div><div class="t">M+</div><div class="t op">−</div>
+    </div>
+  </div>
+  <svg class="grano" width="1080" height="1350"><rect width="1080" height="1350" filter="url(#grano)"/></svg>
+</div>
+</body></html>
