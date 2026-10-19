@@ -90,16 +90,15 @@
     </div>
   </div>
 
-  <!-- etiqueta, centrada en el medio de la página -->
-  <div style="width:92mm;height:60mm;margin:4mm auto 0;border:.35mm dashed var(--linea);border-radius:2.5mm;
-              display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm;">
-    <span class="manuscrita" style="font-size:8.5mm;">pegá la etiqueta</span>
-    <span class="et">o despegala con agua tibia y guardala acá</span>
-  </div>
-
-  <!-- puntaje y escalas | aromas -->
-  <div style="display:grid;grid-template-columns:61mm 1fr;column-gap:7mm;margin-top:4.2mm;">
-    <div>
+  <!-- etiqueta a un costado (vertical, como las etiquetas de vino) | puntaje, escalas y aromas -->
+  <div style="display:grid;grid-template-columns:58mm 1fr;column-gap:5mm;margin-top:4.2mm;height:97mm;">
+    <div style="border:.35mm dashed var(--linea);border-radius:2.5mm;display:flex;flex-direction:column;
+                align-items:center;justify-content:center;gap:1mm;text-align:center;">
+      <span class="manuscrita" style="font-size:8.5mm;">pegá la etiqueta</span>
+      <span class="et" style="line-height:1.5;">o despegala con agua tibia<br>y guardala acá</span>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:space-between;padding:1mm 0;">
+      <div>
       <span class="et">puntaje</span>
       <svg viewBox="0 0 62 11" style="width:46mm;height:8.2mm;display:block;margin:.8mm 0 1.4mm -0.6mm;">
         <g fill="none" stroke="#7A1832" stroke-width=".7" stroke-linejoin="round">
@@ -107,19 +106,24 @@
           <use href="#e" x="12.6"/><use href="#e" x="25.2"/><use href="#e" x="37.8"/><use href="#e" x="50.4"/>
         </g>
       </svg>
+      </div>
+      <div>
+      <span class="et">características</span>
+      <div style="height:1.8mm"></div>
       <div class="escala"><b>CUERPO</b><span>ligero</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>intenso</span></div>
       <div class="escala"><b>DULZOR</b><span>seco</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>dulce</span></div>
       <div class="escala"><b>ACIDEZ</b><span>suave</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>viva</span></div>
       <div class="escala"><b>TANINOS</b><span>sedoso</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>firme</span></div>
-    </div>
-    <div>
-      <span class="et">aromas</span>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5mm 2mm;font-size:2.95mm;font-weight:500;margin-top:1.6mm;">
-        <span><i class="caja"></i>Frutos rojos</span><span><i class="caja"></i>Frutos negros</span>
-        <span><i class="caja"></i>Cítricos</span><span><i class="caja"></i>Flores</span>
-        <span><i class="caja"></i>Madera</span><span><i class="caja"></i>Vainilla</span>
-        <span><i class="caja"></i>Especias</span><span><i class="caja"></i>Chocolate</span>
-        <span><i class="caja"></i>Hierbas</span><span><i class="caja"></i>Café</span>
+      </div>
+      <div>
+        <span class="et">aromas</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.6mm 2mm;font-size:2.95mm;font-weight:500;margin-top:2mm;">
+          <span><i class="caja"></i>Frutos rojos</span><span><i class="caja"></i>Frutos negros</span>
+          <span><i class="caja"></i>Cítricos</span><span><i class="caja"></i>Flores</span>
+          <span><i class="caja"></i>Madera</span><span><i class="caja"></i>Vainilla</span>
+          <span><i class="caja"></i>Especias</span><span><i class="caja"></i>Chocolate</span>
+          <span><i class="caja"></i>Hierbas</span><span><i class="caja"></i>Café</span>
+        </div>
       </div>
     </div>
   </div>
