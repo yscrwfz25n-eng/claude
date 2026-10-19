@@ -36,6 +36,9 @@
   .s2 .firma{bottom:56px;color:var(--tinta);}
   .s2 .firma span{font-size:44px;}
 
+  /* PDF con texto vectorial (editable al importarlo en Canva): una diapositiva por página */
+  @page{size:1080px 1350px;margin:0;}
+  @media print{.fila{display:block;width:1080px;height:auto;}.slide{break-after:page;}.grano{display:none;}}
   .grano{position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;pointer-events:none;}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute">
