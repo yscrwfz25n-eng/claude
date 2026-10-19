@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Carrusel «Pasos para quitarme el enojo»: paso 2. -->
+<style>
+  @font-face{font-family:Bungee;src:url('../../fuentes/Bungee-Regular.ttf');}
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Marker;src:url('../../fuentes/PermanentMarker-Regular.ttf');}
+  html,body{margin:0;}
+  svg{display:block;}
+  .bungee{font-family:Bungee;} .brico{font-family:Brico;} .marker{font-family:Marker;}
+</style></head><body>
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.05" numOctaves="2" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0.04  0 0 0 0 0.10  0 0 0 0 0.17  0 0 0 0.55 0"/></filter>
+    <radialGradient id="luz" cx="50%" cy="72%" r="60%">
+      <stop offset="0" stop-color="#2C93E8"/><stop offset="1" stop-color="#1C82D9"/>
+    </radialGradient>
+    <symbol id="mira" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="10"/>
+      <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="10"/>
+      <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="10"/>
+      <circle cx="50" cy="50" r="12" fill="#0A1B2B"/>
+    </symbol>
+  </defs>
+
+  <rect width="1080" height="1350" fill="url(#luz)"/>
+  <g stroke="#EEE7D8" stroke-width="3" opacity=".7">
+    <path d="M40 70H90M70 40V90M1040 70H990M1010 40V90M40 1280H90M70 1310V1260M1040 1280H990M1010 1310V1260"/>
+  </g>
+  <g transform="translate(112 92)" color="#EEE7D8">
+    <svg width="40" height="40"><use href="#mira"/></svg>
+    <text class="marker" x="52" y="31" font-size="30" fill="#EEE7D8">Oficina Gráfica</text>
+  </g>
+  <text class="bungee" x="968" y="122" font-size="30" fill="#9BD0EF" text-anchor="end">3/3</text>
+
+  <text class="bungee" x="540" y="275" font-size="132" fill="#9BD0EF" text-anchor="middle" letter-spacing="4">PASO 2</text>
+  <text class="bungee" x="540" y="420" font-size="88" fill="#EEE7D8" text-anchor="middle">NO HAY PASO 2</text>
+  <text class="brico" x="540" y="490" font-size="40" font-weight="300" fill="#EEE7D8" text-anchor="middle"
+        transform="skewX(-12) translate(104 0)" style="font-variation-settings:'opsz' 48,'wdth' 90">bueno, uno: probar y tachar</text>
+
+  <!-- página del álbum: lista con tildes -->
+  <g transform="translate(540 850) rotate(2)">
+    <rect x="-330" y="-270" width="660" height="560" rx="28" fill="#0A1B2B" opacity=".25" transform="translate(10 16)"/>
+    <rect x="-330" y="-270" width="660" height="560" rx="28" fill="#FBF8F1"/>
+    <text class="bungee" x="-270" y="-185" font-size="34" fill="#1C82D9">MIS ALFAJORES</text>
+    <text class="brico" x="270" y="-187" font-size="26" font-weight="500" fill="#2C6690" text-anchor="end">3 / 100</text>
+    <line x1="-270" y1="-160" x2="270" y2="-160" stroke="#E2D8BF" stroke-width="4"/>
+    <g class="brico" font-size="40" font-weight="500" fill="#142A40" style="font-variation-settings:'wdth' 90">
+      <g transform="translate(0 -95)">
+        <rect x="-270" y="-30" width="44" height="44" rx="10" fill="#1C82D9"/>
+        <path d="M-260 -9l10 10 18-20" fill="none" stroke="#FBF8F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="-200" y="6">De maicena</text>
+        <path d="M-206 -6C-120 -12 -20 -2 30 -8" fill="none" stroke="#1C82D9" stroke-width="6" stroke-linecap="round" filter="url(#rough)"/>
+      </g>
+      <g transform="translate(0 -5)">
+        <rect x="-270" y="-30" width="44" height="44" rx="10" fill="#1C82D9"/>
+        <path d="M-260 -9l10 10 18-20" fill="none" stroke="#FBF8F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="-200" y="6">Triple de dulce de leche</text>
+        <path d="M-206 -6C-80 -12 80 -2 222 -8" fill="none" stroke="#1C82D9" stroke-width="6" stroke-linecap="round" filter="url(#rough)"/>
+      </g>
+      <g transform="translate(0 85)">
+        <rect x="-270" y="-30" width="44" height="44" rx="10" fill="#1C82D9"/>
+        <path d="M-260 -9l10 10 18-20" fill="none" stroke="#FBF8F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="-200" y="6">De fruta</text>
+        <path d="M-206 -6C-140 -12 -60 -2 -40 -8" fill="none" stroke="#1C82D9" stroke-width="6" stroke-linecap="round" filter="url(#rough)"/>
+      </g>
+      <g transform="translate(0 175)">
+        <rect x="-270" y="-30" width="44" height="44" rx="10" fill="none" stroke="#2C6690" stroke-width="4"/>
+        <text x="-200" y="6" fill="#2C6690">El de la estación de servicio</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- llamado a la acción -->
+  <g transform="translate(540 1222)">
+    <rect x="-250" y="-40" width="500" height="80" rx="40" fill="#EEE7D8"/>
+    <text class="brico" x="0" y="12" font-size="34" font-weight="700" fill="#142A40" text-anchor="middle">Pedí el tuyo por MD</text>
+  </g>
+
+  <rect width="1080" height="1350" filter="url(#grano)" opacity=".28" style="mix-blend-mode:multiply"/>
+</svg>
+</body></html>

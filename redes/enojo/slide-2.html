@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Carrusel «Pasos para quitarme el enojo»: paso 1. -->
+<style>
+  @font-face{font-family:Bungee;src:url('../../fuentes/Bungee-Regular.ttf');}
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Marker;src:url('../../fuentes/PermanentMarker-Regular.ttf');}
+  html,body{margin:0;}
+  svg{display:block;}
+  .bungee{font-family:Bungee;} .brico{font-family:Brico;} .marker{font-family:Marker;}
+</style></head><body>
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.05" numOctaves="2" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0.04  0 0 0 0 0.10  0 0 0 0 0.17  0 0 0 0.55 0"/></filter>
+    <radialGradient id="luz" cx="50%" cy="72%" r="60%">
+      <stop offset="0" stop-color="#2C93E8"/><stop offset="1" stop-color="#1C82D9"/>
+    </radialGradient>
+    <symbol id="mira" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="10"/>
+      <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="10"/>
+      <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="10"/>
+      <circle cx="50" cy="50" r="12" fill="#0A1B2B"/>
+    </symbol>
+  </defs>
+
+  <rect width="1080" height="1350" fill="url(#luz)"/>
+  <g stroke="#EEE7D8" stroke-width="3" opacity=".7">
+    <path d="M40 70H90M70 40V90M1040 70H990M1010 40V90M40 1280H90M70 1310V1260M1040 1280H990M1010 1310V1260"/>
+  </g>
+  <g transform="translate(112 92)" color="#EEE7D8">
+    <svg width="40" height="40"><use href="#mira"/></svg>
+    <text class="marker" x="52" y="31" font-size="30" fill="#EEE7D8">Oficina Gráfica</text>
+  </g>
+  <text class="bungee" x="968" y="122" font-size="30" fill="#9BD0EF" text-anchor="end">2/3</text>
+
+  <text class="bungee" x="540" y="275" font-size="132" fill="#9BD0EF" text-anchor="middle" letter-spacing="4">PASO 1</text>
+
+  <!-- foto tipo polaroid pegada con cinta -->
+  <g transform="translate(540 745) rotate(-4)">
+    <rect x="-274" y="-300" width="548" height="640" fill="#0A1B2B" opacity=".25" transform="translate(10 16)"/>
+    <rect x="-274" y="-300" width="548" height="640" fill="#FBF8F1"/>
+    <!-- recorte de la foto: sin el aire blanco de arriba y abajo -->
+    <svg x="-250" y="-276" width="500" height="537" viewBox="0 58 382 410" preserveAspectRatio="xMidYMid slice">
+      <image href="album.jpg" width="382" height="512"/>
+    </svg>
+    <text class="brico" x="0" y="310" font-size="34" font-weight="500" fill="#142A40" text-anchor="middle" style="font-variation-settings:'wdth' 80">el nuestro, obvio</text>
+    <rect x="-240" y="-328" width="150" height="50" fill="#9BD0EF" opacity=".8" transform="rotate(-8 -165 -303)"/>
+    <rect x="90" y="-328" width="150" height="50" fill="#9BD0EF" opacity=".8" transform="rotate(7 165 -303)"/>
+  </g>
+
+  <text class="bungee" x="540" y="1220" font-size="62" fill="#EEE7D8" text-anchor="middle">TENER UN ÁLBUM</text>
+  <text class="bungee" x="540" y="1286" font-size="62" fill="#EEE7D8" text-anchor="middle">DE ALFAJORES</text>
+
+  <rect width="1080" height="1350" filter="url(#grano)" opacity=".28" style="mix-blend-mode:multiply"/>
+</svg>
+</body></html>
