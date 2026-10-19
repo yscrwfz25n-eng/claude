@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Rebranding del meme «Pasos para quitarme el enojo» con la identidad de Oficina Gráfica. -->
+<style>
+  @font-face{font-family:Bungee;src:url('../../fuentes/Bungee-Regular.ttf');}
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Marker;src:url('../../fuentes/PermanentMarker-Regular.ttf');}
+  html,body{margin:0;}
+  svg{display:block;}
+  .bungee{font-family:Bungee;} .brico{font-family:Brico;} .marker{font-family:Marker;}
+</style></head><body>
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.05" numOctaves="2" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0.04  0 0 0 0 0.10  0 0 0 0 0.17  0 0 0 0.55 0"/></filter>
+    <radialGradient id="luz" cx="50%" cy="72%" r="60%">
+      <stop offset="0" stop-color="#2C93E8"/><stop offset="1" stop-color="#1C82D9"/>
+    </radialGradient>
+    <symbol id="mira" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="10"/>
+      <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="10"/>
+      <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="10"/>
+      <circle cx="50" cy="50" r="12" fill="#0A1B2B"/>
+    </symbol>
+  </defs>
+
+  <rect width="1080" height="1350" fill="url(#luz)"/>
+
+  <!-- marcas de corte en las esquinas: firma de imprenta -->
+  <g stroke="#EEE7D8" stroke-width="3" opacity=".7">
+    <path d="M40 70H90M70 40V90M1040 70H990M1010 40V90M40 1280H90M70 1310V1260M1040 1280H990M1010 1310V1260"/>
+  </g>
+
+  <!-- logo -->
+  <g transform="translate(112 92)" color="#EEE7D8">
+    <svg width="40" height="40"><use href="#mira"/></svg>
+    <text class="marker" x="52" y="31" font-size="30" fill="#EEE7D8">Oficina Gráfica</text>
+  </g>
+
+  <!-- nota al margen -->
+  <g transform="translate(838 118) rotate(-8)" filter="url(#rough)">
+    <text class="brico" x="0" y="0" font-size="30" font-weight="400" fill="#9BD0EF" text-anchor="middle" style="font-variation-settings:'wdth' 75">todo va a</text>
+    <text class="brico" x="0" y="38" font-size="30" font-weight="400" fill="#9BD0EF" text-anchor="middle" style="font-variation-settings:'wdth' 75">salir bien</text>
+    <path d="M-22 62q22 18 44 0" fill="none" stroke="#9BD0EF" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="-12" cy="52" r="3" fill="#9BD0EF"/><circle cx="12" cy="52" r="3" fill="#9BD0EF"/>
+  </g>
+
+  <!-- título -->
+  <text class="bungee" x="540" y="330" font-size="132" fill="#9BD0EF" text-anchor="middle" letter-spacing="4">PASOS</text>
+  <text class="brico" x="540" y="425" font-size="104" font-weight="300" fill="#EEE7D8" text-anchor="middle"
+        transform="skewX(-12) translate(88 0)" style="font-variation-settings:'opsz' 96,'wdth' 90">para quitarme</text>
+  <text class="bungee" x="540" y="590" font-size="150" fill="#EEE7D8" text-anchor="middle">EL ENOJO</text>
+
+  <!-- perro -->
+  <image href="perro.png" x="200" y="616" width="680" height="767"/>
+
+  <!-- garabatos -->
+  <g fill="none" stroke="#EEE7D8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
+    <!-- marca de enojo, estilo historieta -->
+    <path d="M120 820Q166 822 168 776M192 776Q194 822 240 820M240 846Q194 844 192 890M168 890Q166 844 120 846"/>
+    <path d="M800 660l22-60M850 690l48-38M868 750l60-8"/>
+  </g>
+
+  <!-- deslizá -->
+  <g transform="translate(830 1186)">
+    <rect x="0" y="0" width="170" height="62" rx="31" fill="#EEE7D8"/>
+    <text class="brico" x="30" y="41" font-size="27" font-weight="700" fill="#142A40">deslizá</text>
+    <path d="M128 31h22M141 21l10 10-10 10" fill="none" stroke="#1C82D9" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <rect width="1080" height="1350" filter="url(#grano)" opacity=".28" style="mix-blend-mode:multiply"/>
+</svg>
+</body></html>
