@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Posteo «¿Con quién jugás hoy?»: Match (en pareja) vs. Opinólogos (con amigos), identidad Oficina Gráfica. -->
+<style>
+  @font-face{font-family:Bungee;src:url('../../fuentes/Bungee-Regular.ttf');}
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Karla;src:url('../../fuentes/Karla[wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Marker;src:url('../../fuentes/PermanentMarker-Regular.ttf');}
+  :root{--papel:#EEE7D8;--papel2:#E2D8BF;--tinta:#142A40;--noche:#0A1B2B;--medio:#2C6690;--vivo:#1C82D9;}
+  html,body{margin:0;}
+  .post{position:relative;width:1080px;height:1350px;overflow:hidden;background:linear-gradient(180deg,#F1EBDD,#E9E0CC);}
+  .firma{position:absolute;left:72px;top:70px;display:flex;align-items:center;gap:14px;color:var(--tinta);transform:rotate(-2deg);}
+  .firma span{font-family:Marker;font-size:46px;line-height:1;}
+  .titulo{position:absolute;top:200px;left:0;right:0;text-align:center;font-family:Bungee;font-size:66px;color:var(--tinta);letter-spacing:.01em;}
+  .fantasma{position:absolute;top:470px;width:300px;height:300px;opacity:.5;}
+  .linea{position:absolute;left:539px;top:320px;width:4px;height:1000px;background:#fff;z-index:3;}
+  .fotos{position:absolute;left:160px;top:330px;width:760px;height:640px;border-radius:40px;overflow:hidden;display:flex;
+         box-shadow:0 26px 50px rgba(10,27,43,.25);z-index:2;}
+  .fotos img{width:380px;height:640px;display:block;}
+  .etiqueta{position:absolute;top:350px;z-index:4;font-family:Brico;font-weight:800;font-size:26px;letter-spacing:.12em;
+            color:#fff;background:var(--vivo);padding:8px 18px;border-radius:999px;}
+  .caja-txt{position:absolute;top:930px;width:440px;height:330px;border-radius:40px;box-sizing:border-box;padding:56px 44px 0;
+            font-family:Karla;font-size:38px;line-height:1.3;color:var(--papel);z-index:3;}
+  .caja-txt b{display:block;font-family:Brico;font-weight:800;font-size:46px;letter-spacing:-.01em;margin-bottom:10px;color:#fff;}
+  .izq{left:72px;background:var(--tinta);}
+  .der{right:72px;background:var(--medio);}
+  .grano{position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:5;}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.16  0 0 0 0 0.25  0 0 0 0.5 0"/></filter>
+</svg>
+<div class="post">
+  <div class="firma">
+    <svg width="48" height="48" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#142A40" stroke-width="8"/>
+      <line x1="50" y1="2" x2="50" y2="98" stroke="#142A40" stroke-width="8"/><line x1="2" y1="50" x2="98" y2="50" stroke="#142A40" stroke-width="8"/>
+      <circle cx="50" cy="50" r="11" fill="#1C82D9"/></svg>
+    <span>Oficina Gráfica</span>
+  </div>
+  <div class="titulo">¿CON QUIÉN JUGÁS HOY?</div>
+
+  <!-- íconos fantasma de fondo: un corazón (pareja) y globos de diálogo (amigos) -->
+  <svg class="fantasma" style="left:-40px" viewBox="0 0 100 100" fill="none" stroke="#D6CBB2" stroke-width="9" stroke-linejoin="round">
+    <path d="M50 84 C20 64 8 48 8 32 a20 20 0 0 1 42-10 a20 20 0 0 1 42 10 c0 16-12 32-42 52Z"/></svg>
+  <svg class="fantasma" style="right:-40px" viewBox="0 0 100 100" fill="none" stroke="#D6CBB2" stroke-width="8" stroke-linejoin="round">
+    <path d="M10 18h50a8 8 0 0 1 8 8v22a8 8 0 0 1-8 8H32l-14 12v-12h-8a8 8 0 0 1-8-8V26a8 8 0 0 1 8-8Z"/>
+    <path d="M72 38h14a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8h-4v10l-12-10H52a8 8 0 0 1-8-8v-4"/></svg>
+
+  <div class="fotos"><img src="mitad-match.jpg"><img src="mitad-opinologos.jpg"></div>
+  <div class="linea"></div>
+  <div class="etiqueta" style="left:190px">EN PAREJA</div>
+  <div class="etiqueta" style="right:190px">CON AMIGOS</div>
+
+  <div class="caja-txt izq"><b>Match</b>Preguntas y retos para conocerse un poco más.</div>
+  <div class="caja-txt der"><b>Opinólogos</b>Debates sin fin para ver quién convence a quién.</div>
+  <svg class="grano" width="1080" height="1350"><rect width="1080" height="1350" filter="url(#grano)"/></svg>
+</div>
+</body></html>
