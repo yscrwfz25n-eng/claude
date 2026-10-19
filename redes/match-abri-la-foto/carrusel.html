@@ -1,54 +1,73 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8">
+<!-- Carrusel «Abrí la foto» de Match, con la identidad de Oficina Gráfica (paleta de azules + papel). -->
 <style>
-  @font-face{font-family:Pop;src:url('../../fuentes/Poppins-Medium.ttf');font-weight:500;}
-  @font-face{font-family:Pop;src:url('../../fuentes/Poppins-SemiBold.ttf');font-weight:600;}
-  @font-face{font-family:DMSerifIt;src:url('../../fuentes/DMSerifDisplay-Italic.ttf');}
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Marker;src:url('../../fuentes/PermanentMarker-Regular.ttf');}
+  :root{--papel:#EEE7D8;--tinta:#142A40;--noche:#0A1B2B;--medio:#2C6690;--vivo:#1C82D9;--celeste:#9BD0EF;}
   html,body{margin:0;background:#000;}
   .fila{display:flex;width:2160px;height:1350px;}
   .slide{position:relative;width:1080px;height:1350px;overflow:hidden;}
   .foto{position:absolute;inset:0;background:url('../gemini/match-foto-corregida.jpg') center/cover;}
-  /* slide 1: la misma foto, oscura y desenfocada, para generar intriga */
-  .s1 .foto{filter:blur(18px) brightness(.45);transform:scale(1.12);}
-  .s1 .tinte{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,13,13,.55) 0%,rgba(92,15,30,.55) 60%,rgba(60,8,20,.9) 100%);}
-  .titulo{position:absolute;left:0;right:0;text-align:center;font-family:Pop;font-weight:500;letter-spacing:-.045em;line-height:1.02;}
-  .s1 .titulo{top:430px;font-size:96px;color:#F3E6D2;}
-  .burbuja{position:absolute;left:220px;top:580px;width:640px;height:230px;background:#FFFFFF;border-radius:64px;
-           box-shadow:0 18px 50px rgba(0,0,0,.35);}
+  .titulo{position:absolute;left:0;right:0;text-align:center;font-family:Brico;font-weight:800;letter-spacing:-.035em;line-height:1.02;}
+  /* firma: mira de registro + Permanent Marker (exclusiva del logo) */
+  .firma{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:18px;transform:rotate(-2deg);}
+  .firma span{font-family:Marker;font-size:58px;line-height:1;}
+
+  /* slide 1: la foto de la caja, oscura y desenfocada, bajo un velo azul noche */
+  .s1 .foto{filter:blur(20px) brightness(.5) saturate(.6);transform:scale(1.12);}
+  .s1 .velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,27,43,.72) 0%,rgba(20,42,64,.6) 55%,rgba(10,27,43,.94) 100%);}
+  .s1 .titulo{top:430px;font-size:100px;color:var(--papel);}
+  .burbuja{position:absolute;left:220px;top:585px;width:640px;height:230px;background:#FFFFFF;border-radius:64px;box-shadow:0 18px 50px rgba(0,0,0,.4);}
   .burbuja::before{content:"";position:absolute;left:-26px;bottom:-4px;width:90px;height:70px;background:#FFFFFF;
-           border-bottom-right-radius:70px 60px;transform:skewX(-14deg);clip-path:polygon(0 100%,100% 0,100% 100%);}
+           transform:skewX(-14deg);clip-path:polygon(0 100%,100% 0,100% 100%);}
   .icono{position:absolute;left:68px;top:66px;width:98px;height:98px;}
-  .foto-txt{position:absolute;left:196px;top:52px;font-family:Pop;font-weight:600;font-size:96px;letter-spacing:-.03em;color:#1C1C1C;}
-  .hora{position:absolute;right:62px;bottom:34px;font-family:Pop;font-weight:500;font-size:52px;color:#5E5E5E;}
-  .logo{position:absolute;left:0;right:0;text-align:center;}
-  .logo span{font-family:DMSerifIt;font-size:118px;color:#F3E6D2;letter-spacing:-.01em;}
-  .logo svg{display:inline-block;vertical-align:middle;margin-left:6px;transform:translateY(-6px);}
-  .s1 .logo{bottom:150px;}
-  /* slide 2: la foto nítida con el remate */
-  .s2{background:#EBE0D2;}
-  .s2 .titulo{top:78px;font-size:78px;color:#1E1A19;}
-  /* la foto un poco más chica y con los bordes fundidos en el fondo, para dejar aire al título */
-  .s2 .foto{inset:auto;left:65px;top:175px;width:950px;height:1179px;
-            -webkit-mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 72%,transparent 100%);
-                    mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 72%,transparent 100%);}
+  .foto-txt{position:absolute;left:196px;top:46px;font-family:Brico;font-weight:700;font-size:100px;letter-spacing:-.03em;color:var(--noche);}
+  .hora{position:absolute;right:62px;bottom:30px;font-family:Brico;font-weight:500;font-size:52px;color:#6B7785;}
+  .s1 .firma{bottom:150px;color:var(--papel);}
+
+  /* slide 2: la foto nítida sobre papel, con el remate */
+  .s2{background:var(--papel);}
+  .s2 .titulo{top:70px;font-size:84px;color:var(--tinta);}
+  .s2 .titulo b{color:var(--vivo);font-weight:800;}
+  .s2 .foto{inset:auto;left:80px;top:200px;width:920px;height:1142px;
+            -webkit-mask-image:radial-gradient(ellipse 70% 68% at 50% 50%,#000 70%,transparent 100%);
+                    mask-image:radial-gradient(ellipse 70% 68% at 50% 50%,#000 70%,transparent 100%);}
+  .s2 .firma{bottom:56px;color:var(--tinta);}
+  .s2 .firma span{font-size:44px;}
+
+  .grano{position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;pointer-events:none;}
 </style></head><body>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.16  0 0 0 0 0.25  0 0 0 0.5 0"/></filter>
+  <symbol id="mira" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="8"/>
+    <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="8"/>
+    <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="8"/>
+    <circle cx="50" cy="50" r="11" fill="#1C82D9"/>
+  </symbol>
+</svg>
 <div class="fila">
   <div class="slide s1">
-    <div class="foto"></div><div class="tinte"></div>
+    <div class="foto"></div><div class="velo"></div>
     <div class="titulo">Abrí la foto</div>
     <div class="burbuja">
       <svg class="icono" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="#1DAA61" stroke-width="9" stroke-dasharray="190 20 6 18 6 18 6 100" stroke-linecap="round" transform="rotate(-80 50 50)"/>
-        <text x="50" y="67" text-anchor="middle" font-family="Pop" font-weight="600" font-size="48" fill="#1DAA61">1</text>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#1C82D9" stroke-width="9" stroke-dasharray="190 20 6 18 6 18 6 100" stroke-linecap="round" transform="rotate(-80 50 50)"/>
+        <text x="50" y="67" text-anchor="middle" font-family="Brico" font-weight="700" font-size="48" fill="#1C82D9">1</text>
       </svg>
       <div class="foto-txt">Foto</div>
       <div class="hora">22:47</div>
     </div>
-    <div class="logo"><span>match</span><svg width="74" height="50" viewBox="0 0 74 50"><circle cx="24" cy="25" r="18" fill="none" stroke="#F3E6D2" stroke-width="5"/><circle cx="48" cy="25" r="18" fill="none" stroke="#E0263F" stroke-width="5"/></svg></div>
+    <div class="firma"><svg width="62" height="62"><use href="#mira"/></svg><span>Oficina Gráfica</span></div>
+    <svg class="grano" width="1080" height="1350"><rect width="1080" height="1350" filter="url(#grano)"/></svg>
   </div>
   <div class="slide s2">
     <div class="foto"></div>
-    <div class="titulo">Me debés una<br>partida de Match</div>
+    <div class="titulo">Me debés una<br>partida de <b>Match</b></div>
+    <div class="firma"><svg width="46" height="46"><use href="#mira"/></svg><span>Oficina Gráfica</span></div>
+    <svg class="grano" width="1080" height="1350"><rect width="1080" height="1350" filter="url(#grano)"/></svg>
   </div>
 </div>
 </body></html>
