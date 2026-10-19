@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Posteo con personaje ilustrado sosteniendo un cartel tipo app de notas, identidad Oficina Gráfica. -->
+<style>
+  @font-face{font-family:Brico;src:url('../../fuentes/BricolageGrotesque[opsz,wdth,wght].ttf');font-weight:200 800;}
+  @font-face{font-family:Karla;src:url('../../fuentes/Karla[wght].ttf');font-weight:200 800;}
+  html,body{margin:0;}
+  svg{display:block;}
+  .brico{font-family:Brico;} .karla{font-family:Karla;}
+</style></head><body>
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.05" numOctaves="2" seed="4" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grano"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.16  0 0 0 0 0.25  0 0 0 0.5 0"/></filter>
+    <filter id="sombra" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A1B2B" flood-opacity=".22"/></filter>
+    <symbol id="mira" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="10"/>
+      <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="10"/>
+      <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="10"/>
+      <circle cx="50" cy="50" r="12" fill="#1C82D9"/>
+    </symbol>
+  </defs>
+
+  <!-- piso de baldosas en perspectiva -->
+  <rect width="1080" height="1350" fill="#EEE7D8"/>
+  <g stroke="#E0D5BC" stroke-width="3" fill="none">
+    <path d="M0 860H1080M0 980H1080M0 1140H1080"/>
+    <path d="M540 700L-200 1350M540 700L180 1350M540 700L540 1350M540 700L900 1350M540 700L1280 1350"/>
+  </g>
+  <ellipse cx="540" cy="1135" rx="420" ry="62" fill="#142A40" opacity=".12"/>
+
+  <g filter="url(#rough)" stroke="#142A40" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <!-- torso (buzo azul vivo): el ruedo queda detrás de las piernas -->
+    <path d="M330 300C390 270 690 270 750 300L790 790Q540 830 290 790Z" fill="#1C82D9"/>
+    <!-- piernas cruzadas (jean) -->
+    <path d="M330 700C200 730 80 820 105 900C125 965 240 965 340 945L560 905C610 870 570 785 530 760Z" fill="#2C6690"/>
+    <path d="M750 700C880 730 1000 820 975 900C955 965 840 965 740 945L520 905C470 870 510 785 550 760Z" fill="#2C6690"/>
+    <path d="M175 905C300 960 470 1010 630 1020" fill="none" stroke="#142A40" stroke-width="150"/>
+    <path d="M175 905C300 960 470 1010 630 1020" fill="none" stroke="#2C6690" stroke-width="136"/>
+    <path d="M905 905C780 965 610 1020 450 1035" fill="none" stroke="#142A40" stroke-width="150"/>
+    <path d="M905 905C780 965 610 1020 450 1035" fill="none" stroke="#2C6690" stroke-width="136"/>
+    <path d="M250 925C340 960 440 990 540 1000M830 925C740 965 640 995 540 1005" fill="none" stroke="#9BD0EF" stroke-width="4" stroke-dasharray="14 12"/>
+    <!-- zapatillas -->
+    <g fill="#F8F2E4">
+      <path d="M640 965c60-10 120 10 140 45c10 25-20 45-70 45h-80c-20 0-30-20-25-45Z"/>
+      <path d="M440 985c-60-8-120 14-138 48c-9 25 22 44 72 43h80c20 0 29-21 23-45Z"/>
+    </g>
+    <path d="M660 1040h120M300 1062h125" stroke="#C7B999" stroke-width="12"/>
+    <path d="M680 990l40 30M420 1008l-40 30" stroke="#1C82D9" stroke-width="9"/>
+
+    <!-- brazos -->
+    <path d="M345 330C220 340 70 360 45 470" fill="none" stroke="#142A40" stroke-width="100"/>
+    <path d="M345 330C220 340 70 360 45 470" fill="none" stroke="#1C82D9" stroke-width="86"/>
+    <path d="M735 330C860 340 1010 360 1035 470" fill="none" stroke="#142A40" stroke-width="100"/>
+    <path d="M735 330C860 340 1010 360 1035 470" fill="none" stroke="#1C82D9" stroke-width="86"/>
+
+    <!-- cabeza -->
+    <rect x="510" y="250" width="60" height="50" fill="#E9B49A"/>
+    <circle cx="462" cy="208" r="17" fill="#E9B49A"/><circle cx="618" cy="208" r="17" fill="#E9B49A"/>
+    <circle cx="540" cy="200" r="80" fill="#E9B49A"/>
+    <path d="M462 190c-6 40 4 60 14 70M618 190c6 40-4 60-14 70" fill="none" stroke="#3B2A22" stroke-width="16"/>
+    <!-- gorra con la mira -->
+    <path d="M458 178C458 95 622 95 622 178Z" fill="#142A40"/>
+    <path d="M450 178C470 165 610 165 630 178C650 190 620 202 540 200C460 202 430 190 450 178Z" fill="#0A1B2B"/>
+    <!-- anteojos y sonrisa -->
+    <rect x="478" y="196" width="60" height="38" rx="12" fill="#0A1B2B"/>
+    <rect x="544" y="196" width="60" height="38" rx="12" fill="#0A1B2B"/>
+    <path d="M512 252q28 22 56 0" fill="#fff"/>
+  </g>
+  <g transform="translate(523 118)" color="#EEE7D8"><svg width="34" height="34"><use href="#mira"/></svg></g>
+
+  <!-- cartel tipo app de notas -->
+  <g filter="url(#sombra)">
+    <rect x="60" y="300" width="960" height="390" rx="56" fill="#FBF8F1"/>
+  </g>
+  <g>
+    <circle cx="140" cy="372" r="40" fill="#EFE9DC"/>
+    <path d="M150 352l-20 20 20 20" fill="none" stroke="#142A40" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="brico" x="198" y="392" font-size="54" font-weight="700" fill="#1C82D9">Notas</text>
+    <rect x="690" y="334" width="180" height="76" rx="38" fill="#EFE9DC"/>
+    <path d="M735 352v34M723 362l12-12 12 12M720 372v20h30v-20" fill="none" stroke="#2C6690" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="800" cy="372" r="5" fill="#142A40"/><circle cx="818" cy="372" r="5" fill="#142A40"/><circle cx="836" cy="372" r="5" fill="#142A40"/>
+    <circle cx="935" cy="372" r="44" fill="#1C82D9"/>
+    <path d="M915 372l14 14 26-28" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="148" y="450" width="7" height="150" rx="3" fill="#1C82D9"/>
+    <text class="karla" x="182" y="512" font-size="68" fill="#142A40" font-weight="400">No hacemos <tspan font-weight="800">papelería</tspan></text>
+    <text class="karla" x="182" y="590" font-size="68" fill="#142A40" font-weight="400">Creamos <tspan font-weight="800">recuerdos</tspan></text>
+    <g transform="translate(400 628)">
+      <svg width="26" height="26" color="#142A40"><use href="#mira"/></svg>
+      <text class="karla" x="36" y="21" font-size="26" fill="#142A40" font-weight="500">@oficina.grafica_</text>
+    </g>
+  </g>
+
+  <!-- manos sobre el borde del cartel -->
+  <g filter="url(#rough)" stroke="#142A40" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="#E9B49A">
+    <path d="M30 430c10-30 70-35 90-10c12 16 10 40 2 58c-10 20-40 34-70 28c-30-6-34-44-22-76Z"/>
+    <path d="M70 448c18 0 34 4 46 12M66 474c18 0 32 4 44 12" fill="none"/>
+    <path d="M1050 430c-10-30-70-35-90-10c-12 16-10 40-2 58c10 20 40 34 70 28c30-6 34-44 22-76Z"/>
+    <path d="M1010 448c-18 0-34 4-46 12M1014 474c-18 0-32 4-44 12" fill="none"/>
+  </g>
+
+  <rect width="1080" height="1350" filter="url(#grano)" opacity=".3" style="mix-blend-mode:multiply"/>
+</svg>
+</body></html>
