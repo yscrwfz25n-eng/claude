@@ -31,26 +31,28 @@
     <path d="M0 860H1080M0 980H1080M0 1140H1080"/>
     <path d="M540 700L-200 1350M540 700L180 1350M540 700L540 1350M540 700L900 1350M540 700L1280 1350"/>
   </g>
-  <ellipse cx="540" cy="1170" rx="450" ry="62" fill="#142A40" opacity=".12"/>
+  <ellipse cx="540" cy="1262" rx="420" ry="40" fill="#142A40" opacity=".12"/>
 
   <g transform="translate(0 100)">
   <g filter="url(#rough)" stroke="#142A40" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
     <!-- torso (buzo azul vivo): el ruedo queda detrás de las piernas -->
     <path d="M330 300C390 270 690 270 750 300L790 790Q540 830 290 790Z" fill="#1C82D9"/>
-    <!-- piernas estiradas hacia quien mira: en escorzo se ven cortas y anchas,
-         con las suelas de las zapatillas grandes en primer plano -->
-    <path d="M292 770H538L528 930C490 955 335 955 300 930Z" fill="#2C6690"/>
-    <path d="M788 770H542L552 930C590 955 745 955 780 930Z" fill="#2C6690"/>
-    <path d="M415 795L414 915M665 795L666 915" fill="none" stroke="#9BD0EF" stroke-width="4" stroke-dasharray="12 10"/>
-    <path d="M305 905q110 22 222 0M553 905q110 22 222 0" fill="none" stroke-width="5"/>
-    <!-- zapatillas de frente, con la suela hacia nosotros -->
+    <!-- piernas estiradas hacia adelante, apenas abiertas en V: muslo ancho, rodilla y tobillo más finos -->
+    <path d="M298 772C300 880 318 980 330 1068L442 1068C448 975 492 872 536 772Z" fill="#2C6690"/>
+    <path d="M782 772C780 880 762 980 750 1068L638 1068C632 975 588 872 544 772Z" fill="#2C6690"/>
+    <path d="M418 800C405 880 392 960 386 1040M662 800C675 880 688 960 694 1040" fill="none" stroke="#9BD0EF" stroke-width="4" stroke-dasharray="12 10"/>
+    <path d="M326 925q30 10 60 4M754 925q-30 10-60 4" fill="none" stroke-width="5"/>
+    <path d="M327 1040L444 1040L442 1068L330 1068ZM753 1040L636 1040L638 1068L750 1068Z" fill="#9BD0EF" stroke-width="5"/>
+    <!-- zapatillas de perfil, con la punta cayendo hacia afuera -->
     <g>
-      <ellipse cx="408" cy="1005" rx="118" ry="100" fill="#C7B999"/>
-      <ellipse cx="408" cy="992" rx="98" ry="82" fill="#F8F2E4"/>
-      <path d="M378 945h60M372 968h72M378 991h60" stroke="#1C82D9" stroke-width="7"/>
-      <ellipse cx="672" cy="1005" rx="118" ry="100" fill="#C7B999"/>
-      <ellipse cx="672" cy="992" rx="98" ry="82" fill="#F8F2E4"/>
-      <path d="M642 945h60M636 968h72M642 991h60" stroke="#1C82D9" stroke-width="7"/>
+      <path transform="translate(22 0)" d="M428 1058L432 1150L232 1150C200 1150 196 1112 226 1100C268 1088 300 1082 318 1058Z" fill="#F8F2E4"/>
+      <path transform="translate(22 0)" d="M226 1150H436Q440 1172 418 1174H244Q222 1172 226 1150Z" fill="#C7B999"/>
+      <path transform="translate(22 0)" d="M300 1122C340 1110 390 1100 428 1112" fill="none" stroke="#1C82D9" stroke-width="9"/>
+      <path transform="translate(22 0)" d="M296 1074l14 18M314 1066l14 18" stroke="#1C82D9" stroke-width="6"/>
+      <path transform="translate(-22 0)" d="M652 1058L648 1150L848 1150C880 1150 884 1112 854 1100C812 1088 780 1082 762 1058Z" fill="#F8F2E4"/>
+      <path transform="translate(-22 0)" d="M854 1150H644Q640 1172 662 1174H836Q858 1172 854 1150Z" fill="#C7B999"/>
+      <path transform="translate(-22 0)" d="M780 1122C740 1110 690 1100 652 1112" fill="none" stroke="#1C82D9" stroke-width="9"/>
+      <path transform="translate(-22 0)" d="M784 1074l-14 18M766 1066l-14 18" stroke="#1C82D9" stroke-width="6"/>
     </g>
 
     <!-- brazos -->
@@ -91,8 +93,10 @@
     <circle cx="935" cy="372" r="44" fill="#1C82D9"/>
     <path d="M915 372l14 14 26-28" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
     <rect x="148" y="450" width="7" height="205" rx="3" fill="#1C82D9"/>
-    <text class="karla" x="182" y="512" font-size="68" fill="#142A40" font-weight="400">No hacemos <tspan font-weight="800">listas</tspan></text>
-    <text class="karla" x="182" y="590" font-size="68" fill="#142A40" font-weight="400">Hacemos <tspan font-weight="800">planes</tspan></text>
+    <text id="l1" class="karla" x="182" y="512" font-size="68" fill="#142A40" font-weight="400"><tspan id="tachar">Tachar</tspan> es el</text>
+    <!-- "Tachar", tachado a mano -->
+    <path id="raya" d="M176 492C230 486 300 494 384 487" fill="none" stroke="#1C82D9" stroke-width="8" stroke-linecap="round" filter="url(#rough)"/>
+    <text class="karla" x="182" y="590" font-size="68" fill="#142A40" font-weight="400">nuevo <tspan font-weight="800">plan</tspan></text>
     <text class="karla" x="184" y="648" font-size="31" fill="#2C6690" font-weight="500">Check lists de películas, vinos, alfajores y más</text>
     <g transform="translate(400 682)">
       <svg width="26" height="26" color="#142A40"><use href="#mira"/></svg>
