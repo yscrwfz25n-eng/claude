@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Tapa del ÁLBUM DE VINOS: A5 + 3 mm de sangrado. Frase grande en letra alta y angosta con
+     O redondas (efecto tipográfico de imprenta), manchas de vino en acuarela y dibujos de línea. -->
+<style>
+  @font-face{font-family:Bebas;src:url('../fuentes/BebasNeue-Regular.ttf');}
+  @font-face{font-family:Sacramento;src:url('../fuentes/Sacramento-Regular.ttf');}
+  @font-face{font-family:Karla;src:url('../fuentes/Karla[wght].ttf');font-weight:200 800;}
+  @page{size:154mm 216mm;margin:0;}
+  html,body{margin:0;width:154mm;height:216mm;overflow:hidden;}
+  body{position:relative;background:#F7F2EA;}
+  .capa{position:absolute;left:0;top:0;width:154mm;height:216mm;}
+  /* zona útil: corte a 3 mm; margen izquierdo 14 mm, el derecho deja libre el elástico */
+  .tinta{position:absolute;left:17mm;top:17mm;width:112mm;color:#1B1716;filter:url(#prensa);}
+  .titulo{font-family:Bebas;font-size:15.5mm;line-height:1;letter-spacing:.3mm;display:flex;align-items:center;}
+  .sub{font-family:Sacramento;font-size:8.4mm;line-height:1;margin:-0.6mm 0 0 1mm;}
+  .frase{margin-top:19mm;}
+  .linea{font-family:Bebas;font-size:33mm;line-height:.86;letter-spacing:.2mm;display:flex;align-items:center;height:27.4mm;white-space:pre;}
+  /* la O es un círculo perfecto, del alto de la mayúscula y con el grueso del trazo */
+  .o{display:inline-block;box-sizing:border-box;border-radius:50%;border-style:solid;border-color:currentColor;margin:0 .35mm;}
+  .titulo .o{width:10.9mm;height:10.9mm;border-width:1.75mm;}
+  .linea .o{width:23.2mm;height:23.2mm;border-width:3.65mm;margin:0 .8mm;}
+  .pie{position:absolute;left:17mm;top:194mm;width:112mm;display:flex;justify-content:space-between;align-items:flex-end;
+       font-family:Karla;font-size:2.5mm;font-weight:600;letter-spacing:.35mm;color:#1B1716;}
+</style></head><body>
+
+<!-- manchas de vino (detrás de todo, en multiplicar) -->
+<svg class="capa" viewBox="0 0 154 216" style="mix-blend-mode:multiply">
+  <defs>
+    <filter id="acuarela" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="4" seed="3" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale="7" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.2" result="liso"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="6" result="pig"/>
+      <feColorMatrix in="pig" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.6 0.2" result="pig2"/>
+      <feComposite in="liso" in2="pig2" operator="in" result="b"/>
+      <!-- borde más oscuro: el pigmento se junta en el contorno al secarse -->
+      <feMorphology in="liso" operator="erode" radius="0.6" result="e"/>
+      <feComposite in="liso" in2="e" operator="out" result="borde"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="borde"/><feMergeNode in="borde"/></feMerge>
+    </filter>
+    <filter id="salpicado"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="8" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale="1.2" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <g filter="url(#acuarela)" fill="#7A1436">
+    <ellipse cx="111" cy="104" rx="19" ry="16" opacity=".34"/>
+    <ellipse cx="104" cy="98" rx="10" ry="8.5" opacity=".25"/>
+    <ellipse cx="26" cy="150" rx="13" ry="11" opacity=".26"/>
+    <ellipse cx="127" cy="28" rx="9" ry="8" opacity=".3"/>
+  </g>
+  <!-- anillo de copa -->
+  <g filter="url(#acuarela)" fill="none" stroke="#9C2350">
+    <circle cx="62" cy="184" r="15" stroke-width="2" opacity=".38"/>
+  </g>
+  <g filter="url(#salpicado)" fill="#8E1F48" opacity=".75">
+    <circle cx="137" cy="88" r="1.5"/><circle cx="141" cy="94" r=".7"/><circle cx="89" cy="118" r=".9"/>
+    <circle cx="94" cy="124" r=".45"/><circle cx="48" cy="146" r="1.2"/><circle cx="12" cy="170" r=".8"/>
+    <circle cx="116" cy="44" r=".9"/><circle cx="110" cy="40" r=".45"/><circle cx="80" cy="203" r=".7"/>
+    <path d="M131 112q1 7 -1 13q-1 3 1 4" stroke="#8E1F48" stroke-width=".8" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
+
+<!-- dibujos de línea -->
+<svg class="capa" viewBox="0 0 154 216">
+  <defs>
+    <filter id="mano"><feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="2" seed="5" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale=".9" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <g filter="url(#mano)" fill="none" stroke="#7A1832" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round">
+    <!-- sacacorchos, arriba a la derecha -->
+    <g transform="translate(108 9) rotate(24)">
+      <path d="M0 4Q12 -2 24 4"/><path d="M12 1.5V10"/>
+      <path d="M12 10q-3.5 1.6 0 3.2q3.5 1.6 0 3.2q-3.5 1.6 0 3.2q3.5 1.6 0 3.2q-3.5 1.6 0 3.2"/>
+    </g>
+    <!-- botella, junto a «VINO,» -->
+    <g transform="translate(104 86) rotate(14) scale(.62)">
+      <path d="M5 0h4v8q5 3 5 9v22q0 2 -2 2h-10q-2 0 -2 -2v-22q0 -6 5 -9Z"/>
+      <path d="M0 20h14M0 30h14"/><path d="M4 24h6" stroke-width=".5"/>
+    </g>
+    <!-- copa con vino, abajo a la derecha -->
+    <g transform="translate(111 166) rotate(10) scale(.72)">
+      <path d="M0 0C0 13 4 19 9 19C14 19 18 13 18 0Z"/><path d="M9 19V31"/><path d="M3 32Q9 29.5 15 32"/>
+      <path d="M1 7Q9 9.5 17 7"/>
+      <path d="M2.5 10q6 2 13 0M3.5 13q5 1.6 11 0M5 16q4 1 8 0" stroke-width=".6"/>
+    </g>
+    <!-- racimo, junto a «ANOTO.» -->
+    <g transform="translate(120 136) rotate(8) scale(.85)">
+      <path d="M8 -2q1 -5 6 -6"/><path d="M11 -5q4 -4 7 -1q-2 3 -6 2"/>
+      <circle cx="3" cy="2" r="2.4"/><circle cx="8" cy="2" r="2.4"/><circle cx="13" cy="2" r="2.4"/>
+      <circle cx="5.5" cy="6.4" r="2.4"/><circle cx="10.5" cy="6.4" r="2.4"/>
+      <circle cx="8" cy="10.8" r="2.4"/><circle cx="8" cy="15.2" r="2.2"/>
+    </g>
+    <!-- queso, abajo -->
+    <g transform="translate(78 176) rotate(-6) scale(.75)">
+      <path d="M0 10L22 2L22 13L0 19Z"/><path d="M0 10V19"/>
+      <circle cx="13" cy="10" r="1.3"/><circle cx="18" cy="13" r=".9"/><circle cx="7" cy="14" r=".8"/>
+    </g>
+    <!-- nota musical, entre el título y la frase -->
+    <g transform="translate(96 42) rotate(-8)"><path d="M0 11a2.2 2.2 0 1 0 4.4 0V0q5 1.5 6.5 6"/></g>
+  </g>
+</svg>
+
+<!-- textos: «impresos» con tinta irregular -->
+<svg width="0" height="0" style="position:absolute">
+  <filter id="prensa" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="3" seed="11" result="ruido"/>
+    <feColorMatrix in="ruido" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -8 6.1" result="huecos"/>
+    <feComposite in="SourceGraphic" in2="huecos" operator="in" result="tinta"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="2" result="ondas"/>
+    <feDisplacementMap in="tinta" in2="ondas" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<div class="tinta">
+  <div class="titulo">ÁLBUM DE VIN<span class="o"></span>S</div>
+  <div class="sub">para cada botella que valga la pena</div>
+  <div class="frase">
+    <div class="linea">VIN<span class="o"></span> QUE</div>
+    <div class="linea">VIN<span class="o"></span>,</div>
+    <div class="linea">VIN<span class="o"></span> QUE</div>
+    <div class="linea">AN<span class="o"></span>T<span class="o"></span>.</div>
+  </div>
+</div>
+<div class="pie" style="filter:url(#prensa)">
+  <span>FECHA · CEPA · BODEGA · ESTRELLAS</span>
+  <span>@OFICINA.GRAFICA_</span>
+</div>
+</body></html>
