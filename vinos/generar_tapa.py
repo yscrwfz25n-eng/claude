@@ -27,11 +27,12 @@ VINOS = Tapa("#F7F2EA", "#1B1716", "#E9E1D3", "#7A1832", "#7A1832")
 S = 3 * mm
 
 
-def pdf_de_imprenta():
-    crudo = os.path.join(tempfile.mkdtemp(), "tapa.pdf")
+def pdf_de_imprenta(html="tapa.html", salida=SALIDA, titulo="Álbum de vinos – tapa"):
+    """HTML de A5 + sangrado -> PDF con TrimBox y BleedBox."""
+    crudo = os.path.join(tempfile.mkdtemp(), "crudo.pdf")
     subprocess.run([CHROME, "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
                     "--virtual-time-budget=3000", f"--print-to-pdf={crudo}",
-                    "file://" + os.path.join(AQUI, "tapa.html")], check=True, capture_output=True)
+                    "file://" + os.path.join(AQUI, html)], check=True, capture_output=True)
     lector = PdfReader(crudo)
     hoja = lector.pages[0]
     w, h = float(hoja.mediabox.width), float(hoja.mediabox.height)
@@ -39,10 +40,10 @@ def pdf_de_imprenta():
     hoja.bleedbox = RectangleObject((0, 0, w, h))
     escritor = PdfWriter()
     escritor.add_page(hoja)
-    escritor.add_metadata({"/Title": "Álbum de vinos – tapa", "/Author": "@oficina.grafica_"})
-    with open(SALIDA, "wb") as f:
+    escritor.add_metadata({"/Title": titulo, "/Author": "@oficina.grafica_"})
+    with open(salida, "wb") as f:
         escritor.write(f)
-    print("ok", os.path.basename(SALIDA), f"{w / mm:.1f} x {h / mm:.1f} mm")
+    print("ok", os.path.basename(salida), f"{w / mm:.1f} x {h / mm:.1f} mm")
 
 
 def maqueta():

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Página interior del ÁLBUM DE VINOS (una botella por página). A5 + 3 mm de sangrado.
+     Misma familia que la tapa: Bebas con O redondas, Sacramento, bordó y dibujos de línea. -->
+<style>
+  @font-face{font-family:Bebas;src:url('../fuentes/BebasNeue-Regular.ttf');}
+  @font-face{font-family:Sacramento;src:url('../fuentes/Sacramento-Regular.ttf');}
+  @font-face{font-family:Karla;src:url('../fuentes/Karla[wght].ttf');font-weight:200 800;}
+  @page{size:154mm 216mm;margin:0;}
+  :root{--tinta:#1B1716;--vino:#7A1832;--linea:#C9BBA8;--suave:#8C7B6B;}
+  html,body{margin:0;width:154mm;height:216mm;overflow:hidden;}
+  body{position:relative;background:#FBF8F3;font-family:Karla;color:var(--tinta);}
+  .capa{position:absolute;left:0;top:0;width:154mm;height:216mm;}
+  /* margen interior (lomo) 16 mm, exterior 12 mm */
+  .hoja{position:absolute;left:19mm;top:14mm;width:120mm;}
+  .bebas{font-family:Bebas;line-height:1;display:flex;align-items:center;}
+  .o{display:inline-block;box-sizing:border-box;border-radius:50%;border:solid currentColor;}
+  .et{font-size:2.15mm;font-weight:700;letter-spacing:.42mm;text-transform:uppercase;color:var(--suave);}
+  .campo{display:flex;align-items:flex-end;gap:2mm;border-bottom:.25mm solid var(--linea);height:7.2mm;}
+  .campo .et{white-space:nowrap;padding-bottom:1mm;}
+  .fila{display:grid;grid-template-columns:1fr 1fr;column-gap:7mm;}
+  .caja{display:inline-block;width:3mm;height:3mm;border:.3mm solid var(--tinta);border-radius:.6mm;vertical-align:-.5mm;margin-right:1.2mm;}
+  .circ{display:inline-block;width:3.1mm;height:3.1mm;border:.3mm solid var(--tinta);border-radius:50%;vertical-align:-.6mm;margin-right:1.2mm;}
+  .opciones{display:flex;flex-wrap:wrap;gap:1.6mm 4.2mm;font-size:3.1mm;font-weight:500;}
+  .seccion{margin-top:4.6mm;}
+  .seccion > .et{display:block;margin-bottom:1.8mm;}
+  .escala{display:grid;grid-template-columns:15mm 9mm auto 9mm;align-items:center;font-size:2.4mm;color:var(--suave);height:5.4mm;}
+  .escala b{font-size:2.15mm;font-weight:700;letter-spacing:.35mm;color:var(--tinta);}
+  .puntos{display:flex;gap:1.6mm;}
+  .puntos i{width:3.4mm;height:3.4mm;border:.3mm solid var(--vino);border-radius:50%;box-sizing:border-box;}
+  .renglon{border-bottom:.25mm solid var(--linea);height:6.3mm;}
+  .manuscrita{font-family:Sacramento;color:var(--vino);}
+</style></head><body>
+
+<!-- un aro de copa muy tenue en la esquina (no molesta para escribir) y un par de dibujos -->
+<svg class="capa" viewBox="0 0 154 216" style="mix-blend-mode:multiply">
+  <defs>
+    <filter id="acuarela" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="4" seed="3" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.2"/>
+    </filter>
+    <filter id="mano"><feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="2" seed="5" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale=".8" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <g filter="url(#acuarela)"><circle cx="-4" cy="222" r="17" fill="none" stroke="#7A1436" stroke-width="1.8" opacity=".16"/></g>
+  <g filter="url(#mano)" fill="none" stroke="#7A1832" stroke-width=".6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- copa y racimo dentro del recuadro de la etiqueta -->
+    <g transform="translate(37 100) rotate(-8) scale(.42)">
+      <path d="M0 0C0 13 4 19 9 19C14 19 18 13 18 0Z"/><path d="M9 19V31"/><path d="M3 32Q9 29.5 15 32"/><path d="M1 7Q9 9.5 17 7"/>
+    </g>
+    <g transform="translate(46 102) rotate(10) scale(.5)">
+      <path d="M8 -2q1 -5 6 -6"/>
+      <circle cx="3" cy="2" r="2.4"/><circle cx="8" cy="2" r="2.4"/><circle cx="13" cy="2" r="2.4"/>
+      <circle cx="5.5" cy="6.4" r="2.4"/><circle cx="10.5" cy="6.4" r="2.4"/><circle cx="8" cy="10.8" r="2.4"/>
+    </g>
+  </g>
+</svg>
+
+<div class="hoja">
+  <!-- encabezado -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+    <div class="bebas" style="font-size:15mm;color:var(--vino);">VIN<span class="o" style="width:10.4mm;height:10.4mm;border-width:1.65mm;margin:0 .35mm;"></span>&nbsp;N.º 01</div>
+    <div style="text-align:right;">
+      <div class="et">fecha</div>
+      <div style="font-size:4.6mm;letter-spacing:1mm;color:var(--linea);margin-top:.6mm;">__ / __ / ____</div>
+    </div>
+  </div>
+  <div class="manuscrita" style="font-size:6.2mm;margin:-.5mm 0 1.5mm .6mm;">una botella, una historia</div>
+
+  <!-- datos del vino -->
+  <div class="campo"><span class="et">nombre del vino</span></div>
+  <div class="fila">
+    <div class="campo"><span class="et">bodega</span></div>
+    <div class="campo"><span class="et">cepa</span></div>
+    <div class="campo"><span class="et">cosecha</span></div>
+    <div class="campo"><span class="et">región</span></div>
+    <div class="campo"><span class="et">precio</span></div>
+    <div class="campo"><span class="et">dónde lo compré</span></div>
+    <div class="campo"><span class="et">con quién</span></div>
+    <div class="campo"><span class="et">ocasión</span></div>
+  </div>
+
+  <div class="seccion">
+    <span class="et">tipo</span>
+    <div class="opciones">
+      <span><i class="circ"></i>Tinto</span><span><i class="circ"></i>Blanco</span><span><i class="circ"></i>Rosado</span>
+      <span><i class="circ"></i>Espumante</span><span><i class="circ"></i>Naranjo</span><span><i class="circ"></i>Dulce</span>
+    </div>
+  </div>
+
+  <!-- etiqueta + puntaje y escalas -->
+  <div style="display:grid;grid-template-columns:50mm 1fr;column-gap:7mm;margin-top:5.2mm;">
+    <div style="border:.35mm dashed var(--linea);border-radius:2.5mm;height:55mm;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm;">
+      <span class="manuscrita" style="font-size:7mm;">pegá la etiqueta</span>
+      <span class="et">o una foto</span>
+    </div>
+    <div>
+      <span class="et">puntaje</span>
+      <svg viewBox="0 0 62 11" style="width:60mm;height:10.6mm;display:block;margin:1mm 0 2.4mm -0.6mm;">
+        <g fill="none" stroke="#7A1832" stroke-width=".7" stroke-linejoin="round">
+          <path id="e" d="M5.5 .8l1.4 3.1 3.4.4-2.5 2.3.7 3.3-3-1.7-3 1.7.7-3.3L.7 4.3l3.4-.4Z"/>
+          <use href="#e" x="12.6"/><use href="#e" x="25.2"/><use href="#e" x="37.8"/><use href="#e" x="50.4"/>
+        </g>
+      </svg>
+      <div class="escala"><b>CUERPO</b><span>ligero</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>intenso</span></div>
+      <div class="escala"><b>DULZOR</b><span>seco</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>dulce</span></div>
+      <div class="escala"><b>ACIDEZ</b><span>suave</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>viva</span></div>
+      <div class="escala"><b>TANINOS</b><span>sedoso</span><span class="puntos"><i></i><i></i><i></i><i></i><i></i></span><span>firme</span></div>
+      <div class="seccion" style="margin-top:3.6mm;">
+        <span class="et">aromas</span>
+        <div class="opciones" style="font-size:2.85mm;gap:1.4mm 3mm;">
+          <span><i class="caja"></i>Frutos rojos</span><span><i class="caja"></i>Madera</span>
+          <span><i class="caja"></i>Vainilla</span><span><i class="caja"></i>Especias</span>
+          <span><i class="caja"></i>Flores</span><span><i class="caja"></i>Cítricos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seccion"><div class="campo"><span class="et">lo acompañamos con</span></div></div>
+
+  <div class="seccion">
+    <span class="et">notas</span>
+    <div class="renglon"></div><div class="renglon"></div><div class="renglon"></div><div class="renglon"></div>
+  </div>
+
+  <div class="seccion" style="display:flex;align-items:center;gap:4mm;">
+    <span class="et" style="color:var(--tinta);">¿lo volverías a comprar?</span>
+    <div class="opciones" style="font-size:3mm;">
+      <span><i class="circ"></i>Sí</span><span><i class="circ"></i>No</span><span><i class="circ"></i>Solo si es de regalo</span>
+    </div>
+  </div>
+</div>
+</body></html>
