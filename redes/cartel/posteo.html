@@ -31,26 +31,27 @@
     <path d="M0 860H1080M0 980H1080M0 1140H1080"/>
     <path d="M540 700L-200 1350M540 700L180 1350M540 700L540 1350M540 700L900 1350M540 700L1280 1350"/>
   </g>
-  <ellipse cx="540" cy="1135" rx="420" ry="62" fill="#142A40" opacity=".12"/>
+  <ellipse cx="540" cy="1170" rx="450" ry="62" fill="#142A40" opacity=".12"/>
 
+  <g transform="translate(0 100)">
   <g filter="url(#rough)" stroke="#142A40" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
     <!-- torso (buzo azul vivo): el ruedo queda detrás de las piernas -->
     <path d="M330 300C390 270 690 270 750 300L790 790Q540 830 290 790Z" fill="#1C82D9"/>
-    <!-- piernas cruzadas (jean) -->
-    <path d="M330 700C200 730 80 820 105 900C125 965 240 965 340 945L560 905C610 870 570 785 530 760Z" fill="#2C6690"/>
-    <path d="M750 700C880 730 1000 820 975 900C955 965 840 965 740 945L520 905C470 870 510 785 550 760Z" fill="#2C6690"/>
-    <path d="M175 905C300 960 470 1010 630 1020" fill="none" stroke="#142A40" stroke-width="150"/>
-    <path d="M175 905C300 960 470 1010 630 1020" fill="none" stroke="#2C6690" stroke-width="136"/>
-    <path d="M905 905C780 965 610 1020 450 1035" fill="none" stroke="#142A40" stroke-width="150"/>
-    <path d="M905 905C780 965 610 1020 450 1035" fill="none" stroke="#2C6690" stroke-width="136"/>
-    <path d="M250 925C340 960 440 990 540 1000M830 925C740 965 640 995 540 1005" fill="none" stroke="#9BD0EF" stroke-width="4" stroke-dasharray="14 12"/>
-    <!-- zapatillas -->
-    <g fill="#F8F2E4">
-      <path d="M640 965c60-10 120 10 140 45c10 25-20 45-70 45h-80c-20 0-30-20-25-45Z"/>
-      <path d="M440 985c-60-8-120 14-138 48c-9 25 22 44 72 43h80c20 0 29-21 23-45Z"/>
+    <!-- piernas estiradas hacia quien mira: en escorzo se ven cortas y anchas,
+         con las suelas de las zapatillas grandes en primer plano -->
+    <path d="M292 770H538L528 930C490 955 335 955 300 930Z" fill="#2C6690"/>
+    <path d="M788 770H542L552 930C590 955 745 955 780 930Z" fill="#2C6690"/>
+    <path d="M415 795L414 915M665 795L666 915" fill="none" stroke="#9BD0EF" stroke-width="4" stroke-dasharray="12 10"/>
+    <path d="M305 905q110 22 222 0M553 905q110 22 222 0" fill="none" stroke-width="5"/>
+    <!-- zapatillas de frente, con la suela hacia nosotros -->
+    <g>
+      <ellipse cx="408" cy="1005" rx="118" ry="100" fill="#C7B999"/>
+      <ellipse cx="408" cy="992" rx="98" ry="82" fill="#F8F2E4"/>
+      <path d="M378 945h60M372 968h72M378 991h60" stroke="#1C82D9" stroke-width="7"/>
+      <ellipse cx="672" cy="1005" rx="118" ry="100" fill="#C7B999"/>
+      <ellipse cx="672" cy="992" rx="98" ry="82" fill="#F8F2E4"/>
+      <path d="M642 945h60M636 968h72M642 991h60" stroke="#1C82D9" stroke-width="7"/>
     </g>
-    <path d="M660 1040h120M300 1062h125" stroke="#C7B999" stroke-width="12"/>
-    <path d="M680 990l40 30M420 1008l-40 30" stroke="#1C82D9" stroke-width="9"/>
 
     <!-- brazos -->
     <path d="M345 330C220 340 70 360 45 470" fill="none" stroke="#142A40" stroke-width="100"/>
@@ -78,7 +79,7 @@
 
   <!-- cartel tipo app de notas -->
   <g filter="url(#sombra)">
-    <rect x="60" y="300" width="960" height="390" rx="56" fill="#FBF8F1"/>
+    <rect x="60" y="300" width="960" height="440" rx="56" fill="#FBF8F1"/>
   </g>
   <g>
     <circle cx="140" cy="372" r="40" fill="#EFE9DC"/>
@@ -89,10 +90,11 @@
     <circle cx="800" cy="372" r="5" fill="#142A40"/><circle cx="818" cy="372" r="5" fill="#142A40"/><circle cx="836" cy="372" r="5" fill="#142A40"/>
     <circle cx="935" cy="372" r="44" fill="#1C82D9"/>
     <path d="M915 372l14 14 26-28" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="148" y="450" width="7" height="150" rx="3" fill="#1C82D9"/>
-    <text class="karla" x="182" y="512" font-size="68" fill="#142A40" font-weight="400">No vendemos <tspan font-weight="800">juegos</tspan></text>
-    <text class="karla" x="182" y="590" font-size="68" fill="#142A40" font-weight="400">Armamos <tspan font-weight="800">juntadas</tspan></text>
-    <g transform="translate(400 628)">
+    <rect x="148" y="450" width="7" height="205" rx="3" fill="#1C82D9"/>
+    <text class="karla" x="182" y="512" font-size="68" fill="#142A40" font-weight="400">No hacemos <tspan font-weight="800">listas</tspan></text>
+    <text class="karla" x="182" y="590" font-size="68" fill="#142A40" font-weight="400">Hacemos <tspan font-weight="800">planes</tspan></text>
+    <text class="karla" x="184" y="648" font-size="31" fill="#2C6690" font-weight="500">Check lists de películas, vinos, alfajores y más</text>
+    <g transform="translate(400 682)">
       <svg width="26" height="26" color="#142A40"><use href="#mira"/></svg>
       <text class="karla" x="36" y="21" font-size="26" fill="#142A40" font-weight="500">@oficina.grafica_</text>
     </g>
@@ -106,6 +108,7 @@
     <path d="M1010 448c-18 0-34 4-46 12M1014 474c-18 0-32 4-44 12" fill="none"/>
   </g>
 
+  </g>
   <rect width="1080" height="1350" filter="url(#grano)" opacity=".3" style="mix-blend-mode:multiply"/>
 </svg>
 </body></html>
