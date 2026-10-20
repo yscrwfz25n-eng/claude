@@ -45,7 +45,8 @@ def pdf_de_imprenta(html="tapa.html", salida=SALIDA, titulo="Álbum de vinos –
     print("ok", os.path.basename(salida), f"{len(escritor.pages)} pág. de {w / mm:.1f} x {h / mm:.1f} mm")
 
 
-def maqueta(pdf_arte=SALIDA, png=os.path.join(AQUI, "tapa.png"), espejo=False):
+def maqueta(pdf_arte=SALIDA, png=os.path.join(AQUI, "tapa.png"), espejo=False, transparente=False):
+    """Cuaderno con la tapa puesta. transparente=True: sin fondo (PNG con alfa, para montar en posteos)."""
     tmp = tempfile.mkdtemp()
     base = os.path.join(tmp, "arte")
     subprocess.run(["pdftoppm", "-r", "200", "-png", "-singlefile", pdf_arte, base], check=True)
@@ -55,8 +56,9 @@ def maqueta(pdf_arte=SALIDA, png=os.path.join(AQUI, "tapa.png"), espejo=False):
     m = 16 * mm
     pdf = os.path.join(tmp, "maqueta.pdf")
     cv = canvas.Canvas(pdf, pagesize=(PW + 2 * m, PH + 2 * m))
-    cv.setFillColor(HexColor("#E6DED1"))
-    cv.rect(0, 0, PW + 2 * m, PH + 2 * m, stroke=0, fill=1)
+    if not transparente:
+        cv.setFillColor(HexColor("#E6DED1"))
+        cv.rect(0, 0, PW + 2 * m, PH + 2 * m, stroke=0, fill=1)
     x, y = m, m + 4 * mm
 
     def espejado(dibujo):
@@ -77,7 +79,10 @@ def maqueta(pdf_arte=SALIDA, png=os.path.join(AQUI, "tapa.png"), espejo=False):
     espejado(elastico)
     cv.showPage()
     cv.save()
-    subprocess.run(["pdftoppm", "-r", "150", "-png", "-singlefile", pdf, png[:-4]], check=True)
+    if transparente:
+        subprocess.run(["pdftocairo", "-r", "200", "-png", "-transp", "-singlefile", pdf, png[:-4]], check=True)
+    else:
+        subprocess.run(["pdftoppm", "-r", "150", "-png", "-singlefile", pdf, png[:-4]], check=True)
     print("ok", os.path.basename(png))
 
 
