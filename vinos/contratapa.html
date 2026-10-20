@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <!-- Contratapa del ÁLBUM DE VINOS: A5 + 3 mm de sangrado. «A veces es cuestión de tiempo vino»
-     con el estilo de la tapa. El elástico queda del lado izquierdo: el texto arranca después. -->
+     con el estilo de la tapa. Es un libro anillado: en la contratapa el espiral queda a la derecha. -->
 <style>
   @font-face{font-family:Bebas;src:url('../fuentes/BebasNeue-Regular.ttf');}
   @font-face{font-family:Sacramento;src:url('../fuentes/Sacramento-Regular.ttf');}
@@ -10,13 +10,13 @@
   html,body{margin:0;width:154mm;height:216mm;overflow:hidden;}
   body{position:relative;background:#F7F2EA;}
   .capa{position:absolute;left:0;top:0;width:154mm;height:216mm;}
-  .tinta{position:absolute;left:27mm;top:100mm;color:#1B1716;filter:url(#prensa);}
+  .tinta{position:absolute;left:18mm;top:100mm;color:#1B1716;filter:url(#prensa);}
   .linea{font-family:Bebas;font-size:30mm;line-height:.86;letter-spacing:.2mm;display:flex;align-items:center;height:25mm;white-space:pre;}
   .o{display:inline-block;box-sizing:border-box;border-radius:50%;border:solid currentColor;width:21mm;height:21mm;border-width:3.3mm;margin:0 .7mm;}
   .o.acento{position:relative;}
   .o.acento::after{content:"";position:absolute;left:8mm;top:-7.4mm;width:3mm;height:5.2mm;background:currentColor;transform:skewX(-28deg);}
-  .vino{position:absolute;left:71mm;top:170mm;font-family:Sacramento;font-size:30mm;line-height:1;color:#7A1832;transform:rotate(-7deg);}
-  .pie{position:absolute;left:27mm;top:196mm;width:110mm;display:flex;justify-content:space-between;
+  .vino{position:absolute;left:62mm;top:170mm;font-family:Sacramento;font-size:30mm;line-height:1;color:#7A1832;transform:rotate(-7deg);}
+  .pie{position:absolute;left:18mm;top:196mm;width:110mm;display:flex;justify-content:space-between;
        font-family:Karla;font-size:2.5mm;font-weight:600;letter-spacing:.35mm;color:#1B1716;}
 </style></head><body>
 
@@ -37,12 +37,12 @@
       <feDisplacementMap in="SourceGraphic" in2="r" scale="1.2" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs>
   <g filter="url(#acuarela)" fill="#7A1436">
-    <ellipse cx="80" cy="84" rx="19" ry="12" opacity=".26"/>
-    <ellipse cx="88" cy="80" rx="9" ry="6" opacity=".2"/>
-    <ellipse cx="128" cy="168" rx="12" ry="10" opacity=".26"/>
+    <ellipse cx="72" cy="84" rx="19" ry="12" opacity=".26"/>
+    <ellipse cx="80" cy="80" rx="9" ry="6" opacity=".2"/>
+    <ellipse cx="118" cy="168" rx="12" ry="10" opacity=".26"/>
   </g>
   <g filter="url(#acuarela)" fill="none" stroke="#7A1436">
-    <circle cx="132" cy="28" r="15" stroke-width="2" opacity=".36"/>
+    <circle cx="118" cy="30" r="15" stroke-width="2" opacity=".36"/>
   </g>
   <g filter="url(#salpicado)" fill="#8E1F48" opacity=".75">
     <circle cx="104" cy="58" r="1.4"/><circle cx="109" cy="54" r=".6"/><circle cx="58" cy="96" r="1"/>
@@ -57,7 +57,7 @@
       <feDisplacementMap in="SourceGraphic" in2="r" scale=".9" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs>
   <g filter="url(#mano)" fill="none" stroke="#7A1832" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round">
-    <g transform="translate(70 40) rotate(-18)">
+    <g transform="translate(62 40) rotate(-18)">
       <path d="M0 0C-1 18 4 28 12 28C20 28 25 18 24 0"/>
       <ellipse cx="12" cy="0" rx="12" ry="2.6"/>
       <path d="M12 28V50"/><path d="M3 52Q12 48 21 52Q12 55 3 52Z"/>
@@ -69,13 +69,13 @@
       <path d="M15 -5q1 -5 4 -6q0 4 -4 6Z" fill="#7A1832"/>
     </g>
     <!-- sacacorchos chico, abajo a la derecha -->
-    <g transform="translate(30 40) rotate(-24) scale(.75)">
+    <g transform="translate(22 46) rotate(-24) scale(.75)">
       <path d="M0 4Q12 -2 24 4"/><path d="M12 1.5V10"/>
       <path d="M12 10q-3.5 1.6 0 3.2q3.5 1.6 0 3.2q-3.5 1.6 0 3.2q3.5 1.6 0 3.2"/>
     </g>
   </g>
   <!-- tachado a mano sobre «TIEMPO» -->
-  <path d="M58 164C80 161 104 163 133 158" fill="none" stroke="#7A1832" stroke-width="2.6" stroke-linecap="round" filter="url(#mano)"/>
+  <path d="M49 164C71 161 95 163 124 158" fill="none" stroke="#7A1832" stroke-width="2.6" stroke-linecap="round" filter="url(#mano)"/>
 </svg>
 
 <svg width="0" height="0" style="position:absolute">
