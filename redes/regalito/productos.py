@@ -69,7 +69,6 @@ def main():
         carta(os.path.join(RAIZ, "opinologos-muestra-imprenta.pdf"), 1, 4, "carta-opinologos.png", tmp)
         dating_list(tmp)
     shutil.copy(os.path.join(os.path.dirname(AQUI), "vinos", "libro-tapa.png"), os.path.join(AQUI, "libro-vinos.png"))
-    shutil.copy(os.path.join(os.path.dirname(AQUI), "enojo", "perro.png"), os.path.join(AQUI, "perro.png"))
     for f in sorted(os.listdir(AQUI)):
         if f.endswith(".png"):
             print(f, Image.open(os.path.join(AQUI, f)).size)
