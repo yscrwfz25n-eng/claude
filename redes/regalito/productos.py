@@ -31,8 +31,14 @@ def recortar(img):
 
 
 def caja(pdf, nombre, tmp):
+    """Caja en 3D sin sombras proyectadas (la sombra la pone el posteo, pareja para todos los productos)."""
     lienzo = Image.new("RGBA", (900, 1100), (0, 0, 0, 0))
-    fp.caja_3d(lienzo, fp.caras_de_caja(pdf, tmp), 260, 980, 800)
+    sombra_original = fp.sombra
+    fp.sombra = lambda *a, **k: None
+    try:
+        fp.caja_3d(lienzo, fp.caras_de_caja(pdf, tmp), 260, 980, 800)
+    finally:
+        fp.sombra = sombra_original
     recortar(lienzo).save(os.path.join(AQUI, nombre))
 
 
