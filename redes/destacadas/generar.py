@@ -52,12 +52,14 @@ ICONOS = {
       <path d="M0 -60C-50 -160 -200 -130 -195 -20C-190 70 -60 130 0 185C60 130 190 70 195 -20C200 -130 50 -160 0 -60Z"/>
       <path d="M-80 10L-20 70L95 -50"/>
       <circle cx="0" cy="185" r="17" fill="{VIVO}" stroke="none"/>""",
-    "eventos": f"""
-      <rect x="-190" y="-140" width="380" height="320" rx="30"/>
-      <path d="M-190 -50H190M-100 -185V-100M100 -185V-100"/>
-      <path d="M-110 30H-70M-20 30H20M70 30H110M-110 110H-70M-20 110H20"/>
-      <circle cx="90" cy="110" r="38" fill="{PAPEL}"/><circle cx="90" cy="110" r="17" fill="{VIVO}" stroke="none"/>
-      <path d="M196 -186L216 -220M228 -146L264 -156M-208 -182L-228 -214" stroke-width="18"/>""",
+    # papelería para eventos: invitación asomando de un sobre, con sello
+    "eventos": f"""<g transform="translate(0 15) scale(.88)">
+      <rect x="-130" y="-200" width="260" height="250" rx="16" fill="{PAPEL}"/>
+      <path d="M-70 -135H70M-70 -90H70M-45 -45H45"/>
+      <path d="M-210 -40V170Q-210 190 -190 190H190Q210 190 210 170V-40" fill="{PAPEL}"/>
+      <path d="M-210 -40L0 95L210 -40"/>
+      <path d="M-210 190L-60 60M210 190L60 60"/>
+      <circle cx="0" cy="95" r="40" fill="{PAPEL}"/><circle cx="0" cy="95" r="19" fill="{VIVO}" stroke="none"/></g>""",
 }
 NOMBRES = {"juegos": "Juegos", "libros": "Libros", "pedidos": "Pedidos", "envios": "Envíos",
            "proceso": "Proceso", "tips": "Tips", "clientes": "Clientes",
