@@ -6,7 +6,7 @@ Uso:  python3 etiquetas/sin_fondo.py etiquetas.pdf  ->  etiquetas/png/NN-nombre.
 Cada página trae una imagen RGB sobre blanco. El blanco del fondo se vuelve transparente con
 «color a alfa» respecto de la tinta de esa etiqueta (bordó en la mayoría, gris claro en las de
 serum), así los bordes de las letras quedan suaves. En las etiquetas bordó el texto blanco de las
-barras se conserva; en las claras (serum) también queda calado, sin fondo.
+barras se conserva; en las claras (serum) las letras de la barra pasan a negro.
 """
 import os
 import subprocess
@@ -50,8 +50,9 @@ def sin_fondo(img):
                 barras[sl] |= lleno
     adentro = ndimage.binary_erosion(barras, iterations=2)
     if tinta.min() > 150:
-        # etiquetas claras (serum): las letras blancas de la barra también van caladas, sin fondo
-        adentro[:] = False
+        # etiquetas claras (serum): las letras blancas de la barra pasan a negro; la barra queda gris
+        letra = np.clip((rgb.min(axis=2) - tinta.min()) / (255 - tinta.min()), 0, 1)[..., None]
+        rgb = np.where(adentro[..., None], tinta * (1 - letra), rgb)
 
     color = np.where(adentro[..., None], rgb, tinta)
     alfa = np.where(adentro, 1.0, alfa)
