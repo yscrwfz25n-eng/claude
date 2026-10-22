@@ -1,6 +1,7 @@
 """Pasa las etiquetas del PDF a PNG con fondo transparente.
 
 Uso:  python3 etiquetas/sin_fondo.py etiquetas.pdf  ->  etiquetas/png/NN-nombre.png
+                                                     etiquetas/etiquetas-sin-fondo.pdf
 
 Cada página trae una imagen RGB sobre blanco. El blanco del fondo se vuelve transparente con
 «color a alfa» respecto de la tinta de esa etiqueta (bordó en la mayoría, gris claro en las de
@@ -58,6 +59,28 @@ def sin_fondo(img):
     return Image.fromarray(out, "RGBA")
 
 
+def armar_pdf(pdf, imagenes, salida):
+    """Mismo PDF (mismas medidas de página y misma posición de cada etiqueta), con las imágenes sin fondo."""
+    import re
+
+    from pypdf import PdfReader
+    from reportlab.lib.utils import ImageReader
+    from reportlab.pdfgen import canvas
+
+    lector = PdfReader(pdf)
+    cv = canvas.Canvas(salida)
+    cv.setTitle("Etiquetas sin fondo")
+    for pagina, img in zip(lector.pages, imagenes):
+        ancho, alto = float(pagina.mediabox.width), float(pagina.mediabox.height)
+        contenido = pagina.get_contents().get_data().decode("latin-1")
+        a, _, _, d, e, f = map(float, re.search(r"q\s+([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) cm\s+/\S+ Do",
+                                                contenido).groups())
+        cv.setPageSize((ancho, alto))
+        cv.drawImage(ImageReader(img), e, f, a, d, mask="auto")
+        cv.showPage()
+    cv.save()
+
+
 def main(pdf):
     salida = os.path.join(AQUI, "png")
     os.makedirs(salida, exist_ok=True)
@@ -65,10 +88,12 @@ def main(pdf):
         subprocess.run(["pdfimages", "-png", pdf, os.path.join(tmp, "e")], check=True)
         archivos = sorted(f for f in os.listdir(tmp) if f.endswith(".png"))
         assert len(archivos) == len(NOMBRES), f"{len(archivos)} imágenes, {len(NOMBRES)} nombres"
+        completas = []
         for n, (f, nombre) in enumerate(zip(archivos, NOMBRES), 1):
             img = sin_fondo(Image.open(os.path.join(tmp, f)))
-            img = img.crop(img.getbbox())
-            img.save(os.path.join(salida, f"{n:02d}-{nombre}.png"), optimize=True)
+            completas.append(img)
+            img.crop(img.getbbox()).save(os.path.join(salida, f"{n:02d}-{nombre}.png"), optimize=True)
+    armar_pdf(pdf, completas, os.path.join(AQUI, "etiquetas-sin-fondo.pdf"))
     print("ok", len(NOMBRES), "png en", os.path.relpath(salida))
 
 
