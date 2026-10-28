@@ -22,12 +22,18 @@ FUENTES = """
 """
 
 
-def mira(tam, color="#142A40", trazo=8):
-    return f"""<svg width="{tam}" height="{tam}" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="34" fill="none" stroke="{color}" stroke-width="{trazo}"/>
-  <line x1="50" y1="2" x2="50" y2="98" stroke="{color}" stroke-width="{trazo}"/>
-  <line x1="2" y1="50" x2="98" y2="50" stroke="{color}" stroke-width="{trazo}"/>
-  <circle cx="50" cy="50" r="11" fill="#1C82D9"/></svg>"""
+def mira(tam, color="#142A40", trazo=10):
+    """La mira de registro como está en el perfil de Instagram: trazo grueso e irregular, de marcador."""
+    sid = f"rough{tam}"
+    return f"""<svg width="{tam}" height="{tam}" viewBox="-4 -4 108 108">
+  <defs><filter id="{sid}" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.06 0.08" numOctaves="2" seed="7" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
+  <g filter="url(#{sid})">
+  <circle cx="50" cy="50" r="35.5" fill="none" stroke="{color}" stroke-width="{trazo}"/>
+  <line x1="50" y1="1" x2="50" y2="99" stroke="{color}" stroke-width="{trazo}"/>
+  <line x1="1" y1="50" x2="99" y2="50" stroke="{color}" stroke-width="{trazo}"/>
+  <circle cx="50" cy="50" r="11" fill="#3B7FD0"/></g></svg>"""
 
 
 PIEZAS = {
@@ -45,10 +51,10 @@ PIEZAS = {
   <div style="font-family:Bungee;font-size:58px;line-height:1.02;margin-top:26px;">DISEÑO PROPIO,<br><span style="color:#1C82D9;">DEL BOCETO<br>AL PAPEL</span></div>
   <div style="font-size:28px;font-weight:600;margin-top:22px;">Juegos, libros y papelería · Pedidos por MD</div>
 </div>
-<img src="../regalito/libro-dating-list.png" style="position:absolute;left:870px;top:128px;height:380px;transform:rotate(-7deg);filter:drop-shadow(0 18px 20px rgba(20,42,64,.28));">
-<img src="../vinos/libro-tapa.png" style="position:absolute;left:1065px;top:115px;height:380px;transform:rotate(6deg);filter:drop-shadow(0 18px 20px rgba(20,42,64,.28));">
-<img src="../regalito/caja-match.png" style="position:absolute;left:868px;top:330px;height:245px;transform:rotate(-5deg);filter:drop-shadow(0 18px 20px rgba(20,42,64,.3));">
-<img src="../regalito/caja-opinologos.png" style="position:absolute;left:1045px;top:340px;height:245px;transform:rotate(4deg);filter:drop-shadow(0 18px 20px rgba(20,42,64,.3));">
+<img src="../regalito/libro-dating-list.png" style="position:absolute;left:880px;top:62px;height:330px;transform:rotate(-7deg);filter:drop-shadow(0 18px 20px rgba(20,42,64,.28));">
+<img src="../vinos/libro-tapa.png" style="position:absolute;left:1075px;top:55px;height:330px;transform:rotate(6deg);filter:drop-shadow(0 18px 20px rgba(20,42,64,.28));">
+<img src="../gemini/match-foto-final.jpg" style="position:absolute;left:860px;top:330px;height:250px;border-radius:18px;transform:rotate(-5deg);box-shadow:0 18px 30px rgba(20,42,64,.3);border:8px solid #FBF8F1;">
+<img src="../gemini/opinologos-foto-final.jpg" style="position:absolute;left:1080px;top:338px;height:250px;border-radius:18px;transform:rotate(4deg);box-shadow:0 18px 30px rgba(20,42,64,.3);border:8px solid #FBF8F1;">
 <svg style="position:absolute;left:0;top:0;pointer-events:none" width="1640" height="624"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
 <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.16  0 0 0 0 0.25  0 0 0 0.5 0"/></filter><rect width="1640" height="624" filter="url(#g)" opacity=".25"/></svg>
 </body>"""),
