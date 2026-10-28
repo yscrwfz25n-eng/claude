@@ -3,6 +3,7 @@
 Uso:  python3 redes/anuncios/generar.py  ->  NOMBRE-feed.png y NOMBRE-historia.png
 
 1 · match: regalo para la pareja · 2 · opinologos: la previa · 3 · libros: álbumes para completar.
+Los juegos usan las fotos de producto finales de Gemini (redes/gemini/); los libros, las maquetas.
 En 9:16 los textos quedan entre y = 250 y y = 1580 (arriba y abajo Instagram pone su interfaz).
 """
 import os
@@ -44,14 +45,14 @@ ANUNCIOS = {
         fondo="#5C0F1E", texto="#EFE3D0", acento="#F2B8C6",
         kicker="REGALO PARA TU PAREJA", tit="QUE NO ES<br>UN PERFUME",
         sub="120 preguntas y retos para conocerse<br>(y animarse) un poco más.",
-        prods=[("../regalito/caja-match.png", "left:150px;top:0;height:H1px;transform:rotate(-6deg);"),
+        prods=[("../gemini/match-foto-final.jpg", "left:FXpx;top:0;height:FHpx;border-radius:28px;transform:rotate(-3deg);"),
                ("_match-pregunta.png", "left:Lpx;top:Tpx;height:H2px;transform:rotate(8deg);")],
         cta="Pedilo por MD", cta_fondo="#EFE3D0", cta_texto="#5C0F1E"),
     "opinologos": dict(
         fondo="#FFFFFF", texto="#111111", acento="#2F6FED",
         kicker="PARA LA PREVIA", tit="TODOS OPINAN.<br>POCOS CONVENCEN.",
         sub="El juego de debate que termina<br>con alguien diciendo «me convenciste».",
-        prods=[("../regalito/caja-opinologos.png", "left:150px;top:0;height:H1px;transform:rotate(-5deg);"),
+        prods=[("../gemini/opinologos-foto-final.jpg", "left:FXpx;top:0;height:FHpx;border-radius:28px;transform:rotate(-3deg);"),
                ("_opinologos-tema.png", "left:Lpx;top:Tpx;height:H2px;transform:rotate(8deg);")],
         cta="Pedilo por MD", cta_fondo="#111111", cta_texto="#FFFFFF", franja=True),
     "libros": dict(
@@ -64,15 +65,15 @@ ANUNCIOS = {
         cta="Pedilo por MD", cta_fondo="#142A40", cta_texto="#EEE7D8"),
 }
 
-FORMATOS = {"feed": dict(alto=1350, gap=26, pad=70, prod=520, h1=480, h2=380, t=110, w=330, l=540, hl=400, v=600, a=290, ta=230),
-            "historia": dict(alto=1920, gap=34, pad=250, prod=700, h1=560, h2=440, t=200, w=420, l=600, hl=520, v=560, a=250, ta=330)}
+FORMATOS = {"feed": dict(alto=1350, gap=26, pad=70, prod=520, h1=480, h2=300, t=190, w=330, l=560, hl=400, v=600, a=290, ta=230, fx=150, fh=480),
+            "historia": dict(alto=1920, gap=34, pad=250, prod=700, h1=560, h2=380, t=280, w=420, l=600, hl=520, v=560, a=250, ta=330, fx=120, fh=650)}
 
 
 def html(a, f):
     css = (CSS.replace("ALTO", str(f["alto"])).replace("GAP", str(f["gap"])).replace("PAD", str(f["pad"]))
            .replace("PROD", str(f["prod"])))
     def medidas(st):
-        for clave in ("TA", "HL", "H1", "H2", "T", "W", "L", "V", "A"):  # las claves largas primero
+        for clave in ("TA", "HL", "FX", "FH", "H1", "H2", "T", "W", "L", "V", "A"):  # las claves largas primero
             st = st.replace(f":{clave}px", f":{f[clave.lower()]}px")
         return st
     imgs = "".join(f'<img src="{src}" style="{medidas(st)}">' for src, st in a["prods"])
