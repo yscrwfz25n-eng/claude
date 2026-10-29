@@ -10,8 +10,8 @@ debería quedar cerca de 50/50. Si un tema arranca 6 a 0, se descarta.
 """
 
 CALENTAMIENTO = [
-    "El ananá en la pizza es una genialidad.",
-    "Responder un audio con un texto es una falta de respeto.",
+    "El que pone la casa no limpia después de la juntada.",
+    "Llevar tupper al trabajo es de organizado, no de rata.",
     "Dejar en visto es peor que contestar «ok».",
     "Spoilear una serie una semana después del estreno es válido.",
     "El mate dulce es tan digno como el amargo.",
