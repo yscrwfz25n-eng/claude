@@ -90,7 +90,7 @@ PREGUNTAS = [
     ('Contá cuál es tu parte favorita del cuerpo de tu pareja.', "ambos", True),
     ('¿Qué prefiero: con la luz prendida o apagada?', "pareja", True),
     ('Contá qué fue lo que más te enamoró de tu pareja.', "ambos", False),
-    ('¿De qué cuadro soy, o cuál es mi deporte favorito?', "pareja", False),
+    ('¿Qué cosa mía nunca dejaría de hacer, aunque me lo pidas?', "pareja", False),
     ('Contá un sueño que todavía no te animaste a contarle.', "ambos", False),
     ('¿Con qué amigo o amiga tuyo me llevo mejor?', "pareja", False),
     ('Contá qué juego te gustaría probar en la cama.', "ambos", True),
