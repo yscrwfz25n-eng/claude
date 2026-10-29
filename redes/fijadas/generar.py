@@ -90,11 +90,19 @@ QUIENES = [
     <div><div style="font-family:Brico;font-weight:700;font-size:42px;">Hechos con oficio</div><div class="txt" style="font-size:34px;opacity:.8;">Si no está en registro, no sale.</div></div></div>
 </div>"""),
     (VIVO, PAPEL, f"""
-<div class="abs" style="left:0;right:0;top:300px;display:flex;flex-direction:column;align-items:center;text-align:center;">
-  {mira(220, PAPEL)}
-  <div class="bungee" style="font-size:96px;margin-top:50px;">¿TENÉS UNA<br>IDEA?</div>
-  <div class="txt" style="margin-top:30px;max-width:780px;">También hacemos pedidos personalizados para regalos y eventos.</div>
-  <div style="margin-top:56px;"><span class="pill" style="background:{PAPEL};color:{TINTA};">Escribinos por MD</span></div>
+<div class="abs" style="left:0;right:0;top:215px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+  {mira(150, PAPEL)}
+  <div class="bungee" style="font-size:96px;margin-top:36px;">¿TENÉS UNA<br>IDEA?</div>
+  <div class="txt" style="margin-top:26px;max-width:820px;">Si se puede imprimir, lo hacemos.<br>Y si es digital, también lo diseñamos.</div>
+  <div style="display:flex;gap:28px;margin-top:46px;text-align:left;">
+    <div style="background:rgba(238,231,216,.14);border:3px solid {PAPEL};border-radius:28px;padding:26px 30px;width:330px;">
+      <div class="bungee" style="font-size:40px;">IMPRESO</div>
+      <div style="font-size:28px;font-weight:500;line-height:1.35;margin-top:12px;">Juegos, libros, invitaciones, etiquetas, papelería para eventos…</div></div>
+    <div style="background:rgba(238,231,216,.14);border:3px solid {PAPEL};border-radius:28px;padding:26px 30px;width:330px;">
+      <div class="bungee" style="font-size:40px;">DIGITAL</div>
+      <div style="font-size:28px;font-weight:500;line-height:1.35;margin-top:12px;">Logos, posteos, invitaciones digitales, plantillas…</div></div>
+  </div>
+  <div style="margin-top:48px;"><span class="pill" style="background:{PAPEL};color:{TINTA};">Contanos tu idea por MD</span></div>
 </div>"""),
 ]
 
