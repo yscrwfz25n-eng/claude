@@ -1,7 +1,7 @@
 """Publicaciones fijadas del perfil (carruseles 4:5, 1080 x 1350), pensadas para no envejecer:
 no nombran productos puntuales, así sirven aunque la línea crezca.
 
-Uso:  python3 redes/fijadas/generar.py  ->  quienes-1..4.png, proceso-1..5.png
+Uso:  python3 redes/fijadas/generar.py  ->  quienes-1..3.png, proceso-1..5.png, idea-1.png (suelta)
 
 Las tapas de las tres fijadas comparten diseño (fondo papel, número de fijada, título en Bungee)
 para que la primera fila del perfil se lea como un conjunto.
@@ -42,11 +42,13 @@ def mira(tam, color=TINTA):
 
 
 def marco(fondo, texto, pagina, total, cuerpo):
+    """pagina/total arriba a la derecha; en una publicación suelta (total = 1) no se muestra."""
     marcas = f"""<svg class="abs" style="left:0;top:0" width="1080" height="1350"><g stroke="{texto}" stroke-width="3" opacity=".4">
   <path d="M40 70H90M70 40V90M1040 70H990M1010 40V90M40 1280H90M70 1310V1260M1040 1280H990M1010 1310V1260"/></g></svg>"""
     firma = f"""<div class="abs" style="left:112px;top:92px;display:flex;align-items:center;gap:12px;font-family:Marker;font-size:30px;color:{texto};">
   {mira(40, texto)}Oficina Gráfica</div>"""
-    num = f'<div class="abs bungee" style="right:112px;top:98px;font-size:30px;color:{VIVO if fondo != VIVO else CELESTE};">{pagina}/{total}</div>'
+    num = (f'<div class="abs bungee" style="right:112px;top:98px;font-size:30px;color:{VIVO if fondo != VIVO else CELESTE};">{pagina}/{total}</div>'
+           if total > 1 else "")
     grano = """<svg class="abs" style="left:0;top:0;pointer-events:none" width="1080" height="1350"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
 <feColorMatrix values="0 0 0 0 0.08  0 0 0 0 0.16  0 0 0 0 0.25  0 0 0 0.5 0"/></filter><rect width="1080" height="1350" filter="url(#g)" opacity=".22"/></svg>"""
     return f'{HEAD}<body style="background:{fondo};color:{texto};">{marcas}{firma}{num}{cuerpo}{grano}</body></html>'
@@ -89,6 +91,9 @@ QUIENES = [
   <div style="display:flex;gap:30px;align-items:flex-start;"><div class="bungee" style="font-size:56px;color:{VIVO};width:90px;">03</div>
     <div><div style="font-family:Brico;font-weight:700;font-size:42px;">Hechos con oficio</div><div class="txt" style="font-size:34px;opacity:.8;">Si no está en registro, no sale.</div></div></div>
 </div>"""),
+]
+
+IDEA = [
     (VIVO, PAPEL, f"""
 <div class="abs" style="left:0;right:0;top:215px;display:flex;flex-direction:column;align-items:center;text-align:center;">
   {mira(150, PAPEL)}
@@ -161,7 +166,8 @@ def render(nombre, slides):
 def main():
     render("quienes", QUIENES)
     render("proceso", PROCESO)
-    print("ok", len(QUIENES) + len(PROCESO), "slides")
+    render("idea", IDEA)
+    print("ok", len(QUIENES) + len(PROCESO) + len(IDEA), "slides")
 
 
 if __name__ == "__main__":
