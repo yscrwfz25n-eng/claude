@@ -1,7 +1,7 @@
 """Publicaciones fijadas del perfil (carruseles 4:5, 1080 x 1350), pensadas para no envejecer:
 no nombran productos puntuales, así sirven aunque la línea crezca.
 
-Uso:  python3 redes/fijadas/generar.py  ->  quienes-1..3.png, regalos-1..6.png, idea-1.png (suelta)
+Uso:  python3 redes/fijadas/generar.py  ->  quienes-1..3.png, regalos-1..6.png, idea-1..2.png
 
 Las tapas de las tres fijadas comparten diseño (fondo papel, número de fijada, título en Bungee)
 para que la primera fila del perfil se lea como un conjunto.
@@ -94,6 +94,8 @@ QUIENES = [
 ]
 
 IDEA = [
+    (PAPEL, TINTA, tapa("03", "¿TENÉS UNA<br><span style='color:#1C82D9'>IDEA?</span>",
+                        "Si se puede imprimir, lo hacemos. Y si es digital, también lo diseñamos.")),
     (VIVO, PAPEL, f"""
 <div class="abs" style="left:0;right:0;top:215px;display:flex;flex-direction:column;align-items:center;text-align:center;">
   {mira(150, PAPEL)}
