@@ -1,7 +1,7 @@
 """Publicaciones fijadas del perfil (carruseles 4:5, 1080 x 1350), pensadas para no envejecer:
 no nombran productos puntuales, así sirven aunque la línea crezca.
 
-Uso:  python3 redes/fijadas/generar.py  ->  quienes-1..3.png, proceso-1..5.png, idea-1.png (suelta)
+Uso:  python3 redes/fijadas/generar.py  ->  quienes-1..3.png, regalos-1..6.png, idea-1.png (suelta)
 
 Las tapas de las tres fijadas comparten diseño (fondo papel, número de fijada, título en Bungee)
 para que la primera fila del perfil se lea como un conjunto.
@@ -112,40 +112,49 @@ IDEA = [
 ]
 
 
-def paso(n, titulo, texto, icono):
+def ocasion(kicker, titulo, texto, productos):
+    """Slide de la guía de regalos: ocasión arriba, productos sugeridos abajo (se cambian sin tocar el resto)."""
     return f"""
-<div class="abs" style="left:112px;right:112px;top:230px;">
-  <div class="bungee" style="font-size:230px;color:{CELESTE};line-height:.8;">{n}</div>
-  <div class="bungee" style="font-size:104px;margin-top:30px;">{titulo}</div>
-  <div class="txt" style="margin-top:34px;max-width:820px;">{texto}</div>
+<div class="abs" style="left:112px;right:112px;top:220px;">
+  <div class="kick" style="color:{VIVO};">{kicker}</div>
+  <div class="bungee" style="font-size:88px;margin-top:20px;">{titulo}</div>
+  <div class="txt" style="margin-top:26px;max-width:820px;font-size:36px;">{texto}</div>
 </div>
-<svg class="abs" style="right:112px;bottom:110px;" width="380" height="380" viewBox="-200 -200 400 400">
-  <defs><filter id="mano"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="4" result="t"/>
-    <feDisplacementMap in="SourceGraphic" in2="t" scale="6" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
-  <g fill="none" stroke="{TINTA}" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" filter="url(#mano)">{icono}</g></svg>"""
+<div class="abs" style="left:0;right:0;top:700px;height:560px;">{productos}</div>"""
 
 
-ICONOS = {
-    "lapiz": f"""<g transform="rotate(-40)"><rect x="-160" y="-40" width="260" height="80" rx="10" fill="{CELESTE}"/>
-      <path d="M100 -40L170 0L100 40Z" fill="{PAPEL}"/><path d="M150 -12L170 0L150 12Z" fill="{TINTA}" stroke="none"/></g>
-      <circle cx="-120" cy="140" r="17" fill="#1C82D9" stroke="none"/>""",
-    "impresora": f"""<path d="M-120 -60V-160H120V-60"/><rect x="-200" y="-60" width="400" height="190" rx="30" fill="{PAPEL}"/>
-      <path d="M-120 60H120V190H-120Z" fill="#FBF8F1"/><path d="M-70 105H70M-70 145H30"/>
-      <circle cx="140" cy="0" r="17" fill="#1C82D9" stroke="none"/>""",
-    "tijera": """<circle cx="-110" cy="70" r="55"/><circle cx="-110" cy="-70" r="55"/><path d="M-62 45L170 -90M-62 -45L170 90"/>
-      <path d="M-180 -170V-120M-205 -145H-155" stroke-width="14"/><circle cx="20" cy="0" r="17" fill="#1C82D9" stroke="none"/>""",
-    "caja": f"""<path d="M-190 -70L0 -150L190 -70V110L0 190L-190 110Z" fill="{PAPEL}"/><path d="M-190 -70L0 10L190 -70M0 10V190"/>
-      <path d="M-95 -110L95 -30V30"/><circle cx="-95" cy="95" r="17" fill="#9BD0EF" stroke="none"/>""",
-}
+def foto(src, x, y, alto, ang):
+    return (f'<img src="{src}" style="position:absolute;left:{x}px;top:{y}px;height:{alto}px;transform:rotate({ang}deg);'
+            f'border:10px solid #FBF8F1;border-radius:20px;box-shadow:0 22px 30px rgba(20,42,64,.3);">')
 
-PROCESO = [
-    (PAPEL, TINTA, tapa("02", "ASÍ LO<br><span style='color:#1C82D9'>HACEMOS</span>",
-                        "De la idea al paquete en tu casa: estos son los cuatro pasos de todo lo que sale del taller.")),
-    (PAPEL, TINTA, paso("01", "DISEÑAMOS", "Arranca en un boceto. Pensamos el uso, el texto y cada detalle antes de pasarlo a la compu.", ICONOS["lapiz"])),
-    (PAPEL, TINTA, paso("02", "IMPRIMIMOS", "Primero una prueba, siempre. Revisamos colores y cortes antes de imprimir la tirada.", ICONOS["impresora"])),
-    (PAPEL, TINTA, paso("03", "CORTAMOS<br>Y ARMAMOS", "Cortes, troquelado, anillado y armado: todo pasa por nuestras manos.", ICONOS["tijera"])),
-    (VIVO, PAPEL, paso("04", "ENVIAMOS", "Lo embalamos con cuidado y sale a cualquier punto del país.", ICONOS["caja"].replace(f'fill="{PAPEL}"', f'fill="{VIVO}"')).replace(f'stroke="{TINTA}"', f'stroke="{PAPEL}"')
-     + f"""<div class="abs" style="left:112px;bottom:130px;"><span class="pill" style="background:{PAPEL};color:{TINTA};">Pedidos por MD</span></div>"""),
+
+def objeto(src, x, y, alto, ang):
+    return f'<img class="sombra" src="{src}" style="position:absolute;left:{x}px;top:{y}px;height:{alto}px;transform:rotate({ang}deg);">'
+
+
+REGALOS = [
+    (PAPEL, TINTA, tapa("02", "IDEAS PARA<br><span style='color:#1C82D9'>REGALAR</span>",
+                        "Para cuando no sabés qué regalar. Guardala para la próxima.")),
+    (PAPEL, TINTA, ocasion("ANIVERSARIO · SAN VALENTÍN", "PARA TU<br>PAREJA",
+                           "Algo para hacer juntos, no para guardar en un cajón.",
+                           foto("../gemini/match-foto-final.jpg", 150, 30, 470, -5)
+                           + objeto("../regalito/libro-dating-list.png", 580, 20, 500, 6))),
+    (TINTA, PAPEL, ocasion("CUMPLEAÑOS · LA PREVIA", "PARA TUS<br>AMIGOS",
+                           "El regalo que se estrena esa misma noche.",
+                           foto("../gemini/opinologos-foto-final.jpg", 300, 20, 500, -4))),
+    (PAPEL, TINTA, ocasion("DÍA DEL PADRE · EL QUE TIENE TODO", "PARA EL QUE<br>DISFRUTA",
+                           "Para el que siempre dice «este vino estaba buenísimo» y después se olvida cuál era.",
+                           objeto("../vinos/libro-tapa.png", 330, 10, 520, -4))),
+    (PAPEL, TINTA, ocasion("AMIGO INVISIBLE · UN DETALLE", "ALGO<br>DISTINTO",
+                           "Un regalo chico que no termina en el fondo del placard.",
+                           objeto("../regalito/album-alfajores.png", 270, 40, 480, -3))),
+    (VIVO, PAPEL, f"""
+<div class="abs" style="left:0;right:0;top:300px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+  {mira(170, PAPEL)}
+  <div class="bungee" style="font-size:92px;margin-top:44px;">¿NINGUNO<br>TE CONVENCE?</div>
+  <div class="txt" style="margin-top:30px;max-width:820px;">Lo hacemos a medida: con nombres, fechas o la idea que tengas.</div>
+  <div style="margin-top:56px;"><span class="pill" style="background:{PAPEL};color:{TINTA};">Escribinos por MD</span></div>
+</div>"""),
 ]
 
 
@@ -165,9 +174,9 @@ def render(nombre, slides):
 
 def main():
     render("quienes", QUIENES)
-    render("proceso", PROCESO)
+    render("regalos", REGALOS)
     render("idea", IDEA)
-    print("ok", len(QUIENES) + len(PROCESO) + len(IDEA), "slides")
+    print("ok", len(QUIENES) + len(REGALOS) + len(IDEA), "slides")
 
 
 if __name__ == "__main__":
