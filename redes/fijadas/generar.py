@@ -54,22 +54,26 @@ def marco(fondo, texto, pagina, total, cuerpo):
     return f'{HEAD}<body style="background:{fondo};color:{texto};">{marcas}{firma}{num}{cuerpo}{grano}</body></html>'
 
 
-def tapa(numero, titulo, bajada):
-    """Tapa común a las tres fijadas."""
-    return f"""
+def tapa(numero, titulo, acento, bajada, fondo=PAPEL):
+    """Tapa común a las tres fijadas: mismo diseño, distinto color de fondo para cada una."""
+    texto = TINTA if fondo == PAPEL else PAPEL
+    color_num = {PAPEL: CELESTE, TINTA: VIVO, VIVO: CELESTE}[fondo]
+    color_acento = {PAPEL: VIVO, TINTA: CELESTE, VIVO: TINTA}[fondo]
+    pill = f"background:{TINTA};color:{PAPEL};" if fondo == PAPEL else f"background:{PAPEL};color:{TINTA};"
+    return fondo, texto, f"""
 <div class="abs" style="left:112px;right:112px;top:250px;">
-  <div class="bungee" style="font-size:300px;color:{CELESTE};line-height:.8;">{numero}</div>
-  <div class="bungee" style="font-size:112px;margin-top:40px;">{titulo}</div>
+  <div class="bungee" style="font-size:300px;color:{color_num};line-height:.8;">{numero}</div>
+  <div class="bungee" style="font-size:112px;margin-top:40px;">{titulo}<br><span style="color:{color_acento}">{acento}</span></div>
   <div class="txt" style="margin-top:34px;max-width:780px;">{bajada}</div>
 </div>
 <div class="abs" style="left:112px;bottom:120px;">
-  <span class="pill" style="background:{TINTA};color:{PAPEL};">deslizá →</span></div>"""
+  <span class="pill" style="{pill}">deslizá →</span></div>"""
 
 
 # ---------- 1 · QUIÉNES SOMOS ----------
 QUIENES = [
-    (PAPEL, TINTA, tapa("01", "QUIÉNES<br><span style='color:#1C82D9'>SOMOS</span>",
-                        "Un taller gráfico que diseña e imprime su propia línea de juegos, libros y papelería.")),
+    tapa("01", "QUIÉNES", "SOMOS",
+         "Un taller gráfico que diseña e imprime su propia línea de juegos, libros y papelería.", PAPEL),
     (TINTA, PAPEL, f"""
 <div class="abs" style="left:112px;right:112px;top:260px;">
   <div class="kick" style="color:{CELESTE};">CÓMO EMPEZÓ</div>
@@ -94,8 +98,8 @@ QUIENES = [
 ]
 
 IDEA = [
-    (PAPEL, TINTA, tapa("03", "¿TENÉS UNA<br><span style='color:#1C82D9'>IDEA?</span>",
-                        "Si se puede imprimir, lo hacemos. Y si es digital, también lo diseñamos.")),
+    tapa("03", "¿TENÉS UNA", "IDEA?",
+         "Si se puede imprimir, lo hacemos. Y si es digital, también lo diseñamos.", VIVO),
     (VIVO, PAPEL, f"""
 <div class="abs" style="left:0;right:0;top:215px;display:flex;flex-direction:column;align-items:center;text-align:center;">
   {mira(150, PAPEL)}
@@ -135,8 +139,8 @@ def objeto(src, x, y, alto, ang):
 
 
 REGALOS = [
-    (PAPEL, TINTA, tapa("02", "IDEAS PARA<br><span style='color:#1C82D9'>REGALAR</span>",
-                        "Para cuando no sabés qué regalar. Guardala para la próxima.")),
+    tapa("02", "IDEAS PARA", "REGALAR",
+         "Para cuando no sabés qué regalar. Guardala para la próxima.", TINTA),
     (PAPEL, TINTA, ocasion("ANIVERSARIO · SAN VALENTÍN", "PARA TU<br>PAREJA",
                            "Algo para hacer juntos, no para guardar en un cajón.",
                            foto("../gemini/match-foto-final.jpg", 150, 30, 470, -5)
