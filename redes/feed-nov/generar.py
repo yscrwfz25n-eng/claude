@@ -1,7 +1,7 @@
 """Tres publicaciones para el feed (4:5, 1080 x 1350), cada una con la identidad de su producto.
 
 Uso:  python3 redes/feed-nov/generar.py
-  -> debate-1..6.png   Opinólogos: «¿A favor o en contra?», 4 temas para votar en comentarios
+  -> debate-1..6.png   Opinólogos: «¿A favor o en contra?», 4 temas que dividen cualquier mesa
   -> match-1..6.png    Match: 4 preguntas para hacerle a tu pareja esta noche
   -> antes-del-31.png  The Dating List: 8 citas para tachar antes de fin de año (para guardar)
 
@@ -101,7 +101,7 @@ def debate_tapa():
 <div class="abs" style="left:112px;right:112px;top:210px;">
   <div class="kick" style="color:{VIVO};">PARA TU PRÓXIMA PREVIA</div>
   <div class="bungee" style="font-size:112px;margin-top:22px;">¿A FAVOR<br><span style="color:{VIVO}">O EN CONTRA?</span></div>
-  <div style="font-size:40px;font-weight:500;margin-top:26px;">4 debates para votar en comentarios.</div>
+  <div style="font-size:40px;font-weight:500;margin-top:26px;">4 debates que dividen cualquier mesa.</div>
 </div>
 {carta_op(DEBATES[1][0], DEBATES[1][1], 290, -10, 210, 820)}
 {carta_op(DEBATES[2][0], DEBATES[2][1], 290, 9, 590, 830)}
@@ -114,8 +114,8 @@ def debate_slide(i, texto, nivel):
 <div class="abs kick" style="left:0;right:0;top:175px;text-align:center;color:{CELESTE if fondo == TINTA else VIVO};">DEBATE {i} DE 4</div>
 {carta_op(texto, nivel, 580, -2 if i % 2 else 2, 250, 240)}
 <div class="abs" style="left:0;right:0;top:1100px;text-align:center;">
-  <div class="bungee" style="font-size:58px;">COMENTÁ <span style="color:#1F9D5C">✔</span> O <span style="color:#D93A3A">✖</span></div>
-  <div style="font-size:34px;font-weight:500;margin-top:14px;">y defendé tu postura</div>
+  <div class="bungee" style="font-size:52px;">VOTAN <span style="color:#1F9D5C">✔</span> A FAVOR O <span style="color:#D93A3A">✖</span> EN CONTRA</div>
+  <div style="font-size:34px;font-weight:500;margin-top:14px;">y el que convence a otro se lleva la carta</div>
 </div>""", i + 1, 6)
 
 
