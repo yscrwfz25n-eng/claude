@@ -82,9 +82,9 @@ html:has(.au-sec), body:has(.au-sec){overflow-x:clip}
 
 /* Selector de promos */
 .au-packs{display:grid; grid-template-columns:1fr 1fr; gap:clamp(1rem,3vw,2rem); align-items:center}
-.au-packs__visual{position:relative; border-radius:clamp(20px,3vw,30px); background:radial-gradient(circle at 50% 62%,#fff,#FBE3E2 70%); min-height:clamp(240px,30vw,330px); display:flex; align-items:flex-end; justify-content:center; padding:2.2rem 1rem 1.4rem}
-.au-bottles{display:flex; align-items:flex-end; justify-content:center}
-.au-bottles img{width:clamp(52px,8vw,88px); margin-inline:-9px; filter:drop-shadow(0 14px 16px rgba(59,4,8,.22)); transition:transform .5s var(--au-ease)}
+.au-packs__visual{position:relative; aspect-ratio:1/1; border-radius:clamp(20px,3vw,30px); overflow:hidden; background:#fff}
+.au-sec .au-packs__visual img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.au-packs__visual .au-gift{z-index:2}
 .au-gift{position:absolute; top:1rem; right:1rem; background:#fff; border-radius:999px; padding:.4rem .9rem; font-size:.78rem; font-weight:700; color:#3B0408}
 .au-gift[hidden]{display:none}
 .au-packs__info{display:grid; gap:.7rem}

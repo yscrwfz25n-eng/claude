@@ -55,7 +55,6 @@
 
         {%- if is_promo and has_packs -%}
           <div class="au-card au-pdp__packs" data-au-packs>
-            <div data-au-bottles data-img="" hidden></div>
             <span class="au-gift au-pdp__gift" data-au-gift hidden></span>
             <div class="au-seg" role="group" aria-label="Cantidad de unidades">
               {%- for block in section.blocks -%}
@@ -77,6 +76,7 @@
                     {% if qty > 1 and off > 0 %}data-compare="{{ compare_cents | money_without_trailing_zeros }}" data-off="{{ off }}" data-unit="{{ unit_cents | money_without_trailing_zeros }}"{% endif %}
                     data-ship="{{ block.settings.shipping | escape }}" data-tag="{{ block.settings.badge | escape }}"
                     data-gift="{{ block.settings.gift | escape }}" data-cta="{{ cta }}" data-default="{{ block.settings.default }}"
+                    data-img="{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 1200 }}{% endif %}"
                     aria-pressed="false">{{ qty }} u</button>
                 {%- endif -%}
               {%- endfor -%}
@@ -127,29 +127,129 @@
   "name": "Aurum · Producto",
   "tag": "div",
   "settings": [
-    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula", "default": "start",
-      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
-    { "type": "text", "id": "eyebrow", "label": "Etiqueta sobre el título", "default": "Hecho en Argentina" },
-    { "type": "product", "id": "promo_product", "label": "Producto con selector de promos", "info": "En este producto se muestran las promos de abajo. En los demás, cantidad y botón." },
-    { "type": "text", "id": "trust", "label": "Texto debajo de los botones", "default": "Envío gratis desde $39.999 · 3 cuotas sin interés · Mercado Pago" }
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula",
+      "default": "start",
+      "options": [
+        {
+          "value": "start",
+          "label": "Inicio"
+        },
+        {
+          "value": "middle",
+          "label": "Medio"
+        },
+        {
+          "value": "end",
+          "label": "Final"
+        },
+        {
+          "value": "single",
+          "label": "Cápsula sola"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etiqueta sobre el título",
+      "default": "Hecho en Argentina"
+    },
+    {
+      "type": "product",
+      "id": "promo_product",
+      "label": "Producto con selector de promos",
+      "info": "En este producto se muestran las promos de abajo. En los demás, cantidad y botón."
+    },
+    {
+      "type": "text",
+      "id": "trust",
+      "label": "Texto debajo de los botones",
+      "default": "Envío gratis desde $39.999 · 3 cuotas sin interés · Mercado Pago"
+    }
   ],
   "blocks": [
-    { "type": "pack", "name": "Promo",
+    {
+      "type": "pack",
+      "name": "Promo",
       "settings": [
-        { "type": "range", "id": "quantity", "label": "Unidades", "min": 1, "max": 6, "step": 1, "default": 1 },
-        { "type": "number", "id": "price", "label": "Precio final (en pesos, sin puntos)", "default": 39999, "info": "Tiene que coincidir con tu descuento automático." },
-        { "type": "text", "id": "badge", "label": "Etiqueta (opcional)" },
-        { "type": "text", "id": "shipping", "label": "Envío y regalos", "default": "Envío gratis a sucursal" },
-        { "type": "text", "id": "gift", "label": "Regalo (opcional)" },
-        { "type": "checkbox", "id": "default", "label": "Elegida de entrada", "default": false }
-      ] },
-    { "type": "faq", "name": "Pregunta frecuente",
+        {
+          "type": "range",
+          "id": "quantity",
+          "label": "Unidades",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "number",
+          "id": "price",
+          "label": "Precio final (en pesos, sin puntos)",
+          "default": 39999,
+          "info": "Tiene que coincidir con tu descuento automático."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen de la promo (cuadrada 1:1)",
+          "info": "Ej.: la foto con 3 frascos y la mascarilla. Si la dejás vacía, se usa la foto principal del producto."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Etiqueta (opcional)"
+        },
+        {
+          "type": "text",
+          "id": "shipping",
+          "label": "Envío y regalos",
+          "default": "Envío gratis a sucursal"
+        },
+        {
+          "type": "text",
+          "id": "gift",
+          "label": "Regalo (opcional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "default",
+          "label": "Elegida de entrada",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Pregunta frecuente",
       "settings": [
-        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuánto tarda el envío?" },
-        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Despachamos en 24 h hábiles.</p>" },
-        { "type": "text", "id": "only_handle", "label": "Mostrar solo en el producto (opcional)", "info": "El final del link del producto, ej.: mousse-autobronceante. Vacío = en todos." }
-      ] }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pregunta",
+          "default": "¿Cuánto tarda el envío?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Respuesta",
+          "default": "<p>Despachamos en 24 h hábiles.</p>"
+        },
+        {
+          "type": "text",
+          "id": "only_handle",
+          "label": "Mostrar solo en el producto (opcional)",
+          "info": "El final del link del producto, ej.: mousse-autobronceante. Vacío = en todos."
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Aurum · Producto" } ]
+  "presets": [
+    {
+      "name": "Aurum · Producto"
+    }
+  ]
 }
 {% endschema %}

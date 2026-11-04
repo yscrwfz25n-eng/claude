@@ -21,10 +21,11 @@
         const gift = q('[data-au-gift]'); gift.hidden = !d.gift; gift.textContent = d.gift || '';
         q('[data-au-qty]').value = d.qty;
         q('[data-au-cta]').textContent = d.cta;
-        const bottles = q('[data-au-bottles]'), img = bottles.dataset.img;
-        if (img) {
-          bottles.innerHTML = Array.from({length: +d.qty}, () => `<img src="${img}" alt="" width="120" height="260" loading="lazy">`).join('');
-          if (!reduce) $$('img', bottles).forEach((el, i) => el.animate([{transform: 'translateY(30px)'}, {transform: 'none'}], {duration: 500, delay: i * 60, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards'}));
+        /* imagen 1:1 de la promo: en la sección Promos, o en la foto principal de la página de producto */
+        const target = q('[data-au-packimg]') || box.closest('.au-pdp')?.querySelector('[data-au-main]');
+        if (target && d.img && target.getAttribute('src') !== d.img) {
+          target.src = d.img;
+          if (!reduce) target.animate([{opacity: .3, transform: 'scale(.97)'}, {opacity: 1, transform: 'none'}], {duration: 450, easing: 'cubic-bezier(.22,.8,.2,1)'});
         }
       };
       btns.forEach(b => b.addEventListener('click', () => set(b)));
