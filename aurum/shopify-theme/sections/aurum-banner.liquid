@@ -17,7 +17,7 @@
       {%- endif -%}
     </div>
     {%- if section.settings.button_label != blank -%}
-      <a class="au-btn au-btn--glass" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label }}</a>
+      <a class="au-btn au-btn--glass" href="{{ section.settings.button_link | default: '#kits' }}">{{ section.settings.button_label }}</a>
     {%- endif -%}
   </div>
   <div style="height:clamp(1.6rem,3vw,2.4rem)"></div>
@@ -73,12 +73,13 @@
       "type": "text",
       "id": "button_label",
       "label": "Botón sobre la foto",
-      "default": "Comprar resaltador"
+      "default": "Ver kits"
     },
     {
       "type": "url",
       "id": "button_link",
-      "label": "Link del botón"
+      "label": "Link del botón",
+      "info": "Si lo dejás vacío, lleva a la sección Kits."
     },
     {
       "type": "checkbox",

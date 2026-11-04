@@ -46,6 +46,9 @@ body.aurum-night{
 .au-btn--pink{background:var(--au-pink); color:var(--au-wine)!important}
 .au-btn--pink:hover{background:var(--au-pink-2)}
 .au-btn--wine{background:var(--au-wine); color:var(--au-pink)!important}
+.au-btn--outline{background:transparent; color:var(--au-pink)!important; box-shadow:inset 0 0 0 2px var(--au-pink)}
+.au-btn--outline:hover{background:var(--au-pink); color:var(--au-wine)!important}
+html:has(.au-sec), body:has(.au-sec){overflow-x:clip}
 .au-btn--glass{background:var(--au-glass); color:#FCE4E3!important; backdrop-filter:blur(12px) saturate(1.2); -webkit-backdrop-filter:blur(12px) saturate(1.2); border:1px solid rgba(252,228,227,.35); box-shadow:0 10px 24px rgba(0,0,0,.18)}
 
 /* Destellos junto a los títulos */
@@ -92,7 +95,7 @@ body.aurum-night{
 .au-packs__visual{position:relative; border-radius:clamp(20px,3vw,30px); background:radial-gradient(circle at 50% 62%,#fff,#FBE3E2 70%); min-height:clamp(240px,30vw,330px); display:flex; align-items:flex-end; justify-content:center; padding:2.2rem 1rem 1.4rem}
 .au-bottles{display:flex; align-items:flex-end; justify-content:center}
 .au-bottles img{width:clamp(52px,8vw,88px); margin-inline:-9px; filter:drop-shadow(0 14px 16px rgba(59,4,8,.22)); transition:transform .5s var(--au-ease)}
-.au-gift{position:absolute; top:1rem; right:1rem; background:#fff; border-radius:999px; padding:.4rem .9rem; font-size:.78rem; font-weight:700; color:var(--au-wine)}
+.au-gift{position:absolute; top:1rem; right:1rem; background:#fff; border-radius:999px; padding:.4rem .9rem; font-size:.78rem; font-weight:700; color:#3B0408}
 .au-gift[hidden]{display:none}
 .au-packs__info{display:grid; gap:.7rem}
 .au-seg{display:inline-flex; justify-self:start; flex-wrap:wrap; background:rgba(252,228,227,.12); border-radius:999px; padding:4px; gap:3px}
