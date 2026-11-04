@@ -43,7 +43,7 @@
         <img src="{{ 'aurum-cinta.jpg' | asset_url }}" width="1200" height="861" alt="Pierna con Aurum y una franja sin producto donde estaba la cinta" loading="lazy">
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
-        <a class="au-btn au-btn--glass" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label }}</a>
+        <a class="au-btn au-btn--glass" href="{{ section.settings.button_link | default: '#promos' }}">{{ section.settings.button_label }}</a>
       {%- endif -%}
     </div>
   </div>

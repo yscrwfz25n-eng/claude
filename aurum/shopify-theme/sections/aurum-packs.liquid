@@ -1,5 +1,5 @@
 {%- comment -%}
-  Aurum · Selector de promos. Cada bloque es una promo (cantidad + precio final).
+  Aurum · Promos. Cada bloque es una promo (cantidad + precio final).
   El precio tachado se calcula solo: precio de la unidad del producto × cantidad.
   El botón suma esa cantidad al carrito; el descuento lo aplica Shopify con tus descuentos automáticos.
 {%- endcomment -%}
@@ -63,7 +63,7 @@
 
 {% schema %}
 {
-  "name": "Aurum · Selector de promos",
+  "name": "Aurum · Promos",
   "tag": "div",
   "settings": [
     { "type": "select", "id": "capsule", "label": "Lugar en la cápsula bordó", "default": "middle",
@@ -85,7 +85,7 @@
         { "type": "checkbox", "id": "default", "label": "Elegida de entrada", "default": false }
       ] }
   ],
-  "presets": [ { "name": "Aurum · Selector de promos",
+  "presets": [ { "name": "Aurum · Promos",
     "blocks": [
       { "type": "pack", "settings": { "quantity": 1, "price": 39999, "shipping": "Envío gratis a sucursal" } },
       { "type": "pack", "settings": { "quantity": 2, "price": 54900, "shipping": "Envío gratis a domicilio" } },
