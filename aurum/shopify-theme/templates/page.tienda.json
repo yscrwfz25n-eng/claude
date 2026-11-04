@@ -1,0 +1,87 @@
+{
+  "sections": {
+    "tienda_promos": {
+      "type": "aurum-packs",
+      "blocks": {
+        "b1": {
+          "type": "pack",
+          "settings": {
+            "quantity": 1,
+            "price": 39999,
+            "shipping": "Envío gratis a sucursal"
+          }
+        },
+        "b2": {
+          "type": "pack",
+          "settings": {
+            "quantity": 2,
+            "price": 54900,
+            "shipping": "Envío gratis a domicilio"
+          }
+        },
+        "b3": {
+          "type": "pack",
+          "settings": {
+            "quantity": 3,
+            "price": 67900,
+            "badge": "Recomendado",
+            "shipping": "Envío gratis a domicilio + Mascarilla Fresh Mix de regalo",
+            "gift": "Mascarilla de regalo",
+            "default": true
+          }
+        },
+        "b4": {
+          "type": "pack",
+          "settings": {
+            "quantity": 4,
+            "price": 79900,
+            "badge": "Mejor precio",
+            "shipping": "Envío gratis a domicilio + Mascarilla y Bálsamo de regalo",
+            "gift": "Mascarilla y bálsamo de regalo"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "capsule": "start",
+        "heading": "Resaltador de bronceado",
+        "product": "mousse-autobronceante",
+        "text": "<p>Glow dorado al instante, sin sol. Cuantas más unidades, menos pagás cada una.</p>"
+      }
+    },
+    "tienda_productos": {
+      "type": "aurum-products",
+      "settings": {
+        "capsule": "middle",
+        "heading": "Productos",
+        "layout": "grid",
+        "show": "products",
+        "anchor": "productos",
+        "limit": 24,
+        "text": "<p>Cosmética hecha en Argentina, con activos botánicos.</p>"
+      }
+    },
+    "tienda_kits": {
+      "type": "aurum-products",
+      "settings": {
+        "capsule": "end",
+        "heading": "Kits",
+        "layout": "grid",
+        "show": "kits",
+        "anchor": "kits",
+        "limit": 24,
+        "text": "<p>Novedades + Resaltador, con hasta 21% de ahorro y envío gratis.</p>"
+      }
+    }
+  },
+  "order": [
+    "tienda_promos",
+    "tienda_productos",
+    "tienda_kits"
+  ]
+}
