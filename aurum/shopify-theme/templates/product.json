@@ -1,0 +1,133 @@
+{
+  "sections": {
+    "main": {
+      "type": "aurum-product",
+      "blocks": {
+        "pack1": {
+          "type": "pack",
+          "settings": {
+            "quantity": 1,
+            "price": 39999,
+            "shipping": "Envío gratis a sucursal"
+          }
+        },
+        "pack2": {
+          "type": "pack",
+          "settings": {
+            "quantity": 2,
+            "price": 54900,
+            "shipping": "Envío gratis a domicilio"
+          }
+        },
+        "pack3": {
+          "type": "pack",
+          "settings": {
+            "quantity": 3,
+            "price": 67900,
+            "badge": "Recomendado",
+            "shipping": "Envío gratis a domicilio + Mascarilla Fresh Mix de regalo",
+            "gift": "Mascarilla de regalo",
+            "default": true
+          }
+        },
+        "pack4": {
+          "type": "pack",
+          "settings": {
+            "quantity": 4,
+            "price": 79900,
+            "badge": "Mejor precio",
+            "shipping": "Envío gratis a domicilio + Mascarilla y Bálsamo de regalo",
+            "gift": "Mascarilla y bálsamo de regalo"
+          }
+        },
+        "faq1": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Es autobronceante?",
+            "answer": "<p>No. Es un pigmento iluminador: el color aparece al instante y lo que ves cuando lo aplicás es lo que queda. No tiñe la piel.</p>",
+            "only_handle": "mousse-autobronceante"
+          }
+        },
+        "faq2": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Cuánto dura?",
+            "answer": "<p>Hasta tu próximo baño. Se va con agua y jabón, así que lo usás solo cuando lo necesitás.</p>",
+            "only_handle": "mousse-autobronceante"
+          }
+        },
+        "faq3": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Resiste el agua o el sudor?",
+            "answer": "<p>No. Su fórmula es hidrosoluble: se va con agua. Es ideal para salidas, fiestas, eventos y fotos.</p>",
+            "only_handle": "mousse-autobronceante"
+          }
+        },
+        "faq4": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Cómo se aplica?",
+            "answer": "<p>Sobre la piel limpia y seca, con movimientos circulares hasta emparejar. Dejá que se absorba unos minutos antes de vestirte.</p>",
+            "only_handle": "mousse-autobronceante"
+          }
+        },
+        "faq5": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Protege del sol?",
+            "answer": "<p>No. Usalo siempre junto con tu protector solar.</p>",
+            "only_handle": "mousse-autobronceante"
+          }
+        },
+        "faq6": {
+          "type": "faq",
+          "settings": {
+            "question": "Envíos",
+            "answer": "<p>Despachamos en 24 h hábiles a todo el país. Envío gratis a sucursal desde $39.999 y a domicilio desde $54.900.</p>",
+            "only_handle": ""
+          }
+        },
+        "faq7": {
+          "type": "faq",
+          "settings": {
+            "question": "Medios de pago",
+            "answer": "<p>Mercado Pago (dinero en cuenta), tarjetas de crédito y débito, y 3 cuotas sin interés.</p>",
+            "only_handle": ""
+          }
+        }
+      },
+      "block_order": [
+        "pack1",
+        "pack2",
+        "pack3",
+        "pack4",
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4",
+        "faq5",
+        "faq6",
+        "faq7"
+      ],
+      "settings": {
+        "capsule": "start",
+        "promo_product": "mousse-autobronceante"
+      }
+    },
+    "completa": {
+      "type": "aurum-products",
+      "settings": {
+        "capsule": "end",
+        "heading": "Completá tu glow",
+        "layout": "rail",
+        "show": "kits",
+        "text": "<p>Kits con novedades y hasta 21% de ahorro.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "completa"
+  ]
+}

@@ -107,7 +107,19 @@
     requestAnimationFrame(tick);
   }
 
-  function init(root = document) { initPacks(root); initRails(root); initReveal(root); }
+  /* ---------- Galería de producto: miniaturas ---------- */
+  function initGallery(root) {
+    $$('[data-au-gallery]', root).forEach(g => {
+      if (g.dataset.ready) return; g.dataset.ready = '1';
+      const main = g.querySelector('[data-au-main]');
+      $$('.au-pdp__thumb', g).forEach(t => t.addEventListener('click', () => {
+        if (main) main.src = t.dataset.src;
+        $$('.au-pdp__thumb', g).forEach(x => x.removeAttribute('aria-current')); t.setAttribute('aria-current', 'true');
+      }));
+    });
+  }
+
+  function init(root = document) { initPacks(root); initRails(root); initReveal(root); initGallery(root); }
   document.addEventListener('DOMContentLoaded', () => { init(); popLoop(); starLoop(); });
   /* En el editor de temas, las secciones se recargan solas: se vuelven a iniciar */
   document.addEventListener('shopify:section:load', e => init(e.target));

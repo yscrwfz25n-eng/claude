@@ -1,0 +1,155 @@
+{%- comment -%}
+  Aurum · Producto: página de producto con galería 1:1, precio, selector de promos (solo para el producto elegido),
+  botones de compra, descripción y preguntas frecuentes.
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign is_promo = false
+  if section.settings.promo_product != blank and section.settings.promo_product.id == product.id
+    assign is_promo = true
+  endif
+  assign has_packs = false
+  for block in section.blocks
+    if block.type == 'pack'
+      assign has_packs = true
+    endif
+  endfor
+-%}
+<section class="au-sec au-sec--{{ section.settings.capsule }}">
+  <div class="au-pdp">
+    <div class="au-pdp__gallery" data-au-gallery>
+      <div class="au-pdp__main">
+        {%- if product.featured_media -%}
+          <img data-au-main src="{{ product.featured_media | image_url: width: 1200 }}" width="1200" height="1200" alt="{{ product.featured_media.alt | default: product.title | escape }}" loading="eager">
+        {%- else -%}
+          <span class="au-prod__nophoto">{{ product.title }}</span>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="au-pdp__thumbs">
+          {%- for media in product.media -%}
+            {%- if media.media_type == 'image' -%}
+              <button type="button" class="au-pdp__thumb" data-src="{{ media | image_url: width: 1200 }}" aria-label="Ver imagen {{ forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
+                <img src="{{ media | image_url: width: 200 }}" width="100" height="100" alt="" loading="lazy">
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="au-pdp__info">
+      {%- if section.settings.eyebrow != blank -%}<span class="au-tag" style="justify-self:start">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 class="au-pdp__title">{{ product.title | split: ' · ' | first }}</h1>
+
+      {%- form 'product', product, class: 'au-pform' -%}
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        {%- unless product.has_only_default_variant -%}
+          <label class="au-small" for="au-variant-{{ section.id }}">{{ product.options.first }}</label>
+          <select id="au-variant-{{ section.id }}" class="au-select" onchange="this.form.id.value=this.value">
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}" {% if v == variant %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }}{% unless v.available %} · sin stock{% endunless %}</option>
+            {%- endfor -%}
+          </select>
+        {%- endunless -%}
+
+        {%- if is_promo and has_packs -%}
+          <div class="au-card au-pdp__packs" data-au-packs>
+            <div data-au-bottles data-img="" hidden></div>
+            <span class="au-gift au-pdp__gift" data-au-gift hidden></span>
+            <div class="au-seg" role="group" aria-label="Cantidad de unidades">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'pack' -%}
+                  {%- liquid
+                    assign qty = block.settings.quantity
+                    assign price_cents = block.settings.price | times: 100
+                    assign compare_cents = product.price | times: qty
+                    assign off = compare_cents | minus: price_cents | times: 100 | divided_by: compare_cents
+                    assign unit_cents = price_cents | divided_by: qty
+                    if qty == 1
+                      assign cta = 'Agregar 1 unidad'
+                    else
+                      assign cta = 'Agregar ' | append: qty | append: ' unidades'
+                    endif
+                  -%}
+                  <button type="button" {{ block.shopify_attributes }} data-pack
+                    data-qty="{{ qty }}" data-price="{{ price_cents | money_without_trailing_zeros }}"
+                    {% if qty > 1 and off > 0 %}data-compare="{{ compare_cents | money_without_trailing_zeros }}" data-off="{{ off }}" data-unit="{{ unit_cents | money_without_trailing_zeros }}"{% endif %}
+                    data-ship="{{ block.settings.shipping | escape }}" data-tag="{{ block.settings.badge | escape }}"
+                    data-gift="{{ block.settings.gift | escape }}" data-cta="{{ cta }}" data-default="{{ block.settings.default }}"
+                    aria-pressed="false">{{ qty }} u</button>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <span class="au-tag" data-au-tag hidden></span>
+            <div class="au-big" data-au-price>{{ product.price | money_without_trailing_zeros }}</div>
+            <div class="au-old" data-au-old></div>
+            <div class="au-small" data-au-unit></div>
+            <div class="au-ship" data-au-ship></div>
+            <input type="hidden" name="quantity" value="1" data-au-qty>
+            <button type="submit" class="au-btn au-btn--wine" data-au-cta {% unless variant.available %}disabled{% endunless %}>Agregar al carrito</button>
+          </div>
+        {%- else -%}
+          <div class="au-pdp__price">
+            {{ product.price | money_without_trailing_zeros }}
+            {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money_without_trailing_zeros }}</s>{%- endif -%}
+          </div>
+          <div class="au-pdp__buy">
+            <label class="au-qty"><span class="au-small">Cantidad</span><input type="number" name="quantity" value="1" min="1" max="10"></label>
+            <button type="submit" class="au-btn au-btn--wine" {% unless variant.available %}disabled{% endunless %}>
+              {%- if variant.available -%}Agregar al carrito{%- else -%}Sin stock{%- endif -%}
+            </button>
+          </div>
+        {%- endif -%}
+        <div class="au-pdp__dynamic">{{ form | payment_button }}</div>
+      {%- endform -%}
+
+      {%- if section.settings.trust != blank -%}<p class="au-small">{{ section.settings.trust }}</p>{%- endif -%}
+
+      <div class="au-acc">
+        {%- if product.description != blank -%}
+          <details open><summary>Descripción</summary><div class="au-rte">{{ product.description }}</div></details>
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            {%- if block.settings.only_handle == blank or block.settings.only_handle == product.handle -%}
+              <details {{ block.shopify_attributes }}><summary>{{ block.settings.question }}</summary><div class="au-rte">{{ block.settings.answer }}</div></details>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Aurum · Producto",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula", "default": "start",
+      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta sobre el título", "default": "Hecho en Argentina" },
+    { "type": "product", "id": "promo_product", "label": "Producto con selector de promos", "info": "En este producto se muestran las promos de abajo. En los demás, cantidad y botón." },
+    { "type": "text", "id": "trust", "label": "Texto debajo de los botones", "default": "Envío gratis desde $39.999 · 3 cuotas sin interés · Mercado Pago" }
+  ],
+  "blocks": [
+    { "type": "pack", "name": "Promo",
+      "settings": [
+        { "type": "range", "id": "quantity", "label": "Unidades", "min": 1, "max": 6, "step": 1, "default": 1 },
+        { "type": "number", "id": "price", "label": "Precio final (en pesos, sin puntos)", "default": 39999, "info": "Tiene que coincidir con tu descuento automático." },
+        { "type": "text", "id": "badge", "label": "Etiqueta (opcional)" },
+        { "type": "text", "id": "shipping", "label": "Envío y regalos", "default": "Envío gratis a sucursal" },
+        { "type": "text", "id": "gift", "label": "Regalo (opcional)" },
+        { "type": "checkbox", "id": "default", "label": "Elegida de entrada", "default": false }
+      ] },
+    { "type": "faq", "name": "Pregunta frecuente",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuánto tarda el envío?" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Despachamos en 24 h hábiles.</p>" },
+        { "type": "text", "id": "only_handle", "label": "Mostrar solo en el producto (opcional)", "info": "El final del link del producto, ej.: mousse-autobronceante. Vacío = en todos." }
+      ] }
+  ],
+  "presets": [ { "name": "Aurum · Producto" } ]
+}
+{% endschema %}
