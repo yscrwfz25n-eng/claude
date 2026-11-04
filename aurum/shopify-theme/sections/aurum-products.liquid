@@ -1,0 +1,67 @@
+{%- comment -%} Aurum · Productos: muestra una colección en carrusel o grilla, con etiqueta "Nuevo" y botón para sumar al carrito {%- endcomment -%}
+{%- assign collection = section.settings.collection -%}
+<section class="au-sec au-sec--{{ section.settings.capsule }}" id="{{ section.settings.anchor | default: section.id }}">
+  <div class="au-head au-reveal">
+    {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+  </div>
+
+  {%- if collection == blank -%}
+    <p class="au-small" style="text-align:center">Elegí una colección en la configuración de esta sección.</p>
+  {%- else -%}
+    <ul class="{% if section.settings.layout == 'grid' %}au-grid{% else %}au-rail{% endif %}" {% if section.settings.layout != 'grid' %}data-au-rail{% endif %}>
+      {%- for product in collection.products limit: section.settings.limit -%}
+        {%- assign v = product.selected_or_first_available_variant -%}
+        <li class="au-prod au-reveal">
+          <a class="au-prod__media" href="{{ product.url }}">
+            {%- if product.tags contains 'nuevo' -%}<span class="au-badge">Nuevo</span>{%- endif -%}
+            {%- if product.featured_media -%}
+              {{ product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '250px', alt: product.title }}
+            {%- endif -%}
+          </a>
+          <div class="au-prod__meta">
+            <div>
+              <a class="au-prod__title" href="{{ product.url }}">{{ product.title | split: ' · ' | first }}</a>
+              <span class="au-prod__price">{{ product.price | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</span>
+            </div>
+            {%- if section.settings.quick_add and product.has_only_default_variant and v.available -%}
+              <form method="post" action="{{ routes.cart_add_url }}">
+                <input type="hidden" name="id" value="{{ v.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="au-prod__add">Sumar</button>
+              </form>
+            {%- else -%}
+              <a class="au-prod__add" href="{{ product.url }}" style="text-decoration:none">Ver</a>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.layout != 'grid' -%}
+      <div class="au-nav">
+        <button class="au-round" type="button" data-au-prev aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="au-round" type="button" data-au-next aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Aurum · Productos",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula bordó", "default": "middle",
+      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Nuevo en Aurum" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cosmética hecha en Argentina, con activos botánicos.</p>" },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "select", "id": "layout", "label": "Diseño", "default": "rail",
+      "options": [ { "value": "rail", "label": "Carrusel" }, { "value": "grid", "label": "Grilla" } ] },
+    { "type": "range", "id": "limit", "label": "Cantidad de productos", "min": 2, "max": 24, "step": 1, "default": 12 },
+    { "type": "checkbox", "id": "quick_add", "label": "Botón para sumar al carrito", "default": true },
+    { "type": "text", "id": "anchor", "label": "Nombre del ancla (para links)", "info": "Ej.: kits → se puede enlazar con #kits" }
+  ],
+  "presets": [ { "name": "Aurum · Productos" } ]
+}
+{% endschema %}

@@ -1,0 +1,96 @@
+{%- comment -%}
+  Aurum · Selector de promos. Cada bloque es una promo (cantidad + precio final).
+  El precio tachado se calcula solo: precio de la unidad del producto × cantidad.
+  El botón suma esa cantidad al carrito; el descuento lo aplica Shopify con tus descuentos automáticos.
+{%- endcomment -%}
+{%- assign product = section.settings.product -%}
+<section class="au-sec au-sec--{{ section.settings.capsule }}" id="promos">
+  <div class="au-head au-reveal">
+    {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+  </div>
+
+  {%- if product == blank -%}
+    <p class="au-small" style="text-align:center">Elegí el producto en la configuración de esta sección.</p>
+  {%- else -%}
+    {%- assign variant = product.selected_or_first_available_variant -%}
+    <div class="au-card au-packs au-reveal" data-au-packs>
+      <div class="au-packs__visual">
+        <span class="au-gift" data-au-gift hidden></span>
+        <div class="au-bottles" data-au-bottles data-img="{% if section.settings.bottle != blank %}{{ section.settings.bottle | image_url: width: 240 }}{% endif %}"></div>
+      </div>
+      <div class="au-packs__info">
+        <div class="au-seg" role="group" aria-label="Cantidad de unidades">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign qty = block.settings.quantity
+              assign price_cents = block.settings.price | times: 100
+              assign compare_cents = product.price | times: qty
+              assign off = compare_cents | minus: price_cents | times: 100 | divided_by: compare_cents
+              assign unit_cents = price_cents | divided_by: qty
+              if qty == 1
+                assign cta = 'Comprar 1 unidad'
+              else
+                assign cta = 'Comprar ' | append: qty | append: ' unidades'
+              endif
+            -%}
+            <button type="button" {{ block.shopify_attributes }} data-pack
+              data-qty="{{ qty }}" data-price="{{ price_cents | money }}"
+              {% if qty > 1 and off > 0 %}data-compare="{{ compare_cents | money }}" data-off="{{ off }}" data-unit="{{ unit_cents | money }}"{% endif %}
+              data-ship="{{ block.settings.shipping | escape }}" data-tag="{{ block.settings.badge | escape }}"
+              data-gift="{{ block.settings.gift | escape }}" data-cta="{{ cta }}" data-default="{{ block.settings.default }}"
+              aria-pressed="false">{{ qty }} u</button>
+          {%- endfor -%}
+        </div>
+        <span class="au-tag" data-au-tag hidden></span>
+        <div class="au-big" data-au-price>{{ product.price | money }}</div>
+        <div class="au-old" data-au-old></div>
+        <div class="au-small" data-au-unit></div>
+        <div class="au-ship" data-au-ship></div>
+        <form method="post" action="{{ routes.cart_add_url }}" style="display:grid; gap:.6rem; justify-items:start">
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <input type="hidden" name="quantity" value="1" data-au-qty>
+          <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+          <button type="submit" class="au-btn au-btn--wine" data-au-cta {% unless variant.available %}disabled{% endunless %}>
+            {%- if variant.available -%}Comprar{%- else -%}Sin stock{%- endif -%}
+          </button>
+        </form>
+        {%- if section.settings.note != blank -%}<span class="au-small">{{ section.settings.note }}</span>{%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Aurum · Selector de promos",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula bordó", "default": "middle",
+      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Elegí tu promo" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cuantas más unidades, menos pagás cada una. Con 3 y 4 unidades te regalamos productos de la línea.</p>" },
+    { "type": "product", "id": "product", "label": "Producto (Resaltador de bronceado)" },
+    { "type": "image_picker", "id": "bottle", "label": "Frasco para el dibujo de cantidades", "info": "PNG con fondo transparente del resaltador." },
+    { "type": "text", "id": "note", "label": "Nota debajo del botón", "default": "3 cuotas sin interés · Mercado Pago o tarjeta" }
+  ],
+  "blocks": [
+    { "type": "pack", "name": "Promo",
+      "settings": [
+        { "type": "range", "id": "quantity", "label": "Unidades", "min": 1, "max": 6, "step": 1, "default": 1 },
+        { "type": "number", "id": "price", "label": "Precio final de la promo (en pesos, sin puntos)", "default": 39999, "info": "Tiene que coincidir con tu descuento automático de Shopify." },
+        { "type": "text", "id": "badge", "label": "Etiqueta (opcional)", "info": "Ej.: Recomendado, Mejor precio" },
+        { "type": "text", "id": "shipping", "label": "Envío y regalos", "default": "Envío gratis a sucursal" },
+        { "type": "text", "id": "gift", "label": "Regalo (aparece sobre el dibujo)", "info": "Ej.: Mascarilla de regalo" },
+        { "type": "checkbox", "id": "default", "label": "Elegida de entrada", "default": false }
+      ] }
+  ],
+  "presets": [ { "name": "Aurum · Selector de promos",
+    "blocks": [
+      { "type": "pack", "settings": { "quantity": 1, "price": 39999, "shipping": "Envío gratis a sucursal" } },
+      { "type": "pack", "settings": { "quantity": 2, "price": 54900, "shipping": "Envío gratis a domicilio" } },
+      { "type": "pack", "settings": { "quantity": 3, "price": 67900, "badge": "Recomendado", "shipping": "Envío gratis a domicilio + Mascarilla Fresh Mix de regalo", "gift": "Mascarilla de regalo", "default": true } },
+      { "type": "pack", "settings": { "quantity": 4, "price": 79900, "badge": "Mejor precio", "shipping": "Envío gratis a domicilio + Mascarilla y Bálsamo de regalo", "gift": "Mascarilla y bálsamo de regalo" } }
+    ] } ]
+}
+{% endschema %}

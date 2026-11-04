@@ -1,0 +1,43 @@
+{%- comment -%} Aurum · Hero: foto en píldora, título grande, texto, botón y productos que salen del marco {%- endcomment -%}
+<section class="au-sec au-sec--{{ section.settings.capsule }}">
+  {%- if section.settings.pop_top != blank -%}
+    <img class="au-pop au-pop--top" src="{{ section.settings.pop_top | image_url: width: 300 }}" width="150" height="{{ 150 | divided_by: section.settings.pop_top.aspect_ratio | round }}" alt="" data-rotate="{{ section.settings.pop_top_rotate }}" style="transform: rotate({{ section.settings.pop_top_rotate }}deg)">
+  {%- endif -%}
+  <div class="au-hero">
+    {%- if section.settings.image != blank -%}
+      <div class="au-window">{{ section.settings.image | image_url: width: 900 | image_tag: loading: 'eager', sizes: '400px' }}</div>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h1 class="{% if section.settings.twinkle %}au-twinkle{% endif %}">{{ section.settings.heading | newline_to_br }}</h1>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="au-btn au-btn--pink" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+  {%- if section.settings.pop_bottom != blank -%}
+    <img class="au-pop au-pop--bottom" src="{{ section.settings.pop_bottom | image_url: width: 400 }}" width="200" height="{{ 200 | divided_by: section.settings.pop_bottom.aspect_ratio | round }}" alt="" loading="lazy" data-rotate="{{ section.settings.pop_bottom_rotate }}" style="transform: rotate({{ section.settings.pop_bottom_rotate }}deg)">
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Aurum · Hero",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula bordó", "default": "start",
+      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
+    { "type": "image_picker", "id": "pop_top", "label": "Producto que entra por arriba", "info": "PNG con fondo transparente. Ej.: el lip oil." },
+    { "type": "range", "id": "pop_top_rotate", "label": "Giro del producto de arriba", "min": -180, "max": 180, "step": 5, "unit": "°", "default": 180 },
+    { "type": "image_picker", "id": "image", "label": "Foto en píldora" },
+    { "type": "textarea", "id": "heading", "label": "Título", "default": "Tu glow,\nal instante" },
+    { "type": "checkbox", "id": "twinkle", "label": "Destellos junto al título", "default": true },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>El Resaltador de bronceado Aurum le da a tu piel un tono dorado en el momento, sin sol y sin esperar, con <strong>envío gratis a todo el país</strong>.</p><p>Es pigmento iluminador, no autobronceante: se va con agua y jabón.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Quiero mi glow" },
+    { "type": "url", "id": "button_link", "label": "Link del botón" },
+    { "type": "image_picker", "id": "pop_bottom", "label": "Producto que sale por abajo", "info": "PNG con fondo transparente. Ej.: el resaltador." },
+    { "type": "range", "id": "pop_bottom_rotate", "label": "Giro del producto de abajo", "min": -180, "max": 180, "step": 5, "unit": "°", "default": 50 }
+  ],
+  "presets": [ { "name": "Aurum · Hero" } ]
+}
+{% endschema %}

@@ -1,0 +1,150 @@
+/* Aurum Skin · estilos de las secciones "Aurum" (pink dark) */
+:root{
+  --au-pink:#F9D4D3; --au-pink-2:#F3C3C2; --au-pink-ink:#FCE4E3;
+  --au-wine:#3B0408; --au-wine-2:#5A0B12; --au-ink:#2B0A0C; --au-muted:#7A4A4C;
+  --au-glass:rgba(249,212,211,.22);
+  --au-font:"Inter Tight","Helvetica Neue",Arial,system-ui,sans-serif;
+  --au-ease:cubic-bezier(.22,.8,.2,1);
+  --au-pad-x:clamp(1rem,4vw,3.2rem);
+}
+
+/* Fondo de noche (solo en la página de inicio, lo activa el snippet aurum-motion) */
+body.aurum-night{
+  background:
+    radial-gradient(640px 420px at 86% 6%, rgba(236,120,150,.30), transparent 70%),
+    radial-gradient(720px 520px at 6% 62%, rgba(236,120,150,.18), transparent 70%),
+    radial-gradient(1.3px 1.3px at 24px 36px, #FFE6EA 50%, transparent 52%),
+    radial-gradient(1px 1px at 132px 88px, #FFE6EA 50%, transparent 52%),
+    radial-gradient(1.6px 1.6px at 206px 158px, #FFFFFF 50%, transparent 52%),
+    radial-gradient(1px 1px at 64px 196px, #FFD9E0 50%, transparent 52%),
+    radial-gradient(1.2px 1.2px at 170px 20px, #FFE6EA 50%, transparent 52%),
+    linear-gradient(180deg, #10020A, #2C0610);
+  background-size:auto,auto,240px 240px,240px 240px,240px 240px,240px 240px,240px 240px,auto;
+  background-attachment:fixed;
+}
+
+/* Cápsula: cada sección es un tramo de la misma cápsula bordó */
+.au-sec{position:relative; max-width:1080px; margin-inline:auto; background:var(--au-wine); color:var(--au-pink-ink);
+  font-family:var(--au-font); padding:clamp(1.6rem,4vw,2.6rem) var(--au-pad-x); box-shadow:-1.5px 0 0 rgba(236,140,165,.55), 1.5px 0 0 rgba(236,140,165,.55)}
+.au-sec--start{border-radius:clamp(36px,7vw,84px) clamp(36px,7vw,84px) 0 0; margin-top:clamp(7rem,13vw,9rem); box-shadow:0 -1.5px 0 rgba(236,140,165,.55), -1.5px 0 0 rgba(236,140,165,.55), 1.5px 0 0 rgba(236,140,165,.55)}
+.au-sec--end{border-radius:0 0 clamp(36px,7vw,84px) clamp(36px,7vw,84px); margin-bottom:clamp(7rem,13vw,9rem); box-shadow:0 1.5px 0 rgba(236,140,165,.55), -1.5px 0 0 rgba(236,140,165,.55), 1.5px 0 0 rgba(236,140,165,.55)}
+.au-sec--single{border-radius:clamp(36px,7vw,84px); margin-block:clamp(7rem,13vw,9rem); box-shadow:0 0 0 1.5px rgba(236,140,165,.55), 0 0 80px rgba(236,120,150,.22)}
+@media (max-width:1112px){ .au-sec{margin-inline:16px} }
+.au-sec *,.au-sec *::before,.au-sec *::after{box-sizing:border-box}
+.au-sec img{max-width:100%; height:auto; display:block}
+.au-sec h1,.au-sec h2,.au-sec h3{font-family:var(--au-font); margin:0; font-weight:700; letter-spacing:-.055em; line-height:.98; text-wrap:balance; color:var(--au-pink)}
+.au-sec p{margin:0}
+.au-sec a{color:inherit}
+
+/* Botones */
+.au-btn{position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; gap:.5em; border:0; cursor:pointer; text-decoration:none; font:700 1.02rem/1 var(--au-font); letter-spacing:-.03em; border-radius:999px; padding:1em 1.8em; transition:transform .35s var(--au-ease), background .3s}
+.au-btn:hover{transform:translateY(-2px)}
+.au-btn::after{content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%); transform:translateX(-120%); animation:au-sheen 4.5s ease-in-out infinite}
+@keyframes au-sheen{0%,60%{transform:translateX(-120%)} 85%,100%{transform:translateX(120%)}}
+.au-btn--pink{background:var(--au-pink); color:var(--au-wine)!important}
+.au-btn--pink:hover{background:#fff}
+.au-btn--wine{background:var(--au-wine); color:var(--au-pink)!important}
+.au-btn--glass{background:var(--au-glass); color:var(--au-pink-ink)!important; backdrop-filter:blur(12px) saturate(1.2); -webkit-backdrop-filter:blur(12px) saturate(1.2); border:1px solid rgba(252,228,227,.35); box-shadow:0 10px 24px rgba(0,0,0,.18)}
+
+/* Destellos junto a los títulos */
+.au-twinkle{position:relative; display:inline-block}
+.au-twinkle::before,.au-twinkle::after{content:""; position:absolute; width:18px; height:18px; background:var(--au-pink); clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%); animation:au-tw 2.6s ease-in-out infinite}
+.au-twinkle::before{left:-28px; top:6%}
+.au-twinkle::after{right:-22px; bottom:8%; width:12px; height:12px; animation-delay:1.3s}
+@keyframes au-tw{0%,100%{transform:scale(.4) rotate(0); opacity:.35} 50%{transform:scale(1) rotate(45deg); opacity:1}}
+
+/* Productos que salen del marco */
+.au-pop{position:absolute; z-index:5; pointer-events:none; filter:drop-shadow(0 22px 26px rgba(0,0,0,.35)); will-change:transform}
+.au-pop--top{left:50%; top:clamp(-9.5rem,-15vw,-7.5rem); width:clamp(58px,7.5vw,86px); translate:-50% 0}
+.au-pop--bottom{right:clamp(-1.5rem,-3vw,-.5rem); bottom:clamp(-9rem,-14vw,-6rem); width:clamp(96px,13vw,150px)}
+
+/* Hero */
+.au-hero{display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center; gap:clamp(1rem,2.4vw,1.5rem)}
+.au-window{width:min(400px,78%); aspect-ratio:2.4/1; border-radius:999px; overflow:hidden; background:var(--au-wine-2)}
+.au-window img{width:100%; height:100%; object-fit:cover}
+.au-hero h1{font-size:clamp(2.9rem,8.4vw,5.8rem); margin-top:.4rem}
+.au-hero .au-rte{max-width:52ch; font-size:clamp(.95rem,1.6vw,1.05rem); opacity:.92}
+.au-rte p + p{margin-top:.8em}
+.au-rte strong{text-decoration:underline; text-underline-offset:3px}
+
+/* Tarjeta rosa con lista + foto */
+.au-card{background:var(--au-pink); color:var(--au-ink); border-radius:clamp(26px,4vw,40px); padding:clamp(1rem,2.4vw,1.5rem)}
+.au-split{display:grid; grid-template-columns:1fr 1.05fr; gap:clamp(1rem,3vw,2rem); align-items:center}
+.au-split__txt{padding:clamp(.4rem,2vw,1.4rem); display:grid; gap:1rem}
+.au-list{list-style:none; margin:0; padding:0; display:grid; gap:.5rem; font-weight:500}
+.au-list li{display:flex; gap:.6rem; align-items:center}
+.au-list svg{width:18px; height:18px; flex:none; color:var(--au-wine)}
+.au-tile{position:relative; border-radius:clamp(20px,3vw,30px); overflow:hidden; aspect-ratio:1/1.08; background:var(--au-wine-2)}
+.au-tile img{width:100%; height:100%; object-fit:cover; transition:transform .9s var(--au-ease)}
+.au-tile:hover img{transform:scale(1.05)}
+.au-tile .au-btn{position:absolute; left:50%; bottom:clamp(.8rem,2vw,1.2rem); translate:-50% 0; white-space:nowrap}
+@media (max-width:720px){ .au-split{grid-template-columns:1fr} }
+
+/* Encabezado de bloque centrado */
+.au-head{display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center; gap:1rem; margin-bottom:clamp(1.2rem,3vw,1.8rem)}
+.au-head h2{font-size:clamp(2.4rem,6.6vw,4.4rem)}
+.au-head .au-rte{max-width:54ch; opacity:.88}
+
+/* Selector de promos */
+.au-packs{display:grid; grid-template-columns:1fr 1fr; gap:clamp(1rem,3vw,2rem); align-items:center}
+.au-packs__visual{position:relative; border-radius:clamp(20px,3vw,30px); background:radial-gradient(circle at 50% 62%,#fff,#FBE3E2 70%); min-height:clamp(240px,30vw,330px); display:flex; align-items:flex-end; justify-content:center; padding:2.2rem 1rem 1.4rem}
+.au-bottles{display:flex; align-items:flex-end; justify-content:center}
+.au-bottles img{width:clamp(52px,8vw,88px); margin-inline:-9px; filter:drop-shadow(0 14px 16px rgba(59,4,8,.22)); transition:transform .5s var(--au-ease)}
+.au-gift{position:absolute; top:1rem; right:1rem; background:#fff; border-radius:999px; padding:.4rem .9rem; font-size:.78rem; font-weight:700; color:var(--au-wine)}
+.au-gift[hidden]{display:none}
+.au-packs__info{display:grid; gap:.7rem}
+.au-seg{display:inline-flex; justify-self:start; flex-wrap:wrap; background:#fff; border-radius:999px; padding:4px; gap:3px}
+.au-seg button{border:0; cursor:pointer; background:transparent; border-radius:999px; padding:.55em 1em; font:700 .95rem var(--au-font); letter-spacing:-.02em; color:var(--au-wine)}
+.au-seg button[aria-pressed="true"]{background:var(--au-wine); color:var(--au-pink)}
+.au-tag{justify-self:start; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:var(--au-wine); color:var(--au-pink); padding:.4em .85em; border-radius:999px}
+.au-tag[hidden]{display:none}
+.au-big{font-size:clamp(2.8rem,6vw,4.2rem); font-weight:800; letter-spacing:-.05em; line-height:1; color:var(--au-wine); font-variant-numeric:tabular-nums}
+.au-old{color:var(--au-muted); font-weight:500}
+.au-old s{margin-right:.4rem}
+.au-off{background:var(--au-pink-2); color:var(--au-wine); border-radius:999px; padding:.1em .55em; font-weight:700; font-size:.85rem}
+.au-ship{font-weight:600}
+.au-small{font-size:.82rem; color:var(--au-muted)}
+@media (max-width:720px){ .au-packs{grid-template-columns:1fr} }
+
+/* Productos: carrusel o grilla */
+.au-rail{display:flex; gap:clamp(12px,1.6vw,18px); overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding:.6rem var(--au-pad-x) 1rem; margin-inline:calc(-1 * var(--au-pad-x)); list-style:none}
+.au-rail::-webkit-scrollbar{display:none}
+.au-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr)); gap:clamp(12px,1.6vw,18px); list-style:none; padding:0; margin:0}
+.au-rail .au-prod{flex:0 0 clamp(200px,24vw,250px); scroll-snap-align:start}
+.au-prod{text-align:left}
+.au-prod__media{position:relative; display:grid; place-items:center; aspect-ratio:4/5; border-radius:28px; background:var(--au-pink); overflow:hidden}
+.au-prod__media img{width:80%; height:86%; object-fit:contain; mix-blend-mode:multiply; transition:transform .6s var(--au-ease)}
+.au-prod:hover .au-prod__media img{transform:scale(1.06) translateY(-4px)}
+.au-badge{position:absolute; top:14px; left:14px; z-index:2; background:var(--au-wine); color:var(--au-pink); font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.35em .8em; border-radius:999px}
+.au-prod__meta{display:flex; justify-content:space-between; align-items:flex-end; gap:.6rem; padding:.8rem .3rem 0}
+.au-prod__title{font:600 1rem/1.15 var(--au-font); letter-spacing:-.03em; color:var(--au-pink); text-decoration:none}
+.au-prod__price{display:block; margin-top:.2rem; font-size:.85rem; color:var(--au-pink-ink)}
+.au-prod__price s{opacity:.6; margin-left:.35rem}
+.au-prod__add{flex:none; border:0; cursor:pointer; font:700 .78rem var(--au-font); background:var(--au-pink); color:var(--au-wine); padding:.5em 1em; border-radius:999px}
+.au-prod__add:hover{background:#fff}
+.au-nav{display:flex; gap:.5rem; justify-content:center; margin-top:.4rem}
+.au-round{width:44px; height:44px; border-radius:50%; border:1px solid rgba(252,228,227,.35); background:transparent; color:var(--au-pink); cursor:pointer; display:grid; place-items:center}
+.au-round:hover{background:var(--au-pink); color:var(--au-wine)}
+.au-round svg{width:18px; height:18px}
+
+/* Banner ancho con botón de vidrio */
+.au-wide{position:relative}
+.au-wide__img{border-radius:clamp(26px,4vw,40px); overflow:hidden; aspect-ratio:2.6/1; background:var(--au-wine-2)}
+.au-wide__img img{width:100%; height:100%; object-fit:cover}
+.au-wide .au-btn{position:absolute; left:50%; bottom:clamp(-1.4rem,-2.4vw,-1rem); translate:-50% 0; white-space:nowrap}
+@media (max-width:560px){ .au-wide__img{aspect-ratio:1.5/1} }
+
+/* Estrella de 4 puntas que baja con el scroll */
+.au-star{position:fixed; left:0; top:0; z-index:30; width:44px; height:44px; margin:-22px 0 0 -22px; pointer-events:none; will-change:transform; filter:drop-shadow(0 0 10px rgba(255,255,255,.75)) drop-shadow(0 4px 10px rgba(59,4,8,.35))}
+.au-spark{position:fixed; left:0; top:0; z-index:29; width:12px; height:12px; margin:-6px 0 0 -6px; pointer-events:none; opacity:0}
+.au-star svg,.au-spark svg{width:100%; height:100%; display:block}
+
+/* Aparición suave (solo movimiento: el contenido siempre está visible) */
+.au-reveal{transition:transform 1s var(--au-ease)}
+.au-reveal.is-below{transform:translateY(40px)}
+
+@media (prefers-reduced-motion: reduce){
+  .au-sec *,.au-sec *::before,.au-sec *::after{animation:none!important; transition:none!important}
+  .au-star,.au-spark{display:none}
+  .au-reveal.is-below{transform:none}
+}

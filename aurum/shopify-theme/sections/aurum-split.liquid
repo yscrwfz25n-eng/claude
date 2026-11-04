@@ -1,0 +1,79 @@
+{%- comment -%} Aurum · Lista + foto: tarjeta rosa con "Ideal para:", íconos y foto con botón de vidrio {%- endcomment -%}
+{%- liquid
+  capture ico_glass
+    echo '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 15v6M6 3h12l-1 6a5 5 0 0 1-10 0L6 3Z"/></svg>'
+  endcapture
+  capture ico_camera
+    echo '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>'
+  endcapture
+  capture ico_star
+    echo '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5L12 15.6 7 18.2l1-5.5-4-3.9 5.6-.8z"/></svg>'
+  endcapture
+  capture ico_sun
+    echo '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6 19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg>'
+  endcapture
+  capture ico_heart
+    echo '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>'
+  endcapture
+-%}
+<section class="au-sec au-sec--{{ section.settings.capsule }}">
+  <div class="au-card au-split au-reveal">
+    <div class="au-split__txt">
+      {%- if section.settings.title != blank -%}<b>{{ section.settings.title }}</b>{%- endif -%}
+      <ul class="au-list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            {%- case block.settings.icon -%}
+              {%- when 'glass' -%}{{ ico_glass }}
+              {%- when 'camera' -%}{{ ico_camera }}
+              {%- when 'sun' -%}{{ ico_sun }}
+              {%- when 'heart' -%}{{ ico_heart }}
+              {%- else -%}{{ ico_star }}
+            {%- endcase -%}
+            {{ block.settings.text }}
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    <div class="au-tile">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(max-width: 720px) 100vw, 500px' }}
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="au-btn au-btn--glass" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Aurum · Lista + foto",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula bordó", "default": "middle",
+      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
+    { "type": "text", "id": "title", "label": "Título de la lista", "default": "Ideal para:" },
+    { "type": "richtext", "id": "text", "label": "Texto debajo de la lista", "default": "<p>Glow dorado, satinado y parejo, con pantenol que hidrata.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    { "type": "text", "id": "button_label", "label": "Botón sobre la foto", "default": "Ver promos" },
+    { "type": "url", "id": "button_link", "label": "Link del botón" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Ítem de la lista",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícono", "default": "star",
+          "options": [ { "value": "glass", "label": "Copa" }, { "value": "camera", "label": "Cámara" }, { "value": "star", "label": "Estrella" }, { "value": "sun", "label": "Sol" }, { "value": "heart", "label": "Corazón" } ] },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Fiestas, casamientos y salidas" }
+      ] }
+  ],
+  "presets": [ { "name": "Aurum · Lista + foto",
+    "blocks": [
+      { "type": "item", "settings": { "icon": "glass", "text": "Cenas y brindis de fin de año" } },
+      { "type": "item", "settings": { "icon": "camera", "text": "Fotos con flash" } },
+      { "type": "item", "settings": { "icon": "star", "text": "Fiestas, casamientos y salidas" } },
+      { "type": "item", "settings": { "icon": "sun", "text": "Vacaciones sin tomar sol" } }
+    ] } ]
+}
+{% endschema %}
