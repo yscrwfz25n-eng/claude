@@ -39,6 +39,8 @@
     <div class="au-tile">
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(max-width: 720px) 100vw, 500px' }}
+      {%- else -%}
+        <img src="{{ 'aurum-cinta.jpg' | asset_url }}" width="1200" height="861" alt="Pierna con Aurum y una franja sin producto donde estaba la cinta" loading="lazy">
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
         <a class="au-btn au-btn--glass" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label }}</a>

@@ -17,7 +17,7 @@
     <div class="au-card au-packs au-reveal" data-au-packs>
       <div class="au-packs__visual">
         <span class="au-gift" data-au-gift hidden></span>
-        <div class="au-bottles" data-au-bottles data-img="{% if section.settings.bottle != blank %}{{ section.settings.bottle | image_url: width: 240 }}{% endif %}"></div>
+        <div class="au-bottles" data-au-bottles data-img="{% if section.settings.bottle != blank %}{{ section.settings.bottle | image_url: width: 240 }}{% else %}{{ 'aurum-resaltador.png' | asset_url }}{% endif %}"></div>
       </div>
       <div class="au-packs__info">
         <div class="au-seg" role="group" aria-label="Cantidad de unidades">

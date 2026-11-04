@@ -1,7 +1,8 @@
 {%- comment -%} Aurum · Banner: título centrado, texto y foto ancha con botón de vidrio {%- endcomment -%}
 <section class="au-sec au-sec--{{ section.settings.capsule }}">
-  {%- if section.settings.pop_bottom != blank -%}
-    <img class="au-pop au-pop--bottom" src="{{ section.settings.pop_bottom | image_url: width: 400 }}" width="200" height="{{ 200 | divided_by: section.settings.pop_bottom.aspect_ratio | round }}" alt="" loading="lazy" data-rotate="{{ section.settings.pop_bottom_rotate }}" style="transform: rotate({{ section.settings.pop_bottom_rotate }}deg)">
+  {%- if section.settings.show_pop_bottom -%}
+    {%- if section.settings.pop_bottom != blank -%}{%- assign pop_src = section.settings.pop_bottom | image_url: width: 400 -%}{%- else -%}{%- assign pop_src = 'aurum-resaltador.png' | asset_url -%}{%- endif -%}
+    <img class="au-pop au-pop--bottom" src="{{ pop_src }}" width="200" height="428" alt="" loading="lazy" data-rotate="{{ section.settings.pop_bottom_rotate }}" style="transform: rotate({{ section.settings.pop_bottom_rotate }}deg)">
   {%- endif -%}
   <div class="au-head au-reveal">
     {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading | newline_to_br }}</h2>{%- endif -%}
@@ -11,6 +12,8 @@
     <div class="au-wide__img">
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(max-width: 1080px) 100vw, 1000px' }}
+      {%- else -%}
+        <img src="{{ 'aurum-mano.jpg' | asset_url }}" width="1100" height="1218" alt="Resaltador Aurum aplicado sobre la piel" loading="lazy">
       {%- endif -%}
     </div>
     {%- if section.settings.button_label != blank -%}
@@ -25,16 +28,85 @@
   "name": "Aurum · Banner",
   "tag": "div",
   "settings": [
-    { "type": "select", "id": "capsule", "label": "Lugar en la cápsula bordó", "default": "end",
-      "options": [ { "value": "start", "label": "Inicio" }, { "value": "middle", "label": "Medio" }, { "value": "end", "label": "Final" }, { "value": "single", "label": "Cápsula sola" } ] },
-    { "type": "textarea", "id": "heading", "label": "Título", "default": "Lista para\nlas fiestas" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Despachamos en 24 h a todo el país, con envío gratis.</p>" },
-    { "type": "image_picker", "id": "image", "label": "Foto ancha" },
-    { "type": "text", "id": "button_label", "label": "Botón sobre la foto", "default": "Comprar resaltador" },
-    { "type": "url", "id": "button_link", "label": "Link del botón" },
-    { "type": "image_picker", "id": "pop_bottom", "label": "Producto que sale por abajo (opcional)", "info": "PNG con fondo transparente." },
-    { "type": "range", "id": "pop_bottom_rotate", "label": "Giro del producto", "min": -180, "max": 180, "step": 5, "unit": "°", "default": 50 }
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula bordó",
+      "default": "end",
+      "options": [
+        {
+          "value": "start",
+          "label": "Inicio"
+        },
+        {
+          "value": "middle",
+          "label": "Medio"
+        },
+        {
+          "value": "end",
+          "label": "Final"
+        },
+        {
+          "value": "single",
+          "label": "Cápsula sola"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Título",
+      "default": "Lista para\nlas fiestas"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Despachamos en 24 h a todo el país, con envío gratis.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Foto ancha"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón sobre la foto",
+      "default": "Comprar resaltador"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link del botón"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pop_bottom",
+      "label": "Mostrar producto que sale por abajo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "pop_bottom",
+      "label": "Producto que sale por abajo (opcional)",
+      "info": "PNG con fondo transparente."
+    },
+    {
+      "type": "range",
+      "id": "pop_bottom_rotate",
+      "label": "Giro del producto",
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "unit": "°",
+      "default": 50
+    }
   ],
-  "presets": [ { "name": "Aurum · Banner" } ]
+  "presets": [
+    {
+      "name": "Aurum · Banner"
+    }
+  ]
 }
 {% endschema %}

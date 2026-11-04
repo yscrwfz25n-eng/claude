@@ -1,5 +1,5 @@
 {%- comment -%} Aurum · Productos: muestra una colección en carrusel o grilla, con etiqueta "Nuevo" y botón para sumar al carrito {%- endcomment -%}
-{%- assign collection = section.settings.collection -%}
+{%- assign collection = section.settings.collection | default: collections.all -%}
 <section class="au-sec au-sec--{{ section.settings.capsule }}" id="{{ section.settings.anchor | default: section.id }}">
   <div class="au-head au-reveal">
     {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
