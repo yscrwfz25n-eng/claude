@@ -174,8 +174,8 @@ def escena_caja(t, caja):
     a = tramo(t, 10.2, 10.8)
     texto(d, "90 preguntas", 280, SERIF(110), BORDO, a)
     texto(d, "y 30 retos", 410, SERIF_IT(110), ROJO, tramo(t, 10.5, 11.1))
-    esc = 0.8 + 0.2 * tramo(t, 10.0, 11.0) + 0.03 * (t - 10)
-    con_sombra(lienzo, caja, W / 2, 1060, -4, escala=esc)
+    esc = 0.85 + 0.12 * tramo(t, 10.0, 11.0) + 0.02 * (t - 10)
+    con_sombra(lienzo, caja, W / 2, 1010, -3, escala=esc)
     texto(d, "preguntas y retos para parejas · +18", 1520, POP(40), BORDO, tramo(t, 11.0, 11.6))
     return lienzo
 
@@ -217,8 +217,15 @@ def cuadro(t, C, caja):
 
 def main():
     C = cargar_cartas()
-    caja = Image.open(os.path.join(REDES, "regalito", "caja-match.png")).convert("RGBA")
-    caja = caja.resize((560, round(560 * caja.height / caja.width)), Image.LANCZOS)
+    # foto realista de la caja (la de Gemini), con esquinas redondeadas y borde
+    foto = Image.open(os.path.join(REDES, "gemini", "match-foto-final.jpg")).convert("RGBA")
+    foto = foto.resize((640, round(640 * foto.height / foto.width)), Image.LANCZOS)
+    caja = Image.new("RGBA", (foto.width + 24, foto.height + 24), (0, 0, 0, 0))
+    ImageDraw.Draw(caja).rounded_rectangle((0, 0, caja.width - 1, caja.height - 1), radius=34, fill=BLANCO + (255,))
+    m = Image.new("L", foto.size, 0)
+    ImageDraw.Draw(m).rounded_rectangle((0, 0, foto.width - 1, foto.height - 1), radius=26, fill=255)
+    foto.putalpha(m)
+    caja.alpha_composite(foto, (12, 12))
     tmp = tempfile.mkdtemp()
     try:
         total = int(DURACION * FPS)
