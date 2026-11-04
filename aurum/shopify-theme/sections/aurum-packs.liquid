@@ -35,15 +35,15 @@
               endif
             -%}
             <button type="button" {{ block.shopify_attributes }} data-pack
-              data-qty="{{ qty }}" data-price="{{ price_cents | money }}"
-              {% if qty > 1 and off > 0 %}data-compare="{{ compare_cents | money }}" data-off="{{ off }}" data-unit="{{ unit_cents | money }}"{% endif %}
+              data-qty="{{ qty }}" data-price="{{ price_cents | money_without_trailing_zeros }}"
+              {% if qty > 1 and off > 0 %}data-compare="{{ compare_cents | money_without_trailing_zeros }}" data-off="{{ off }}" data-unit="{{ unit_cents | money_without_trailing_zeros }}"{% endif %}
               data-ship="{{ block.settings.shipping | escape }}" data-tag="{{ block.settings.badge | escape }}"
               data-gift="{{ block.settings.gift | escape }}" data-cta="{{ cta }}" data-default="{{ block.settings.default }}"
               aria-pressed="false">{{ qty }} u</button>
           {%- endfor -%}
         </div>
         <span class="au-tag" data-au-tag hidden></span>
-        <div class="au-big" data-au-price>{{ product.price | money }}</div>
+        <div class="au-big" data-au-price>{{ product.price | money_without_trailing_zeros }}</div>
         <div class="au-old" data-au-old></div>
         <div class="au-small" data-au-unit></div>
         <div class="au-ship" data-au-ship></div>

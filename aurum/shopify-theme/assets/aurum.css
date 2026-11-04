@@ -10,21 +10,23 @@
 
 /* Fondo de noche (solo en la página de inicio, lo activa el snippet aurum-motion) */
 body.aurum-night{
-  background:
-    radial-gradient(640px 420px at 86% 6%, rgba(236,120,150,.30), transparent 70%),
-    radial-gradient(720px 520px at 6% 62%, rgba(236,120,150,.18), transparent 70%),
-    radial-gradient(1.3px 1.3px at 24px 36px, #FFE6EA 50%, transparent 52%),
-    radial-gradient(1px 1px at 132px 88px, #FFE6EA 50%, transparent 52%),
-    radial-gradient(1.6px 1.6px at 206px 158px, #FFFFFF 50%, transparent 52%),
-    radial-gradient(1px 1px at 64px 196px, #FFD9E0 50%, transparent 52%),
-    radial-gradient(1.2px 1.2px at 170px 20px, #FFE6EA 50%, transparent 52%),
-    linear-gradient(180deg, #10020A, #2C0610);
-  background-size:auto,auto,240px 240px,240px 240px,240px 240px,240px 240px,240px 240px,auto;
+  background-color:#3B0408;
+  background-image:
+    radial-gradient(1.3px 1.3px at 24px 36px, rgba(255,230,234,.85) 50%, transparent 52%),
+    radial-gradient(1px 1px at 132px 88px, rgba(255,230,234,.7) 50%, transparent 52%),
+    radial-gradient(1.6px 1.6px at 206px 158px, rgba(255,255,255,.9) 50%, transparent 52%),
+    radial-gradient(1px 1px at 64px 196px, rgba(255,217,224,.7) 50%, transparent 52%),
+    radial-gradient(1.2px 1.2px at 170px 20px, rgba(255,230,234,.8) 50%, transparent 52%);
+  background-size:240px 240px;
   background-attachment:fixed;
 }
 
-/* Cápsula: cada sección es un tramo de la misma cápsula bordó */
-.au-sec{position:relative; max-width:1080px; margin-inline:auto; background:var(--au-wine); color:var(--au-pink-ink);
+/* Colores invertidos dentro de las secciones: cápsula rosa, tarjetas y botones bordó */
+.au-sec{--au-wine:#F9D4D3; --au-pink:#3B0408; --au-wine-2:#F3C3C2; --au-pink-2:#5A0B12;
+  --au-pink-ink:#4A0A10; --au-ink:#FCE4E3; --au-muted:#E8B9BC; --au-glass:rgba(59,4,8,.28)}
+
+/* Cápsula: cada sección es un tramo de la misma cápsula */
+.au-sec{position:relative; z-index:3; max-width:1080px; margin-inline:auto; background:var(--au-wine); color:var(--au-pink-ink);
   font-family:var(--au-font); padding:clamp(1.6rem,4vw,2.6rem) var(--au-pad-x); box-shadow:-1.5px 0 0 rgba(236,140,165,.55), 1.5px 0 0 rgba(236,140,165,.55)}
 .au-sec--start{border-radius:clamp(36px,7vw,84px) clamp(36px,7vw,84px) 0 0; margin-top:clamp(7rem,13vw,9rem); box-shadow:0 -1.5px 0 rgba(236,140,165,.55), -1.5px 0 0 rgba(236,140,165,.55), 1.5px 0 0 rgba(236,140,165,.55)}
 .au-sec--end{border-radius:0 0 clamp(36px,7vw,84px) clamp(36px,7vw,84px); margin-bottom:clamp(7rem,13vw,9rem); box-shadow:0 1.5px 0 rgba(236,140,165,.55), -1.5px 0 0 rgba(236,140,165,.55), 1.5px 0 0 rgba(236,140,165,.55)}
@@ -42,9 +44,9 @@ body.aurum-night{
 .au-btn::after{content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%); transform:translateX(-120%); animation:au-sheen 4.5s ease-in-out infinite}
 @keyframes au-sheen{0%,60%{transform:translateX(-120%)} 85%,100%{transform:translateX(120%)}}
 .au-btn--pink{background:var(--au-pink); color:var(--au-wine)!important}
-.au-btn--pink:hover{background:#fff}
+.au-btn--pink:hover{background:var(--au-pink-2)}
 .au-btn--wine{background:var(--au-wine); color:var(--au-pink)!important}
-.au-btn--glass{background:var(--au-glass); color:var(--au-pink-ink)!important; backdrop-filter:blur(12px) saturate(1.2); -webkit-backdrop-filter:blur(12px) saturate(1.2); border:1px solid rgba(252,228,227,.35); box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.au-btn--glass{background:var(--au-glass); color:#FCE4E3!important; backdrop-filter:blur(12px) saturate(1.2); -webkit-backdrop-filter:blur(12px) saturate(1.2); border:1px solid rgba(252,228,227,.35); box-shadow:0 10px 24px rgba(0,0,0,.18)}
 
 /* Destellos junto a los títulos */
 .au-twinkle{position:relative; display:inline-block}
@@ -54,9 +56,9 @@ body.aurum-night{
 @keyframes au-tw{0%,100%{transform:scale(.4) rotate(0); opacity:.35} 50%{transform:scale(1) rotate(45deg); opacity:1}}
 
 /* Productos que salen del marco */
-.au-pop{position:absolute; z-index:5; pointer-events:none; filter:drop-shadow(0 22px 26px rgba(0,0,0,.35)); will-change:transform}
+.au-pop{position:absolute; z-index:20; pointer-events:none; filter:drop-shadow(0 22px 26px rgba(0,0,0,.35)); will-change:transform}
 .au-pop--top{left:50%; top:clamp(-9.5rem,-15vw,-7.5rem); width:clamp(58px,7.5vw,86px); translate:-50% 0}
-.au-pop--bottom{right:clamp(-1.5rem,-3vw,-.5rem); bottom:clamp(-9rem,-14vw,-6rem); width:clamp(96px,13vw,150px)}
+.au-pop--bottom{right:clamp(-1rem,-2vw,-.25rem); bottom:clamp(-6rem,-9vw,-4rem); width:clamp(84px,11vw,130px)}
 
 /* Hero */
 .au-hero{display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center; gap:clamp(1rem,2.4vw,1.5rem)}
@@ -93,7 +95,7 @@ body.aurum-night{
 .au-gift{position:absolute; top:1rem; right:1rem; background:#fff; border-radius:999px; padding:.4rem .9rem; font-size:.78rem; font-weight:700; color:var(--au-wine)}
 .au-gift[hidden]{display:none}
 .au-packs__info{display:grid; gap:.7rem}
-.au-seg{display:inline-flex; justify-self:start; flex-wrap:wrap; background:#fff; border-radius:999px; padding:4px; gap:3px}
+.au-seg{display:inline-flex; justify-self:start; flex-wrap:wrap; background:rgba(252,228,227,.12); border-radius:999px; padding:4px; gap:3px}
 .au-seg button{border:0; cursor:pointer; background:transparent; border-radius:999px; padding:.55em 1em; font:700 .95rem var(--au-font); letter-spacing:-.02em; color:var(--au-wine)}
 .au-seg button[aria-pressed="true"]{background:var(--au-wine); color:var(--au-pink)}
 .au-tag{justify-self:start; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:var(--au-wine); color:var(--au-pink); padding:.4em .85em; border-radius:999px}
@@ -112,18 +114,19 @@ body.aurum-night{
 .au-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr)); gap:clamp(12px,1.6vw,18px); list-style:none; padding:0; margin:0}
 .au-rail .au-prod{flex:0 0 clamp(200px,24vw,250px); scroll-snap-align:start}
 .au-prod{text-align:left}
-.au-prod__media{position:relative; display:grid; place-items:center; aspect-ratio:4/5; border-radius:28px; background:var(--au-pink); overflow:hidden}
-.au-prod__media img{width:80%; height:86%; object-fit:contain; mix-blend-mode:multiply; transition:transform .6s var(--au-ease)}
-.au-prod:hover .au-prod__media img{transform:scale(1.06) translateY(-4px)}
+.au-prod__media{position:relative; display:grid; place-items:center; aspect-ratio:1/1; border-radius:28px; background:var(--au-pink); overflow:hidden}
+.au-prod__media img{width:100%; height:100%; object-fit:cover; transition:transform .6s var(--au-ease)}
+.au-prod:hover .au-prod__media img{transform:scale(1.05)}
+.au-prod__nophoto{padding:1.2rem; text-align:center; font:700 1.05rem/1.2 var(--au-font); letter-spacing:-.03em; color:var(--au-wine)}
 .au-badge{position:absolute; top:14px; left:14px; z-index:2; background:var(--au-wine); color:var(--au-pink); font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.35em .8em; border-radius:999px}
 .au-prod__meta{display:flex; justify-content:space-between; align-items:flex-end; gap:.6rem; padding:.8rem .3rem 0}
 .au-prod__title{font:600 1rem/1.15 var(--au-font); letter-spacing:-.03em; color:var(--au-pink); text-decoration:none}
 .au-prod__price{display:block; margin-top:.2rem; font-size:.85rem; color:var(--au-pink-ink)}
 .au-prod__price s{opacity:.6; margin-left:.35rem}
 .au-prod__add{flex:none; border:0; cursor:pointer; font:700 .78rem var(--au-font); background:var(--au-pink); color:var(--au-wine); padding:.5em 1em; border-radius:999px}
-.au-prod__add:hover{background:#fff}
+.au-prod__add:hover{background:var(--au-pink-2)}
 .au-nav{display:flex; gap:.5rem; justify-content:center; margin-top:.4rem}
-.au-round{width:44px; height:44px; border-radius:50%; border:1px solid rgba(252,228,227,.35); background:transparent; color:var(--au-pink); cursor:pointer; display:grid; place-items:center}
+.au-round{width:44px; height:44px; border-radius:50%; border:1px solid rgba(59,4,8,.35); background:transparent; color:var(--au-pink); cursor:pointer; display:grid; place-items:center}
 .au-round:hover{background:var(--au-pink); color:var(--au-wine)}
 .au-round svg{width:18px; height:18px}
 
