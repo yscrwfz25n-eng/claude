@@ -1,4 +1,4 @@
-"""Video 9:16 (1080 x 1920, 18 s, 30 fps, sin audio) para la preventa de Match, hecho con el arte
+"""Video 9:16 (1080 x 1920, 19,3 s, 30 fps, sin audio) para la preventa de Match, hecho con el arte
 real de las cartas y la caja. La voz en off se graba aparte (guion en GUION.md).
 
 Uso:  python3 redes/video-match/generar.py  ->  redes/video-match/match-preventa.mp4
@@ -22,6 +22,18 @@ sys.path.insert(0, REDES)
 import foto_producto as fp  # noqa: E402
 
 W, H, FPS, DURACION = 1080, 1920, 30, 18.0
+# El video se estira por tramos para coincidir con la voz en off de ElevenLabs (19,3 s):
+# (inicio en la salida, inicio en la línea de tiempo original); cada tramo se escala lineal.
+TRAMOS = [(0.0, 0.0), (3.0, 3.0), (8.0, 6.5), (10.8, 10.0), (14.7, 13.5), (19.3, 18.0)]
+DURACION_SALIDA = TRAMOS[-1][0]
+
+
+def a_original(t):
+    """Segundo del video final -> segundo de la animación original."""
+    for (s0, o0), (s1, o1) in zip(TRAMOS, TRAMOS[1:]):
+        if t <= s1:
+            return o0 + (t - s0) * (o1 - o0) / (s1 - s0)
+    return TRAMOS[-1][1]
 # paleta de Match (los videos de publicidad usan la estética del juego, no la de la marca)
 NEGRO, BORDO, ROJO, BEIGE, BLANCO = (15, 13, 13), (92, 15, 30), (200, 16, 46), (230, 213, 184), (250, 246, 240)
 F = os.path.join(RAIZ, "fuentes")
@@ -228,9 +240,9 @@ def main():
     caja.alpha_composite(foto, (12, 12))
     tmp = tempfile.mkdtemp()
     try:
-        total = int(DURACION * FPS)
+        total = int(DURACION_SALIDA * FPS)
         for i in range(total):
-            cuadro(i / FPS, C, caja).save(os.path.join(tmp, f"{i:04d}.png"))
+            cuadro(min(a_original(i / FPS), DURACION - 1 / FPS), C, caja).save(os.path.join(tmp, f"{i:04d}.png"))
         salida = os.path.join(AQUI, "match-preventa.mp4")
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", os.path.join(tmp, "%04d.png"),
                         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart", salida], check=True)

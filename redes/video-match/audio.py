@@ -1,7 +1,7 @@
 """Voz en off, música de fondo y efectos para el video de Match.
 
-La voz está en voz/1..5.wav: generada con Piper TTS (voz es_AR «daniela», licencia libre) a partir
-del guion de GUION.md. La música y los efectos se sintetizan acá (sin samples de terceros).
+La voz es voz-elevenlabs.mp3 (ElevenLabs, voz «Cande»), con el guion de GUION.md. La música y los
+efectos se sintetizan acá (sin samples de terceros).
 Mientras habla la voz, la música baja sola.
 
 Uso:  python3 redes/video-match/audio.py  ->  match-preventa-con-audio.mp4 (video + audio)
@@ -18,7 +18,7 @@ from scipy.io import wavfile
 from scipy.signal import butter, lfilter
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-SR, DUR = 44100, 18.0
+SR, DUR = 44100, 19.3
 N = int(SR * DUR)
 rng = np.random.default_rng(7)
 
@@ -111,22 +111,21 @@ def golpe():
     return 0.7 * np.sin(2 * np.pi * (45 + 120 * np.exp(-t * 25)) * t) * np.exp(-t * 6) + 0.15 * pasabajos(rng.standard_normal(len(t)), 3000) * np.exp(-t * 18)
 
 
-VOZ = [(1, 0.30), (2, 3.05), (3, 6.75), (4, 10.25), (5, 13.85)]  # (archivo, segundo en que arranca)
+VOZ_ELEVENLABS = os.path.join(AQUI, "voz-elevenlabs.mp3")  # voz «Cande», de ElevenLabs
 
 
 def voz():
+    """La voz completa de ElevenLabs desde el segundo 0 y una envolvente de «está hablando»."""
+    wav = os.path.join(AQUI, "_voz.wav")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", VOZ_ELEVENLABS, "-ac", "1", "-ar", str(SR), wav], check=True)
+    _, x = wavfile.read(wav)
+    os.remove(wav)
+    x = x.astype(float) / 32768
     pista = np.zeros(N)
-    habla = np.zeros(N)
-    for n, t0 in VOZ:
-        sr, x = wavfile.read(os.path.join(AQUI, "voz", f"{n}.wav"))
-        x = x.astype(float) / 32768
-        x = np.interp(np.arange(0, len(x), sr / SR), np.arange(len(x)), x)  # a 44,1 kHz
-        poner(pista, x, t0)
-        i = int(t0 * SR)
-        habla[i:i + len(x)] = 1
-    # envolvente suave de «está hablando», para bajar la música debajo de la voz
+    poner(pista, x, 0.0)
     k = int(SR * 0.25)
-    habla = np.convolve(habla, np.ones(k) / k, mode="same")
+    nivel = np.convolve(np.abs(pista), np.ones(k) / k, mode="same")
+    habla = np.clip(nivel / (0.3 * nivel.max()), 0, 1)
     return pista, habla
 
 
@@ -134,11 +133,11 @@ def main():
     v, habla = voz()
     m = musica() * 0.55 * (1 - 0.6 * habla)
     fx = np.zeros(N)
-    for t0 in (0.8, 4.8, 7.0, 10.0, 13.5):
+    for t0 in (0.8, 5.7, 8.7, 10.8, 14.7):  # tiempos del video ya estirado a la voz
         poner(fx, whoosh(), t0 - 0.1)
-    poner(fx, clic(), 3.22)
-    poner(fx, fuego(2.9), 7.15)
-    poner(fx, golpe(), 13.6)
+    poner(fx, clic(), 3.3)
+    poner(fx, fuego(3.0), 8.95)
+    poner(fx, golpe(), 14.85)
     v = v / np.max(np.abs(v))
     mezcla = 0.55 * (m + fx * (1 - 0.4 * habla)) / max(1e-9, np.max(np.abs(m + fx))) + 0.95 * v
     # fundido de entrada y de salida
