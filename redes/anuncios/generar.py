@@ -97,7 +97,7 @@ def preparar():
     import foto_producto as fp
     raiz = os.path.dirname(os.path.dirname(AQUI))
     with tempfile.TemporaryDirectory() as tmp:
-        fp.carta(os.path.join(raiz, "match", "match-cartas.pdf"), 1, 1, tmp).save(os.path.join(AQUI, "_match-pregunta.png"))
+        fp.carta(os.path.join(raiz, "match", "match-cartas.pdf"), 3, 2, tmp).save(os.path.join(AQUI, "_match-pregunta.png"))  # ¿Dónde me gusta más que me besen?
         fp.carta(os.path.join(raiz, "opinologos-muestra-imprenta.pdf"), 1, 4, tmp).save(os.path.join(AQUI, "_opinologos-tema.png"))
 
 

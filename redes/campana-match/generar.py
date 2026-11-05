@@ -28,9 +28,10 @@ def sello(img, cx, cy, r=118, ang=-10):
     c = capa.width // 2
     d.ellipse((c - r * s, c - r * s, c + r * s, c + r * s), fill=ROJO + (255,))
     d.ellipse((c - (r - 10) * s, c - (r - 10) * s, c + (r - 10) * s, c + (r - 10) * s), outline=BEIGE + (255,), width=3 * s)
-    f1 = ImageFont.truetype(os.path.join(F, "Poppins-Bold.ttf"), 30 * s)
-    f2 = ImageFont.truetype(os.path.join(F, "DMSerifDisplay-Regular.ttf"), 56 * s)
-    for txt, f, dy in (("PREVENTA", f1, -38), (PRECIO, f2, 18)):
+    k = r / 118  # el texto se achica con el sello
+    f1 = ImageFont.truetype(os.path.join(F, "Poppins-Bold.ttf"), round(30 * k * s))
+    f2 = ImageFont.truetype(os.path.join(F, "DMSerifDisplay-Regular.ttf"), round(54 * k * s))
+    for txt, f, dy in (("PREVENTA", f1, -38 * k), (PRECIO, f2, 18 * k)):
         caja = d.textbbox((0, 0), txt, font=f)
         d.text((c - (caja[2] - caja[0]) / 2 - caja[0], c + dy * s - (caja[3] - caja[1]) / 2 - caja[1]), txt, font=f,
                fill=(255, 255, 255, 255))

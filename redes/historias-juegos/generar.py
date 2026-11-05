@@ -130,7 +130,7 @@ HISTORIAS = {
 def preparar_imagenes():
     with tempfile.TemporaryDirectory() as tmp:
         cartas = os.path.join(RAIZ, "match", "match-cartas.pdf")
-        fp.carta(cartas, 1, 1, tmp).save(os.path.join(AQUI, "_match-pregunta.png"))
+        fp.carta(cartas, 3, 2, tmp).save(os.path.join(AQUI, "_match-pregunta.png"))  # ¿Dónde me gusta más que me besen?
         fp.carta(cartas, 21, 0, tmp).save(os.path.join(AQUI, "_match-reto.png"))
         fp.carta(os.path.join(RAIZ, "opinologos-muestra-imprenta.pdf"), 1, 4, tmp).save(
             os.path.join(AQUI, "_opinologos-tema.png"))

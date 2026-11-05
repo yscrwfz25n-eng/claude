@@ -95,7 +95,7 @@ def main():
     # carta de arriba del mazo: boca abajo (el dorso se lee mejor que una pregunta tan en escorzo)
     foto = pegar(foto, carta("_dorso-preg.png"), esquinas, [(805, 1461), (962, 1528), (830, 1557), (686, 1515)], redonda, 1.2)
     # carta de adelante del abanico
-    foto = pegar(foto, carta("_preg-comida.png"), esquinas, [(672, 1700), (885, 1712), (800, 1842), (590, 1822)], redonda, 1.2)
+    foto = pegar(foto, carta("_preg-besen.png"), esquinas, [(672, 1700), (885, 1712), (800, 1842), (590, 1822)], redonda, 1.2)
     # carta de adelante en la mano izquierda: los dedos que la tapan quedan por encima
     antes = foto.copy()
     foto = pegar(foto, carta("_preg-mate.png"), esquinas, [(436, 688), (550, 703), (523, 850), (405, 836)], redonda, 1.2)
