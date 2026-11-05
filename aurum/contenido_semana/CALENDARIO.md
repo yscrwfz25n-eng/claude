@@ -59,43 +59,43 @@ Armá tu combo y llegá al envío gratis desde $39.999 🚚
 
 ---
 
-## HISTORIAS (carpeta `2_Historias`, una por día)
-Los archivos ya están numerados con la hora. **Encuesta, quiz y preguntas:** las imágenes dejan espacio libre abajo para el sticker. Lo agregás desde Instagram.
+## HISTORIAS · estilo rosa (carpeta `2_Historias`, una por día)
+Los archivos ya están numerados con la hora. En las de encuesta, quiz y preguntas, el espacio libre del medio es para el sticker.
 
-| Día | Hora | Historia | Sticker que agregás |
+| Día | Hora | Historia | Sticker |
 |---|---|---|---|
-| **Vie 6** | 09:00 | Llegó tu glow (Glow en grande) | Enlace → resaltador |
+| **Vie 6** | 09:00 | Tienda nueva | Enlace → tienda |
 | | 10:15 | *Compartir el Reel* | — |
-| | 14:15 | *Compartir el carrusel educativo* | — |
-| | 17:00 | Encuesta "¿Ya probaste un resaltador?" | **Encuesta:** "Sí, me encanta" / "Todavía no" |
-| | 19:30 | Plan de finde: Kit Noche de Glow | Enlace → kit-noche-de-glow |
-| | 20:45 | *Compartir el carrusel de novedades* | — |
-| | 22:30 | Escalera de packs | Enlace → resaltador |
-| **Sáb 7** | 11:00 | Así es la textura | Enlace → resaltador |
-| | 14:00 | "¿A dónde vas este finde?" | **Caja de preguntas** |
+| | 13:00 | Glow dorado | Enlace → resaltador |
+| | 14:15 | *Compartir el carrusel 1* | — |
+| | 17:00 | ¿Ya lo probaste? | **Encuesta:** "Sí, me encanta" / "Todavía no" |
+| | 20:45 | *Compartir el carrusel 2* | — |
+| | 21:00 | 2 por $54.900 | Enlace → resaltador |
+| **Sáb 7** | 11:00 | Mirá la diferencia (cinta) | Enlace → resaltador |
+| | 14:00 | ¿A dónde vas este finde? | **Caja de preguntas** |
 | | 18:30 | Video de la cinta | Enlace → resaltador |
-| | 21:30 | ¿No te gustó? Agua y jabón | Enlace → resaltador |
-| **Dom 8** | 11:00 | Cómo se aplica (3 pasos) | — |
-| | 15:00 | Scrub: antes del glow, exfoliá | Enlace → scrub-watermelon |
-| | 19:00 | Kit Sol & Glow | Enlace → kit-sol-y-glow |
-| | 21:30 | Envíos y pagos | Enlace → tienda |
-| | + | **Respondé 2 o 3 preguntas reales** del sábado (compartí la respuesta con el sticker) | — |
-| **Lun 9** | 09:30 | FAQ "¿Es autobronceante? No." | — |
-| | 13:30 | Lip oil sin / con | Enlace → lip-oil-juicy-glow |
-| | 18:00 | Quiz "¿Lip oil o bálsamo?" | **Quiz:** "Lip oil" / "Bálsamo" / "Los dos" |
-| | 21:30 | Kit Labios Jugosos | Enlace → kit-labios-jugosos |
-| **Mar 10** | 09:30 | Roll-on: luz donde la necesitás | Enlace → serum-iluminador-roll-on |
-| | 13:30 | Bálsamo: reparación en marcha | Enlace → balsamo-labial-velvet-lip |
-| | 18:00 | Encuesta "¿Tu glow es de día o de noche?" | **Encuesta:** "De día ☀️" / "De noche 🌙" |
-| | 21:30 | Pack x4 + 2 regalos | Enlace → resaltador |
-| **Mié 11** | 09:30 | Body Splash: perfumá y brillá | Enlace → body-splash-sparkle-xl |
-| | 13:30 | Kit Regalo Fiestas | Enlace → kit-regalo-fiestas |
+| | 21:30 | Plan de finde (Kit Noche de Glow) | Enlace → kit-noche-de-glow |
+| **Dom 8** | 11:00 | ¿Es autobronceante? No. | — |
+| | 15:00 | Antes del glow (Scrub) | Enlace → scrub-watermelon |
+| | 19:00 | Glow + FPS 40 (Sol & Glow) | Enlace → kit-sol-y-glow |
+| | 21:30 | Envío gratis | Enlace → tienda |
+| | + | Respondé 2 o 3 preguntas reales del sábado | — |
+| **Lun 9** | 09:30 | Labios jugosos (Lip oil) | Enlace → lip-oil-juicy-glow |
+| | 13:30 | ¿Labios secos? (Bálsamo) | Enlace → balsamo-labial-velvet-lip |
+| | 18:00 | ¿Lip oil o bálsamo? | **Quiz:** "Lip oil" / "Bálsamo" / "Los dos" |
+| | 21:30 | 4 + 2 regalos | Enlace → resaltador |
+| **Mar 10** | 09:30 | Luz en tu cara (Roll-on) | Enlace → serum-iluminador-roll-on |
+| | 13:30 | Perfumá y brillá (Body Splash) | Enlace → body-splash-sparkle-xl |
 | | 18:00 | Video de la cinta | Enlace → resaltador |
-| | 21:30 | Envíos y pagos | Enlace → tienda |
-| **Jue 12** | 09:30 | Kit Verano Glow | Enlace → kit-verano-glow |
-| | 13:30 | Así es la textura | Enlace → resaltador |
-| | 18:00 | Escalera de packs | Enlace → resaltador |
-| | 21:30 | Glow en grande (cierre de semana) | Enlace → resaltador |
+| | 21:30 | El regalo que brilla | Enlace → kit-regalo-fiestas |
+| **Mié 11** | 09:30 | Exfoliá. Iluminá. (Verano Glow) | Enlace → kit-verano-glow |
+| | 13:30 | Glow dorado | Enlace → resaltador |
+| | 18:00 | 2 por $54.900 | Enlace → resaltador |
+| | 21:30 | Envío gratis | Enlace → tienda |
+| **Jue 12** | 09:30 | Mirá la diferencia (cinta) | Enlace → resaltador |
+| | 13:30 | Plan de finde (Kit Noche de Glow) | Enlace → kit-noche-de-glow |
+| | 18:00 | 4 + 2 regalos | Enlace → resaltador |
+| | 21:30 | Tienda nueva | Enlace → tienda |
 
 **Links** (todos empiezan con `https://skinaurum.myshopify.com/products/`): mousse-autobronceante (resaltador) · kit-noche-de-glow · kit-sol-y-glow · kit-verano-glow · kit-regalo-fiestas · kit-labios-jugosos · lip-oil-juicy-glow · balsamo-labial-velvet-lip · serum-iluminador-roll-on · scrub-watermelon · body-splash-sparkle-xl.
 
