@@ -55,7 +55,7 @@ def videos():
     filtro = ("[0:v]crop=16:ih:24:0,scale=1080:1350,boxblur=8:1[fondo];"
               "[0:v]scale=-2:1350[frente];[fondo][frente]overlay=(W-w)/2:0")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", fuente, "-filter_complex", filtro, "-c:v", "libx264",
-                    "-pix_fmt", "yuv420p", "-crf", "18", "-c:a", "copy", "-movflags", "+faststart",
+                    "-preset", "slow", "-tune", "animation", "-pix_fmt", "yuv420p", "-crf", "15", "-c:a", "copy", "-movflags", "+faststart",
                     os.path.join(AQUI, "1-video-4x5.mp4")], check=True)
 
 

@@ -56,27 +56,33 @@ def tramo(t, a, b):
 
 
 def cargar_cartas():
+    """Cartas en alta resolución (600 dpi); se achican recién al dibujarlas, así el texto queda nítido."""
     pdf = os.path.join(RAIZ, "match", "match-cartas.pdf")
+    fp.DPI, fp.ESCALA = 600, 600 / 72
     with tempfile.TemporaryDirectory() as tmp:
         cartas = {"dorso": fp.carta(pdf, 2, 0, tmp), "comida": fp.carta(pdf, 3, 2, tmp),   # ¿Dónde me gusta más que me besen?
                   "miedo": fp.carta(pdf, 1, 7, tmp),   # ¿Qué parte de mi cuerpo es la que más me gusta?
                   "reto": fp.carta(pdf, 21, 8, tmp)}
     salida = {}
     for k, im in cartas.items():
-        im = im.convert("RGBA").resize((560, round(560 * im.height / im.width)), Image.LANCZOS)
-        # esquinas redondeadas
+        im = im.convert("RGBA")
+        # esquinas redondeadas (34 px a la medida en pantalla)
         m = Image.new("L", im.size, 0)
-        ImageDraw.Draw(m).rounded_rectangle((0, 0, im.width - 1, im.height - 1), radius=34, fill=255)
+        ImageDraw.Draw(m).rounded_rectangle((0, 0, im.width - 1, im.height - 1), radius=round(34 * im.width / 560), fill=255)
         im.putalpha(m)
         salida[k] = im
     return salida
 
 
-def con_sombra(lienzo, im, cx, cy, ang=0.0, escala=1.0, alfa=1.0, escala_x=1.0):
+def con_sombra(lienzo, im, cx, cy, ang=0.0, escala=1.0, alfa=1.0, escala_x=1.0, ancho=560):
+    """Dibuja im (en alta resolución) con `ancho` px de ancho en pantalla. Se rota al doble de tamaño
+    y recién después se achica, para que el texto no se emborrone."""
     if alfa <= 0 or escala <= 0 or escala_x <= 0.01:
         return
-    w, h = max(1, round(im.width * escala * escala_x)), max(1, round(im.height * escala))
-    im = im.resize((w, h), Image.BICUBIC).rotate(ang, expand=True, resample=Image.BICUBIC)
+    w = max(1, round(ancho * escala * escala_x))
+    h = max(1, round(ancho * im.height / im.width * escala))
+    im = im.resize((2 * w, 2 * h), Image.LANCZOS).rotate(ang, expand=True, resample=Image.BICUBIC)
+    im = im.resize((max(1, im.width // 2), max(1, im.height // 2)), Image.LANCZOS)
     if alfa < 1:
         a = im.getchannel("A").point(lambda v: int(v * alfa))
         im.putalpha(a)
@@ -187,7 +193,7 @@ def escena_caja(t, caja):
     texto(d, "90 preguntas", 280, SERIF(110), BORDO, a)
     texto(d, "y 30 retos", 410, SERIF_IT(110), ROJO, tramo(t, 10.5, 11.1))
     esc = 0.85 + 0.12 * tramo(t, 10.0, 11.0) + 0.02 * (t - 10)
-    con_sombra(lienzo, caja, W / 2, 1010, -3, escala=esc)
+    con_sombra(lienzo, caja, W / 2, 1010, -3, escala=esc, ancho=664)
     texto(d, "preguntas y retos para parejas · +18", 1520, POP(40), BORDO, tramo(t, 11.0, 11.6))
     return lienzo
 
@@ -221,23 +227,20 @@ def cuadro(t, C, caja):
         if tt < 13.5:
             return escena_caja(tt, caja)
         return escena_preventa(tt)
-    for corte in (10.0, 13.5):  # fundido corto entre escenas
-        if corte <= t < corte + 0.25:
-            return Image.blend(base(corte - 0.001).convert("RGB"), base(t).convert("RGB"), (t - corte) / 0.25)
-    return base(t).convert("RGB")
+    return base(t).convert("RGB")  # corte seco entre escenas: el fundido mezclaba dos cuadros y se veía borroso
 
 
 def main():
     C = cargar_cartas()
     # foto realista de la caja (la de Gemini), con esquinas redondeadas y borde
     foto = Image.open(os.path.join(REDES, "gemini", "match-foto-final.jpg")).convert("RGBA")
-    foto = foto.resize((640, round(640 * foto.height / foto.width)), Image.LANCZOS)
-    caja = Image.new("RGBA", (foto.width + 24, foto.height + 24), (0, 0, 0, 0))
-    ImageDraw.Draw(caja).rounded_rectangle((0, 0, caja.width - 1, caja.height - 1), radius=34, fill=BLANCO + (255,))
+    foto = foto.resize((1280, round(1280 * foto.height / foto.width)), Image.LANCZOS)  # al doble: se achica al dibujarla
+    caja = Image.new("RGBA", (foto.width + 48, foto.height + 48), (0, 0, 0, 0))
+    ImageDraw.Draw(caja).rounded_rectangle((0, 0, caja.width - 1, caja.height - 1), radius=68, fill=BLANCO + (255,))
     m = Image.new("L", foto.size, 0)
-    ImageDraw.Draw(m).rounded_rectangle((0, 0, foto.width - 1, foto.height - 1), radius=26, fill=255)
+    ImageDraw.Draw(m).rounded_rectangle((0, 0, foto.width - 1, foto.height - 1), radius=52, fill=255)
     foto.putalpha(m)
-    caja.alpha_composite(foto, (12, 12))
+    caja.alpha_composite(foto, (24, 24))
     tmp = tempfile.mkdtemp()
     try:
         total = int(DURACION_SALIDA * FPS)
@@ -245,7 +248,7 @@ def main():
             cuadro(min(a_original(i / FPS), DURACION - 1 / FPS), C, caja).save(os.path.join(tmp, f"{i:04d}.png"))
         salida = os.path.join(AQUI, "match-preventa.mp4")
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", os.path.join(tmp, "%04d.png"),
-                        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart", salida], check=True)
+                        "-c:v", "libx264", "-preset", "slow", "-tune", "animation", "-pix_fmt", "yuv420p", "-crf", "15", "-movflags", "+faststart", salida], check=True)
         cuadro(2.5, C, caja).save(os.path.join(AQUI, "_vista-1.png"))
         cuadro(5.8, C, caja).save(os.path.join(AQUI, "_vista-2.png"))
         cuadro(9.0, C, caja).save(os.path.join(AQUI, "_vista-3.png"))
