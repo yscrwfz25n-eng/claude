@@ -1,20 +1,121 @@
-# Aurum · Campaña de lanzamiento: anuncios y textos
+# Aurum · Campaña de lanzamiento: lista para publicar HOY
 
-**Campaña:** `VENTAS · Lanzamiento · ABO` · Objetivo: Ventas (compras en el sitio) · Presupuesto por conjunto.
-**Link de destino:** el producto o kit de cada anuncio (no la home). Parámetros de URL: `utm_source=meta&utm_medium=paid&utm_campaign=lanzamiento&utm_content={{ad.name}}`
+## Estructura (la más eficiente con este presupuesto)
+**1 campaña · Ventas Advantage+ (campaña de ventas Advantage+)**
+- Nombre: `VENTAS · Lanzamiento Advantage+`
+- Presupuesto: **USD 28/día** a nivel campaña.
+- País: Argentina. Ubicaciones: Advantage+ (automáticas).
+- **Tope de clientes existentes: 20%**, así la mayor parte va a gente nueva.
+- Evento de conversión: **Compra**. No uses el objetivo Tráfico: trae visitas que no compran. Las visitas igual llegan, y de gente con intención de compra.
+- Link de destino: el producto o kit de cada anuncio. Parámetros de URL: `utm_source=meta&utm_medium=paid&utm_campaign=lanzamiento&utm_content={{ad.name}}`
 
-| Conjunto | Público | USD/día | Anuncios |
+**Por qué una sola:** con poco historial de ventas, separar el presupuesto en 3 conjuntos frena el aprendizaje. En una sola campaña, Meta prueba todos los anuncios y le da más presupuesto a los que venden.
+
+**Si tu cuenta no muestra "Advantage+":** creá una campaña de Ventas manual con **1 solo conjunto**: público Advantage+, Argentina, ubicaciones automáticas, USD 28/día. Cargá ahí los mismos anuncios.
+
+## Los 14 anuncios (subí todos al mismo conjunto)
+| # | Archivo | Tipo | Link |
 |---|---|---|---|
-| **1 · Resaltador** | Argentina, mujeres 20-45, Advantage+ público, excluir compradores 30 días | 15 | C1-A, C1-B, C1-C, C1-D + video de la cinta (publicación existente) |
-| **2 · Kits** | Igual que el 1 | 8 | C2-A, C2-B, C2-C, C2-D |
-| **3 · Novedades** | Visitas web 30 d + carrito 180 d + interacción IG/FB 90 d | 5 | C3-A, C3-B, C3-C |
+| 1 | `0_Videos/V0_prueba-de-la-cinta.mp4` | **Video principal** | Resaltador |
+| 2 | Video de la cinta ya publicado → **"Usar publicación existente"** | Video real (conserva sus likes) | Resaltador |
+| 3 | `0_Videos/V1_packs-resaltador.mp4` | Video | Resaltador |
+| 4 | `0_Videos/V2_autobronceante-vs-resaltador.mp4` | Video | Resaltador |
+| 5 | `0_Videos/V3_kit-noche-de-glow.mp4` | Video | Kit Noche de Glow |
+| 6 | `0_Videos/V4_los-7-kits.mp4` | Video | Página Tienda |
+| 7 | `0_Videos/V5_novedades.mp4` | Video | Página Tienda |
+| 8 | `1_Resaltador/C1-A` (4x5 + 9x16) | Foto | Resaltador |
+| 9 | `1_Resaltador/C1-B` (4x5 + 9x16) | Foto | Resaltador |
+| 10 | `1_Resaltador/C1-D` carrusel | Carrusel | Resaltador |
+| 11 | `2_Kits/C2-B` Sol & Glow (4x5 + 9x16) | Foto | Kit Sol & Glow |
+| 12 | `2_Kits/C2-D` carrusel de kits | Carrusel | Página Tienda |
+| 13 | `3_Novedades/C3-B` Regalo Fiestas (4x5 + 9x16) | Foto | Kit Regalo Fiestas |
+| 14 | `3_Novedades/C3-C` carrusel de novedades | Carrusel | Página Tienda |
 
-**Reglas:** no tocar nada 3 días. Pausar un anuncio si gasta USD 20 sin ventas o si la venta sale más de USD 13. Escalar +20% cada 3 días el conjunto que venda a USD 10 o menos.
+Las demás piezas (C1-C, C2-A, C2-C, C3-A) quedan **de reserva** para reemplazar a las que se cansen a las 2 semanas.
 
-**Formatos:** cada anuncio único tiene `_4x5` (feed) y `_9x16` (historias y reels). En Meta subí las dos versiones en el mismo anuncio ("Personalizar ubicaciones"). Los carruseles van 1:1.
+**Videos:** salen sin música a propósito. Al subirlos, en el editor de Meta tocá **"Agregar música"** y elegí un tema de la biblioteca. Así no tenés problemas de derechos de autor.
+**Fotos:** en cada anuncio de foto, subí las dos versiones (`4x5` para feed y `9x16` para historias) con **"Personalizar ubicaciones"**.
+
+## Reglas para los primeros días
+- **Días 1 a 3:** no tocar nada.
+- **Día 4 en adelante:** apagá los anuncios con más de USD 20 gastados y 0 ventas.
+- **Si la campaña vende a USD 10 o menos:** subí el presupuesto 20% cada 3 días.
+- **Si la venta pasa de USD 13 durante 3 días:** avisame y cambiamos piezas.
+- **Cada 2 semanas:** subí 2 o 3 piezas nuevas.
 
 ---
 
+## TEXTOS DE LOS VIDEOS
+
+### V0 · La prueba de la cinta
+```
+La prueba de la cinta 👀 Mirá la diferencia con una sola capa.
+
+El Resaltador de bronceado Aurum le da a tu piel un glow dorado al instante. Sin sol, sin esperar. ¿No te gustó? Se va con agua y jabón.
+
+🔥 2 por $54.900 · 3 + mascarilla por $67.900 · 4 + 2 regalos por $79.900
+🚚 Envío gratis · 💳 3 cuotas sin interés
+```
+**Título:** `Glow dorado al instante` · **Descripción:** `Hasta 50% OFF en packs` · **Botón:** Comprar
+
+### V1 · Packs
+```
+¿Cuántos te llevás? ✨
+
+1 → $39.999
+2 → $54.900 (-31%)
+3 + mascarilla → $67.900 (-43%)
+4 + mascarilla y bálsamo → $79.900 (-50%) ⭐
+
+🚚 Envío gratis · 💳 3 cuotas sin interés
+```
+**Título:** `Hasta 50% OFF + regalos` · **Botón:** Comprar
+
+### V2 · Autobronceante vs Resaltador
+```
+¿Te quedó naranja el autobronceante? 😅
+
+El Resaltador Aurum no es autobronceante: es un pigmento iluminador. Ves el resultado mientras lo aplicás, el glow es al instante y, si no te gusta, se va con agua y jabón.
+
+Desde $39.999 con envío gratis 🚚 · 3 cuotas sin interés
+```
+**Título:** `Glow sin sorpresas` · **Botón:** Comprar
+
+### V3 · Kit Noche de Glow
+```
+Tu glow para salir ✨
+
+Resaltador de bronceado + Body Splash Sparkle XL + Sérum iluminador roll-on + Lip oil hidratante.
+
+Por separado $78.696 → en el kit $64.900
+🚚 Envío gratis a domicilio · 💳 3 cuotas sin interés
+```
+**Título:** `Kit Noche de Glow · -18%` · **Botón:** Comprar
+
+### V4 · Los 7 kits
+```
+7 kits para brillar este verano ✨ ¿Cuál es el tuyo?
+
+Noche de Glow · Sol & Glow · Verano Glow · Regalo Fiestas · Piel de Verano · Dúo Sol · Labios Jugosos
+
+Ahorrá hasta 21% · Envío gratis desde $39.999 · 3 cuotas sin interés
+```
+**Título:** `Kits Aurum desde $15.900` · **Botón:** Comprar
+
+### V5 · Novedades
+```
+Nuevo en Aurum ✨ Labios, rostro y cuerpo.
+
+💋 Lip oil hidratante · Bálsamo labial
+✨ Sérum iluminador roll-on · Body Splash Sparkle XL
+
+Armá tu combo y llegá al envío gratis desde $39.999 🚚
+```
+**Título:** `Lo nuevo de Aurum` · **Botón:** Comprar
+
+---
+
+## TEXTOS DE LAS FOTOS Y CARRUSELES
 ## CONJUNTO 1 · RESALTADOR
 
 ### C1-A · Glow al instante (foto lifestyle) → link: producto Resaltador
