@@ -6,8 +6,6 @@
 
 ---
 
-> **Body splash sin stock:** se sacó de las historias, del carrusel de novedades y de todo lo que lleva el Kit Noche de Glow. Cuando vuelva, lo sumamos de nuevo.
-
 ## FEED · Viernes 6
 
 ### Post 1 · 10:00 · Reel "La prueba de la cinta"
@@ -41,8 +39,8 @@ Ojo: no protege del sol, usalo siempre con tu protector ☀️
 ```
 **Después:** compartilo en historias a las **14:15**.
 
-### Post 3 · 20:30 · Carrusel "Nuevo en Aurum" (6 imágenes)
-**Archivos:** `Post3_2030_Carrusel/01` a `06`, en orden.
+### Post 3 · 20:30 · Carrusel "Nuevo en Aurum" (7 imágenes)
+**Archivos:** `Post3_2030_Carrusel/01` a `07`, en orden.
 **Texto:**
 ```
 Glow de pies a labios ✨ Llegó lo nuevo de Aurum:
@@ -51,6 +49,7 @@ Glow de pies a labios ✨ Llegó lo nuevo de Aurum:
 🫶 Bálsamo labial reparador · $9.999
 ✨ Sérum iluminador roll-on · $9.999
 🍉 Scrub Watermelon · $17.999
+💫 Body Splash Sparkle XL · $18.699
 ☀️ Protector con color FPS 40 · $28.999
 
 Armá tu combo y llegá al envío gratis desde $39.999 🚚
@@ -75,7 +74,7 @@ Los archivos ya están numerados con la hora. En las de encuesta, quiz y pregunt
 | **Sáb 7** | 11:00 | Mirá la diferencia (cinta) | Enlace → resaltador |
 | | 14:00 | ¿A dónde vas este finde? | **Caja de preguntas** |
 | | 18:30 | Video de la cinta | Enlace → resaltador |
-| | 21:30 | El regalo que brilla | Enlace → kit-regalo-fiestas |
+| | 21:30 | Plan de finde (Kit Noche de Glow) | Enlace → kit-noche-de-glow |
 | **Dom 8** | 11:00 | ¿Es autobronceante? No. | — |
 | | 15:00 | Antes del glow (Scrub) | Enlace → scrub-watermelon |
 | | 19:00 | Glow + FPS 40 (Sol & Glow) | Enlace → kit-sol-y-glow |
@@ -86,7 +85,7 @@ Los archivos ya están numerados con la hora. En las de encuesta, quiz y pregunt
 | | 18:00 | ¿Lip oil o bálsamo? | **Quiz:** "Lip oil" / "Bálsamo" / "Los dos" |
 | | 21:30 | 4 + 2 regalos | Enlace → resaltador |
 | **Mar 10** | 09:30 | Luz en tu cara (Roll-on) | Enlace → serum-iluminador-roll-on |
-| | 13:30 | Glow + FPS 40 (Sol & Glow) | Enlace → kit-sol-y-glow |
+| | 13:30 | Perfumá y brillá (Body Splash) | Enlace → body-splash-sparkle-xl |
 | | 18:00 | Video de la cinta | Enlace → resaltador |
 | | 21:30 | El regalo que brilla | Enlace → kit-regalo-fiestas |
 | **Mié 11** | 09:30 | Exfoliá. Iluminá. (Verano Glow) | Enlace → kit-verano-glow |
@@ -94,17 +93,17 @@ Los archivos ya están numerados con la hora. En las de encuesta, quiz y pregunt
 | | 18:00 | 2 por $54.900 | Enlace → resaltador |
 | | 21:30 | Envío gratis | Enlace → tienda |
 | **Jue 12** | 09:30 | Mirá la diferencia (cinta) | Enlace → resaltador |
-| | 13:30 | Antes del glow (Scrub) | Enlace → scrub-watermelon |
+| | 13:30 | Plan de finde (Kit Noche de Glow) | Enlace → kit-noche-de-glow |
 | | 18:00 | 4 + 2 regalos | Enlace → resaltador |
 | | 21:30 | Tienda nueva | Enlace → tienda |
 
-**Links** (todos empiezan con `https://skinaurum.myshopify.com/products/`): mousse-autobronceante (resaltador) · kit-sol-y-glow · kit-verano-glow · kit-regalo-fiestas · kit-labios-jugosos · lip-oil-juicy-glow · balsamo-labial-velvet-lip · serum-iluminador-roll-on · scrub-watermelon. Sin body splash ni Kit Noche de Glow mientras no haya stock.
+**Links** (todos empiezan con `https://skinaurum.myshopify.com/products/`): mousse-autobronceante (resaltador) · kit-noche-de-glow · kit-sol-y-glow · kit-verano-glow · kit-regalo-fiestas · kit-labios-jugosos · lip-oil-juicy-glow · balsamo-labial-velvet-lip · serum-iluminador-roll-on · scrub-watermelon · body-splash-sparkle-xl.
 
 ## Destacadas
 Al final de cada día, guardá las mejores historias en las destacadas (ya tenés los íconos):
 - **Resaltador:** textura, agua y jabón, cómo se aplica, video de la cinta.
 - **Promos:** packs y pack x4.
-- **Kits:** Sol & Glow, Regalo, Verano, Labios.
+- **Kits:** Noche, Sol & Glow, Regalo, Verano, Labios.
 - **Envíos y Pagos:** la historia de info.
 - **Preguntas:** FAQ y las respuestas reales.
 
