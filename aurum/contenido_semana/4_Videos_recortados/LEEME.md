@@ -34,7 +34,7 @@ Los que duran menos de 10 segundos son tomas cortas de apoyo para la edición, p
 | 27 | Resultado | Cara con glow, luz de ventana | 6 s |
 | 28 | Resultado | Cara de perfil, de cerca | 9 s |
 | 29 | Resultado | Cara con luz natural | 17 s |
-| 30 | Ultra Glitter | Spray en el pelo | 20 s |
+| 30 | Ultra Glitter (nuevo) | Spray en el pelo | 20 s |
 | 31 | Ultra Glitter | Spray en el pelo (otra toma) | 16 s |
 | 32 | Ultra Glitter | Pelo brillando | 17 s |
 | 33 | Ultra Glitter | Frasco a cámara | 8 s |
@@ -45,5 +45,6 @@ Los que duran menos de 10 segundos son tomas cortas de apoyo para la edición, p
 | 38 | Caja | Roll-on | 18 s |
 | 39 | Caja | Ultra Glitter | 25 s |
 | 40 | Lip oil | En la mano, contra la pared | 18 s |
+| 41 | Mascarilla Fresh Mix | Pote a cámara (con el pack de 3) | 7 s |
 
-**Falta:** la mascarilla Fresh Mix (no hay ninguna toma) y el body splash (no hay video).
+**Mascarilla:** solo hay tomas del pote (41, y también aparece en 08 y 09). **Body splash:** no hay video.
