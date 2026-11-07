@@ -16,6 +16,6 @@ Todos van **sin música**: al subirlos, elegí en Instagram un audio en tendenci
 | Rutina_glow | 35 s | ¿Cómo tengo este glow? ✨ Mi rutina en 5 pasos: crema hidratante, sérum iluminador, protector FPS 40, bálsamo y, al final, el resaltador. ¿Cuál no puede faltar en la tuya? |
 | FEED_Unboxing | 29 s | Unboxing Aurum Skin 📦 Así llega tu pedido: hecho en Argentina y con cada producto listo para brillar. ¿Cuál abrís primero? |
 | FEED_Ultra_Glitter | 14 s | Nuevo: Ultra Glitter ✨ Micropartículas de glitter para el cuerpo, el pelo y la ropa. Otro glow. $16.999 · Link en la bio |
-| FEED_Labios | 15 s | ¿Labios secos? 💋 Bálsamo labial para reparar y lip oil para un brillo jugoso. $9.999 cada uno · Link en la bio |
+| FEED_Labios | 15 s | ¿Labios secos? 💋 Bálsamo labial para reparar y lip oil para labios brillosos. $9.999 cada uno · Link en la bio |
 
 **Antes de publicar:** cargá el Ultra Glitter ($16.999) y el Kit Fiesta Glow ($63.900) en Shopify, porque los videos los nombran.

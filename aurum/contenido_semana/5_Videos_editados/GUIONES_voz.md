@@ -40,7 +40,7 @@ Grabá **un audio por video**, con el nombre del video. Hablá tranqui, como a u
 
 ## 5 · Kit Fiesta Glow (20 s, anuncio)
 - 0–2: ¿Plan de fiesta? Tenemos tu kit.
-- 2–5: Lip oil, para labios jugosos…
+- 2–5: Lip oil, para labios brillosos…
 - 5–9: sérum iluminador en la cara y las clavículas…
 - 9–12: resaltador en todo el cuerpo…
 - 12–15: y Ultra Glitter en el pelo, el cuerpo o la ropa.
@@ -55,7 +55,7 @@ Grabá **un audio por video**, con el nombre del video. Hablá tranqui, como a u
 - 8–11: Scrub Watermelon, para exfoliar el cuerpo.
 - 11–12: Bálsamo labial.
 - 12–16: El resaltador, para todo el cuerpo… mirá ese brillo.
-- 16–19: Lip oil, para labios jugosos.
+- 16–19: Lip oil, para labios brillosos.
 - 19–22: Sérum iluminador, para rostro y clavículas.
 - 22–27: Y lo nuevo: Ultra Glitter, para el cuerpo, el pelo y la ropa.
 - 27–30: Hecho en Argentina. Link en la bio.
@@ -71,7 +71,7 @@ Grabá **un audio por video**, con el nombre del video. Hablá tranqui, como a u
 ## 8 · Labios (14 s, feed)
 - 0–1: ¿Labios secos?
 - 1–5: El bálsamo labial de Aurum los repara.
-- 5–9: Y para un brillo jugoso, el lip oil.
+- 5–9: Y para labios brillosos, el lip oil.
 - 9–11: Mirá cómo quedan.
 - 11–14: Nueve mil novecientos noventa y nueve cada uno. Link en la bio.
 
