@@ -6,6 +6,7 @@
 |---|---|---|---|
 | V · Cinta (original) | Sigue | el que ya está | /products/mousse-autobronceante |
 | F · Glow en grande | Sigue | el que ya está | /products/mousse-autobronceante |
+| V · Cinta voz | Nuevo | finales/AD_Cinta.mp4 | /products/mousse-autobronceante |
 | V · Rutina glow | Nuevo | finales/Rutina_glow.mp4 | /products/mousse-autobronceante |
 | V · Unboxing | Nuevo | finales/FEED_Unboxing.mp4 | /collections/all |
 | V · Packs | Nuevo | finales/AD_Packs.mp4 | /products/mousse-autobronceante |
@@ -14,5 +15,5 @@
 | C · Carrusel novedades | Apagar | – | – |
 | F · Escalera packs | Apagar | – | – |
 
-Fuera de la campaña: Protectores, Cinta con voz y Ultra Glitter (este va al feed).
+Fuera de la campaña: Protectores y Ultra Glitter (este va al feed).
 En todos los nuevos: botón Comprar; Advantage+ creative sin música, sin variaciones de texto y sin expandir imagen.
