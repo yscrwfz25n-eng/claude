@@ -26,7 +26,7 @@ Ultra Glitter es un spray con micropartículas de glitter que le da a tu piel, t
 ## 2 · Kit Fiesta Glow
 - **Título:** Kit Fiesta Glow · Lip oil + Sérum iluminador + Resaltador + Ultra Glitter
 - **Precio:** $63.900 · **Precio tachado:** $76.996 (es la suma real de los 4 productos)
-- **Tipo de producto:** Kit · **Proveedor:** Aurum Skin · **Etiquetas:** kit, fiestas, regalo, glow
+- **Tipo de producto:** Kits · **Proveedor:** Aurum Skin · **Etiquetas:** kit, fiestas, regalo, glow
 - **Peso (para envíos):** 0,5 kg
 - **Handle (URL):** kit-fiesta-glow
 - **Título SEO:** Kit Fiesta Glow Aurum · Glow de pies a cabeza
