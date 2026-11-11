@@ -89,3 +89,11 @@ Si todo está bien: **Temas → tu copia → Publicar.**
 | `FEED_Unboxing.mp4` | Unboxing | (vacío) |
 
 Los videos arrancan solos sin sonido cuando aparecen en pantalla; con un toque se escuchan (y se silencian los demás).
+
+## 8. Recuadro de beneficios en el carrito
+1. **Editar código → snippets → Agregar un nuevo fragmento** → `aurum-cart-perks` → pegá `snippets/aurum-cart-perks.liquid`. Guardá.
+2. Abrí **snippets/cart-summary.liquid**, buscá `{% stylesheet %}` y pegá **justo arriba** (debajo del `</div>` que cierra el botón "Finalizar compra"):
+```liquid
+{% render 'aurum-cart-perks' %}
+```
+Aparece en el carrito lateral y en la página del carrito. Si el carrito suma menos de $39.999, muestra cuánto falta para el envío gratis.

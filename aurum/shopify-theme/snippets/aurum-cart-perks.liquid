@@ -1,0 +1,29 @@
+{%- comment -%}
+  Aurum · Beneficios en el carrito (carrito lateral y página del carrito).
+  Se muestra debajo del botón "Finalizar compra". Se agrega en snippets/cart-summary.liquid con:
+  {% render 'aurum-cart-perks' %}
+{%- endcomment -%}
+{%- assign au_min_sucursal = 3999900 -%}
+<div class="au-perks">
+  {%- if cart.item_count > 0 and cart.total_price < au_min_sucursal -%}
+    {%- assign au_falta = au_min_sucursal | minus: cart.total_price -%}
+    <p class="au-perks__goal">Te faltan <strong>{{ au_falta | money_without_trailing_zeros }}</strong> para el envío gratis 🚚</p>
+  {%- endif -%}
+  <ul class="au-perks__list">
+    <li><span aria-hidden="true">🚚</span> Envío gratis a sucursal desde $39.999</li>
+    <li><span aria-hidden="true">🏡</span> Gratis a domicilio llevando 2 ($54.900)</li>
+    <li><span aria-hidden="true">📦</span> Despacho en 24–48 hs con seguimiento Andreani</li>
+    <li><span aria-hidden="true">💳</span> Pagá con Mercado Pago o tarjeta en cuotas</li>
+  </ul>
+</div>
+
+<style>
+  .au-perks{margin-top:12px; padding:12px 14px; border-radius:14px;
+    border:1px solid rgb(var(--color-foreground-rgb) / .18);
+    background:rgb(var(--color-foreground-rgb) / .05)}
+  .au-perks__goal{margin:0 0 8px; padding-bottom:8px; font-size:.86rem; line-height:1.3;
+    border-bottom:1px dashed rgb(var(--color-foreground-rgb) / .2)}
+  .au-perks__list{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+  .au-perks__list li{display:flex; gap:8px; align-items:flex-start; font-size:.84rem; line-height:1.3}
+  .au-perks__list li span{flex:none; width:1.2em; text-align:center}
+</style>
