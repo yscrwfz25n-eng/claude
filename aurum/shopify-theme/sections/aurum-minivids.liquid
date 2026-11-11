@@ -1,0 +1,195 @@
+{%- comment -%} Aurum · Mini videos: fila de videos chiquitos; al tocar uno se abre grande con sonido (y se puede pasar al siguiente). {%- endcomment -%}
+<section class="au-sec au-sec--{{ section.settings.capsule }} au-mv" data-au-mv>
+  {%- if section.settings.heading != blank -%}
+    <p class="au-mv__title">{{ section.settings.heading }}</p>
+  {%- endif -%}
+
+  {%- if section.blocks.size == 0 -%}
+    <p class="au-small" style="text-align:center">Agregá videos con "Agregar bloque".</p>
+  {%- else -%}
+    <ul class="au-mv__rail">
+      {%- for block in section.blocks -%}
+        {%- assign vid = block.settings.video -%}
+        {%- assign p = block.settings.product -%}
+        <li class="au-mv__item" {{ block.shopify_attributes }}>
+          <button type="button" class="au-mv__thumb" data-au-mv-open="{{ forloop.index0 }}" aria-label="Ver video {{ block.settings.label | escape }}">
+            {%- if vid != blank -%}
+              {{ vid.preview_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.label }}
+            {%- endif -%}
+            <span class="au-mv__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          </button>
+          {%- if block.settings.label != blank -%}<span class="au-mv__label">{{ block.settings.label }}</span>{%- endif -%}
+          <template data-au-mv-src>
+            {%- if vid != blank -%}{{ vid | video_tag: controls: true, playsinline: true, preload: 'none', image_size: '720x', class: 'au-mv__v' }}{%- endif -%}
+            {%- if p != blank -%}
+              <a class="au-mv__buy" href="{{ p.url }}">{{ section.settings.buy_label | default: 'Comprar' }} · {{ p.title | split: ' · ' | first }} · {{ p.price | money_without_trailing_zeros }}</a>
+            {%- endif -%}
+          </template>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  <dialog class="au-mv__box" aria-label="Video">
+    <div class="au-mv__stage" data-au-mv-stage></div>
+    <button type="button" class="au-mv__btn au-mv__close" data-au-mv-close aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <button type="button" class="au-mv__btn au-mv__prev" data-au-mv-prev aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button type="button" class="au-mv__btn au-mv__next" data-au-mv-next aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </dialog>
+</section>
+
+<style>
+  .au-mv{padding-block:clamp(.8rem,2vw,1.2rem)}
+  .au-mv__title{text-align:center; font:700 clamp(1.05rem,2.4vw,1.3rem)/1.1 var(--au-font); letter-spacing:-.03em; color:var(--au-pink); margin:0 0 .8rem}
+  .au-mv__rail{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; list-style:none;
+    margin:0 calc(-1 * var(--au-pad-x)); padding:.2rem var(--au-pad-x) .4rem; justify-content:safe center}
+  .au-mv__rail::-webkit-scrollbar{display:none}
+  .au-mv__item{flex:0 0 auto; width:clamp(84px,22vw,112px); scroll-snap-align:start; display:grid; gap:6px; justify-items:center}
+  .au-mv__thumb{position:relative; width:100%; aspect-ratio:9/16; border-radius:18px; overflow:hidden; padding:0; cursor:pointer;
+    border:2px solid var(--au-pink); background:var(--au-pink); box-shadow:0 8px 18px rgba(59,4,8,.18); transition:transform .3s var(--au-ease)}
+  .au-mv__thumb:hover{transform:translateY(-3px)}
+  .au-sec .au-mv__thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .au-mv__play{position:absolute; inset:0; margin:auto; width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+    background:rgba(249,212,211,.92); color:#3B0408; box-shadow:0 4px 10px rgba(0,0,0,.25)}
+  .au-mv__play svg{width:15px; height:15px; margin-left:2px}
+  .au-mv__label{font:600 .72rem/1.15 var(--au-font); color:var(--au-pink); text-align:center; letter-spacing:-.01em}
+
+  .au-mv__box{border:0; padding:0; margin:auto; width:100vw; height:100dvh; max-width:none; max-height:none; background:transparent; color:#fff}
+  .au-mv__box::backdrop{background:rgba(16,2,10,.88); backdrop-filter:blur(6px)}
+  .au-mv__box[open]{display:grid; place-items:center}
+  .au-mv__stage{display:grid; justify-items:center; gap:12px; width:min(92vw, calc(82dvh * 9 / 16))}
+  .au-mv__stage .au-mv__v{width:100%; max-height:82dvh; aspect-ratio:9/16; object-fit:cover; border-radius:22px; background:#000; display:block}
+  .au-mv__buy{display:inline-block; background:#F9D4D3; color:#3B0408; text-decoration:none; font:700 .9rem/1 "Inter Tight",Arial,sans-serif;
+    padding:.85em 1.3em; border-radius:999px; text-align:center}
+  .au-mv__btn{position:fixed; width:44px; height:44px; border-radius:50%; border:0; cursor:pointer; display:grid; place-items:center;
+    background:rgba(249,212,211,.95); color:#3B0408}
+  .au-mv__btn svg{width:20px; height:20px}
+  .au-mv__close{top:16px; right:16px}
+  .au-mv__prev{left:12px; top:50%; transform:translateY(-50%)}
+  .au-mv__next{right:12px; top:50%; transform:translateY(-50%)}
+  @media (max-width:600px){ .au-mv__prev,.au-mv__next{top:auto; bottom:16px; transform:none} }
+</style>
+
+<script>
+  (function () {
+    function init(root) {
+      (root.querySelectorAll ? root : document).querySelectorAll('[data-au-mv]').forEach(function (sec) {
+        if (sec.dataset.mvReady) return; sec.dataset.mvReady = '1';
+        var box = sec.querySelector('.au-mv__box');
+        var stage = sec.querySelector('[data-au-mv-stage]');
+        var items = Array.prototype.slice.call(sec.querySelectorAll('.au-mv__item'));
+        var idx = 0;
+        if (!box || !items.length) return;
+        if (box.parentElement !== document.body) document.body.appendChild(box); // que no lo recorte ningún contenedor
+
+        function show(i) {
+          idx = (i + items.length) % items.length;
+          var tpl = items[idx].querySelector('template[data-au-mv-src]');
+          stage.innerHTML = tpl ? tpl.innerHTML : '';
+          var v = stage.querySelector('video');
+          if (v) { v.preload = 'auto'; v.muted = false; var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; v.play(); }); }
+        }
+        function open(i) { if (typeof box.showModal === 'function') box.showModal(); else box.setAttribute('open', ''); document.documentElement.style.overflow = 'hidden'; show(i); }
+        function close() { stage.innerHTML = ''; if (box.open && box.close) box.close(); else box.removeAttribute('open'); document.documentElement.style.overflow = ''; }
+
+        sec.querySelectorAll('[data-au-mv-open]').forEach(function (b) {
+          b.addEventListener('click', function () { open(parseInt(b.getAttribute('data-au-mv-open'), 10)); });
+        });
+        box.querySelector('[data-au-mv-close]').addEventListener('click', close);
+        box.querySelector('[data-au-mv-prev]').addEventListener('click', function () { show(idx - 1); });
+        box.querySelector('[data-au-mv-next]').addEventListener('click', function () { show(idx + 1); });
+        box.addEventListener('click', function (e) { if (e.target === box) close(); });
+        box.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+        document.addEventListener('keydown', function (e) {
+          if (!box.open) return;
+          if (e.key === 'ArrowRight') show(idx + 1);
+          if (e.key === 'ArrowLeft') show(idx - 1);
+        });
+        var sx = null;
+        box.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+        box.addEventListener('touchend', function (e) {
+          if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; sx = null;
+          if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+        });
+      });
+    }
+    if (document.readyState !== 'loading') init(document); else document.addEventListener('DOMContentLoaded', function () { init(document); });
+    document.addEventListener('shopify:section:load', function (e) { init(e.target); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Aurum · Mini videos",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula bordó",
+      "default": "middle",
+      "options": [
+        { "value": "start", "label": "Inicio" },
+        { "value": "middle", "label": "Medio" },
+        { "value": "end", "label": "Final" },
+        { "value": "single", "label": "Cápsula sola" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título (opcional)",
+      "default": "Miralo en acción ✨"
+    },
+    {
+      "type": "text",
+      "id": "buy_label",
+      "label": "Texto del botón de compra",
+      "default": "Comprar"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Subilo antes en Contenido → Archivos. Vertical (9:16)."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nombre corto debajo",
+          "info": "Ej.: Rutina, Antes/después, Unboxing"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto para el botón Comprar (opcional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Aurum · Mini videos",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

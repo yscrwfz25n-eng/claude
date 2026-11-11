@@ -97,3 +97,8 @@ Los videos arrancan solos sin sonido cuando aparecen en pantalla; con un toque s
 {% render 'aurum-cart-perks' %}
 ```
 Aparece en el carrito lateral y en la página del carrito. Si el carrito suma menos de $39.999, muestra cuánto falta para el envío gratis.
+
+## 9. Mini videos entre "Lista + foto" y "Elegí tu promo"
+1. **Editar código → sections → New file** → `aurum-minivids.liquid` → pegá el contenido de `sections/aurum-minivids.liquid`. Guardá.
+2. **Personalizar → Página de inicio → Agregar sección → Aurum · Mini videos.** Arrastrala entre **Aurum · Lista + foto** y **Aurum · Promos**. Lugar en la cápsula: **Medio**.
+3. En cada bloque: video (subido en Contenido → Archivos), nombre corto y producto para el botón Comprar.
