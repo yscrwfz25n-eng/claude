@@ -1,0 +1,244 @@
+{%- comment -%} Aurum · Videos: carrusel de videos verticales que se reproducen solos (sin sonido) y con un toque suenan. Cada video puede llevar su producto debajo. {%- endcomment -%}
+<section class="au-sec au-sec--{{ section.settings.capsule }} au-vids" id="{{ section.settings.anchor | default: section.id }}" data-au-vids data-autoplay="{{ section.settings.autoplay }}">
+  {%- if section.settings.heading != blank or section.settings.text != blank -%}
+    <div class="au-head au-reveal">
+      {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size == 0 -%}
+    <p class="au-small" style="text-align:center">Agregá videos con "Agregar bloque" en la configuración de esta sección.</p>
+  {%- else -%}
+    <ul class="au-rail au-vids__rail" data-au-rail>
+      {%- for block in section.blocks -%}
+        {%- assign p = block.settings.product -%}
+        <li class="au-vid au-reveal" {{ block.shopify_attributes }}>
+          <div class="au-vid__media" data-au-vid>
+            {%- if block.settings.video != blank -%}
+              {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '540x', class: 'au-vid__v' }}
+              <button type="button" class="au-vid__play" aria-label="Reproducir con sonido">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+              </button>
+              <button type="button" class="au-vid__snd" aria-label="Activar sonido">
+                <svg class="au-vid__off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="none"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+                <svg class="au-vid__on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="none"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+              </button>
+            {%- else -%}
+              <span class="au-vid__empty">Elegí un video</span>
+            {%- endif -%}
+            {%- if block.settings.label != blank -%}<span class="au-vid__label">{{ block.settings.label }}</span>{%- endif -%}
+          </div>
+
+          {%- if p != blank -%}
+            {%- assign v = p.selected_or_first_available_variant -%}
+            <div class="au-vid__prod">
+              <a class="au-vid__thumb" href="{{ p.url }}">
+                {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}
+              </a>
+              <div class="au-vid__info">
+                <a class="au-prod__title" href="{{ p.url }}">{{ p.title | split: ' · ' | first }}</a>
+                <span class="au-prod__price">{{ p.price | money_without_trailing_zeros }}{% if p.compare_at_price > p.price %}<s>{{ p.compare_at_price | money_without_trailing_zeros }}</s>{% endif %}</span>
+              </div>
+              {%- if section.settings.quick_add and p.has_only_default_variant and v.available -%}
+                <form method="post" action="{{ routes.cart_add_url }}">
+                  <input type="hidden" name="id" value="{{ v.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="au-prod__add">Sumar</button>
+                </form>
+              {%- else -%}
+                <a class="au-prod__add" href="{{ p.url }}" style="text-decoration:none">Ver</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="au-nav">
+      <button class="au-round" type="button" data-au-prev aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button class="au-round" type="button" data-au-next aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  .au-vids .au-vids__rail .au-vid{flex:0 0 clamp(158px,42vw,232px); scroll-snap-align:start; list-style:none}
+  .au-vid__media{position:relative; aspect-ratio:9/16; border-radius:26px; overflow:hidden; background:var(--au-pink); box-shadow:0 14px 30px rgba(59,4,8,.18); isolation:isolate}
+  .au-sec .au-vid__v{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+  .au-vid__play{position:absolute; inset:0; margin:auto; width:58px; height:58px; border-radius:50%; border:0; cursor:pointer; display:grid; place-items:center;
+    background:rgba(249,212,211,.92); color:var(--au-pink); box-shadow:0 6px 18px rgba(0,0,0,.25); transition:transform .3s var(--au-ease), opacity .3s; z-index:2}
+  .au-vid__play svg{width:24px; height:24px; margin-left:3px}
+  .au-vid__play:hover{transform:scale(1.08)}
+  .au-vid.is-playing .au-vid__play{opacity:0; pointer-events:none}
+  .au-vid__snd{position:absolute; right:10px; bottom:10px; width:36px; height:36px; border-radius:50%; border:0; cursor:pointer; display:grid; place-items:center;
+    background:rgba(59,4,8,.55); color:#fff; z-index:2; opacity:0; transition:opacity .3s}
+  .au-vid__snd svg{width:18px; height:18px}
+  .au-vid.is-playing .au-vid__snd{opacity:1}
+  .au-vid__on{display:none} .au-vid.has-sound .au-vid__on{display:block} .au-vid.has-sound .au-vid__off{display:none}
+  .au-vid__label{position:absolute; left:10px; top:10px; z-index:2; max-width:calc(100% - 20px); background:rgba(59,4,8,.62); color:#fff; font:600 .72rem/1.2 var(--au-font); letter-spacing:.02em; padding:.4em .75em; border-radius:999px; backdrop-filter:blur(4px)}
+  .au-vid__empty{position:absolute; inset:0; display:grid; place-items:center; font:600 .9rem var(--au-font); color:var(--au-wine)}
+  .au-vid__prod{display:flex; align-items:center; gap:.55rem; margin-top:.7rem}
+  .au-vid__thumb{flex:none; width:44px; height:44px; border-radius:12px; overflow:hidden; background:#fff}
+  .au-sec .au-vid__thumb img{width:100%; height:100%; object-fit:contain}
+  .au-vid__info{flex:1; min-width:0}
+  .au-vid__info .au-prod__title{display:block; font-size:.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .au-vid__info .au-prod__price{font-size:.78rem}
+  .au-vid__prod .au-prod__add{font-size:.72rem; padding:.5em .85em}
+</style>
+
+<script>
+  (function () {
+    function initVids(root) {
+      (root.querySelectorAll ? root : document).querySelectorAll('[data-au-vids]').forEach(function (sec) {
+        if (sec.dataset.vReady) return; sec.dataset.vReady = '1';
+        var cards = Array.prototype.slice.call(sec.querySelectorAll('.au-vid'));
+        var auto = sec.dataset.autoplay === 'true' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var current = null; // video que suena
+
+        function vidOf(card) { return card.querySelector('video'); }
+        function stopSound(except) {
+          cards.forEach(function (c) {
+            if (c === except) return;
+            var v = vidOf(c); if (!v) return;
+            v.muted = true; c.classList.remove('has-sound');
+            if (!auto) { v.pause(); c.classList.remove('is-playing'); }
+          });
+        }
+        function playMuted(card) {
+          var v = vidOf(card); if (!v || card.classList.contains('has-sound')) return;
+          v.muted = true; v.preload = 'auto';
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+          card.classList.add('is-playing');
+        }
+        function pause(card) {
+          var v = vidOf(card); if (!v) return;
+          v.pause(); card.classList.remove('is-playing', 'has-sound'); v.muted = true;
+          if (current === card) current = null;
+        }
+        function playSound(card) {
+          var v = vidOf(card); if (!v) return;
+          stopSound(card); current = card;
+          v.muted = false; v.preload = 'auto';
+          if (!card.classList.contains('has-sound')) { try { v.currentTime = 0; } catch (e) {} }
+          var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; v.play(); });
+          card.classList.add('is-playing', 'has-sound');
+        }
+
+        cards.forEach(function (card) {
+          var v = vidOf(card); if (!v) return;
+          card.querySelector('.au-vid__play').addEventListener('click', function () { playSound(card); });
+          card.querySelector('.au-vid__snd').addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (card.classList.contains('has-sound')) { v.muted = true; card.classList.remove('has-sound'); }
+            else playSound(card);
+          });
+          v.addEventListener('click', function () {
+            if (!card.classList.contains('has-sound')) playSound(card);
+            else if (v.paused) v.play(); else { v.pause(); card.classList.remove('is-playing'); }
+          });
+        });
+
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var card = en.target;
+              if (en.isIntersecting && en.intersectionRatio > 0.6) { if (auto) playMuted(card); }
+              else if (!en.isIntersecting || en.intersectionRatio < 0.25) pause(card);
+            });
+          }, { threshold: [0, 0.25, 0.6, 1] });
+          cards.forEach(function (c) { if (vidOf(c)) io.observe(c); });
+        }
+      });
+    }
+    if (document.readyState !== 'loading') initVids(document); else document.addEventListener('DOMContentLoaded', function () { initVids(document); });
+    document.addEventListener('shopify:section:load', function (e) { initVids(e.target); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Aurum · Videos",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula bordó",
+      "default": "middle",
+      "options": [
+        { "value": "start", "label": "Inicio" },
+        { "value": "middle", "label": "Medio" },
+        { "value": "end", "label": "Final" },
+        { "value": "single", "label": "Cápsula sola" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Mirá cómo queda"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Tocá un video para escucharlo.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Reproducir solos (sin sonido) al aparecer en pantalla",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "quick_add",
+      "label": "Botón para sumar al carrito",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Nombre del ancla (para links)",
+      "info": "Ej.: videos → se puede enlazar con #videos"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Subilo antes en Contenido → Archivos. Vertical (9:16)."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etiqueta arriba (opcional)",
+          "info": "Ej.: Rutina glow, Unboxing"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto que se muestra debajo (opcional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Aurum · Videos",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -71,3 +71,21 @@ En **Vista previa**, en la compu y en el celular, revisá:
 - [ ] Nada se corta en el celular.
 
 Si todo está bien: **Temas → tu copia → Publicar.**
+
+
+## 7. Carrusel de videos (Aurum · Videos)
+1. **Editar código → sections → Agregar una nueva sección** → nombre `aurum-videos` → borrá el ejemplo y pegá el contenido de `sections/aurum-videos.liquid`. Guardá.
+2. **Contenido → Archivos → Subir archivos:** subí los videos verticales (están en `contenido_semana/5_Videos_editados/finales/`).
+3. **Personalizar → Página de inicio → Agregar sección → Aurum · Videos.** Arrastrala justo debajo de **Aurum · Selector de promos**. Lugar en la cápsula: **Medio**.
+4. En cada bloque **Video** elegí el video, una etiqueta corta y el producto que aparece debajo:
+
+| Video | Etiqueta | Producto |
+|---|---|---|
+| `Rutina_glow.mp4` | Rutina glow | Iluminador Corporal Aurum |
+| `AD_Cinta.mp4` | Antes y después | Iluminador Corporal Aurum |
+| `AD_Kit_Fiesta_Glow.mp4` | Kit Fiesta Glow | Kit Fiesta Glow |
+| `FEED_Ultra_Glitter.mp4` | Ultra Glitter | Ultra Glitter |
+| `FEED_Labios.mp4` | Labios | Lip Oil |
+| `FEED_Unboxing.mp4` | Unboxing | (vacío) |
+
+Los videos arrancan solos sin sonido cuando aparecen en pantalla; con un toque se escuchan (y se silencian los demás).
