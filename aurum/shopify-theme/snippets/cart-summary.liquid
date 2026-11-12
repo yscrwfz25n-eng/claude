@@ -253,13 +253,13 @@
 </div>
 
 <div class="au-perks">
-  {%- if cart.item_count > 0 and cart.total_price < 3999900 -%}
-    {%- assign au_falta = 3999900 | minus: cart.total_price -%}
+  {%- if cart.item_count > 0 and cart.total_price < 3500000 -%}
+    {%- assign au_falta = 3500000 | minus: cart.total_price -%}
     <p class="au-perks__goal">Te faltan <strong>{{ au_falta | money_without_trailing_zeros }}</strong> para el envío gratis 🚚</p>
   {%- endif -%}
   <ul class="au-perks__list">
-    <li><span>🚚</span> Envío gratis a sucursal desde $39.999</li>
-    <li><span>🏡</span> Gratis a domicilio llevando 2 resaltadores ($54.900)</li>
+    <li><span>🚚</span> Retiro gratis en sucursal Andreani desde $35.000</li>
+    <li><span>🏡</span> Envío gratis a domicilio desde $49.000</li>
     <li><span>📦</span> Despacho en 24–48 hs con seguimiento Andreani</li>
     <li><span>💳</span> Pagá con Mercado Pago o tarjeta en cuotas</li>
   </ul>
@@ -270,6 +270,8 @@
   .au-perks__list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
   .au-perks__list li{display:flex;gap:8px;align-items:flex-start;font-size:.84rem;line-height:1.3}
   .au-perks__list li span{flex:none;width:1.2em;text-align:center}
+  .cart__ctas .cart__checkout-button{background:#3B0408!important;color:#F9D4D3!important;border:0!important;border-radius:999px!important;font-weight:700}
+  .cart__ctas .cart__checkout-button:hover{background:#5A0B12!important}
 </style>
 
 <div class="cart__ctas">

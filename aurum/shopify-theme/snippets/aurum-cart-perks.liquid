@@ -3,15 +3,15 @@
   Se muestra debajo del botón "Finalizar compra". Se agrega en snippets/cart-summary.liquid con:
   {% render 'aurum-cart-perks' %}
 {%- endcomment -%}
-{%- assign au_min_sucursal = 3999900 -%}
+{%- assign au_min_sucursal = 3500000 -%}
 <div class="au-perks">
   {%- if cart.item_count > 0 and cart.total_price < au_min_sucursal -%}
     {%- assign au_falta = au_min_sucursal | minus: cart.total_price -%}
     <p class="au-perks__goal">Te faltan <strong>{{ au_falta | money_without_trailing_zeros }}</strong> para el envío gratis 🚚</p>
   {%- endif -%}
   <ul class="au-perks__list">
-    <li><span aria-hidden="true">🚚</span> Envío gratis a sucursal desde $39.999</li>
-    <li><span aria-hidden="true">🏡</span> Gratis a domicilio llevando 2 resaltadores ($54.900)</li>
+    <li><span aria-hidden="true">🚚</span> Retiro gratis en sucursal Andreani desde $35.000</li>
+    <li><span aria-hidden="true">🏡</span> Envío gratis a domicilio desde $49.000</li>
     <li><span aria-hidden="true">📦</span> Despacho en 24–48 hs con seguimiento Andreani</li>
     <li><span aria-hidden="true">💳</span> Pagá con Mercado Pago o tarjeta en cuotas</li>
   </ul>
