@@ -25,7 +25,7 @@
             {%- when 'video' -%}{{ first_media | video_tag: controls: true, playsinline: true, loop: true, muted: true, autoplay: true, preload: 'metadata', image_size: '1200x' }}
             {%- when 'external_video' -%}{{ first_media | external_video_tag }}
             {%- when 'model' -%}{{ first_media | model_viewer_tag }}
-            {%- else -%}{{ first_media | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
+            {%- else -%}<img data-au-main src="{{ first_media | image_url: width: 1200 }}" width="1200" height="1200" alt="{{ first_media.alt | default: product.title | escape }}" loading="eager">
           {%- endcase -%}
         {%- else -%}
           <span class="au-prod__nophoto">{{ product.title }}</span>
@@ -45,7 +45,7 @@
                 {%- when 'video' -%}{{ media | video_tag: controls: true, playsinline: true, loop: true, preload: 'metadata', image_size: '1200x' }}
                 {%- when 'external_video' -%}{{ media | external_video_tag }}
                 {%- when 'model' -%}{{ media | model_viewer_tag }}
-                {%- else -%}{{ media | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product.title }}
+                {%- else -%}<img data-au-main src="{{ media | image_url: width: 1200 }}" width="1200" height="1200" alt="{{ media.alt | default: product.title | escape }}">
               {%- endcase -%}
             </template>
           {%- endfor -%}
