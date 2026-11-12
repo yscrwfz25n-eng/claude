@@ -17,10 +17,16 @@
 -%}
 <section class="au-sec au-sec--{{ section.settings.capsule }}">
   <div class="au-pdp">
-    <div class="au-pdp__gallery" data-au-gallery>
-      <div class="au-pdp__main">
-        {%- if product.featured_media -%}
-          <img data-au-main src="{{ product.featured_media | image_url: width: 1200 }}" width="1200" height="1200" alt="{{ product.featured_media.alt | default: product.title | escape }}" loading="eager">
+    <div class="au-pdp__gallery" data-au-gallery2>
+      {%- assign first_media = product.featured_media -%}
+      <div class="au-pdp__main{% if first_media.media_type == 'video' or first_media.media_type == 'external_video' %} is-video{% endif %}" data-au-stage>
+        {%- if first_media -%}
+          {%- case first_media.media_type -%}
+            {%- when 'video' -%}{{ first_media | video_tag: controls: true, playsinline: true, loop: true, muted: true, autoplay: true, preload: 'metadata', image_size: '1200x' }}
+            {%- when 'external_video' -%}{{ first_media | external_video_tag }}
+            {%- when 'model' -%}{{ first_media | model_viewer_tag }}
+            {%- else -%}{{ first_media | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
+          {%- endcase -%}
         {%- else -%}
           <span class="au-prod__nophoto">{{ product.title }}</span>
         {%- endif -%}
@@ -28,14 +34,53 @@
       {%- if product.media.size > 1 -%}
         <div class="au-pdp__thumbs">
           {%- for media in product.media -%}
-            {%- if media.media_type == 'image' -%}
-              <button type="button" class="au-pdp__thumb" data-src="{{ media | image_url: width: 1200 }}" aria-label="Ver imagen {{ forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
-                <img src="{{ media | image_url: width: 200 }}" width="100" height="100" alt="" loading="lazy">
-              </button>
-            {%- endif -%}
+            {%- assign is_vid = false -%}
+            {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}{%- assign is_vid = true -%}{%- endif -%}
+            <button type="button" class="au-pdp__thumb{% if is_vid %} au-pdp__thumb--vid{% endif %}" data-au-thumb="{{ forloop.index0 }}" aria-label="Ver {% if is_vid %}video{% else %}imagen{% endif %} {{ forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
+              {%- if media.preview_image -%}{{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              {%- if is_vid -%}<span class="au-pdp__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>{%- endif -%}
+            </button>
+            <template data-au-media="{{ forloop.index0 }}" data-vid="{{ is_vid }}">
+              {%- case media.media_type -%}
+                {%- when 'video' -%}{{ media | video_tag: controls: true, playsinline: true, loop: true, preload: 'metadata', image_size: '1200x' }}
+                {%- when 'external_video' -%}{{ media | external_video_tag }}
+                {%- when 'model' -%}{{ media | model_viewer_tag }}
+                {%- else -%}{{ media | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product.title }}
+              {%- endcase -%}
+            </template>
           {%- endfor -%}
         </div>
       {%- endif -%}
+      <style>
+        .au-sec .au-pdp__main video, .au-sec .au-pdp__main iframe{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0; display:block}
+        .au-pdp__main.is-video{aspect-ratio:4/5; background:#000}
+        .au-pdp__thumb{position:relative}
+        .au-pdp__play{position:absolute; inset:0; margin:auto; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:rgba(249,212,211,.92); color:#3B0408}
+        .au-pdp__play svg{width:12px; height:12px; margin-left:2px}
+      </style>
+      <script>
+        (function () {
+          function init(root) {
+            (root.querySelectorAll ? root : document).querySelectorAll('[data-au-gallery2]').forEach(function (g) {
+              if (g.dataset.ready) return; g.dataset.ready = '1';
+              var stage = g.querySelector('[data-au-stage]');
+              g.querySelectorAll('[data-au-thumb]').forEach(function (t) {
+                t.addEventListener('click', function () {
+                  var tpl = g.querySelector('template[data-au-media="' + t.getAttribute('data-au-thumb') + '"]');
+                  if (!tpl || !stage) return;
+                  stage.innerHTML = tpl.innerHTML;
+                  stage.classList.toggle('is-video', tpl.getAttribute('data-vid') === 'true');
+                  var v = stage.querySelector('video'); if (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                  g.querySelectorAll('[data-au-thumb]').forEach(function (x) { x.removeAttribute('aria-current'); });
+                  t.setAttribute('aria-current', 'true');
+                });
+              });
+            });
+          }
+          if (document.readyState !== 'loading') init(document); else document.addEventListener('DOMContentLoaded', function () { init(document); });
+          document.addEventListener('shopify:section:load', function (e) { init(e.target); });
+        })();
+      </script>
     </div>
 
     <div class="au-pdp__info">
