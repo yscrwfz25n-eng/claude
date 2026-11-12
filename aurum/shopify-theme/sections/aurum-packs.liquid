@@ -29,11 +29,7 @@
               assign compare_cents = product.price | times: qty
               assign off = compare_cents | minus: price_cents | times: 100 | divided_by: compare_cents
               assign unit_cents = price_cents | divided_by: qty
-              if qty == 1
-                assign cta = 'Comprar 1 unidad'
-              else
-                assign cta = 'Comprar ' | append: qty | append: ' unidades'
-              endif
+              assign cta = 'Ver'
             -%}
             <button type="button" {{ block.shopify_attributes }} data-pack
               data-qty="{{ qty }}" data-price="{{ price_cents | money_without_trailing_zeros }}"
@@ -49,14 +45,8 @@
         <div class="au-old" data-au-old></div>
         <div class="au-small" data-au-unit></div>
         <div class="au-ship" data-au-ship></div>
-        <form method="post" action="{{ routes.cart_add_url }}" style="display:grid; gap:.6rem; justify-items:start">
-          <input type="hidden" name="id" value="{{ variant.id }}">
-          <input type="hidden" name="quantity" value="1" data-au-qty>
-          <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
-          <button type="submit" class="au-btn au-btn--wine" data-au-cta {% unless variant.available %}disabled{% endunless %}>
-            {%- if variant.available -%}Comprar{%- else -%}Sin stock{%- endif -%}
-          </button>
-        </form>
+        <input type="hidden" value="1" data-au-qty>
+        <a class="au-btn au-btn--wine" href="{{ product.url }}" data-au-cta style="text-decoration:none">Ver</a>
         {%- if section.settings.note != blank -%}<span class="au-small">{{ section.settings.note }}</span>{%- endif -%}
       </div>
     </div>
