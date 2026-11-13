@@ -138,7 +138,7 @@ RETOS = [
     ("Contale tu anécdota sexual más zarpada.", True),
     ("Hacele un masaje en la espalda, sin remera, durante 2 minutos.", True),
     ("Dale el beso más apasionado que le diste en tu vida.", True),
-    ("Subí una historia con tu pareja y la frase que elija tu pareja.", False),
+    ("Subí una historia con tu pareja.", False),
 ]
 
 INSTRUCCIONES = [
