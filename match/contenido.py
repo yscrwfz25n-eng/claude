@@ -1,7 +1,7 @@
 """Contenido de MATCH (juego de preguntas y retos para parejas, +18).
 
 Dos mazos mezclados (sin niveles):
-- 90 Preguntas en un solo mazo. Si la carta no dice nada, responden los dos.
+- 90 Preguntas en un solo mazo. Si la carta no dice nada, responde quien la sacó.
   Si dice «responde tu pareja», la pareja adivina la respuesta de quien lee;
   si falla, levanta un Reto.
   Las marcadas con True son +18 (🔥).
