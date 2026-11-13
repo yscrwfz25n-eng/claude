@@ -135,7 +135,7 @@ RETOS = [
     ("Mandale a tu pareja una foto que nunca le mandarías, aunque esté al lado.", True),
     ("Durante un minuto tu pareja te toca y no podés hacer ningún ruido.", True),
     ("Besale el cuello y bajá hasta donde tu pareja te frene.", True),
-    ("Contale tu anécdota sexual más zarpada.", True),
+    ("Contale qué pensaste la primera vez que viste a tu pareja sin ropa.", True),
     ("Hacele un masaje en la espalda, sin remera, durante 2 minutos.", True),
     ("Dale el beso más apasionado que le diste en tu vida.", True),
     ("Subí una historia con tu pareja.", False),
