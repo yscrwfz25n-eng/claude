@@ -144,7 +144,7 @@ RETOS = [
 INSTRUCCIONES = [
     ("Preparación", "Mezclen las Preguntas y los Retos en dos mazos separados."),
     ("Por turnos", "Sacá una Pregunta y leela en voz alta."),
-    ("Si la carta no dice nada", "Responden los dos."),
+    ("Si la carta no dice nada", "Responde quien la sacó."),
     ("Si dice «responde tu pareja»", "La pregunta es sobre vos y tu pareja tiene que adivinar. "
                                     "Si acierta: ¡Match! Si responde mal, levanta un Reto."),
     ("¿No querés responder?", "Levantás un Reto. Si no te animás al Reto, sacá otro."),
