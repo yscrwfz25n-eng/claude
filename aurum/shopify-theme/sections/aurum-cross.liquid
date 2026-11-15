@@ -1,0 +1,110 @@
+{%- comment -%} Aurum · Cruce: en la página de Productos muestra un carrusel de Kits, y en la de Kits un carrusel de Productos. Una sola sección para las dos páginas. {%- endcomment -%}
+{%- liquid
+  assign on_kits = false
+  if collection and section.settings.kits_collection != blank and collection.handle == section.settings.kits_collection.handle
+    assign on_kits = true
+  endif
+  if on_kits
+    assign show = section.settings.products_collection
+    assign heading = section.settings.heading_on_kits
+    assign intro = section.settings.text_on_kits
+    assign btn = section.settings.button_on_kits
+  else
+    assign show = section.settings.kits_collection
+    assign heading = section.settings.heading_on_products
+    assign intro = section.settings.text_on_products
+    assign btn = section.settings.button_on_products
+  endif
+-%}
+<section class="au-sec au-sec--{{ section.settings.capsule }} au-cross">
+  {%- if show == blank -%}
+    <p class="au-small" style="text-align:center">Elegí la colección de Productos y la de Kits en la configuración de esta sección.</p>
+  {%- else -%}
+    <div class="au-head au-reveal">
+      {%- if heading != blank -%}<h2 class="au-twinkle">{{ heading }}</h2>{%- endif -%}
+      {%- if intro != blank -%}<div class="au-rte"><p>{{ intro }}</p></div>{%- endif -%}
+    </div>
+
+    <ul class="au-rail" data-au-rail>
+      {%- for product in show.products limit: section.settings.limit -%}
+        {%- assign v = product.selected_or_first_available_variant -%}
+        <li class="au-prod au-reveal">
+          <a class="au-prod__media" href="{{ product.url }}">
+            {%- if product.tags contains 'nuevo' -%}<span class="au-badge">Nuevo</span>{%- endif -%}
+            {%- if product.featured_media -%}
+              {{ product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '250px', alt: product.title }}
+            {%- else -%}
+              <span class="au-prod__nophoto">{{ product.title | split: ' · ' | first }}</span>
+            {%- endif -%}
+          </a>
+          <div class="au-prod__meta">
+            <div>
+              <a class="au-prod__title" href="{{ product.url }}">{{ product.title | split: ' · ' | first }}</a>
+              <span class="au-prod__price">{{ product.price | money_without_trailing_zeros }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money_without_trailing_zeros }}</s>{% endif %}</span>
+            </div>
+            {%- if product.has_only_default_variant and v.available -%}
+              <form method="post" action="{{ routes.cart_add_url }}">
+                <input type="hidden" name="id" value="{{ v.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="au-prod__add">Sumar</button>
+              </form>
+            {%- else -%}
+              <a class="au-prod__add" href="{{ product.url }}" style="text-decoration:none">Ver</a>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="au-cross__foot">
+      <div class="au-nav">
+        <button class="au-round" type="button" data-au-prev aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="au-round" type="button" data-au-next aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      {%- if btn != blank -%}<a class="au-btn au-btn--pink" href="{{ show.url }}">{{ btn }}</a>{%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  .au-cross__foot{display:flex; flex-direction:column; align-items:center; gap:1.1rem; margin-top:.4rem}
+  .au-cross__foot .au-nav{margin-top:0}
+  .au-sec a.au-prod__add{color:var(--au-wine)}
+</style>
+
+{% schema %}
+{
+  "name": "Aurum · Cruce",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula bordó",
+      "default": "end",
+      "options": [
+        { "value": "start", "label": "Inicio" },
+        { "value": "middle", "label": "Medio" },
+        { "value": "end", "label": "Final" },
+        { "value": "single", "label": "Cápsula sola" }
+      ]
+    },
+    { "type": "collection", "id": "products_collection", "label": "Colección de Productos" },
+    { "type": "collection", "id": "kits_collection", "label": "Colección de Kits" },
+    { "type": "range", "id": "limit", "label": "Cantidad en el carrusel", "min": 3, "max": 12, "step": 1, "default": 8 },
+    { "type": "header", "content": "Lo que se ve en la página de Productos" },
+    { "type": "text", "id": "heading_on_products", "label": "Título", "default": "Mirá nuestros kits" },
+    { "type": "text", "id": "text_on_products", "label": "Texto", "default": "Productos que se combinan, armados para usar juntos o para regalar." },
+    { "type": "text", "id": "button_on_products", "label": "Botón", "default": "Ver todos los kits" },
+    { "type": "header", "content": "Lo que se ve en la página de Kits" },
+    { "type": "text", "id": "heading_on_kits", "label": "Título", "default": "¿Buscás algo puntual?" },
+    { "type": "text", "id": "text_on_kits", "label": "Texto", "default": "Todos nuestros productos, para elegir de a uno." },
+    { "type": "text", "id": "button_on_kits", "label": "Botón", "default": "Ver todos los productos" }
+  ],
+  "presets": [
+    {
+      "name": "Aurum · Cruce"
+    }
+  ]
+}
+{% endschema %}
