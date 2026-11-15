@@ -56,6 +56,11 @@
   {%- endif -%}
 </section>
 
+{%- comment -%} Solo en las páginas de colección (Productos y Kits): menos espacio arriba. El inicio no cambia. {%- endcomment -%}
+{%- if template.name == 'collection' -%}
+<style>#shopify-section-{{ section.id }} .au-sec{margin-top:clamp(1.2rem,3vw,2rem)}</style>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Aurum · Productos",
