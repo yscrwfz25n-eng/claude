@@ -15,6 +15,23 @@
     endif
   endfor
 -%}
+{%- liquid
+  assign rv_count = 0
+  assign rv_sum = 0
+  for block in section.blocks
+    if block.type == 'review'
+      if block.settings.product == blank or block.settings.product.id == product.id
+        assign rv_count = rv_count | plus: 1
+        assign rv_sum = rv_sum | plus: block.settings.rating
+      endif
+    endif
+  endfor
+  if rv_count > 0
+    assign rv_avg10 = rv_sum | times: 10 | divided_by: rv_count
+    assign rv_int = rv_avg10 | divided_by: 10
+    assign rv_dec = rv_avg10 | modulo: 10
+  endif
+-%}
 <section class="au-sec au-sec--{{ section.settings.capsule }}">
   <div class="au-pdp">
     <div class="au-pdp__gallery" data-au-gallery2>
@@ -86,6 +103,12 @@
     <div class="au-pdp__info">
       {%- if section.settings.eyebrow != blank -%}<span class="au-tag" style="justify-self:start">{{ section.settings.eyebrow }}</span>{%- endif -%}
       <h1 class="au-pdp__title">{{ product.title | split: ' · ' | first }}</h1>
+      {%- if rv_count > 0 -%}
+        <a class="au-rv-sum" href="#resenas-{{ section.id }}">
+          <span class="au-rv-stars" aria-hidden="true">{%- for i in (1..5) -%}<span class="{% if i <= rv_int %}on{% endif %}">★</span>{%- endfor -%}</span>
+          <span>{{ rv_int }},{{ rv_dec }} · {{ rv_count }} {% if rv_count == 1 %}reseña{% else %}reseñas{% endif %}</span>
+        </a>
+      {%- endif -%}
 
       {%- form 'product', product, class: 'au-pform' -%}
         <input type="hidden" name="id" value="{{ variant.id }}">
@@ -164,6 +187,50 @@
       </div>
     </div>
   </div>
+
+  {%- if rv_count > 0 -%}
+    <div class="au-rv" id="resenas-{{ section.id }}">
+      <div class="au-rv__head">
+        <h2>{{ section.settings.reviews_title | default: 'Lo que dicen nuestras clientas' }}</h2>
+        <div class="au-rv-sum au-rv-sum--big">
+          <span class="au-rv-stars" aria-hidden="true">{%- for i in (1..5) -%}<span class="{% if i <= rv_int %}on{% endif %}">★</span>{%- endfor -%}</span>
+          <span>{{ rv_int }},{{ rv_dec }} de 5 · {{ rv_count }} {% if rv_count == 1 %}reseña{% else %}reseñas{% endif %}</span>
+        </div>
+      </div>
+      <div class="au-rv__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            {%- if block.settings.product == blank or block.settings.product.id == product.id -%}
+              <article class="au-rv__card" {{ block.shopify_attributes }}>
+                <span class="au-rv-stars" aria-label="{{ block.settings.rating }} de 5">{%- for i in (1..5) -%}<span class="{% if i <= block.settings.rating %}on{% endif %}">★</span>{%- endfor -%}</span>
+                {%- if block.settings.text != blank -%}<p class="au-rv__text">{{ block.settings.text }}</p>{%- endif -%}
+                {%- if block.settings.photo != blank -%}
+                  {{ block.settings.photo | image_url: width: 500 | image_tag: loading: 'lazy', class: 'au-rv__photo', alt: block.settings.name }}
+                {%- endif -%}
+                <p class="au-rv__who"><b>{{ block.settings.name }}</b>{% if block.settings.city != blank %} · {{ block.settings.city }}{% endif %}{% if block.settings.verified %} <span class="au-rv__ok">✓ Compra verificada</span>{% endif %}</p>
+              </article>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+  <style>
+    .au-rv-sum{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:var(--au-pink); font-size:.92rem; font-weight:600}
+    .au-rv-stars{display:inline-flex; gap:1px; font-size:1.05rem; line-height:1; letter-spacing:0}
+    .au-rv-stars span{color:rgba(59,4,8,.22)}
+    .au-rv-stars span.on{color:#3B0408}
+    .au-rv{margin-top:clamp(2rem,5vw,3.4rem)}
+    .au-rv__head{display:grid; justify-items:center; gap:.6rem; text-align:center; margin-bottom:1.4rem}
+    .au-rv__head h2{font-size:clamp(1.8rem,4.6vw,2.8rem)}
+    .au-rv-sum--big .au-rv-stars{font-size:1.4rem}
+    .au-rv__grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr)); gap:14px}
+    .au-rv__card{background:rgba(255,255,255,.55); border-radius:24px; padding:1.1rem 1.2rem; display:grid; gap:.6rem; align-content:start}
+    .au-rv__text{font-size:.95rem; line-height:1.45; color:var(--au-pink-ink)}
+    .au-sec .au-rv__photo{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:16px}
+    .au-rv__who{font-size:.82rem; color:var(--au-pink)}
+    .au-rv__ok{display:inline-block; margin-left:.2rem; font-size:.72rem; font-weight:700; color:#3B0408; background:rgba(59,4,8,.08); padding:.15em .55em; border-radius:999px}
+  </style>
 </section>
 
 {% schema %}
@@ -211,6 +278,12 @@
       "type": "text",
       "id": "trust",
       "label": "Texto debajo de los botones"
+    },
+    {
+      "type": "text",
+      "id": "reviews_title",
+      "label": "Título de las reseñas",
+      "default": "Lo que dicen nuestras clientas"
     }
   ],
   "blocks": [
@@ -286,6 +359,19 @@
           "label": "Mostrar solo en el producto (opcional)",
           "info": "El final del link del producto, ej.: mousse-autobronceante. Vacío = en todos."
         }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Reseña",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre (ej.: Sofía M.)", "default": "Nombre" },
+        { "type": "text", "id": "city", "label": "Ciudad (opcional)" },
+        { "type": "range", "id": "rating", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Opinión (textual, como la escribió la clienta)" },
+        { "type": "image_picker", "id": "photo", "label": "Foto de la clienta (opcional)" },
+        { "type": "product", "id": "product", "label": "Producto de la reseña", "info": "Se muestra solo en ese producto. Vacío = en todos." },
+        { "type": "checkbox", "id": "verified", "label": "Compra verificada", "default": true }
       ]
     }
   ],
