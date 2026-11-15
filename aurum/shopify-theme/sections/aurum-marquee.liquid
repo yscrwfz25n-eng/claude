@@ -1,0 +1,85 @@
+{%- comment -%} Aurum · Cinta: banda con frases que pasan en movimiento. En la colección de Kits muestra sus propias frases. {%- endcomment -%}
+{%- liquid
+  assign raw = section.settings.phrases
+  if collection and section.settings.kits_collection != blank and section.settings.phrases_kits != blank
+    if collection.handle == section.settings.kits_collection.handle
+      assign raw = section.settings.phrases_kits
+    endif
+  endif
+  assign lines = raw | newline_to_br | split: '<br />'
+-%}
+{%- capture group -%}
+  {%- for n in (1..3) -%}
+    {%- for line in lines -%}
+      {%- assign t = line | strip -%}
+      {%- if t != blank -%}<span class="au-mq__item">{{ t }}</span><span class="au-mq__dot" aria-hidden="true">✦</span>{%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<div class="au-mq au-mq--{{ section.settings.style }}{% if section.settings.tilt %} au-mq--tilt{% endif %}" style="--au-mq-speed: {{ section.settings.speed }}s">
+  <div class="au-mq__track{% if section.settings.reverse %} au-mq__track--rev{% endif %}">
+    <div class="au-mq__group">{{ group }}</div>
+    <div class="au-mq__group" aria-hidden="true">{{ group }}</div>
+  </div>
+</div>
+
+<style>
+  .au-mq{position:relative; z-index:3; overflow:hidden; margin-block:clamp(1.5rem,4vw,2.5rem); padding-block:clamp(.75rem,1.8vw,1.05rem);
+    font-family:"Inter Tight","Helvetica Neue",Arial,system-ui,sans-serif}
+  .au-mq--rosa{background:#F9D4D3; color:#3B0408}
+  .au-mq--bordo{background:#3B0408; color:#F9D4D3; box-shadow:0 1.5px 0 rgba(236,140,165,.55), 0 -1.5px 0 rgba(236,140,165,.55)}
+  .au-mq--tilt{transform:rotate(-2deg); margin-inline:-2vw}
+  .au-mq__track{display:flex; width:max-content; animation:au-mq var(--au-mq-speed,30s) linear infinite}
+  .au-mq__track--rev{animation-direction:reverse}
+  .au-mq:hover .au-mq__track{animation-play-state:paused}
+  .au-mq__group{display:flex; align-items:center; flex:none}
+  .au-mq__item{font-weight:700; font-size:clamp(1.15rem,2.6vw,1.9rem); letter-spacing:-.04em; white-space:nowrap; padding-inline:clamp(.8rem,1.8vw,1.4rem)}
+  .au-mq__dot{font-size:clamp(.8rem,1.6vw,1.1rem); opacity:.7}
+  @keyframes au-mq{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){ .au-mq__track{animation:none} }
+</style>
+
+{% schema %}
+{
+  "name": "Aurum · Cinta",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "phrases",
+      "label": "Frases (una por línea)",
+      "default": "Brillo para el cuerpo\nGlow para el rostro\nProductos para el pelo\nLabios con brillo\nProtección solar"
+    },
+    {
+      "type": "collection",
+      "id": "kits_collection",
+      "label": "Colección de Kits",
+      "info": "En esta colección se muestran las frases de abajo en lugar de las de arriba."
+    },
+    {
+      "type": "textarea",
+      "id": "phrases_kits",
+      "label": "Frases para Kits (una por línea)",
+      "default": "Para regalar\nPara la noche\nPara el verano\nPara la playa\nPara empezar con Aurum"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Color",
+      "default": "rosa",
+      "options": [
+        { "value": "rosa", "label": "Rosa con letras bordó" },
+        { "value": "bordo", "label": "Bordó con letras rosa" }
+      ]
+    },
+    { "type": "range", "id": "speed", "label": "Velocidad (más alto = más lento)", "min": 10, "max": 60, "step": 2, "unit": "s", "default": 30 },
+    { "type": "checkbox", "id": "reverse", "label": "Que pase hacia la derecha", "default": false },
+    { "type": "checkbox", "id": "tilt", "label": "Inclinada", "default": false }
+  ],
+  "presets": [
+    {
+      "name": "Aurum · Cinta"
+    }
+  ]
+}
+{% endschema %}
