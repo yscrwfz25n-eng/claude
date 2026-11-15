@@ -2,10 +2,11 @@
 {%- comment -%} En una página de colección usa esa colección; si no, la elegida en la sección o todos los productos. {%- endcomment -%}
 {%- assign collection = section.settings.collection | default: collection | default: collections.all -%}
 {%- assign heading = section.settings.heading | default: collection.title -%}
+{%- assign intro = section.settings.text | default: collection.description -%}
 <section class="au-sec au-sec--{{ section.settings.capsule }}" id="{{ section.settings.anchor | default: section.id }}">
   <div class="au-head au-reveal">
     {%- if heading != blank -%}<h2 class="au-twinkle">{{ heading }}</h2>{%- endif -%}
-    {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+    {%- if intro != blank -%}<div class="au-rte">{{ intro }}</div>{%- endif -%}
   </div>
 
   {%- if collection == blank -%}

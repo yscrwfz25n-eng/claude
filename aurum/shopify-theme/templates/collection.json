@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "aurum-products",
+      "settings": {
+        "capsule": "single",
+        "heading": "",
+        "text": "",
+        "show": "all",
+        "layout": "grid",
+        "limit": 24,
+        "quick_add": true,
+        "anchor": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
