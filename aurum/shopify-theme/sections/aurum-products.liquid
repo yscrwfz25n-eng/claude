@@ -56,9 +56,10 @@
   {%- endif -%}
 </section>
 
-{%- comment -%} Solo en las páginas de colección (Productos y Kits): menos espacio arriba. El inicio no cambia. {%- endcomment -%}
+<style>.au-sec a.au-prod__add{color:var(--au-wine)}</style>
+{%- comment -%} Solo en las páginas de colección (Productos y Kits): menos espacio arriba y abajo. El inicio no cambia. {%- endcomment -%}
 {%- if template.name == 'collection' -%}
-<style>#shopify-section-{{ section.id }} .au-sec{margin-top:clamp(1.2rem,3vw,2rem)}</style>
+<style>#shopify-section-{{ section.id }} .au-sec{margin-top:clamp(1.2rem,3vw,2rem); margin-bottom:clamp(1.2rem,3vw,2rem)}</style>
 {%- endif -%}
 
 {% schema %}

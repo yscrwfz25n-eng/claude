@@ -51,6 +51,9 @@
     .au-pill__btn{width:100%; text-align:center}
   }
 </style>
+{%- if template.name == 'collection' -%}
+<style>#shopify-section-{{ section.id }} .au-sec{margin-top:clamp(1.2rem,3vw,2rem)}</style>
+{%- endif -%}
 
 {% schema %}
 {
