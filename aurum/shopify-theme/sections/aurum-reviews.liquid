@@ -1,0 +1,116 @@
+{%- comment -%} Aurum · Reseñas: opiniones reales de clientas de varios productos, con promedio de estrellas. Cada reseña es un bloque. {%- endcomment -%}
+{%- liquid
+  assign rv_count = 0
+  assign rv_sum = 0
+  for block in section.blocks
+    assign rv_count = rv_count | plus: 1
+    assign rv_sum = rv_sum | plus: block.settings.rating
+  endfor
+  if rv_count > 0
+    assign rv_avg10 = rv_sum | times: 10 | divided_by: rv_count
+    assign rv_int = rv_avg10 | divided_by: 10
+    assign rv_dec = rv_avg10 | modulo: 10
+  endif
+-%}
+<section class="au-sec au-sec--{{ section.settings.capsule }} au-rvh" id="resenas">
+  <div class="au-head au-reveal">
+    {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if rv_count > 0 -%}
+      <div class="au-rvh__sum">
+        <span class="au-rvh__stars" aria-hidden="true">{%- for i in (1..5) -%}<span class="{% if i <= rv_int %}on{% endif %}">★</span>{%- endfor -%}</span>
+        <span>{{ rv_int }},{{ rv_dec }} de 5 · {{ rv_count }} {% if rv_count == 1 %}reseña{% else %}reseñas{% endif %}</span>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if rv_count == 0 -%}
+    <p class="au-small" style="text-align:center">Agregá reseñas reales con "Agregar bloque → Reseña".</p>
+  {%- else -%}
+    <ul class="au-rail au-rvh__rail" data-au-rail>
+      {%- for block in section.blocks -%}
+        {%- assign p = block.settings.product -%}
+        <li class="au-rvh__card au-reveal" {{ block.shopify_attributes }}>
+          <span class="au-rvh__stars" aria-label="{{ block.settings.rating }} de 5">{%- for i in (1..5) -%}<span class="{% if i <= block.settings.rating %}on{% endif %}">★</span>{%- endfor -%}</span>
+          {%- if block.settings.text != blank -%}<p class="au-rvh__text">“{{ block.settings.text }}”</p>{%- endif -%}
+          {%- if block.settings.photo != blank -%}
+            {{ block.settings.photo | image_url: width: 500 | image_tag: loading: 'lazy', class: 'au-rvh__photo', alt: block.settings.name }}
+          {%- endif -%}
+          <p class="au-rvh__who"><b>{{ block.settings.name }}</b>{% if block.settings.city != blank %} · {{ block.settings.city }}{% endif %}{% if block.settings.verified %} <span class="au-rvh__ok">✓ Compra verificada</span>{% endif %}</p>
+          {%- if p != blank -%}
+            <a class="au-rvh__prod" href="{{ p.url }}">
+              {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 80 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              <span>{{ p.title | split: ' · ' | first }}</span>
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="au-nav">
+      <button class="au-round" type="button" data-au-prev aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button class="au-round" type="button" data-au-next aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  .au-rvh__sum{display:inline-flex; align-items:center; gap:.6rem; font-weight:600; color:var(--au-pink)}
+  .au-rvh__stars{display:inline-flex; gap:1px; font-size:1.2rem; line-height:1}
+  .au-rvh__stars span{color:rgba(59,4,8,.22)}
+  .au-rvh__stars span.on{color:#3B0408}
+  .au-rvh__rail{align-items:stretch}
+  .au-rvh .au-rvh__rail .au-rvh__card{flex:0 0 clamp(250px,30vw,300px); scroll-snap-align:start; list-style:none;
+    background:rgba(255,255,255,.55); border-radius:26px; padding:1.2rem; display:flex; flex-direction:column; gap:.7rem}
+  .au-rvh__text{font-size:.98rem; line-height:1.45; color:var(--au-pink-ink)}
+  .au-sec .au-rvh__photo{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:18px}
+  .au-rvh__who{font-size:.84rem; color:var(--au-pink); margin-top:auto}
+  .au-rvh__ok{display:inline-block; margin-left:.2rem; font-size:.72rem; font-weight:700; color:#3B0408; background:rgba(59,4,8,.08); padding:.15em .55em; border-radius:999px}
+  .au-rvh__prod{display:flex; align-items:center; gap:.55rem; padding-top:.7rem; border-top:1px solid rgba(59,4,8,.12); text-decoration:none; color:var(--au-pink); font-weight:600; font-size:.84rem}
+  .au-sec .au-rvh__prod img{width:38px; height:38px; border-radius:10px; object-fit:cover; background:#fff; flex:none}
+</style>
+
+{% schema %}
+{
+  "name": "Aurum · Reseñas",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula bordó",
+      "default": "middle",
+      "options": [
+        { "value": "start", "label": "Inicio" },
+        { "value": "middle", "label": "Medio" },
+        { "value": "end", "label": "Final" },
+        { "value": "single", "label": "Cápsula sola" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Lo que dicen nuestras clientas"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre (ej.: Sofía M.)", "default": "Nombre" },
+        { "type": "text", "id": "city", "label": "Ciudad (opcional)" },
+        { "type": "range", "id": "rating", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Opinión (textual, como la escribió la clienta)" },
+        { "type": "image_picker", "id": "photo", "label": "Foto de la clienta (opcional)" },
+        { "type": "product", "id": "product", "label": "Producto que compró" },
+        { "type": "checkbox", "id": "verified", "label": "Compra verificada", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurum · Reseñas"
+    }
+  ]
+}
+{% endschema %}

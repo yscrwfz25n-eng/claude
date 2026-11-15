@@ -1,0 +1,92 @@
+{%- comment -%} Aurum · Comparación: tabla "Aurum vs. otra opción". Cada fila es un bloque. {%- endcomment -%}
+<section class="au-sec au-sec--{{ section.settings.capsule }} au-cmp">
+  <div class="au-head au-reveal">
+    {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
+  </div>
+
+  <div class="au-cmp__table au-reveal" role="table" aria-label="{{ section.settings.heading | escape }}">
+    <div class="au-cmp__row au-cmp__row--head" role="row">
+      <span role="columnheader"></span>
+      <span role="columnheader" class="au-cmp__us">{{ section.settings.col_us }}</span>
+      <span role="columnheader">{{ section.settings.col_them }}</span>
+    </div>
+    {%- for block in section.blocks -%}
+      <div class="au-cmp__row" role="row" {{ block.shopify_attributes }}>
+        <span role="cell" class="au-cmp__label">{{ block.settings.label }}</span>
+        <span role="cell" class="au-cmp__us">{% if block.settings.us %}<b class="yes" aria-label="Sí">✓</b>{% else %}<b class="no" aria-label="No">✕</b>{% endif %}</span>
+        <span role="cell">{% if block.settings.them %}<b class="yes" aria-label="Sí">✓</b>{% else %}<b class="no" aria-label="No">✕</b>{% endif %}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.button_label != blank -%}
+    <div class="au-cmp__cta"><a class="au-btn au-btn--pink" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a></div>
+  {%- endif -%}
+</section>
+
+<style>
+  .au-cmp__table{max-width:720px; margin:0 auto; border-radius:28px; overflow:hidden; background:rgba(255,255,255,.5)}
+  .au-cmp__row{display:grid; grid-template-columns:1.6fr 1fr 1fr; align-items:center; text-align:center; border-top:1px solid rgba(59,4,8,.1)}
+  .au-cmp__row > span{padding:.95rem .6rem}
+  .au-cmp__row--head{border-top:0; font-weight:800; letter-spacing:-.02em; color:var(--au-pink)}
+
+  .au-cmp__label{text-align:left; padding-left:1.2rem!important; font-weight:600; color:var(--au-pink-ink); font-size:.95rem}
+  .au-cmp__row .au-cmp__us{background:rgba(59,4,8,.06)}
+  .au-cmp__row.au-cmp__row--head .au-cmp__us{background:#3B0408; color:#F9D4D3}
+  .au-cmp__row b{display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; font-size:1rem}
+  .au-cmp__row b.yes{background:#3B0408; color:#F9D4D3}
+  .au-cmp__row b.no{background:rgba(59,4,8,.08); color:rgba(59,4,8,.45)}
+  .au-cmp__cta{display:flex; justify-content:center; margin-top:1.4rem}
+  @media (max-width:560px){ .au-cmp__label{font-size:.86rem; padding-left:.8rem!important} .au-cmp__row > span{padding:.8rem .4rem} }
+</style>
+
+{% schema %}
+{
+  "name": "Aurum · Comparación",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "capsule",
+      "label": "Lugar en la cápsula bordó",
+      "default": "middle",
+      "options": [
+        { "value": "start", "label": "Inicio" },
+        { "value": "middle", "label": "Medio" },
+        { "value": "end", "label": "Final" },
+        { "value": "single", "label": "Cápsula sola" }
+      ]
+    },
+    { "type": "text", "id": "heading", "label": "Título", "default": "¿Por qué Aurum?" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Glow dorado al instante, sin esperar y sin quedar naranja.</p>" },
+    { "type": "text", "id": "col_us", "label": "Columna 1 (nosotros)", "default": "Aurum" },
+    { "type": "text", "id": "col_them", "label": "Columna 2 (la otra opción)", "default": "Autobronceante" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón (opcional)", "default": "Quiero mi glow" },
+    { "type": "url", "id": "button_link", "label": "Link del botón" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Característica", "default": "Color al instante" },
+        { "type": "checkbox", "id": "us", "label": "Aurum lo tiene", "default": true },
+        { "type": "checkbox", "id": "them", "label": "La otra opción lo tiene", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurum · Comparación",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Color al instante", "us": true, "them": false } },
+        { "type": "row", "settings": { "label": "Sin tono naranja", "us": true, "them": false } },
+        { "type": "row", "settings": { "label": "Se va con agua y jabón", "us": true, "them": false } },
+        { "type": "row", "settings": { "label": "Glow satinado con brillo", "us": true, "them": false } },
+        { "type": "row", "settings": { "label": "No hay que esperar horas", "us": true, "them": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}
