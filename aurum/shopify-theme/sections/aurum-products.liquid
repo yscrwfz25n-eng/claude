@@ -1,8 +1,10 @@
 {%- comment -%} Aurum · Productos: muestra una colección en carrusel o grilla, con etiqueta "Nuevo" y botón para sumar al carrito {%- endcomment -%}
-{%- assign collection = section.settings.collection | default: collections.all -%}
+{%- comment -%} En una página de colección usa esa colección; si no, la elegida en la sección o todos los productos. {%- endcomment -%}
+{%- assign collection = section.settings.collection | default: collection | default: collections.all -%}
+{%- assign heading = section.settings.heading | default: collection.title -%}
 <section class="au-sec au-sec--{{ section.settings.capsule }}" id="{{ section.settings.anchor | default: section.id }}">
   <div class="au-head au-reveal">
-    {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if heading != blank -%}<h2 class="au-twinkle">{{ heading }}</h2>{%- endif -%}
     {%- if section.settings.text != blank -%}<div class="au-rte">{{ section.settings.text }}</div>{%- endif -%}
   </div>
 
@@ -98,7 +100,7 @@
       "type": "collection",
       "id": "collection",
       "label": "Colección",
-      "info": "Si la dejás vacía, se usan todos los productos de la tienda."
+      "info": "Si la dejás vacía: en una página de colección muestra esa colección; en el inicio, todos los productos."
     },
     {
       "type": "select",
