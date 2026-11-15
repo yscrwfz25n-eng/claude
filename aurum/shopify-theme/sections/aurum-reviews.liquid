@@ -11,14 +11,28 @@
     assign rv_int = rv_avg10 | divided_by: 10
     assign rv_dec = rv_avg10 | modulo: 10
   endif
+  assign sum_avg = rv_int | append: ',' | append: rv_dec
+  assign sum_count = rv_count
+  assign sum_stars = rv_int
+  if section.settings.avg_manual != blank
+    assign sum_avg = section.settings.avg_manual
+    assign sum_stars = section.settings.avg_manual | replace: ',', '.' | times: 1 | round
+  endif
+  if section.settings.count_manual != blank
+    assign sum_count = section.settings.count_manual
+  endif
+  assign show_sum = false
+  if rv_count > 0 or section.settings.avg_manual != blank
+    assign show_sum = true
+  endif
 -%}
 <section class="au-sec au-sec--{{ section.settings.capsule }} au-rvh" id="resenas">
   <div class="au-head au-reveal">
     {%- if section.settings.heading != blank -%}<h2 class="au-twinkle">{{ section.settings.heading }}</h2>{%- endif -%}
-    {%- if rv_count > 0 -%}
+    {%- if show_sum -%}
       <div class="au-rvh__sum">
-        <span class="au-rvh__stars" aria-hidden="true">{%- for i in (1..5) -%}<span class="{% if i <= rv_int %}on{% endif %}">★</span>{%- endfor -%}</span>
-        <span>{{ rv_int }},{{ rv_dec }} de 5 · {{ rv_count }} {% if rv_count == 1 %}reseña{% else %}reseñas{% endif %}</span>
+        <span class="au-rvh__stars" aria-hidden="true">{%- for i in (1..5) -%}<span class="{% if i <= sum_stars %}on{% endif %}">★</span>{%- endfor -%}</span>
+        <span>{{ sum_avg }} estrellas ({{ sum_count }} {% if sum_count == 1 %}reseña{% else %}reseñas{% endif %})</span>
       </div>
     {%- endif -%}
   </div>
@@ -90,6 +104,18 @@
       "id": "heading",
       "label": "Título",
       "default": "Lo que dicen nuestras clientas"
+    },
+    {
+      "type": "text",
+      "id": "avg_manual",
+      "label": "Promedio de estrellas (ej.: 4,8)",
+      "info": "Si lo dejás vacío, se calcula con las reseñas cargadas abajo."
+    },
+    {
+      "type": "text",
+      "id": "count_manual",
+      "label": "Cantidad de reseñas (ej.: +400)",
+      "info": "Si lo dejás vacío, cuenta las reseñas cargadas abajo."
     }
   ],
   "blocks": [
