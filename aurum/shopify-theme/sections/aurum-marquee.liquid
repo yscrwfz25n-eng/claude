@@ -24,7 +24,7 @@
 </div>
 
 <style>
-  .au-mq{position:relative; z-index:3; overflow:hidden; margin-block:clamp(1.5rem,4vw,2.5rem); padding-block:clamp(.75rem,1.8vw,1.05rem);
+  .au-mq{position:relative; z-index:3; overflow:hidden; margin-block:0; padding-block:clamp(.75rem,1.8vw,1.05rem);
     font-family:"Inter Tight","Helvetica Neue",Arial,system-ui,sans-serif}
   .au-mq--rosa{background:#F9D4D3; color:#3B0408}
   .au-mq--bordo{background:#3B0408; color:#F9D4D3; box-shadow:0 1.5px 0 rgba(236,140,165,.55), 0 -1.5px 0 rgba(236,140,165,.55)}
@@ -35,6 +35,8 @@
   .au-mq__group{display:flex; align-items:center; flex:none}
   .au-mq__item{font-weight:700; font-size:clamp(1.15rem,2.6vw,1.9rem); letter-spacing:-.04em; white-space:nowrap; padding-inline:clamp(.8rem,1.8vw,1.4rem)}
   .au-mq__dot{font-size:clamp(.8rem,1.6vw,1.1rem); opacity:.7}
+  /* Menos espacio entre la cinta y la sección de abajo */
+  .shopify-section:has(.au-mq) + .shopify-section .au-sec{margin-top:clamp(1.6rem,4vw,2.6rem)}
   @keyframes au-mq{from{transform:translateX(0)} to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion:reduce){ .au-mq__track{animation:none} }
 </style>
