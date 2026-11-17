@@ -1,0 +1,33 @@
+{%- comment -%} Aurum v2 · Productos de una colección (Belleza) {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- assign col = section.settings.collection -%}
+<section class="av av--{{ section.settings.scheme }} av-prods">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.sub != blank -%}<p class="av__sub">{{ section.settings.sub }}</p>{%- endif -%}
+    {%- if col == blank -%}
+      <p class="av__note">Elegí la colección Belleza en la configuración de esta sección.</p>
+    {%- else -%}
+      <div class="av-prods__grid">
+        {%- for product in col.products limit: section.settings.limit -%}
+          <a class="av-prod" href="{{ product.url }}">
+            <div class="av-prod__img">{%- if product.featured_media -%}{{ product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}{%- endif -%}</div>
+            <b>{{ product.title | split: ' · ' | first }}</b><span>{{ product.price | money_without_trailing_zeros }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Productos",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "rosa", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "Completá tu look" },
+    { "type": "text", "id": "sub", "label": "Subtítulo", "default": "Línea Belleza Aurum" },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "range", "id": "limit", "label": "Cantidad", "min": 2, "max": 10, "step": 1, "default": 5 } ],
+  "presets": [ { "name": "Aurum · Productos" } ]
+}
+{% endschema %}

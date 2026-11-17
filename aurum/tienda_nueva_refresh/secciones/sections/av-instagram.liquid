@@ -1,0 +1,32 @@
+{%- comment -%} Aurum v2 · Grilla de Instagram {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-ig">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.sub != blank -%}<p class="av__sub">{{ section.settings.sub }}</p>{%- endif -%}
+    <div class="av-ig__grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ section.settings.link | default: 'https://www.instagram.com/skin.aurum/' }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: 'Aurum en Instagram' }}
+          {%- elsif block.settings.fallback != blank -%}<img src="{{ block.settings.fallback | asset_url }}" alt="Aurum en Instagram" loading="lazy">{%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Instagram",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "Etiquetanos @skin.aurum" },
+    { "type": "text", "id": "sub", "label": "Subtítulo", "default": "Subí tu foto con Aurum y aparecé acá." },
+    { "type": "url", "id": "link", "label": "Link de Instagram" } ],
+  "blocks": [ { "type": "photo", "name": "Foto", "limit": 12, "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto" }, { "type": "text", "id": "fallback", "label": "Foto del tema (no tocar)" } ] } ],
+  "presets": [ { "name": "Aurum · Instagram", "blocks": [
+    { "type": "photo", "settings": { "fallback": "av-basket.png" } }, { "type": "photo", "settings": { "fallback": "av-pack.jpg" } },
+    { "type": "photo", "settings": { "fallback": "av-z-piernas-3.jpg" } }, { "type": "photo", "settings": { "fallback": "av-pouch.png" } },
+    { "type": "photo", "settings": { "fallback": "av-z-abdomen-1.jpg" } }, { "type": "photo", "settings": { "fallback": "av-lift.jpg" } } ] } ]
+}
+{% endschema %}

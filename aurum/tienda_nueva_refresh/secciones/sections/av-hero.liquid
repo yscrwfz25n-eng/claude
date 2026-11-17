@@ -1,0 +1,57 @@
+{%- comment -%} Aurum v2 · Hero de la Faja invisible: fondo de vestidor apagado y canasto que se balancea {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  if section.settings.bg != blank
+    assign bg = section.settings.bg | image_url: width: 2000
+  else
+    assign bg = 'av-hero-bg.jpg' | asset_url
+  endif
+-%}
+<section class="av av-hero">
+  <div class="av-hero__bg" style="background-image:url({{ bg }})"></div>
+  <div class="av__wrap">
+    <div class="av-hero__txt">
+      {%- if section.settings.eyebrow != blank -%}<div class="av__eb">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h1>{{ section.settings.title }} <em>{{ section.settings.title_accent }}</em></h1>
+      <ul>
+        {%- for block in section.blocks -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endfor -%}
+      </ul>
+      {%- if section.settings.button_label != blank -%}
+        <a class="av__btn av-hero__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+    <div class="av-hero__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.title }}
+      {%- else -%}
+        <img src="{{ 'av-basket.png' | asset_url }}" alt="Canasto con sobres de Faja invisible" width="572" height="776" loading="eager">
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Hero Faja",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "bg", "label": "Fondo (vestidor)", "info": "Si lo dejás vacío usa el vestidor rosa." },
+    { "type": "image_picker", "id": "image", "label": "Producto que se balancea (PNG sin fondo)", "info": "El brazo tiene que tocar el borde de arriba de la imagen." },
+    { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Nuevo · Faja invisible · Cinta lifting" },
+    { "type": "text", "id": "title", "label": "Título", "default": "La faja que" },
+    { "type": "text", "id": "title_accent", "label": "Título · parte destacada en rojo", "default": "no se ve." },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "La quiero" },
+    { "type": "url", "id": "button_link", "label": "Link del botón", "info": "Elegí el producto Faja invisible." }
+  ],
+  "blocks": [
+    { "type": "bullet", "name": "Beneficio", "settings": [ { "type": "text", "id": "text", "label": "Texto", "default": "Beneficio" } ] }
+  ],
+  "presets": [
+    { "name": "Aurum · Hero Faja", "blocks": [
+      { "type": "bullet", "settings": { "text": "Efecto lift al instante" } },
+      { "type": "bullet", "settings": { "text": "Invisible bajo la ropa" } },
+      { "type": "bullet", "settings": { "text": "Resiste agua y transpiración" } },
+      { "type": "bullet", "settings": { "text": "Dura hasta 16 horas" } }
+    ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{%- comment -%} Aurum v2 · Cómo se usa en 3 pasos {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-steps">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    <div class="av-steps__grid">
+      {%- for block in section.blocks -%}
+        <div class="av-step" {{ block.shopify_attributes }}><div class="av-step__n">{{ forloop.index }}</div><b>{{ block.settings.title }}</b><p>{{ block.settings.text }}</p></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Cómo se usa",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo2", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] }, { "type": "text", "id": "title", "label": "Título", "default": "Así de fácil" } ],
+  "blocks": [ { "type": "step", "name": "Paso", "limit": 4, "settings": [
+    { "type": "text", "id": "title", "label": "Paso", "default": "Paso" }, { "type": "textarea", "id": "text", "label": "Texto" } ] } ],
+  "presets": [ { "name": "Aurum · Cómo se usa", "blocks": [
+    { "type": "step", "settings": { "title": "Pegala", "text": "Piel limpia y seca. Despegá el protector sin tocar el adhesivo." } },
+    { "type": "step", "settings": { "title": "Levantá", "text": "Subí suavemente la piel y apoyá la tira." } },
+    { "type": "step", "settings": { "title": "Lucite", "text": "Presioná unos segundos y listo, hasta 16 horas." } } ] } ]
+}
+{% endschema %}

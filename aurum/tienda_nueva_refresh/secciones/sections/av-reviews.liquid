@@ -1,0 +1,32 @@
+{%- comment -%} Aurum v2 · Reseñas reales de clientas {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- if section.blocks.size > 0 or request.design_mode -%}
+<section class="av av--{{ section.settings.scheme }} av-revs">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    {%- if section.blocks.size == 0 -%}<p class="av__note">Agregá reseñas reales con "Agregar bloque → Reseña". Sin reseñas, esta sección no se muestra.</p>{%- endif -%}
+    <div class="av-revs__grid">
+      {%- for block in section.blocks -%}
+        <div class="av-rev" {{ block.shopify_attributes }}>
+          <div class="av-rev__s" aria-label="{{ block.settings.rating }} de 5">{%- for i in (1..5) -%}{% if i <= block.settings.rating %}★{% else %}☆{% endif %}{%- endfor -%}</div>
+          <p>{{ block.settings.text }}</p>
+          <b>{{ block.settings.name }}{% if block.settings.product != blank %} · {{ block.settings.product }}{% endif %}</b>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Aurum · Reseñas",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] }, { "type": "text", "id": "title", "label": "Título", "default": "Lo que dicen nuestras clientas" } ],
+  "blocks": [ { "type": "review", "name": "Reseña", "settings": [
+    { "type": "text", "id": "name", "label": "Nombre (ej.: Sofía M.)", "default": "Nombre" },
+    { "type": "text", "id": "product", "label": "Producto", "default": "Faja invisible" },
+    { "type": "range", "id": "rating", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+    { "type": "textarea", "id": "text", "label": "Opinión (textual, como la escribió la clienta)" } ] } ],
+  "presets": [ { "name": "Aurum · Reseñas" } ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+{%- comment -%} Aurum v2 · Preguntas frecuentes {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-faq" id="preguntas">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    <div class="av-faq__list">
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}><summary>{{ block.settings.question }}<span aria-hidden="true">+</span></summary><div class="rte">{{ block.settings.answer }}</div></details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Preguntas",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "rosa", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] }, { "type": "text", "id": "title", "label": "Título", "default": "Preguntas frecuentes" } ],
+  "blocks": [ { "type": "question", "name": "Pregunta", "settings": [
+    { "type": "text", "id": "question", "label": "Pregunta", "default": "Pregunta" },
+    { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Respuesta</p>" } ] } ],
+  "presets": [ { "name": "Aurum · Preguntas", "blocks": [
+    { "type": "question", "settings": { "question": "¿Se nota bajo la ropa?", "answer": "<p>No. Es transparente y finita: bien aplicada, no se ve bajo la ropa.</p>" } },
+    { "type": "question", "settings": { "question": "¿Cuánto dura?", "answer": "<p>Hasta 16 horas. El efecto es mientras la tenés puesta, no es permanente.</p>" } },
+    { "type": "question", "settings": { "question": "¿Puedo mojarla?", "answer": "<p>Sí, resiste el agua y la transpiración.</p>" } },
+    { "type": "question", "settings": { "question": "¿Cómo se saca?", "answer": "<p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio.</p>" } },
+    { "type": "question", "settings": { "question": "¿Cuánto tarda el envío?", "answer": "<p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Retiro gratis en sucursal desde 5.000 y envío gratis a domicilio desde 9.000.</p>" } },
+    { "type": "question", "settings": { "question": "¿Puedo cancelar mi compra?", "answer": "<p>Sí. Tenés 10 días corridos desde que recibís tu pedido para arrepentirte. Escribinos por WhatsApp y te ayudamos.</p>" } } ] } ]
+}
+{% endschema %}

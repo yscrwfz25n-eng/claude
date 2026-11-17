@@ -1,0 +1,58 @@
+{%- comment -%} Aurum v2 · Producto con selector de packs (variantes) y botón de compra {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- assign p = section.settings.product -%}
+<section class="av av--{{ section.settings.scheme }} av-packs" id="packs">
+  <div class="av__wrap">
+    <div class="av-packs__img">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.title }}
+      {%- else -%}
+        <img src="{{ 'av-pack.jpg' | asset_url }}" alt="Faja invisible · Cinta lifting" loading="lazy" width="1000" height="1241">
+      {%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<div class="av__eb">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2>{{ section.settings.title }}</h2>
+      {%- if p == blank -%}
+        <p class="av__note" style="text-align:left">Elegí el producto Faja invisible en la configuración de esta sección.</p>
+      {%- else -%}
+        {%- form 'product', p -%}
+          {%- for v in p.variants -%}
+            {%- assign sub_key = 'sub_' | append: forloop.index -%}
+            <label class="av-opt">
+              <input type="radio" name="id" value="{{ v.id }}" {% if forloop.index == section.settings.default_variant %}checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+              <span>{{ v.title }}{% if forloop.index == section.settings.badge_variant and section.settings.badge != blank %}<span class="av-opt__badge">{{ section.settings.badge }}</span>{% endif %}
+                {%- if section.settings[sub_key] != blank -%}<small>{{ section.settings[sub_key] }}</small>{%- endif -%}</span>
+              <span>{% if v.available %}{{ v.price | money_without_trailing_zeros }}{% else %}Sin stock{% endif %}</span>
+            </label>
+          {%- endfor -%}
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="av__btn">{{ section.settings.button_label }}</button>
+        {%- endform -%}
+        {%- if section.settings.note != blank -%}<p class="av__note">{{ section.settings.note }}</p>{%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Packs Faja",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "product", "id": "product", "label": "Producto" },
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Faja invisible · Cinta lifting" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Elegí tu pack" },
+    { "type": "text", "id": "sub_1", "label": "Detalle pack 1", "default": "10 tiras" },
+    { "type": "text", "id": "sub_2", "label": "Detalle pack 2", "default": "30 tiras · envío gratis a sucursal" },
+    { "type": "text", "id": "sub_3", "label": "Detalle pack 3", "default": "50 tiras · envío gratis a domicilio" },
+    { "type": "range", "id": "default_variant", "label": "Pack elegido de entrada", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "range", "id": "badge_variant", "label": "Pack con etiqueta", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "text", "id": "badge", "label": "Etiqueta", "default": "Recomendado" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Agregar al carrito" },
+    { "type": "text", "id": "note", "label": "Texto debajo del botón", "default": "Mercado Pago · Cuotas · 10% OFF por transferencia" }
+  ],
+  "presets": [ { "name": "Aurum · Packs Faja" } ]
+}
+{% endschema %}

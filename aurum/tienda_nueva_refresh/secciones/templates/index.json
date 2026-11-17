@@ -1,0 +1,344 @@
+{
+  "sections": {
+    "hero": {
+      "type": "av-hero",
+      "settings": {
+        "button_link": "#packs"
+      },
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "Efecto lift al instante"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "Invisible bajo la ropa"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "Resiste agua y transpiración"
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "Dura hasta 16 horas"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4"
+      ]
+    },
+    "marquee": {
+      "type": "av-marquee",
+      "settings": {}
+    },
+    "zones": {
+      "type": "av-zones",
+      "settings": {},
+      "blocks": {
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "name": "Piernas",
+            "fallback_1": "av-z-piernas-1.jpg",
+            "fallback_2": "av-z-piernas-2.jpg",
+            "fallback_3": "av-z-piernas-3.jpg"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "name": "Abdomen",
+            "fallback_1": "av-z-abdomen-1.jpg",
+            "fallback_2": "av-z-abdomen-2.jpg"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "name": "Brazos",
+            "fallback_1": "av-z-brazos-1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "zone_1",
+        "zone_2",
+        "zone_3"
+      ]
+    },
+    "packs": {
+      "type": "av-packs",
+      "settings": {
+        "product": "faja-invisible"
+      }
+    },
+    "benefits": {
+      "type": "av-benefits",
+      "settings": {},
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "clock",
+            "text": "Efecto lift al instante"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shirt",
+            "text": "Invisible bajo la ropa"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "text": "Resiste agua y transpiración"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "hour",
+            "text": "Dura hasta 16 horas"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "scissors",
+            "text": "Se recorta a tu medida"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "spark",
+            "text": "Fácil de poner y de sacar"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ]
+    },
+    "beforeafter": {
+      "type": "av-beforeafter",
+      "settings": {},
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "zone": "Piernas",
+            "fallback": "av-z-piernas-2.jpg",
+            "text": "Piernas más lisas y firmes al instante, con la cinta puesta."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "zone": "Abdomen",
+            "fallback": "av-z-abdomen-1.jpg",
+            "text": "El abdomen se ve más plano y parejo bajo la ropa ajustada."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "zone": "Brazos",
+            "fallback": "av-z-brazos-1.jpg",
+            "text": "Brazos más firmes para usar musculosas sin pensarlo."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ]
+    },
+    "steps": {
+      "type": "av-steps",
+      "settings": {},
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Pegala",
+            "text": "Piel limpia y seca. Despegá el protector sin tocar el adhesivo."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Levantá",
+            "text": "Subí suavemente la piel y apoyá la tira."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Lucite",
+            "text": "Presioná unos segundos y listo, hasta 16 horas."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "products": {
+      "type": "av-products",
+      "settings": {
+        "collection": "belleza"
+      }
+    },
+    "reviews": {
+      "type": "av-reviews",
+      "settings": {}
+    },
+    "instagram": {
+      "type": "av-instagram",
+      "settings": {},
+      "blocks": {
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-basket.png"
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-pack.jpg"
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-z-piernas-3.jpg"
+          }
+        },
+        "photo_4": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-pouch.png"
+          }
+        },
+        "photo_5": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-z-abdomen-1.jpg"
+          }
+        },
+        "photo_6": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-lift.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "photo_1",
+        "photo_2",
+        "photo_3",
+        "photo_4",
+        "photo_5",
+        "photo_6"
+      ]
+    },
+    "story": {
+      "type": "av-story",
+      "settings": {}
+    },
+    "faq": {
+      "type": "av-faq",
+      "settings": {},
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se nota bajo la ropa?",
+            "answer": "<p>No. Es transparente y finita: bien aplicada, no se ve bajo la ropa.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto dura?",
+            "answer": "<p>Hasta 16 horas. El efecto es mientras la tenés puesta, no es permanente.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo mojarla?",
+            "answer": "<p>Sí, resiste el agua y la transpiración.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cómo se saca?",
+            "answer": "<p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto tarda el envío?",
+            "answer": "<p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Retiro gratis en sucursal desde 5.000 y envío gratis a domicilio desde 9.000.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo cancelar mi compra?",
+            "answer": "<p>Sí. Tenés 10 días corridos desde que recibís tu pedido para arrepentirte. Escribinos por WhatsApp y te ayudamos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "zones",
+    "packs",
+    "benefits",
+    "beforeafter",
+    "steps",
+    "products",
+    "reviews",
+    "instagram",
+    "story",
+    "faq"
+  ]
+}

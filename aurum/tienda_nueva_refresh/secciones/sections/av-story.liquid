@@ -1,0 +1,27 @@
+{%- comment -%} Aurum v2 · Nuestra historia {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-story">
+  <div class="av__wrap">
+    <div class="av-story__img{% if section.settings.image != blank %} cover{% endif %}">
+      {%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: section.settings.title }}
+      {%- else -%}<img src="{{ 'av-pouch.png' | asset_url }}" alt="Faja invisible" loading="lazy">{%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<div class="av__eb">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2>{{ section.settings.title }}</h2>
+      <div class="rte">{{ section.settings.text }}</div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Nuestra historia",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo2", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Aurum Skin" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Hecho para que te sientas cómoda" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Contá en pocas líneas quién está detrás de Aurum, por qué nació y qué querés que sienta cada clienta.</p>" } ],
+  "presets": [ { "name": "Aurum · Nuestra historia" } ]
+}
+{% endschema %}

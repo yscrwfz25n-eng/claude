@@ -1,0 +1,19 @@
+{%- comment -%} Aurum v2 · Cinta con frases en movimiento {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- assign lines = section.settings.phrases | newline_to_br | split: '<br />' -%}
+{%- capture g -%}{%- for n in (1..3) -%}{%- for l in lines -%}{%- assign t = l | strip -%}{%- if t != blank -%}<span class="av-mq__item">{{ t }}</span><span class="av-mq__dot" aria-hidden="true">✦</span>{%- endif -%}{%- endfor -%}{%- endfor -%}{%- endcapture -%}
+<div class="av av-mq{% if section.settings.scheme == 'bordo' %} av--bordo{% endif %}" style="--speed: {{ section.settings.speed }}s">
+  <div class="av-mq__track"><div class="av-mq__group">{{ g }}</div><div class="av-mq__group" aria-hidden="true">{{ g }}</div></div>
+</div>
+{% schema %}
+{
+  "name": "Aurum · Cinta en movimiento",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color", "default": "rosa", "options": [ { "value": "rosa", "label": "Rosa con letras bordó" }, { "value": "bordo", "label": "Bordó con letras rosa" } ] },
+    { "type": "textarea", "id": "phrases", "label": "Frases (una por línea)", "default": "Faja invisible\nPiernas\nAbdomen\nBrazos\nLa faja que no se ve" },
+    { "type": "range", "id": "speed", "label": "Velocidad (más alto = más lento)", "min": 10, "max": 60, "step": 2, "unit": "s", "default": 30 }
+  ],
+  "presets": [ { "name": "Aurum · Cinta en movimiento" } ]
+}
+{% endschema %}

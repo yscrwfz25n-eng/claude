@@ -1,0 +1,43 @@
+{%- comment -%} Aurum v2 · Beneficios con íconos {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-bens">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    <div class="av-bens__grid">
+      {%- for block in section.blocks -%}
+        <div class="av-ben" {{ block.shopify_attributes }}>
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            {%- case block.settings.icon -%}
+              {%- when 'clock' -%}<circle cx="24" cy="24" r="19"/><path d="M24 13v11l7 5"/>
+              {%- when 'shirt' -%}<path d="M16 6l-9 6 4 9 5-2v23h16V19l5 2 4-9-9-6c-1 4-4 6-8 6s-7-2-8-6z"/>
+              {%- when 'drop' -%}<path d="M24 5C18 14 12 21 12 29a12 12 0 0 0 24 0c0-8-6-15-12-24z"/><path d="M18 30a6 6 0 0 0 6 6"/>
+              {%- when 'hour' -%}<path d="M14 5h20M14 43h20M16 5c0 10 16 12 16 19S16 33 16 43M32 5c0 10-16 12-16 19s16 9 16 19"/>
+              {%- when 'scissors' -%}<circle cx="13" cy="35" r="6"/><circle cx="35" cy="35" r="6"/><path d="M17 31L38 7M31 31L10 7"/>
+              {%- else -%}<path d="M24 5l4.5 10.5L39 20l-10.5 4.5L24 35l-4.5-10.5L9 20l10.5-4.5z"/>
+            {%- endcase -%}
+          </svg>
+          {{ block.settings.text }}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aurum · Beneficios",
+  "tag": "div",
+  "settings": [ { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo2", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] }, { "type": "text", "id": "title", "label": "Título", "default": "Por qué te va a encantar" } ],
+  "blocks": [ { "type": "benefit", "name": "Beneficio", "settings": [
+    { "type": "select", "id": "icon", "label": "Ícono", "default": "spark", "options": [
+      { "value": "clock", "label": "Reloj" }, { "value": "shirt", "label": "Remera" }, { "value": "drop", "label": "Gota" },
+      { "value": "hour", "label": "Reloj de arena" }, { "value": "scissors", "label": "Tijera" }, { "value": "spark", "label": "Destello" } ] },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Beneficio" } ] } ],
+  "presets": [ { "name": "Aurum · Beneficios", "blocks": [
+    { "type": "benefit", "settings": { "icon": "clock", "text": "Efecto lift al instante" } },
+    { "type": "benefit", "settings": { "icon": "shirt", "text": "Invisible bajo la ropa" } },
+    { "type": "benefit", "settings": { "icon": "drop", "text": "Resiste agua y transpiración" } },
+    { "type": "benefit", "settings": { "icon": "hour", "text": "Dura hasta 16 horas" } },
+    { "type": "benefit", "settings": { "icon": "scissors", "text": "Se recorta a tu medida" } },
+    { "type": "benefit", "settings": { "icon": "spark", "text": "Fácil de poner y de sacar" } } ] } ]
+}
+{% endschema %}

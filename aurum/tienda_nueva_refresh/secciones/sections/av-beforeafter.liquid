@@ -1,0 +1,63 @@
+{%- comment -%} Aurum v2 · Antes y después con pestañas por zona {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-ba" data-av-ba>
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    <div class="av-ba__tabs" role="tablist">
+      {%- for block in section.blocks -%}
+        <button class="av-ba__tab" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-av-tab="{{ forloop.index }}">{{ block.settings.zone }}</button>
+      {%- endfor -%}
+    </div>
+    {%- for block in section.blocks -%}
+      <div class="av-ba__panel" data-av-panel="{{ forloop.index }}" {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+        <div class="av-ba__img">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: block.settings.zone }}
+          {%- elsif block.settings.fallback != blank -%}
+            <img src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.zone }}" loading="lazy" width="844" height="846">
+          {%- endif -%}
+          <span class="av-pill av-pill--l">antes</span><span class="av-pill av-pill--r">después</span>
+        </div>
+        <div class="av-ba__quote">
+          {{ block.settings.text }}
+          {%- if block.settings.name != blank -%}<small>{{ block.settings.name }}</small>{%- endif -%}
+          {%- if section.settings.button_label != blank -%}<div><a class="av__btn" href="{{ section.settings.button_link | default: '#packs' }}">{{ section.settings.button_label }}</a></div>{%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+    {%- if section.settings.note != blank -%}<p class="av__note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+<script>
+  document.querySelectorAll('[data-av-ba]').forEach(function(r){
+    r.querySelectorAll('[data-av-tab]').forEach(function(t){
+      t.addEventListener('click',function(){
+        r.querySelectorAll('[data-av-tab]').forEach(function(x){x.setAttribute('aria-selected',x===t)});
+        r.querySelectorAll('[data-av-panel]').forEach(function(p){p.hidden=p.dataset.avPanel!==t.dataset.avTab});
+      });
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Aurum · Antes y después",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "Mirá la diferencia" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "La quiero" },
+    { "type": "url", "id": "button_link", "label": "Link del botón" },
+    { "type": "text", "id": "note", "label": "Aclaración", "default": "Resultados temporales, mientras la cinta está puesta." }
+  ],
+  "blocks": [ { "type": "item", "name": "Zona", "limit": 3, "settings": [
+    { "type": "text", "id": "zone", "label": "Zona", "default": "Piernas" },
+    { "type": "image_picker", "id": "image", "label": "Foto antes/después" },
+    { "type": "text", "id": "fallback", "label": "Foto del tema (no tocar)" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Efecto lift al instante, sin que se note bajo la ropa." },
+    { "type": "text", "id": "name", "label": "Nombre o aclaración (opcional)" } ] } ],
+  "presets": [ { "name": "Aurum · Antes y después", "blocks": [
+    { "type": "item", "settings": { "zone": "Piernas", "fallback": "av-z-piernas-2.jpg", "text": "Piernas más lisas y firmes al instante, con la cinta puesta." } },
+    { "type": "item", "settings": { "zone": "Abdomen", "fallback": "av-z-abdomen-1.jpg", "text": "El abdomen se ve más plano y parejo bajo la ropa ajustada." } },
+    { "type": "item", "settings": { "zone": "Brazos", "fallback": "av-z-brazos-1.jpg", "text": "Brazos más firmes para usar musculosas sin pensarlo." } } ] } ]
+}
+{% endschema %}

@@ -1,0 +1,84 @@
+{%- comment -%} Aurum v2 · Zonas: un carrusel de fotos por zona (Piernas, Abdomen, Brazos) {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-zones" id="zonas">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.sub != blank -%}<p class="av__sub">{{ section.settings.sub }}</p>{%- endif -%}
+    <div class="av-zones__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign imgs = ''
+          assign count = 0
+          for i in (1..3)
+            assign key = 'image_' | append: i
+            assign fb = 'fallback_' | append: i
+            if block.settings[key] != blank
+              assign count = count | plus: 1
+            elsif block.settings[fb] != blank
+              assign count = count | plus: 1
+            endif
+          endfor
+        -%}
+        <div class="av-zone" {{ block.shopify_attributes }} data-av-zone>
+          <div class="av-zone__track">
+            <div class="av-zone__slides" data-av-slides>
+              {%- for i in (1..3) -%}
+                {%- assign key = 'image_' | append: i -%}
+                {%- assign fb = 'fallback_' | append: i -%}
+                {%- if block.settings[key] != blank -%}
+                  {{ block.settings[key] | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.name }}
+                {%- elsif block.settings[fb] != blank -%}
+                  <img src="{{ block.settings[fb] | asset_url }}" alt="{{ block.settings.name }}" loading="lazy" width="844" height="846">
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            {%- if count > 1 -%}
+              <button class="av-zone__ar av-zone__ar--l" type="button" data-av-prev aria-label="Anterior">‹</button>
+              <button class="av-zone__ar av-zone__ar--r" type="button" data-av-next aria-label="Siguiente">›</button>
+              <div class="av-zone__dots">{%- for i in (1..count) -%}<i{% if forloop.first %} class="on"{% endif %}></i>{%- endfor -%}</div>
+            {%- endif -%}
+          </div>
+          <b>{{ block.settings.name }}</b>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll('[data-av-zone]').forEach(function(z){
+    var s=z.querySelector('[data-av-slides]'), dots=z.querySelectorAll('.av-zone__dots i');
+    function go(d){s.scrollBy({left:d*s.clientWidth,behavior:'smooth'})}
+    var p=z.querySelector('[data-av-prev]'), n=z.querySelector('[data-av-next]');
+    if(p)p.addEventListener('click',function(){go(-1)}); if(n)n.addEventListener('click',function(){go(1)});
+    s.addEventListener('scroll',function(){var i=Math.round(s.scrollLeft/s.clientWidth);dots.forEach(function(d,k){d.classList.toggle('on',k===i)})},{passive:true});
+  });
+</script>
+{% schema %}
+{
+  "name": "Aurum · Zonas",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "¿Dónde la querés usar?" },
+    { "type": "text", "id": "sub", "label": "Subtítulo", "default": "Tocá las flechas y mirá cómo queda." }
+  ],
+  "blocks": [
+    { "type": "zone", "name": "Zona", "limit": 3, "settings": [
+      { "type": "text", "id": "name", "label": "Zona", "default": "Piernas" },
+      { "type": "image_picker", "id": "image_1", "label": "Foto 1" },
+      { "type": "image_picker", "id": "image_2", "label": "Foto 2" },
+      { "type": "image_picker", "id": "image_3", "label": "Foto 3" },
+      { "type": "text", "id": "fallback_1", "label": "Foto 1 del tema (no tocar)" },
+      { "type": "text", "id": "fallback_2", "label": "Foto 2 del tema (no tocar)" },
+      { "type": "text", "id": "fallback_3", "label": "Foto 3 del tema (no tocar)" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Aurum · Zonas", "blocks": [
+      { "type": "zone", "settings": { "name": "Piernas", "fallback_1": "av-z-piernas-1.jpg", "fallback_2": "av-z-piernas-2.jpg", "fallback_3": "av-z-piernas-3.jpg" } },
+      { "type": "zone", "settings": { "name": "Abdomen", "fallback_1": "av-z-abdomen-1.jpg", "fallback_2": "av-z-abdomen-2.jpg" } },
+      { "type": "zone", "settings": { "name": "Brazos", "fallback_1": "av-z-brazos-1.jpg" } }
+    ] }
+  ]
+}
+{% endschema %}
