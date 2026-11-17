@@ -1,0 +1,503 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "eyebrow": {
+          "type": "text",
+          "settings": {
+            "text": "Aurum Skin · Nuevo",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "subtitle": {
+          "type": "text",
+          "settings": {
+            "text": "Levanta y alisa la piel al instante. Invisible bajo la ropa, resiste agua y transpiración, hasta 16 horas.",
+            "text_style": "body"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "packinfo": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- assign base = product.variants.first.price -%}\n<div class=\"av-pinfo\">\n{%- for v in product.variants -%}\n  {%- assign n = v.title | split: ' ' | first | plus: 0 -%}\n  {%- if n < 1 -%}{%- assign n = 1 -%}{%- endif -%}\n  {%- assign per = v.price | divided_by: n -%}\n  {%- assign save = base | times: n | minus: v.price -%}\n  <div class=\"av-pinfo__row{% if n == 3 %} is-rec{% endif %}\">\n    <b>{{ v.title }}{% if n == 3 %} <span>Recomendado</span>{% endif %}</b>\n    <small>{{ per | money_without_trailing_zeros }} c/u{% if save > 0 %} · ahorrás {{ save | money_without_trailing_zeros }}{% endif %}{% if n >= 3 %} · envío gratis a domicilio{% endif %}</small>\n  </div>\n{%- endfor -%}\n</div>\n<style>\n.av-pinfo{display:grid;gap:8px;margin:4px 0 6px}\n.av-pinfo__row{border:2px solid rgba(59,4,8,.15);border-radius:16px;padding:12px 16px;background:rgba(255,255,255,.35)}\n.av-pinfo__row b{display:flex;align-items:center;gap:8px;font-size:1.5rem}\n.av-pinfo__row b span{background:#3B0408;color:#F9D4D3;font-size:1.1rem;padding:3px 10px;border-radius:999px}\n.av-pinfo__row small{display:block;font-size:1.3rem;opacity:.8;margin-top:2px}\n.av-pinfo__row.is-rec{border-color:#3B0408;background:#F9D4D3}\n</style>"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "show_physical_stores": false
+          }
+        },
+        "perks": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "truck",
+            "heading_1": "Envío en 24–48 hs",
+            "icon_2": "price_tag",
+            "heading_2": "10% OFF por transferencia",
+            "icon_3": "lock",
+            "heading_3": "Mercado Pago y cuotas"
+          }
+        },
+        "tab_uso": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Cómo se usa",
+            "icon": "check_mark",
+            "content": "<ol><li>Limpiá y secá la piel, sin cremas, aceites ni resaltador.</li><li>Despegá el protector sin tocar el adhesivo.</li><li>Con una mano subí suavemente la piel y con la otra apoyá la tira.</li><li>Presioná unos segundos de adentro hacia afuera y listo.</li></ol>"
+          }
+        },
+        "tab_saca": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Cómo se saca",
+            "icon": "leaf",
+            "content": "<p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio, sin tirones.</p>"
+          }
+        },
+        "tab_contenido": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Qué trae cada sobre",
+            "icon": "box",
+            "content": "<p>10 tiras transparentes de un solo uso. Se recortan a la medida de cada zona: piernas, abdomen y brazos.</p>"
+          }
+        },
+        "tab_cuidados": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Precauciones",
+            "icon": "heart",
+            "content": "<p>Probá primero en una zona pequeña. No aplicar sobre heridas, piel irritada o quemada por el sol. No usar más de 16 horas seguidas ni para dormir. Si aparece picazón o enrojecimiento, retirar. Uso externo. El efecto es temporal, mientras la cinta está puesta.</p>"
+          }
+        },
+        "tab_envios": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Envíos y pagos",
+            "icon": "truck",
+            "content": "<p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Envío gratis a domicilio llevando 3 sobres o más. Pagá con Mercado Pago, tarjeta en cuotas o transferencia con 10% OFF.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "eyebrow",
+        "title",
+        "subtitle",
+        "price",
+        "variant_picker",
+        "packinfo",
+        "buy_buttons",
+        "perks",
+        "tab_uso",
+        "tab_saca",
+        "tab_contenido",
+        "tab_cuidados",
+        "tab_envios"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "show",
+        "hide_variants": false,
+        "enable_video_looping": true,
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    },
+    "marquee": {
+      "type": "av-marquee",
+      "settings": {}
+    },
+    "zones": {
+      "type": "av-zones",
+      "settings": {
+        "title": "Mirá cómo queda",
+        "sub": "Fotos reales de piernas, abdomen y brazos con la cinta puesta.",
+        "scheme": "rosa"
+      },
+      "blocks": {
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "name": "Piernas",
+            "fallback_1": "av-z-piernas-1.jpg",
+            "fallback_2": "av-z-piernas-2.jpg",
+            "fallback_3": "av-z-piernas-3.jpg"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "name": "Abdomen",
+            "fallback_1": "av-z-abdomen-1.jpg",
+            "fallback_2": "av-z-abdomen-2.jpg"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "name": "Brazos",
+            "fallback_1": "av-z-brazos-1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "zone_1",
+        "zone_2",
+        "zone_3"
+      ]
+    },
+    "beforeafter": {
+      "type": "av-beforeafter",
+      "settings": {
+        "scheme": "claro"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "zone": "Piernas",
+            "fallback": "av-z-piernas-2.jpg",
+            "text": "Piernas más lisas y firmes al instante, con la cinta puesta."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "zone": "Abdomen",
+            "fallback": "av-z-abdomen-1.jpg",
+            "text": "El abdomen se ve más plano y parejo bajo la ropa ajustada."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "zone": "Brazos",
+            "fallback": "av-z-brazos-1.jpg",
+            "text": "Brazos más firmes para usar musculosas sin pensarlo."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ]
+    },
+    "steps": {
+      "type": "av-steps",
+      "settings": {
+        "scheme": "bordo"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Pegala",
+            "text": "Piel limpia y seca. Despegá el protector sin tocar el adhesivo."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Levantá",
+            "text": "Subí suavemente la piel y apoyá la tira."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Lucite",
+            "text": "Presioná unos segundos y listo, hasta 16 horas."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "benefits": {
+      "type": "av-benefits",
+      "settings": {
+        "scheme": "bordo2"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "clock",
+            "text": "Efecto lift al instante"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shirt",
+            "text": "Invisible bajo la ropa"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "text": "Resiste agua y transpiración"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "hour",
+            "text": "Dura hasta 16 horas"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "scissors",
+            "text": "Se recorta a tu medida"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "spark",
+            "text": "Fácil de poner y de sacar"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ]
+    },
+    "reviews": {
+      "type": "av-reviews",
+      "settings": {
+        "scheme": "rosa"
+      }
+    },
+    "faq": {
+      "type": "av-faq",
+      "settings": {
+        "scheme": "bordo2"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se nota bajo la ropa?",
+            "answer": "<p>No. Es transparente y finita: bien aplicada, no se ve bajo la ropa.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto dura?",
+            "answer": "<p>Hasta 16 horas. El efecto es mientras la tenés puesta, no es permanente.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo mojarla?",
+            "answer": "<p>Sí, resiste el agua y la transpiración.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cómo se saca?",
+            "answer": "<p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto tarda el envío?",
+            "answer": "<p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Retiro gratis en sucursal desde $35.000 y envío gratis a domicilio desde $49.000.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo cancelar mi compra?",
+            "answer": "<p>Sí. Tenés 10 días corridos desde que recibís tu pedido para arrepentirte. Escribinos por WhatsApp y te ayudamos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ]
+    },
+    "products": {
+      "type": "av-products",
+      "settings": {
+        "title": "Completá tu look",
+        "sub": "Combinala con la línea Belleza",
+        "scheme": "bordo"
+      }
+    },
+    "compare": {
+      "type": "av-compare",
+      "settings": {
+        "scheme": "claro"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Efecto al instante",
+            "c1": true,
+            "c2": true,
+            "c3": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "No aprieta ni marca",
+            "c1": true,
+            "c2": false,
+            "c3": true
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Invisible con ropa ajustada",
+            "c1": true,
+            "c2": false,
+            "c3": true
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "La usás solo cuando querés",
+            "c1": true,
+            "c2": true,
+            "c3": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Lista en segundos",
+            "c1": true,
+            "c2": false,
+            "c3": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    },
+    "instagram": {
+      "type": "av-instagram",
+      "settings": {
+        "scheme": "claro"
+      },
+      "blocks": {
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-basket.png"
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-pack.jpg"
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-z-piernas-3.jpg"
+          }
+        },
+        "photo_4": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-pouch.png"
+          }
+        },
+        "photo_5": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-z-abdomen-1.jpg"
+          }
+        },
+        "photo_6": {
+          "type": "photo",
+          "settings": {
+            "fallback": "av-lift.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "photo_1",
+        "photo_2",
+        "photo_3",
+        "photo_4",
+        "photo_5",
+        "photo_6"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "marquee",
+    "beforeafter",
+    "benefits",
+    "zones",
+    "steps",
+    "compare",
+    "faq",
+    "reviews",
+    "instagram",
+    "products"
+  ]
+}

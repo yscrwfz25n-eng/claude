@@ -1,0 +1,70 @@
+{%- comment -%} Aurum v2 · Tabla comparativa (Faja invisible vs. otras opciones) {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+<section class="av av--{{ section.settings.scheme }} av-cmp">
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.sub != blank -%}<p class="av__sub">{{ section.settings.sub }}</p>{%- endif -%}
+    <div class="av-cmp__table" role="table">
+      <div class="av-cmp__row av-cmp__row--head" role="row">
+        <span role="columnheader"></span>
+        <span role="columnheader" class="av-cmp__us">{{ section.settings.col_1 }}</span>
+        <span role="columnheader">{{ section.settings.col_2 }}</span>
+        <span role="columnheader">{{ section.settings.col_3 }}</span>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="av-cmp__row" role="row" {{ block.shopify_attributes }}>
+          <span role="cell" class="av-cmp__label">{{ block.settings.label }}</span>
+          <span role="cell" class="av-cmp__us">{% if block.settings.c1 %}<b class="y">✓</b>{% else %}<b class="n">✕</b>{% endif %}</span>
+          <span role="cell">{% if block.settings.c2 %}<b class="y">✓</b>{% else %}<b class="n">✕</b>{% endif %}</span>
+          <span role="cell">{% if block.settings.c3 %}<b class="y">✓</b>{% else %}<b class="n">✕</b>{% endif %}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <div style="text-align:center;margin-top:34px"><a class="av__btn" href="{{ section.settings.button_link | default: '#MainContent' }}">{{ section.settings.button_label }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+<style>
+  .av-cmp__table{max-width:900px;margin:44px auto 0;border-radius:28px;overflow:hidden;background:rgba(249,212,211,.08)}
+  .av--claro .av-cmp__table,.av--rosa .av-cmp__table{background:#fff8}
+  .av-cmp__row{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;align-items:center;text-align:center;border-top:1px solid rgba(127,127,127,.18)}
+  .av-cmp__row>span{padding:16px 8px}
+  .av-cmp__row--head{border-top:0;font-weight:800;font-size:clamp(14px,1.5vw,19px)}
+  .av-cmp__label{text-align:left;padding-left:22px!important;font-weight:600;font-size:clamp(14px,1.5vw,19px)}
+  .av-cmp__us{background:rgba(249,212,211,.14)}
+  .av--claro .av-cmp__us,.av--rosa .av-cmp__us{background:rgba(59,4,8,.06)}
+  .av-cmp__row--head .av-cmp__us{background:#F9D4D3;color:#3B0408}
+  .av--claro .av-cmp__row--head .av-cmp__us,.av--rosa .av-cmp__row--head .av-cmp__us{background:#3B0408;color:#F9D4D3}
+  .av-cmp b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font-size:16px}
+  .av-cmp b.y{background:#F9D4D3;color:#3B0408}.av--claro .av-cmp b.y,.av--rosa .av-cmp b.y{background:#3B0408;color:#F9D4D3}
+  .av-cmp b.n{background:rgba(127,127,127,.18);opacity:.7}
+  @media (max-width:749px){.av-cmp__row{grid-template-columns:1.4fr 1fr 1fr 1fr}.av-cmp__label{padding-left:12px!important}.av-cmp__row>span{padding:12px 4px}}
+</style>
+{% schema %}
+{
+  "name": "Aurum · Comparación",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "¿Por qué Faja invisible?" },
+    { "type": "text", "id": "sub", "label": "Subtítulo", "default": "Comparala con lo que ya probaste." },
+    { "type": "text", "id": "col_1", "label": "Columna 1", "default": "Faja invisible" },
+    { "type": "text", "id": "col_2", "label": "Columna 2", "default": "Faja tradicional" },
+    { "type": "text", "id": "col_3", "label": "Columna 3", "default": "Cremas reafirmantes" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "La quiero" },
+    { "type": "url", "id": "button_link", "label": "Link del botón" }
+  ],
+  "blocks": [ { "type": "row", "name": "Fila", "settings": [
+    { "type": "text", "id": "label", "label": "Característica", "default": "Característica" },
+    { "type": "checkbox", "id": "c1", "label": "Columna 1 lo tiene", "default": true },
+    { "type": "checkbox", "id": "c2", "label": "Columna 2 lo tiene", "default": false },
+    { "type": "checkbox", "id": "c3", "label": "Columna 3 lo tiene", "default": false } ] } ],
+  "presets": [ { "name": "Aurum · Comparación", "blocks": [
+    { "type": "row", "settings": { "label": "Efecto al instante", "c1": true, "c2": true, "c3": false } },
+    { "type": "row", "settings": { "label": "No aprieta ni marca", "c1": true, "c2": false, "c3": true } },
+    { "type": "row", "settings": { "label": "Invisible con ropa ajustada", "c1": true, "c2": false, "c3": true } },
+    { "type": "row", "settings": { "label": "La usás solo cuando querés", "c1": true, "c2": true, "c3": false } },
+    { "type": "row", "settings": { "label": "Lista en segundos", "c1": true, "c2": false, "c3": false } } ] } ]
+}
+{% endschema %}
