@@ -8,7 +8,7 @@
       {%- for block in section.blocks -%}
         <a href="{{ section.settings.link | default: 'https://www.instagram.com/skin.aurum/' }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: 'Aurum en Instagram' }}
-          {%- elsif block.settings.fallback != blank -%}<img src="{{ block.settings.fallback | asset_url }}" alt="Aurum en Instagram" loading="lazy">{%- endif -%}
+          {%- elsif block.settings.fallback != blank -%}<img src="{{ block.settings.fallback | asset_url }}" alt="Aurum en Instagram" loading="lazy" width="500" height="500">{%- endif -%}
         </a>
       {%- endfor -%}
     </div>

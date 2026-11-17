@@ -4,7 +4,7 @@
   <div class="av__wrap">
     <div class="av-story__img{% if section.settings.image != blank %} cover{% endif %}">
       {%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: section.settings.title }}
-      {%- else -%}<img src="{{ 'av-pouch.png' | asset_url }}" alt="Faja invisible" loading="lazy">{%- endif -%}
+      {%- else -%}<img src="{{ 'av-pouch.png' | asset_url }}" alt="Faja invisible" loading="lazy" width="484" height="760">{%- endif -%}
     </div>
     <div>
       {%- if section.settings.eyebrow != blank -%}<div class="av__eb">{{ section.settings.eyebrow }}</div>{%- endif -%}
