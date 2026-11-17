@@ -162,3 +162,6 @@
 .av-mq__dot{opacity:.7}
 @keyframes av-mq{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.av-mq__track{animation:none}}
+
+/* Refresh oculta los div vacíos: el fondo del hero tiene que verse */
+.av-hero__bg,.av div:empty{display:block!important}
