@@ -16,7 +16,7 @@
           {%- elsif block.settings.fallback != blank -%}
             <img src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.zone }}" loading="lazy" width="844" height="846">
           {%- endif -%}
-          <span class="av-pill av-pill--l">antes</span><span class="av-pill av-pill--r">después</span>
+          {%- if section.settings.label_before != blank -%}<span class="av-pill av-pill--l">{{ section.settings.label_before }}</span>{%- endif -%}{%- if section.settings.label_after != blank -%}<span class="av-pill av-pill--r">{{ section.settings.label_after }}</span>{%- endif -%}
         </div>
         <div class="av-ba__quote">
           {{ block.settings.text }}
@@ -45,6 +45,8 @@
   "settings": [
     { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
     { "type": "text", "id": "title", "label": "Título", "default": "Mirá la diferencia" },
+    { "type": "text", "id": "label_before", "label": "Etiqueta de la izquierda", "default": "antes" },
+    { "type": "text", "id": "label_after", "label": "Etiqueta de la derecha", "default": "después" },
     { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "La quiero" },
     { "type": "url", "id": "button_link", "label": "Link del botón" },
     { "type": "text", "id": "note", "label": "Aclaración", "default": "Resultados temporales, mientras la cinta está puesta." }

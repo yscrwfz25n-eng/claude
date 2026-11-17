@@ -23,7 +23,7 @@
               <input type="radio" name="id" value="{{ v.id }}" {% if forloop.index == section.settings.default_variant %}checked{% endif %}{% unless v.available %} disabled{% endunless %}>
               <span>{{ v.title }}{% if forloop.index == section.settings.badge_variant and section.settings.badge != blank %}<span class="av-opt__badge">{{ section.settings.badge }}</span>{% endif %}
                 {%- if section.settings[sub_key] != blank -%}<small>{{ section.settings[sub_key] }}</small>{%- endif -%}</span>
-              <span>{% if v.available %}{{ v.price | money_without_trailing_zeros }}{% else %}Sin stock{% endif %}</span>
+              <span>{% if v.available %}{{ v.price | money_without_trailing_zeros }}{% else %}{{ section.settings.soldout }}{% endif %}</span>
             </label>
           {%- endfor -%}
           <input type="hidden" name="quantity" value="1">
@@ -51,6 +51,7 @@
     { "type": "range", "id": "badge_variant", "label": "Pack con etiqueta", "min": 1, "max": 3, "step": 1, "default": 2 },
     { "type": "text", "id": "badge", "label": "Etiqueta", "default": "Recomendado" },
     { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Agregar al carrito" },
+    { "type": "text", "id": "soldout", "label": "Texto cuando no hay stock", "default": "Sin stock" },
     { "type": "text", "id": "note", "label": "Texto debajo del botón", "default": "Mercado Pago · Cuotas · 10% OFF por transferencia" }
   ],
   "presets": [ { "name": "Aurum · Packs Faja" } ]
