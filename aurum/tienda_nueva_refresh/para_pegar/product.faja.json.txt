@@ -15,11 +15,8 @@
           "settings": {}
         },
         "subtitle": {
-          "type": "text",
-          "settings": {
-            "text": "Levanta y alisa la piel al instante. Invisible bajo la ropa, resiste agua y transpiración, hasta 16 horas.",
-            "text_style": "body"
-          }
+          "type": "description",
+          "settings": {}
         },
         "price": {
           "type": "price",
@@ -58,42 +55,66 @@
             "heading_3": "Mercado Pago y cuotas"
           }
         },
-        "tab_uso": {
+        "q1": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Cómo se usa",
+            "heading": "¿Qué es y cómo funciona?",
+            "icon": "question_mark",
+            "content": "<p>Es una cinta transparente y elástica que se pega sobre la piel y la levanta suavemente. El efecto es inmediato y dura mientras la tenés puesta.</p>"
+          }
+        },
+        "q2": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿Cómo se usa?",
             "icon": "check_mark",
             "content": "<ol><li>Limpiá y secá la piel, sin cremas, aceites ni resaltador.</li><li>Despegá el protector sin tocar el adhesivo.</li><li>Con una mano subí suavemente la piel y con la otra apoyá la tira.</li><li>Presioná unos segundos de adentro hacia afuera y listo.</li></ol>"
           }
         },
-        "tab_saca": {
+        "q3": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Cómo se saca",
+            "heading": "¿Cómo se saca?",
             "icon": "leaf",
             "content": "<p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio, sin tirones.</p>"
           }
         },
-        "tab_contenido": {
+        "q4": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Qué trae cada sobre",
+            "heading": "¿Qué trae cada sobre?",
             "icon": "box",
             "content": "<p>10 tiras transparentes de un solo uso. Se recortan a la medida de cada zona: piernas, abdomen y brazos.</p>"
           }
         },
-        "tab_cuidados": {
+        "q5": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Precauciones",
-            "icon": "heart",
-            "content": "<p>Probá primero en una zona pequeña. No aplicar sobre heridas, piel irritada o quemada por el sol. No usar más de 16 horas seguidas ni para dormir. Si aparece picazón o enrojecimiento, retirar. Uso externo. El efecto es temporal, mientras la cinta está puesta.</p>"
+            "heading": "¿Se nota bajo la ropa?",
+            "icon": "eye",
+            "content": "<p>No. Es finita y transparente: bien aplicada, no se ve bajo la ropa ajustada.</p>"
           }
         },
-        "tab_envios": {
+        "q6": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Envíos y pagos",
+            "heading": "¿Cuánto dura? ¿Puedo mojarla?",
+            "icon": "stopwatch",
+            "content": "<p>Hasta 16 horas. Resiste el agua y la transpiración. El efecto es temporal, mientras la cinta está puesta.</p>"
+          }
+        },
+        "q7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿Tiene alguna precaución?",
+            "icon": "heart",
+            "content": "<p>Probá primero en una zona pequeña. No la uses sobre heridas, piel irritada o quemada por el sol, ni más de 16 horas seguidas o para dormir. Si aparece picazón o enrojecimiento, retirala. Uso externo.</p>"
+          }
+        },
+        "q8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿Cuánto tarda el envío y cómo pago?",
             "icon": "truck",
             "content": "<p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Envío gratis a domicilio llevando 3 sobres o más. Pagá con Mercado Pago, tarjeta en cuotas o transferencia con 10% OFF.</p>"
           }
@@ -108,11 +129,14 @@
         "packinfo",
         "buy_buttons",
         "perks",
-        "tab_uso",
-        "tab_saca",
-        "tab_contenido",
-        "tab_cuidados",
-        "tab_envios"
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -308,64 +332,6 @@
         "scheme": "rosa"
       }
     },
-    "faq": {
-      "type": "av-faq",
-      "settings": {
-        "scheme": "bordo2"
-      },
-      "blocks": {
-        "question_1": {
-          "type": "question",
-          "settings": {
-            "question": "¿Se nota bajo la ropa?",
-            "answer": "<p>No. Es transparente y finita: bien aplicada, no se ve bajo la ropa.</p>"
-          }
-        },
-        "question_2": {
-          "type": "question",
-          "settings": {
-            "question": "¿Cuánto dura?",
-            "answer": "<p>Hasta 16 horas. El efecto es mientras la tenés puesta, no es permanente.</p>"
-          }
-        },
-        "question_3": {
-          "type": "question",
-          "settings": {
-            "question": "¿Puedo mojarla?",
-            "answer": "<p>Sí, resiste el agua y la transpiración.</p>"
-          }
-        },
-        "question_4": {
-          "type": "question",
-          "settings": {
-            "question": "¿Cómo se saca?",
-            "answer": "<p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio.</p>"
-          }
-        },
-        "question_5": {
-          "type": "question",
-          "settings": {
-            "question": "¿Cuánto tarda el envío?",
-            "answer": "<p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Retiro gratis en sucursal desde $35.000 y envío gratis a domicilio desde $49.000.</p>"
-          }
-        },
-        "question_6": {
-          "type": "question",
-          "settings": {
-            "question": "¿Puedo cancelar mi compra?",
-            "answer": "<p>Sí. Tenés 10 días corridos desde que recibís tu pedido para arrepentirte. Escribinos por WhatsApp y te ayudamos.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_1",
-        "question_2",
-        "question_3",
-        "question_4",
-        "question_5",
-        "question_6"
-      ]
-    },
     "products": {
       "type": "av-products",
       "settings": {
@@ -495,7 +461,6 @@
     "zones",
     "steps",
     "compare",
-    "faq",
     "reviews",
     "instagram",
     "products"
