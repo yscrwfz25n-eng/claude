@@ -1,4 +1,9 @@
-{%- comment -%} Aurum · Estética de la página de producto: tipografía, colores, packs en tarjetas, preguntas y barra fija en celular. {%- endcomment -%}
+{%- comment -%}
+  Aurum · Estética de la página de producto.
+  Se carga sola desde layout/theme.liquid. En todos los productos aplica letra, colores, botón y preguntas.
+  En la Faja invisible además pone los packs en tarjetas, envío/pago, las 8 preguntas y la barra fija en celular.
+{%- endcomment -%}
+{%- if template.name == 'product' and product -%}
 {{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
 <style>
   /* ---------- Base ---------- */
@@ -93,33 +98,83 @@
   .av-sticky__info span{font-size:13px;opacity:.8}
   .av-sticky__btn{flex:none;border:0;cursor:pointer;background:#F9D4D3;color:#3B0408;font:800 15px "Inter Tight",sans-serif;padding:14px 22px;border-radius:999px}
   .av-sticky.is-show{transform:none}
+  #av-src{display:none}
+  .av-faja #MainContent .product__info-container share-button,.av-faja #MainContent .product__info-container .product-form__quantity,.av-faja #MainContent .product__info-container .rating-wrapper{display:none!important}
   @media (max-width:749px){
     .av-sticky{display:flex}
     body.av-sticky-on .au-wa{bottom:86px}
     #MainContent .product .product__info-container{padding-top:6px}
   }
 </style>
+{%- if product.handle contains 'faja' -%}
+<div id="av-src">
+  {%- assign base = product.variants.first.price -%}
+  <div class="av-pk" data-av-packs>
+  {%- for v in product.variants -%}
+    {%- assign n = v.title | split: ' ' | first | plus: 0 -%}
+    {%- if n < 1 -%}{%- assign n = 1 -%}{%- endif -%}
+    {%- assign per = v.price | divided_by: n -%}
+    {%- assign save = base | times: n | minus: v.price -%}
+    <button type="button" class="av-pk__card" data-value="{{ v.option1 | escape }}" data-price="{{ v.price | money_without_trailing_zeros }}"{% unless v.available %} disabled{% endunless %}>
+      <span class="av-pk__dot"></span>
+      <span class="av-pk__txt"><b>{{ v.title }}</b><small>{{ per | money_without_trailing_zeros }} c/u{% if n >= 3 %} · envío gratis a domicilio{% endif %}</small></span>
+      <span class="av-pk__price"><b>{{ v.price | money_without_trailing_zeros }}</b>{% if save > 0 %}<small>Ahorrás {{ save | money_without_trailing_zeros }}</small>{% endif %}</span>
+      {%- if v.available == false -%}<span class="av-pk__badge av-pk__badge--off">Sin stock</span>{%- elsif n == 3 -%}<span class="av-pk__badge">Recomendado</span>{%- endif -%}
+    </button>
+  {%- endfor -%}
+  </div>
 
-{%- if section.settings.sticky and product -%}
-  <div class="av-sticky" id="AvSticky-{{ section.id }}" aria-hidden="true">
+  <ul class="icon-with-text list-unstyled" data-av-perks>
+    <li class="icon-with-text__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="17" r="2" fill="currentColor"/><circle cx="17" cy="17" r="2" fill="currentColor"/></svg><span class="h4">Envío en 24–48 hs</span></li>
+    <li class="icon-with-text__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="8.5" r="1.6" fill="currentColor"/></svg><span class="h4">10% OFF por transferencia</span></li>
+    <li class="icon-with-text__item"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="h4">Mercado Pago y cuotas</span></li>
+  </ul>
+
+  <div data-av-faq>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Qué es y cómo funciona?</h2></div></summary><div class="accordion__content rte"><p>Es una cinta transparente y elástica que se pega sobre la piel y la levanta suavemente. El efecto es inmediato y dura mientras la tenés puesta.</p></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Cómo se usa?</h2></div></summary><div class="accordion__content rte"><ol><li>Limpiá y secá la piel, sin cremas, aceites ni resaltador.</li><li>Despegá el protector sin tocar el adhesivo.</li><li>Con una mano subí suavemente la piel y con la otra apoyá la tira.</li><li>Presioná unos segundos de adentro hacia afuera y listo.</li></ol></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Cómo se saca?</h2></div></summary><div class="accordion__content rte"><p>Mojala con agua tibia o poné unas gotas de aceite, sostené la piel y despegala despacio, sin tirones.</p></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Qué trae cada sobre?</h2></div></summary><div class="accordion__content rte"><p>10 tiras transparentes de un solo uso. Se recortan a la medida de cada zona: piernas, abdomen y brazos.</p></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Se nota bajo la ropa?</h2></div></summary><div class="accordion__content rte"><p>No. Es finita y transparente: bien aplicada, no se ve bajo la ropa ajustada.</p></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Cuánto dura? ¿Puedo mojarla?</h2></div></summary><div class="accordion__content rte"><p>Hasta 16 horas. Resiste el agua y la transpiración. El efecto es temporal, mientras la cinta está puesta.</p></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Tiene alguna precaución?</h2></div></summary><div class="accordion__content rte"><p>Probá primero en una zona pequeña. No la uses sobre heridas, piel irritada o quemada por el sol, ni más de 16 horas seguidas o para dormir. Si aparece picazón o enrojecimiento, retirala. Uso externo.</p></div></details></div>
+    <div class="product__accordion accordion"><details><summary><div class="summary__title"><h2 class="h4 accordion__title">¿Cuánto tarda el envío y cómo pago?</h2></div></summary><div class="accordion__content rte"><p>Despachamos en 24–48 hs hábiles a todo el país con seguimiento de Andreani. Envío gratis a domicilio llevando 3 sobres o más. Pagá con Mercado Pago, tarjeta en cuotas o transferencia con 10% OFF.</p></div></details></div>
+  </div>
+
+  <div class="av-sticky" id="AvSticky" aria-hidden="true">
     <div class="av-sticky__info">
       <b>{{ product.title | split: '·' | first | strip }}</b>
       <span data-av-price>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span>
     </div>
-    <button type="button" class="av-sticky__btn" tabindex="-1">{{ section.settings.sticky_label }}</button>
+    <button type="button" class="av-sticky__btn" tabindex="-1">La quiero</button>
   </div>
-{%- endif -%}
+</div>
 
 <script>
   (function () {
     var root = document.querySelector('#MainContent .product__info-container');
-    if (!root) return;
-    var packs = root.querySelector('[data-av-packs]');
-    var bar = document.getElementById('AvSticky-{{ section.id }}');
-    function radios() { return root.querySelectorAll('variant-selects input[type=radio]'); }
-    function setPrice(txt) { if (bar && txt) bar.querySelector('[data-av-price]').textContent = txt; }
+    var src = document.getElementById('av-src');
+    if (!root || !src) return;
+    document.body.classList.add('av-faja');
+    function top(el) { while (el && el.parentElement !== root) el = el.parentElement; return el; }
+    function after(ref, el) { if (ref && el) ref.insertAdjacentElement('afterend', el); }
+    var title = top(root.querySelector('.product__title'));
+    var desc = top(root.querySelector('.product__description'));
+    var picker = top(root.querySelector('variant-selects'));
+    var buy = top(root.querySelector('product-form'));
+    var packs = src.querySelector('[data-av-packs]');
+    var perks = src.querySelector('[data-av-perks]');
+    var faq = src.querySelector('[data-av-faq]');
+    var bar = document.getElementById('AvSticky');
+    if (title && desc) after(title, desc);
+    after(picker || buy, packs);
+    after(buy, perks);
+    after(perks, faq);
+    document.body.appendChild(bar);
 
-    if (packs && radios().length) {
+    function radios() { return root.querySelectorAll('variant-selects input[type=radio]'); }
+    function setPrice(t) { if (t) bar.querySelector('[data-av-price]').textContent = t; }
+    if (radios().length) {
       root.classList.add('av-pk-ready');
       var checked = root.querySelector('variant-selects input[type=radio]:checked');
       packs.querySelectorAll('.av-pk__card').forEach(function (c) {
@@ -130,18 +185,17 @@
       packs.addEventListener('click', function (e) {
         var card = e.target.closest('.av-pk__card');
         if (!card || card.disabled) return;
-        var radio = Array.prototype.find.call(radios(), function (r) { return r.value === card.dataset.value; });
-        if (radio && !radio.checked) radio.click();
+        var r = Array.prototype.find.call(radios(), function (x) { return x.value === card.dataset.value; });
+        if (r && !r.checked) r.click();
         packs.querySelectorAll('.av-pk__card').forEach(function (c) { c.classList.toggle('is-on', c === card); });
         setPrice(card.dataset.price);
       });
-    }
+    } else { packs.remove(); }
 
-    if (bar && 'IntersectionObserver' in window) {
-      var target = root.querySelector('.product-form__submit');
-      if (!target) return;
-      new IntersectionObserver(function (entries) {
-        var show = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+    var target = root.querySelector('.product-form__submit');
+    if (target && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        var show = !en[0].isIntersecting && en[0].boundingClientRect.top < 0;
         bar.classList.toggle('is-show', show);
         bar.setAttribute('aria-hidden', show ? 'false' : 'true');
         document.body.classList.toggle('av-sticky-on', show);
@@ -153,16 +207,12 @@
     }
   })();
 </script>
+{%- endif -%}
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Aurum · Estilo producto",
-  "tag": "div",
-  "settings": [
-    { "type": "paragraph", "content": "Esta sección no se ve: le da la estética Aurum a la ficha del producto (packs en tarjetas, botón, preguntas y barra fija en celular)." },
-    { "type": "checkbox", "id": "sticky", "label": "Barra fija de compra en celular", "default": true },
-    { "type": "text", "id": "sticky_label", "label": "Texto del botón de la barra", "default": "La quiero" }
-  ],
-  "presets": [ { "name": "Aurum · Estilo producto" } ]
+  "settings": []
 }
 {% endschema %}
