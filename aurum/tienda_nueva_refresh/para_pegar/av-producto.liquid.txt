@@ -2,7 +2,7 @@
   Aurum · Página de producto (misma distribución que Tonee).
   Se carga sola desde layout/theme.liquid.
   En todos los productos: letra, colores y botón Aurum.
-  En la Faja invisible: 3 beneficios, "Elegí tu pack" (3 sobres elegido de entrada), botón con precio,
+  En la Faja invisible: 3 beneficios, "Elegí tu pack" (2 sobres elegido de entrada y destacado), botón con precio,
   envío y medios de pago, y 4 preguntas desplegables.
   Las secciones de abajo (antes y después, videos, reseñas, etc.) solo se ven en la Faja.
 {%- endcomment -%}
@@ -121,7 +121,7 @@
         {%- if img -%}<img class="av-pk__img" src="{{ img | image_url: width: 90 }}" alt="" width="34" height="34" loading="lazy">{%- endif -%}
         <span class="av-pk__txt"><b>{{ v.title }}</b> <span>· {{ tiras }} tiras</span><small>{{ per | money_without_trailing_zeros }}/sobre</small></span>
         <span class="av-pk__price"><b>{{ v.price | money_without_trailing_zeros }}</b>{% if save > 0 %}<span class="av-pk__save">Ahorrás {{ save | money_without_trailing_zeros }}</span>{% endif %}</span>
-        {%- if v.available == false -%}<span class="av-pk__badge av-pk__badge--off">Sin stock</span>{%- elsif n == 3 -%}<span class="av-pk__badge">Recomendado</span>{%- endif -%}
+        {%- if v.available == false -%}<span class="av-pk__badge av-pk__badge--off">Sin stock</span>{%- elsif n == 2 -%}<span class="av-pk__badge">Más popular</span>{%- endif -%}
       </button>
     {%- endfor -%}
     </div>
@@ -229,10 +229,10 @@
       if (card && !card.disabled) pick(card.dataset.value);
     });
 
-    /* 3 sobres elegido de entrada (salvo que vengan de un link con otro pack) */
+    /* 2 sobres elegido de entrada (salvo que vengan de un link con otro pack) */
     if (!/[?&]variant=/.test(location.search) && window.customElements) {
       customElements.whenDefined('variant-selects').then(function () {
-        var rec = packs.querySelector('.av-pk__card[data-n="3"]:not([disabled])');
+        var rec = packs.querySelector('.av-pk__card[data-n="2"]:not([disabled])');
         if (rec) setTimeout(function () { pick(rec.dataset.value); }, 60);
       });
     }
