@@ -1,8 +1,10 @@
 {%- comment -%}
-  Aurum · Página de producto (estilo Tonee).
+  Aurum · Página de producto (misma distribución que Tonee).
   Se carga sola desde layout/theme.liquid.
   En todos los productos: letra, colores y botón Aurum.
-  En la Faja invisible: 3 beneficios, packs en tarjetas (3 sobres elegido de entrada) y 4 preguntas.
+  En la Faja invisible: 3 beneficios, "Elegí tu pack" (3 sobres elegido de entrada), botón con precio,
+  envío y medios de pago, y 4 preguntas desplegables.
+  Las secciones de abajo (antes y después, videos, reseñas, etc.) solo se ven en la Faja.
 {%- endcomment -%}
 {%- if template.name == 'product' and product -%}
 {{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
@@ -12,13 +14,13 @@
   #MainContent .product .product-media-container{border-radius:24px;overflow:hidden;border:0}
   #MainContent .product .thumbnail{border-radius:12px;overflow:hidden;border:0}
   #MainContent .product .thumbnail[aria-current]{box-shadow:0 0 0 2px #3B0408}
-  #MainContent .product .product__title h1{font-family:"Inter Tight",sans-serif;font-weight:800;letter-spacing:-.045em;line-height:1;
-    font-size:clamp(32px,3.6vw,46px);color:#3B0408}
-  #MainContent .product .price .price-item{font-family:"Inter Tight",sans-serif;font-size:26px;font-weight:800;letter-spacing:-.03em;color:#3B0408}
+  #MainContent .product .product__title h1{font-family:"Inter Tight",sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1.05;
+    font-size:clamp(30px,3.4vw,42px);color:#3B0408}
+  #MainContent .product .price .price-item{font-family:"Inter Tight",sans-serif;font-size:24px;font-weight:800;color:#3B0408}
   #MainContent .product .product-form__input--pill input[type=radio]+label{border-radius:999px;border:2px solid #3B0408;color:#3B0408;background:transparent;font-weight:700}
   #MainContent .product .product-form__input--pill input[type=radio]:checked+label{background:#3B0408;color:#F9D4D3}
-  #MainContent .product .product-form__submit{min-height:58px;border-radius:999px;background:#3B0408;color:#F9D4D3;
-    font:800 17px "Inter Tight",sans-serif;letter-spacing:-.01em}
+  #MainContent .product .product-form__submit{min-height:56px;border-radius:999px;background:#3B0408;color:#F9D4D3;
+    font:800 16px "Inter Tight",sans-serif;letter-spacing:.08em;text-transform:uppercase}
   #MainContent .product .product-form__submit::after,#MainContent .product .product-form__submit::before{display:none}
 
   /* ---------- Faja invisible ---------- */
@@ -29,46 +31,72 @@
   .av-faja #MainContent .product__info-container .rating-wrapper,
   .av-faja #MainContent .product__info-container .product__text,
   .av-faja #MainContent .product__info-container > div > .price,
+  .av-faja #MainContent .product__info-container .product__tax,
   .av-faja #MainContent .av-pk-ready variant-selects{display:none!important}
+  .av-faja #MainContent .product__title{text-align:center;margin-bottom:6px}
 
-  .av-bul{list-style:none;margin:14px 0 22px;padding:0;display:grid;gap:9px}
-  .av-bul li{display:flex;align-items:center;gap:10px;font:600 16px/1.3 "Inter Tight",sans-serif;color:#3B0408}
-  .av-bul li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:#3B0408;color:#F9D4D3;display:grid;place-items:center;font-size:12px;font-weight:800}
+  /* 3 beneficios en píldoras */
+  .av-bul{list-style:none;margin:14px 0 26px;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .av-bul li{display:inline-flex;align-items:center;gap:8px;background:#FCE4E3;border-radius:999px;padding:8px 16px 8px 10px;
+    font:700 14px/1.2 "Inter Tight",sans-serif;color:#3B0408}
+  .av-bul li::before{content:"✓";flex:none;width:18px;height:18px;border-radius:50%;background:#3B0408;color:#F9D4D3;display:grid;place-items:center;font-size:10px;font-weight:800}
 
-  .av-pk__head{font:800 15px "Inter Tight",sans-serif;letter-spacing:.02em;color:#3B0408;margin:0 0 10px}
-  .av-pk{display:grid;gap:10px;margin-bottom:16px}
-  .av-pk__card{position:relative;display:grid;grid-template-columns:20px 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;
-    font-family:"Inter Tight",sans-serif;color:#3B0408;background:#fff;border:2px solid rgba(59,4,8,.15);border-radius:16px;padding:15px 16px;cursor:pointer;transition:border-color .2s,background .2s}
-  .av-pk__card:hover{border-color:rgba(59,4,8,.45)}
-  .av-pk__card.is-on{border-color:#3B0408;background:#FCE4E3}
+  /* Elegí tu pack */
+  .av-pk__head{text-align:center;font:700 13px "Inter Tight",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3B0408;margin:0 0 12px}
+  .av-pk{display:grid;gap:10px;margin-bottom:14px}
+  .av-pk__card{position:relative;display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-family:"Inter Tight",sans-serif;color:#3B0408;
+    background:#fff;border:2px solid rgba(59,4,8,.14);border-radius:14px;padding:14px 14px;cursor:pointer;transition:border-color .2s,background .2s}
+  .av-pk__card:hover{border-color:rgba(59,4,8,.4)}
+  .av-pk__card.is-on{border-color:#3B0408;background:#F9D4D3}
   .av-pk__card[disabled]{opacity:.45;cursor:not-allowed}
-  .av-pk__dot{width:20px;height:20px;border-radius:50%;border:2px solid #3B0408;display:grid;place-items:center}
-  .av-pk__card.is-on .av-pk__dot::after{content:"";width:10px;height:10px;border-radius:50%;background:#3B0408}
-  .av-pk__txt b{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
-  .av-pk__txt small{display:block;font-size:13px;opacity:.7;margin-top:3px}
-  .av-pk__price{text-align:right}
-  .av-pk__price b{display:block;font-size:18px;font-weight:800;letter-spacing:-.02em}
-  .av-pk__price small{display:block;margin-top:3px;font-size:12px;font-weight:700;color:#8E1B26}
-  .av-pk__badge{position:absolute;top:-10px;left:50px;background:#3B0408;color:#F9D4D3;font:700 10px/1 "Inter Tight",sans-serif;
+  .av-pk__dot{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid rgba(59,4,8,.45);display:grid;place-items:center;background:#fff}
+  .av-pk__card.is-on .av-pk__dot{border-color:#3B0408}
+  .av-pk__card.is-on .av-pk__dot::after{content:"";width:8px;height:8px;border-radius:50%;background:#3B0408}
+  .av-pk__img{flex:none;width:34px;height:34px;border-radius:6px;object-fit:cover;background:#FCE4E3}
+  .av-pk__txt{flex:1;min-width:0}
+  .av-pk__txt b{font-size:15px;font-weight:800}
+  .av-pk__txt span{font-size:13px;opacity:.65}
+  .av-pk__txt small{display:block;font-size:13px;opacity:.75;margin-top:3px}
+  .av-pk__price{flex:none;text-align:right}
+  .av-pk__price b{display:block;font-size:17px;font-weight:800}
+  .av-pk__save{display:inline-block;margin-top:5px;background:#3B0408;color:#F9D4D3;font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px}
+  .av-pk__badge{position:absolute;top:-10px;left:12px;background:#3B0408;color:#F9D4D3;font:800 10px/1 "Inter Tight",sans-serif;
     letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
   .av-pk__badge--off{background:#8E1B26}
 
-  .av-note{margin:12px 0 0;text-align:center;font:500 13px/1.45 "Inter Tight",sans-serif;color:#3B0408;opacity:.8}
-  .av-note b{font-weight:700}
+  /* Debajo del botón */
+  .av-btn-price{margin-left:10px}
+  .av-under{margin:12px 0 0;text-align:center;font:700 13px "Inter Tight",sans-serif;color:#3B0408}
+  .av-box{margin-top:14px;border:1px solid rgba(59,4,8,.15);border-radius:14px;background:#fff}
+  .av-box p{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:11px 12px;font:500 14px "Inter Tight",sans-serif;color:#3B0408}
+  .av-box p + p{border-top:1px solid rgba(59,4,8,.1)}
+  .av-box b{font-weight:800}
+  .av-box svg{width:18px;height:18px;flex:none}
+  .av-pay{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+  .av-pay svg{width:38px;height:24px}
 
-  .av-acc{margin-top:22px;border-top:1px solid rgba(59,4,8,.18)}
-  .av-acc details{border-bottom:1px solid rgba(59,4,8,.18)}
-  .av-acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 0;
-    font:700 16px/1.3 "Inter Tight",sans-serif;color:#3B0408}
+  /* Preguntas */
+  .av-acc{margin-top:22px;border-top:1px solid rgba(59,4,8,.15)}
+  .av-acc details{border-bottom:1px solid rgba(59,4,8,.15)}
+  .av-acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;
+    font:800 16px/1.3 "Inter Tight",sans-serif;color:#3B0408}
   .av-acc summary::-webkit-details-marker{display:none}
-  .av-acc summary::after{content:"+";flex:none;font-size:22px;font-weight:500;line-height:1;transition:transform .25s}
+  .av-acc summary::after{content:"+";flex:none;width:20px;height:20px;border-radius:50%;background:#FCE4E3;display:grid;place-items:center;
+    font-size:15px;font-weight:600;line-height:1;transition:transform .25s}
   .av-acc details[open] summary::after{transform:rotate(45deg)}
-  .av-acc__body{padding:0 0 18px;font:400 15px/1.55 "Inter Tight",sans-serif;color:#3B0408;opacity:.9}
-  .av-acc__body p{margin:0 0 10px}
-  .av-acc__body ul,.av-acc__body ol{margin:0 0 10px;padding-left:20px}
-  .av-acc__body li+li{margin-top:5px}
+  .av-acc__body{padding:0 0 20px;font:400 15px/1.6 "Inter Tight",sans-serif;color:#3B0408}
+  .av-acc__body p{margin:0 0 14px}
+  .av-acc__lead{font-weight:700}
+  .av-acc__checks{list-style:none;margin:0 0 14px;padding:0}
+  .av-acc__checks li::before{content:"✔ ";font-weight:800}
+  .av-acc__body ul:not(.av-acc__checks){margin:0 0 6px;padding-left:20px}
+  .av-acc__body li + li{margin-top:6px}
+  .av-acc__body h4{margin:0 0 8px;font:800 15px "Inter Tight",sans-serif}
 </style>
 
+{%- unless product.handle contains 'faja' -%}
+<style>#MainContent [id*="__faja_"]{display:none!important}</style>
+{%- endunless -%}
 {%- if product.handle contains 'faja' -%}
 <div id="av-src">
   <ul class="av-bul" data-av-bul>
@@ -87,45 +115,79 @@
       {%- assign per = v.price | divided_by: n -%}
       {%- assign tiras = n | times: 10 -%}
       {%- assign save = base | times: n | minus: v.price -%}
-      <button type="button" class="av-pk__card" data-n="{{ n }}" data-value="{{ v.option1 | escape }}"{% unless v.available %} disabled{% endunless %}>
+      {%- assign img = v.featured_image | default: product.featured_image -%}
+      <button type="button" class="av-pk__card" data-n="{{ n }}" data-value="{{ v.option1 | escape }}" data-price="{{ v.price | money_without_trailing_zeros }}"{% unless v.available %} disabled{% endunless %}>
         <span class="av-pk__dot"></span>
-        <span class="av-pk__txt"><b>{{ v.title }} · {{ tiras }} tiras</b><small>{{ per | money_without_trailing_zeros }} por sobre{% if n >= 3 %} · envío gratis{% endif %}</small></span>
-        <span class="av-pk__price"><b>{{ v.price | money_without_trailing_zeros }}</b>{% if save > 0 %}<small>Ahorrás {{ save | money_without_trailing_zeros }}</small>{% endif %}</span>
+        {%- if img -%}<img class="av-pk__img" src="{{ img | image_url: width: 90 }}" alt="" width="34" height="34" loading="lazy">{%- endif -%}
+        <span class="av-pk__txt"><b>{{ v.title }}</b> <span>· {{ tiras }} tiras</span><small>{{ per | money_without_trailing_zeros }}/sobre</small></span>
+        <span class="av-pk__price"><b>{{ v.price | money_without_trailing_zeros }}</b>{% if save > 0 %}<span class="av-pk__save">Ahorrás {{ save | money_without_trailing_zeros }}</span>{% endif %}</span>
         {%- if v.available == false -%}<span class="av-pk__badge av-pk__badge--off">Sin stock</span>{%- elsif n == 3 -%}<span class="av-pk__badge">Recomendado</span>{%- endif -%}
       </button>
     {%- endfor -%}
     </div>
   </div>
 
-  <p class="av-note" data-av-note><b>Envío en 24–48 hs</b> a todo el país · Gratis a domicilio desde 3 sobres<br>Mercado Pago · Cuotas con tarjeta · 10% OFF por transferencia</p>
+  <div data-av-after>
+    <p class="av-under">Envío gratis a domicilio llevando 3 sobres o más.</p>
+    <div class="av-box">
+      <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="8.5" r="1.6" fill="currentColor"/></svg><b>10% OFF</b> pagando por transferencia</p>
+    </div>
+    {%- if shop.enabled_payment_types.size > 0 -%}
+      <ul class="av-pay">
+        {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+      </ul>
+    {%- endif -%}
 
-  <div class="av-acc" data-av-acc>
-    <details>
-      <summary>¿Qué hace la Faja invisible?</summary>
-      <div class="av-acc__body">
-        <p>Es una cinta lifting transparente para piernas, abdomen y brazos. Se pega sobre la piel y la levanta y alisa al instante, con un adhesivo suave.</p>
-        <ul><li>Efecto lift al instante</li><li>Resiste agua y transpiración</li><li>Invisible bajo la ropa</li><li>Dura hasta 16 horas</li></ul>
-        <p><b>Contenido:</b> 10 tiras por sobre.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Tamaño y colocación</summary>
-      <div class="av-acc__body">
-        <p>Cada tira mide 12 × 18 cm y se puede recortar a la medida de cada zona. Puesta sobre la piel puede verse más grande que en las fotos.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Cómo se aplica</summary>
-      <div class="av-acc__body">
-        <ol><li>Limpiá y secá la piel, sin cremas ni aceites.</li><li>Despegá el protector sin tocar el adhesivo.</li><li>Con una mano subí suavemente la piel y con la otra apoyá la tira.</li><li>Presioná unos segundos y listo.</li></ol>
-      </div>
-    </details>
-    <details>
-      <summary>Precauciones · leer antes de usar</summary>
-      <div class="av-acc__body">
-        <ul><li>Probá primero en una zona pequeña.</li><li>Aplicala solo sobre piel limpia, seca y sana.</li><li>No la uses sobre várices, heridas, piel irritada o cicatrices.</li><li>Es de un solo uso.</li><li>No duermas con ella ni la uses más de 16 horas seguidas.</li><li>Retirala despacio con agua tibia y jabón o unas gotas de aceite.</li><li>No apta para niños.</li><li>Si estás embarazada, amamantando o tenés alguna afección de la piel, consultá a tu médico.</li></ul>
-      </div>
-    </details>
+    <div class="av-acc">
+      <details>
+        <summary>¿Qué hace la Faja invisible?</summary>
+        <div class="av-acc__body">
+          <p class="av-acc__lead">Levanta al instante y alisa la textura de la piel. Sin necesidad de fajas.</p>
+          <p>Faja invisible · Cinta lifting es una solución discreta para alisar y reafirmar la apariencia de la piel suelta o flácida en tres zonas clave: piernas, abdomen y brazos.</p>
+          <p>Hecha con un adhesivo ultrafino y suave para la piel, cada tira levanta la piel hacia arriba para un aspecto más tonificado y definido bajo la ropa. Ideal para ocasiones especiales o para sentirte segura todos los días.</p>
+          <ul class="av-acc__checks">
+            <li>Para piernas, abdomen y brazos</li>
+            <li>Aspecto más firme y esculpido</li>
+            <li>Suave con la piel y de agarre firme todo el día</li>
+            <li>Invisible bajo la ropa</li>
+            <li>Resiste agua y transpiración</li>
+          </ul>
+          <h4>Qué incluye:</h4>
+          <ul><li>10 tiras lifting por sobre</li></ul>
+        </div>
+      </details>
+      <details>
+        <summary>Tamaño y colocación</summary>
+        <div class="av-acc__body">
+          <p>La tira puede verse más larga sobre la piel que en las fotos del producto. Es normal: se estira cuando levantás la piel y la aplicás, y por eso se ve más extendida una vez colocada.</p>
+          <p class="av-acc__lead">Cada tira mide 12 × 18 cm y se puede recortar a la medida de cada zona.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Cómo se aplica</summary>
+        <div class="av-acc__body">
+          <p>Despegá, pegá y levantá: lleva menos de 30 segundos. Con la piel limpia y seca, sacá el protector, apoyá la tira mientras subís suavemente la piel y presioná unos segundos.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Precauciones · leer antes de usar</summary>
+        <div class="av-acc__body">
+          <ul>
+            <li>Hacé una prueba 24 horas antes del primer uso en una zona pequeña (por ejemplo, la parte interna del antebrazo) y suspendé el uso si aparece enrojecimiento, picazón o irritación.</li>
+            <li>Aplicala solo sobre piel limpia y seca, sin desodorante, crema, hidratante ni aceites.</li>
+            <li>No la apliques sobre piel lastimada, irritada, quemada por el sol, sensible o recién depilada. Evitá el contacto con ojos, boca y mucosas.</li>
+            <li>No la apliques sobre várices, capilares rotos, cicatrices, estrías con la piel abierta ni zonas que estén cicatrizando.</li>
+            <li>No apta para personas con alergia conocida a adhesivos o cintas médicas.</li>
+            <li>De un solo uso: no la reutilices.</li>
+            <li>No la uses para dormir ni más de 16 horas seguidas.</li>
+            <li>Retirala despacio con agua tibia y jabón o unas gotas de aceite. No la arranques de golpe.</li>
+            <li>No apta para bebés ni niños. Mantener fuera de su alcance.</li>
+            <li>Consultá a un profesional de la salud antes de usarla si estás embarazada, amamantando o tenés alguna afección de la piel.</li>
+            <li>Guardala a temperatura ambiente, lejos del sol directo y del calor.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
   </div>
 </div>
 
@@ -142,36 +204,36 @@
     var bul = src.querySelector('[data-av-bul]');
     var wrap = src.querySelector('[data-av-packs-wrap]');
     var packs = src.querySelector('[data-av-packs]');
-    var note = src.querySelector('[data-av-note]');
-    var acc = src.querySelector('[data-av-acc]');
+    var afterBuy = src.querySelector('[data-av-after]');
     after(title, bul);
     if (buy) buy.insertAdjacentElement('beforebegin', wrap);
-    after(buy, note);
-    after(note, acc);
+    after(buy, afterBuy);
+
+    var btn = root.querySelector('.product-form__submit');
+    var btnPrice = null;
+    if (btn) { btnPrice = document.createElement('span'); btnPrice.className = 'av-btn-price'; var first = btn.querySelector('span'); if (first) first.insertAdjacentElement('afterend', btnPrice); }
+    function setBtn(card) { if (btnPrice && card) btnPrice.textContent = '· ' + card.dataset.price; }
 
     function radios() { return root.querySelectorAll('variant-selects input[type=radio]'); }
-    function mark() {
-      var c = root.querySelector('variant-selects input[type=radio]:checked');
-      packs.querySelectorAll('.av-pk__card').forEach(function (k) { k.classList.toggle('is-on', !!c && k.dataset.value === c.value); });
-    }
     function pick(value) {
       var r = Array.prototype.find.call(radios(), function (x) { return x.value === value; });
       if (r && !r.checked) r.click();
-      packs.querySelectorAll('.av-pk__card').forEach(function (k) { k.classList.toggle('is-on', k.dataset.value === value); });
+      packs.querySelectorAll('.av-pk__card').forEach(function (k) { var on = k.dataset.value === value; k.classList.toggle('is-on', on); if (on) setBtn(k); });
     }
     if (!radios().length) { wrap.remove(); return; }
     root.classList.add('av-pk-ready');
-    mark();
+    var checked = root.querySelector('variant-selects input[type=radio]:checked');
+    if (checked) pick(checked.value);
     packs.addEventListener('click', function (e) {
       var card = e.target.closest('.av-pk__card');
       if (card && !card.disabled) pick(card.dataset.value);
     });
 
-    /* 3 sobres elegido de entrada (si no vienen de un link con otro pack) */
+    /* 3 sobres elegido de entrada (salvo que vengan de un link con otro pack) */
     if (!/[?&]variant=/.test(location.search) && window.customElements) {
       customElements.whenDefined('variant-selects').then(function () {
         var rec = packs.querySelector('.av-pk__card[data-n="3"]:not([disabled])');
-        if (rec) setTimeout(function () { pick(rec.dataset.value); }, 50);
+        if (rec) setTimeout(function () { pick(rec.dataset.value); }, 60);
       });
     }
   })();
