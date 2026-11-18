@@ -128,7 +128,7 @@
   </div>
 
   <div data-av-after>
-    <p class="av-under">Envío gratis a domicilio llevando 3 sobres o más.</p>
+    <p class="av-under">Envío gratis a domicilio llevando 2 sobres o más.</p>
     <div class="av-box">
       <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="8.5" r="1.6" fill="currentColor"/></svg><b>10% OFF</b> pagando por transferencia</p>
     </div>
