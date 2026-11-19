@@ -1,0 +1,394 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "body"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "show_physical_stores": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": true,
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    },
+    "marquee": {
+      "type": "av-marquee",
+      "settings": {
+        "scheme": "bordo",
+        "phrases": "Push-up invisible\nLevanta y da forma\nSin corpiño\nEspalda descubierta\nStrapless",
+        "speed": 30
+      }
+    },
+    "beforeafter": {
+      "type": "av-beforeafter",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "zone": "Busto",
+            "text": "Más levantado y con forma al instante, sin corpiño.",
+            "name": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_1"
+      ],
+      "disabled": true,
+      "settings": {
+        "scheme": "claro",
+        "title": "Mirá la diferencia.",
+        "label_before": "antes",
+        "label_after": "después",
+        "button_label": "",
+        "note": "Los resultados varían y son temporales."
+      }
+    },
+    "benefits": {
+      "type": "av-benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "spark",
+            "text": "Levanta y da forma al instante"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shirt",
+            "text": "Invisible bajo la ropa"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "text": "Para espalda descubierta y strapless"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "clock",
+            "text": "Se aplica en segundos"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "scissors",
+            "text": "Forma de gota que acompaña el busto"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "hour",
+            "text": "La usás solo cuando querés"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ],
+      "settings": {
+        "scheme": "bordo",
+        "title": "Todo lo que necesitás"
+      }
+    },
+    "videos": {
+      "type": "av-videos",
+      "settings": {
+        "scheme": "rosa",
+        "title": "Mirala en acción",
+        "sub": "Así se pone y así queda."
+      }
+    },
+    "steps": {
+      "type": "av-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Pegá",
+            "text": "Con la piel limpia y seca, apoyá la parte ancha de la gota debajo del busto."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Levantá",
+            "text": "Subí suavemente el busto y estirá la cinta hacia arriba."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Listo",
+            "text": "Presioná unos segundos y vestite como quieras."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "scheme": "bordo2",
+        "title": "Cómo se usa"
+      }
+    },
+    "compare": {
+      "type": "av-compare",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Efecto al instante",
+            "c1": true,
+            "c2": true,
+            "c3": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Sin breteles ni espalda",
+            "c1": true,
+            "c2": false,
+            "c3": true
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Invisible con escotes profundos",
+            "c1": true,
+            "c2": false,
+            "c3": true
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "La usás solo cuando querés",
+            "c1": true,
+            "c2": true,
+            "c3": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Sin cirugía ni recuperación",
+            "c1": true,
+            "c2": true,
+            "c3": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ],
+      "settings": {
+        "scheme": "claro",
+        "title": "Push-up invisible vs. corpiño y cirugía",
+        "sub": "",
+        "col_1": "Push-up invisible",
+        "col_2": "Corpiño push-up",
+        "col_3": "Cirugía",
+        "button_label": ""
+      }
+    },
+    "faq": {
+      "type": "av-faq",
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se nota debajo de la ropa?",
+            "answer": "<p>Está pensada para quedar lisa debajo de la ropa y, bien aplicada, no se nota. Es ideal para vestidos con espalda descubierta, tops strapless y escotes profundos.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se puede poner sobre el pezón?",
+            "answer": "<p>No. No la apliques sobre el pezón ni la areola: colocala alrededor, siguiendo la forma del busto.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se puede reutilizar?",
+            "answer": "<p>No, cada cinta es de un solo uso. Para mejores resultados, usá una nueva cada vez.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cómo me la saco?",
+            "answer": "<p>Retirala despacio con el Spray removedor Aurum, unas gotas de aceite o agua tibia con jabón. Nunca la arranques de golpe.</p>"
+          }
+        },
+        "q_5": {
+          "type": "question",
+          "settings": {
+            "question": "¿Sirve para piel sensible?",
+            "answer": "<p>Está pensada para ser suave, pero te recomendamos hacer una prueba antes de usarla, sobre todo si tenés la piel sensible.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4",
+        "q_5"
+      ],
+      "settings": {
+        "scheme": "rosa",
+        "title": "Preguntas frecuentes"
+      }
+    },
+    "reviews": {
+      "type": "av-reviews",
+      "settings": {
+        "scheme": "bordo",
+        "title": "Lo que dicen nuestras clientas",
+        "autoplay": false
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "También te puede gustar",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "heading": "Divulgaciones",
+        "heading_size": "h2",
+        "open_by_default": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "marquee",
+    "beforeafter",
+    "benefits",
+    "videos",
+    "steps",
+    "compare",
+    "faq",
+    "reviews",
+    "related-products",
+    "disclosures"
+  ]
+}
