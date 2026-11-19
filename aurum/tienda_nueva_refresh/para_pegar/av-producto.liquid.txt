@@ -1,10 +1,11 @@
 {%- comment -%}
-  Aurum · Página de producto (misma distribución que Tonee).
+  Aurum · Página de producto (misma distribución que Tonee) y carrito lateral.
   Se carga sola desde layout/theme.liquid.
   En todos los productos: letra, colores y botón Aurum.
   En la Faja invisible: 3 beneficios, "Elegí tu pack" (2 sobres elegido de entrada y destacado), botón con precio,
   envío y medios de pago, y 4 preguntas desplegables.
   Las secciones de abajo (antes y después, videos, reseñas, etc.) solo se ven en la Faja.
+  Al final: el carrito lateral con estilo Aurum (en todas las páginas).
 {%- endcomment -%}
 {%- if template.name == 'product' and product -%}
 {{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
@@ -234,6 +235,218 @@
   })();
 </script>
 {%- endif -%}
+{%- endif -%}
+
+{%- comment -%} ===================== Carrito lateral Aurum (en todas las páginas) ===================== {%- endcomment -%}
+{%- if settings.cart_type == 'drawer' -%}
+{%- liquid
+  assign faja = all_products['faja-invisible']
+  assign bel = collections['belleza']
+  if bel == blank or bel.products_count == 0
+    assign bel = collections['productos']
+  endif
+-%}
+<template id="av-cd-ups">
+  {%- if faja != blank and faja.available -%}
+    {%- assign fv = faja.selected_or_first_available_variant -%}
+    {%- for v in faja.variants -%}{%- assign n = v.title | split: ' ' | first | plus: 0 -%}{%- if n == 2 and v.available -%}{%- assign fv = v -%}{%- endif -%}{%- endfor -%}
+    <div data-id="{{ fv.id }}" data-pid="{{ faja.id }}" data-title="{{ faja.title | escape }}{% if faja.variants.size > 1 %} · {{ fv.title | escape }}{% endif %}" data-price="{{ fv.price | money_without_trailing_zeros | escape }}" data-img="{% if faja.featured_image %}{{ faja.featured_image | image_url: width: 160 }}{% endif %}"></div>
+  {%- endif -%}
+  {%- if bel != blank -%}
+    {%- for p in bel.products limit: 8 -%}
+      {%- if p.available and p.handle != 'faja-invisible' -%}
+        {%- assign pv = p.selected_or_first_available_variant -%}
+        <div data-id="{{ pv.id }}" data-pid="{{ p.id }}" data-title="{{ p.title | escape }}" data-price="{{ pv.price | money_without_trailing_zeros | escape }}" data-img="{% if p.featured_image %}{{ p.featured_image | image_url: width: 160 }}{% endif %}"></div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+</template>
+<template id="av-cd-pay">
+  {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+</template>
+<style>
+  cart-drawer .drawer__inner{background:#fff;font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;color:#3B0408;border-left:0}
+  cart-drawer .drawer__header{padding-top:22px;border:0}
+  cart-drawer .drawer__heading{font:800 24px/1 "Inter Tight",sans-serif;letter-spacing:-.03em;color:#3B0408;display:flex;align-items:center;gap:10px}
+  .av-cd-count{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 7px;border-radius:999px;background:#3B0408;color:#F9D4D3;font-size:14px}
+  cart-drawer .drawer__close{width:40px;height:40px;border-radius:50%;background:#3B0408;color:#F9D4D3;display:grid;place-items:center;top:16px}
+  cart-drawer .drawer__close .svg-wrapper,cart-drawer .drawer__close svg{width:14px;height:14px;color:#F9D4D3}
+  .av-cd-banner{margin:4px 0 14px;padding:12px 14px;border-radius:14px;background:#FCE4E3;font:600 13.5px/1.35 "Inter Tight",sans-serif;color:#3B0408;display:flex;gap:10px;align-items:center}
+  .av-cd-banner svg{flex:none;width:22px;height:22px}
+  .av-cd-up{margin:0 0 16px;padding:14px;border-radius:16px;background:#FCE4E3;border:1px solid rgba(59,4,8,.08)}
+  .av-cd-up__lbl{font:800 11px "Inter Tight",sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+  .av-cd-up__row{display:flex;align-items:center;gap:12px}
+  .av-cd-up__row img{width:58px;height:58px;border-radius:12px;object-fit:cover;background:#fff;flex:none}
+  .av-cd-up__txt{flex:1;min-width:0}
+  .av-cd-up__txt b{display:block;font-size:14.5px;font-weight:700;line-height:1.25}
+  .av-cd-up__txt span{display:block;font-size:15px;font-weight:800;color:#8E1B26;margin-top:3px}
+  .av-cd-up__btn{flex:none;border:0;cursor:pointer;background:#3B0408;color:#F9D4D3;font:800 12.5px "Inter Tight",sans-serif;letter-spacing:.06em;padding:12px 16px;border-radius:999px}
+  .av-cd-up__btn[disabled]{opacity:.6}
+  .av-cd-lbl{font:800 11px "Inter Tight",sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px;opacity:.75}
+  cart-drawer .cart-items thead{display:none}
+  cart-drawer .cart-item{border:1px solid rgba(59,4,8,.12);border-radius:16px;padding:12px;margin-bottom:10px;background:#fff}
+  cart-drawer .cart-item__image{border-radius:12px}
+  cart-drawer .cart-item__name{font:700 15px/1.25 "Inter Tight",sans-serif;color:#3B0408;text-decoration:none}
+  cart-drawer .cart-item .price,cart-drawer .cart-item__final-price{font:800 15px "Inter Tight",sans-serif;color:#3B0408}
+  cart-drawer .cart-item__old-price{opacity:.55}
+  cart-drawer .quantity{border-radius:999px;min-height:38px;width:112px}
+  cart-drawer .quantity:before,cart-drawer .quantity:after{border-radius:999px;box-shadow:0 0 0 1px rgba(59,4,8,.2)}
+  cart-drawer .drawer__footer{border-top:1px solid rgba(59,4,8,.12);padding-top:14px}
+  .av-cd-disc{display:flex;gap:8px;margin:0 0 6px}
+  .av-cd-disc input{flex:1;min-width:0;height:46px;border-radius:12px;border:1px solid rgba(59,4,8,.25);padding:0 14px;font:500 14px "Inter Tight",sans-serif;color:#3B0408;background:#fff}
+  .av-cd-disc button{flex:none;height:46px;padding:0 18px;border-radius:12px;border:0;background:#3B0408;color:#F9D4D3;font:800 14px "Inter Tight",sans-serif;cursor:pointer}
+  .av-cd-disc-msg{font:600 12.5px "Inter Tight",sans-serif;color:#1d7a3a;margin:0 0 10px;min-height:0}
+  .av-cd-save{display:flex;justify-content:space-between;font:800 14px "Inter Tight",sans-serif;color:#1d7a3a;margin:6px 0}
+  cart-drawer .totals{margin-top:4px}
+  cart-drawer .totals__total{font:800 18px "Inter Tight",sans-serif;color:#3B0408}
+  cart-drawer .totals__total-value{font:800 20px "Inter Tight",sans-serif;color:#3B0408}
+  cart-drawer .tax-note{font-size:12px;opacity:.7}
+  cart-drawer .cart__checkout-button{min-height:56px;border-radius:999px;background:#3B0408;color:#F9D4D3;font:800 15px "Inter Tight",sans-serif;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:10px}
+  cart-drawer .cart__checkout-button:before,cart-drawer .cart__checkout-button:after{display:none}
+  cart-drawer .cart__checkout-button svg{width:16px;height:16px}
+  .av-cd-pay{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;list-style:none;margin:12px 0 0;padding:0}
+  .av-cd-pay svg{width:38px;height:24px}
+  .av-cd-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(59,4,8,.1);text-align:center}
+  .av-cd-trust div{font:800 9.5px/1.3 "Inter Tight",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#3B0408;opacity:.8}
+  .av-cd-trust svg{display:block;width:20px;height:20px;margin:0 auto 5px}
+</style>
+<script>
+  (function () {
+    var CD = document.querySelector('cart-drawer');
+    if (!CD) return;
+    var ICON = {
+      truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>',
+      lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>',
+      shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg>',
+      card: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>'
+    };
+    function money(c) { return '$' + Math.round(c / 100).toLocaleString('es-AR'); }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+    function getCode() { try { return sessionStorage.getItem('av_discount') || ''; } catch (e) { return ''; } }
+    function setCode(v) { try { sessionStorage.setItem('av_discount', v); } catch (e) {} }
+    var busy = false, timer = null;
+
+    function enhance(cart) {
+      var inner = CD.querySelector('.drawer__inner');
+      if (!inner) return;
+      var empty = !cart || cart.item_count === 0;
+      var header = CD.querySelector('.drawer__header');
+      var h = CD.querySelector('.drawer__heading');
+      if (h) h.innerHTML = 'Tu carrito' + (empty ? '' : ' <span class="av-cd-count">' + cart.item_count + '</span>');
+      CD.querySelectorAll('.av-cd-banner,.av-cd-up,.av-cd-lbl,.av-cd-disc,.av-cd-disc-msg,.av-cd-save,.av-cd-pay,.av-cd-trust').forEach(function (el) { el.remove(); });
+      if (empty || !header) { CD.dataset.avDone = '1'; return; }
+
+      var banner = document.createElement('div');
+      banner.className = 'av-cd-banner';
+      banner.innerHTML = ICON.truck + '<span>Envío gratis a sucursal en todos los packs de <b>Faja invisible</b>. A domicilio, gratis desde 2 sobres.</span>';
+      header.insertAdjacentElement('afterend', banner);
+
+      var inCart = cart.items.map(function (i) { return String(i.product_id); });
+      var tpl = document.getElementById('av-cd-ups');
+      var cands = tpl ? Array.prototype.slice.call(tpl.content.querySelectorAll('[data-id]')) : [];
+      var pick = cands.find(function (c) { return inCart.indexOf(c.dataset.pid) === -1; });
+      if (pick) {
+        var up = document.createElement('div');
+        up.className = 'av-cd-up';
+        up.innerHTML = '<p class="av-cd-up__lbl">★ Sumalo a tu pedido</p><div class="av-cd-up__row">' +
+          (pick.dataset.img ? '<img src="' + pick.dataset.img + '" alt="" width="58" height="58" loading="lazy">' : '') +
+          '<div class="av-cd-up__txt"><b>' + esc(pick.dataset.title) + '</b><span>' + esc(pick.dataset.price) + '</span></div>' +
+          '<button type="button" class="av-cd-up__btn" data-id="' + pick.dataset.id + '">+ Agregar</button></div>';
+        banner.insertAdjacentElement('afterend', up);
+      }
+
+      var items = CD.querySelector('cart-drawer-items');
+      if (items) {
+        var lbl = document.createElement('p'); lbl.className = 'av-cd-lbl'; lbl.textContent = 'En tu carrito';
+        items.insertAdjacentElement('beforebegin', lbl);
+      }
+
+      var foot = CD.querySelector('.cart-drawer__footer');
+      if (foot) {
+        var disc = document.createElement('div');
+        disc.className = 'av-cd-disc';
+        disc.innerHTML = '<input type="text" id="AvCdCode" placeholder="Código de descuento" autocomplete="off" value="' + esc(getCode()) + '"><button type="button">Aplicar</button>';
+        var msg = document.createElement('p'); msg.className = 'av-cd-disc-msg';
+        if (getCode()) msg.textContent = '✓ El código ' + getCode() + ' se aplica al finalizar la compra.';
+        foot.insertAdjacentElement('beforebegin', disc);
+        disc.insertAdjacentElement('afterend', msg);
+        if (cart.total_discount > 0) {
+          var sv = document.createElement('div'); sv.className = 'av-cd-save';
+          sv.innerHTML = '<span>✓ Estás ahorrando</span><span>-' + money(cart.total_discount) + '</span>';
+          foot.insertAdjacentElement('afterbegin', sv);
+        }
+        var tl = CD.querySelector('.totals__total'); if (tl) tl.textContent = 'Subtotal';
+        var tv = CD.querySelector('.totals__total-value'); if (tv) tv.textContent = money(cart.total_price);
+      }
+      var btn = CD.querySelector('#CartDrawer-Checkout');
+      if (btn) btn.innerHTML = ICON.lock + '<span>Finalizar compra · ' + money(cart.total_price) + '</span>';
+      var ctas = CD.querySelector('.cart__ctas');
+      if (ctas) {
+        var payTpl = document.getElementById('av-cd-pay');
+        if (payTpl && payTpl.content.children.length) {
+          var pay = document.createElement('ul'); pay.className = 'av-cd-pay';
+          pay.appendChild(payTpl.content.cloneNode(true));
+          ctas.insertAdjacentElement('afterend', pay);
+        }
+        var tr = document.createElement('div'); tr.className = 'av-cd-trust';
+        tr.innerHTML = '<div>' + ICON.shield + 'Pago seguro</div><div>' + ICON.truck + 'Envíos a todo el país</div><div>' + ICON.card + 'Cuotas con Mercado Pago</div>';
+        (CD.querySelector('.av-cd-pay') || ctas).insertAdjacentElement('afterend', tr);
+      }
+      CD.dataset.avDone = '1';
+    }
+
+    function refresh() {
+      if (busy) return;
+      busy = true;
+      fetch('/cart.js', { headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (cart) { enhance(cart); })
+        .catch(function () {})
+        .finally(function () { setTimeout(function () { busy = false; }, 50); });
+    }
+    function needs() {
+      var btn = CD.querySelector('#CartDrawer-Checkout');
+      var h = CD.querySelector('.drawer__heading');
+      return (h && h.textContent.trim().indexOf('Tu carrito') !== 0) || (btn && !btn.querySelector('svg')) || (CD.querySelector('.drawer__header') && !CD.querySelector('.av-cd-banner') && CD.querySelector('cart-drawer-items .cart-item'));
+    }
+    new MutationObserver(function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { if (needs()) refresh(); }, 120);
+    }).observe(CD, { childList: true, subtree: true });
+    document.addEventListener('cart:av-refresh', refresh);
+    refresh();
+
+    CD.addEventListener('click', function (e) {
+      var add = e.target.closest('.av-cd-up__btn');
+      if (add) {
+        add.disabled = true; add.textContent = 'Agregando…';
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/javascript' },
+          body: JSON.stringify({ items: [{ id: Number(add.dataset.id), quantity: 1 }], sections: 'cart-drawer,cart-icon-bubble', sections_url: window.location.pathname })
+        }).then(function (r) { return r.json(); }).then(function (res) {
+          if (res && res.sections && typeof CD.renderContents === 'function') { CD.renderContents(res); }
+          else { window.location.reload(); }
+        }).catch(function () { add.disabled = false; add.textContent = '+ Agregar'; });
+        return;
+      }
+      var apply = e.target.closest('.av-cd-disc button');
+      if (apply) {
+        var input = CD.querySelector('#AvCdCode');
+        var code = (input && input.value || '').trim().toUpperCase();
+        setCode(code);
+        var m = CD.querySelector('.av-cd-disc-msg');
+        if (m) m.textContent = code ? '✓ El código ' + code + ' se aplica al finalizar la compra.' : '';
+        return;
+      }
+      var co = e.target.closest('#CartDrawer-Checkout');
+      if (co) {
+        var c = getCode();
+        if (c) { e.preventDefault(); window.location.href = '/checkout?discount=' + encodeURIComponent(c); }
+      }
+    });
+  })();
+</script>
 {%- endif -%}
 
 {% schema %}
