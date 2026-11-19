@@ -296,25 +296,27 @@
   cart-drawer .cart-item__details{min-width:0;overflow-wrap:anywhere}
   cart-drawer .cart-items{width:100%;border-collapse:separate;border-spacing:0}
   cart-drawer .cart-items thead{display:none}
-  cart-drawer .cart-item{box-sizing:border-box;width:100%;display:grid!important;grid-template-columns:64px minmax(0,1fr) auto;grid-template-rows:auto auto;
-    column-gap:12px;row-gap:8px;align-items:start;border:1px solid rgba(59,4,8,.12);border-radius:14px;padding:10px;margin:0 0 8px!important;background:#fff}
+  cart-drawer .cart-item{box-sizing:border-box;width:100%;display:grid!important;grid-template-columns:64px minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;
+    column-gap:12px!important;row-gap:8px!important;align-items:start;border:1px solid rgba(59,4,8,.12);border-radius:14px;padding:10px;margin:0 0 8px!important;background:#fff}
   cart-drawer .cart-item > td{padding:0!important;min-width:0}
-  cart-drawer .cart-item__media{grid-column:1;grid-row:1 / 3;width:64px}
+  cart-drawer .cart-item__media{grid-column:1!important;grid-row:1 / 3!important;width:64px}
   cart-drawer .cart-item__media img,cart-drawer .cart-item__image{width:64px;height:auto;border-radius:10px}
-  cart-drawer .cart-item__details{grid-column:2;grid-row:1;min-width:0;overflow-wrap:anywhere}
-  cart-drawer .cart-item__details > div.product-option{display:none}
+  cart-drawer .cart-item__details{grid-column:2!important;grid-row:1!important;min-width:0;overflow-wrap:anywhere}
+  cart-drawer .cart-item__details > div.product-option,cart-drawer .cart-item__details > .cart-item__discounted-prices{display:none!important}
+  .av-ci-qty{margin:6px 0 0!important;display:inline-block;background:#FCE4E3;border-radius:999px;padding:3px 10px;font:600 12.5px/1.3 "Inter Tight",sans-serif;color:#3B0408}
+  .av-ci-qty b{font-weight:800}
   cart-drawer .cart-item__details dl{margin:4px 0 0}
-  cart-drawer .cart-item__totals{grid-column:3;grid-row:1}
-  cart-drawer .cart-items .cart-item__quantity{grid-column:2 / 4;grid-row:2;padding:0!important}
+  cart-drawer .cart-item__totals{grid-column:3!important;grid-row:1!important;position:static!important}
+  cart-drawer .cart-items .cart-item__quantity{grid-column:2 / 4!important;grid-row:2!important;padding:0!important}
   cart-drawer .cart-item__quantity-wrapper{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
   cart-drawer .cart-item__totals .price{white-space:nowrap}
   cart-drawer .cart-item__name{font:600 14px/1.25 "Inter Tight",sans-serif;color:#3B0408;text-decoration:none}
   cart-drawer .cart-item .product-option{font-size:12.5px}
   cart-drawer .cart-item .price,cart-drawer .cart-item__final-price{font:800 14.5px "Inter Tight",sans-serif;color:#3B0408}
   cart-drawer .cart-item__old-price{opacity:.55}
-  cart-drawer .quantity{border-radius:999px;min-height:34px;width:110px;flex:none}
+  cart-drawer .quantity{border-radius:999px;min-height:34px;width:116px;flex:none}
   cart-drawer .quantity__button{width:34px}
-  cart-drawer .quantity__input{min-width:0;font-weight:700;color:#3B0408}
+  cart-drawer .quantity__input{flex:1 1 auto;width:40px;min-width:30px;padding:0;text-align:center;font:700 15px "Inter Tight",sans-serif;color:#3B0408;opacity:1}
   cart-drawer .quantity:before,cart-drawer .quantity:after{border-radius:999px;box-shadow:0 0 0 1px rgba(59,4,8,.2)}
   cart-drawer .drawer__footer{border-top:1px solid rgba(59,4,8,.12);padding-top:10px}
   cart-drawer .drawer__footer > details{display:none}
@@ -337,6 +339,7 @@
   .av-cd-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(59,4,8,.1);text-align:center}
   .av-cd-trust div{font:800 8.5px/1.3 "Inter Tight",sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#3B0408;opacity:.75}
   .av-cd-trust svg{display:block;width:16px;height:16px;margin:0 auto 4px}
+  body.overflow-hidden .au-wa{display:none!important}
   .av-cd-err{margin:8px 0 0;font:600 13px "Inter Tight",sans-serif;color:#8E1B26;text-align:center}
   @media (max-width:749px){cart-drawer .cart__checkout-button{font-size:13px;letter-spacing:.05em}}
 </style>
@@ -363,7 +366,7 @@
       var header = CD.querySelector('.drawer__header');
       var h = CD.querySelector('.drawer__heading');
       if (h) h.innerHTML = 'Tu carrito' + (empty ? '' : ' <span class="av-cd-count">' + cart.item_count + '</span>');
-      CD.querySelectorAll('.av-cd-banner,.av-cd-up,.av-cd-lbl,.av-cd-disc,.av-cd-disc-msg,.av-cd-save,.av-cd-pay,.av-cd-trust').forEach(function (el) { el.remove(); });
+      CD.querySelectorAll('.av-cd-banner,.av-cd-up,.av-cd-lbl,.av-ci-qty,.av-cd-disc,.av-cd-disc-msg,.av-cd-save,.av-cd-pay,.av-cd-trust').forEach(function (el) { el.remove(); });
       if (empty || !header) { CD.dataset.avDone = '1'; return; }
 
       var scroll = CD.querySelector('cart-drawer-items .drawer__contents') || CD.querySelector('cart-drawer-items');
@@ -393,6 +396,20 @@
           '<button type="button" class="av-cd-up__btn" data-id="' + pick.dataset.id + '">+ Agregar</button></div>';
         banner.insertAdjacentElement('afterend', up);
       }
+
+      /* Cada producto: cuántas unidades lleva y precio de cada una; a la derecha, el total de esa línea */
+      cart.items.forEach(function (it, i) {
+        var row = CD.querySelector('#CartDrawer-Item-' + (i + 1));
+        if (!row) return;
+        var d = row.querySelector('.cart-item__details');
+        if (d) {
+          var q = document.createElement('p'); q.className = 'av-ci-qty';
+          q.innerHTML = 'Cantidad: <b>' + it.quantity + '</b>' + (it.quantity > 1 ? ' × ' + money(it.final_price) : '');
+          d.appendChild(q);
+        }
+        var pw = row.querySelector('.cart-item__totals .cart-item__price-wrapper');
+        if (pw) pw.innerHTML = '<span class="price price--end">' + money(it.final_line_price) + '</span>';
+      });
 
       var lbl = document.createElement('p'); lbl.className = 'av-cd-lbl'; lbl.textContent = 'En tu carrito';
       (CD.querySelector('.av-cd-up') || banner).insertAdjacentElement('afterend', lbl);
@@ -443,7 +460,7 @@
     function needs() {
       var btn = CD.querySelector('#CartDrawer-Checkout');
       var h = CD.querySelector('.drawer__heading');
-      return (h && h.textContent.trim().indexOf('Tu carrito') !== 0) || (btn && !btn.querySelector('svg')) || (CD.querySelector('.drawer__header') && !CD.querySelector('.av-cd-banner') && CD.querySelector('cart-drawer-items .cart-item'));
+      return (h && h.textContent.trim().indexOf('Tu carrito') !== 0) || (btn && !btn.querySelector('svg')) || (CD.querySelector('.drawer__header') && CD.querySelector('cart-drawer-items .cart-item') && (!CD.querySelector('.av-cd-banner') || CD.querySelectorAll('.av-ci-qty').length < CD.querySelectorAll('cart-drawer-items .cart-item').length));
     }
     new MutationObserver(function () {
       clearTimeout(timer);
