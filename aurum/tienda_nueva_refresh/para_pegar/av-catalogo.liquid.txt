@@ -1,0 +1,215 @@
+{%- comment -%}
+  Aurum v2 · Mini catálogo con pestañas (inicio).
+  Cada pestaña es un producto que elegís en Personalizar. Muestra fotos en carrusel, nombre, frase corta y precio,
+  y el botón lleva a la página del producto.
+{%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign sid = section.id
+  assign count = 0
+  for block in section.blocks
+    if block.settings.product != blank
+      assign count = count | plus: 1
+    endif
+  endfor
+-%}
+{%- if count > 0 or request.design_mode -%}
+<style>
+  #av-cat-{{ sid }} .av-cat__head{text-align:center}
+  #av-cat-{{ sid }} .av-cat__head h2{font-size:clamp(34px,4.4vw,56px);margin-top:10px}
+  #av-cat-{{ sid }} .av-cat__sub{margin:10px 0 0;font-size:clamp(15px,1.4vw,18px);opacity:.75}
+  #av-cat-{{ sid }} .av-cat__tabs{display:flex;gap:12px;justify-content:center;margin-top:28px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px}
+  #av-cat-{{ sid }} .av-cat__tabs::-webkit-scrollbar{display:none}
+  #av-cat-{{ sid }} .av-cat__tab{flex:0 0 132px;background:#fff;color:#3B0408;border:2px solid rgba(59,4,8,.08);border-radius:18px;padding:14px 8px 12px;
+    font-weight:700;font-size:14px;line-height:1.2;font-family:inherit;text-align:center;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+  #av-cat-{{ sid }} .av-cat__tab:hover{border-color:rgba(59,4,8,.3)}
+  #av-cat-{{ sid }} .av-cat__tab.is-on{border-color:#3B0408;box-shadow:0 6px 18px rgba(59,4,8,.12)}
+  #av-cat-{{ sid }} .av-cat__ico{width:58px;height:58px;border-radius:14px;margin:0 auto 10px;display:grid;place-items:center;background:#F9D4D3;color:#3B0408;overflow:hidden}
+  #av-cat-{{ sid }} .av-cat__tab.is-on .av-cat__ico{background:#3B0408;color:#F9D4D3}
+  #av-cat-{{ sid }} .av-cat__ico svg{width:30px;height:30px}
+  #av-cat-{{ sid }} .av-cat__ico img{width:100%;height:100%;object-fit:cover}
+  #av-cat-{{ sid }} .av-cat__panel{display:none;margin-top:18px;background:#fff;color:#3B0408;border-radius:32px;padding:40px;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  #av-cat-{{ sid }} .av-cat__panel.is-on{display:grid}
+  #av-cat-{{ sid }} .av-cat__gal{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:1;background:#FCE4E3}
+  #av-cat-{{ sid }} .av-cat__track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+  #av-cat-{{ sid }} .av-cat__track::-webkit-scrollbar{display:none}
+  #av-cat-{{ sid }} .av-cat__track a{flex:0 0 100%;scroll-snap-align:start;display:block}
+  #av-cat-{{ sid }} .av-cat__track img{width:100%;height:100%;object-fit:cover;display:block}
+  #av-cat-{{ sid }} .av-cat__arr{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#3B0408;
+    display:grid;place-items:center;font-size:20px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  #av-cat-{{ sid }} .av-cat__arr--l{left:12px}
+  #av-cat-{{ sid }} .av-cat__arr--r{right:12px}
+  #av-cat-{{ sid }} .av-cat__dots{position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none}
+  #av-cat-{{ sid }} .av-cat__dots i{width:7px;height:7px;border-radius:9px;background:#fff;opacity:.6;transition:all .25s}
+  #av-cat-{{ sid }} .av-cat__dots i.is-on{width:22px;opacity:1}
+  #av-cat-{{ sid }} .av-cat__name{font-size:clamp(30px,3.4vw,44px);font-weight:800;letter-spacing:-.04em;margin:0;line-height:1}
+  #av-cat-{{ sid }} .av-cat__phrase{font-size:clamp(15px,1.4vw,18px);opacity:.75;margin:12px 0 0;line-height:1.4}
+  #av-cat-{{ sid }} .av-cat__info{margin:14px 0 0;font-weight:700;font-size:15px;color:#8E1B26}
+  #av-cat-{{ sid }} .av-cat__price{margin:20px 0 0;font-size:clamp(28px,2.8vw,36px);font-weight:800;letter-spacing:-.03em}
+  #av-cat-{{ sid }} .av-cat__price small{font-size:15px;font-weight:600;opacity:.7;letter-spacing:0;margin-right:6px}
+  #av-cat-{{ sid }} .av-cat__btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;margin-top:22px;border-radius:999px;
+    background:#3B0408;color:#F9D4D3;text-decoration:none;font:800 16px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:transform .2s}
+  #av-cat-{{ sid }} .av-cat__btn:hover{transform:translateY(-2px)}
+  #av-cat-{{ sid }} .av-cat__empty{padding:30px;text-align:center;opacity:.6}
+  @media (min-width:990px){#av-cat-{{ sid }} .av-cat__info-wrap{max-width:460px}}
+  @media (max-width:749px){
+    #av-cat-{{ sid }} .av-cat__tabs{justify-content:flex-start;margin-inline:calc(-1*max(18px,4vw));padding-inline:max(18px,4vw)}
+    #av-cat-{{ sid }} .av-cat__tab{flex:0 0 104px;font-size:12.5px;padding:10px 6px}
+    #av-cat-{{ sid }} .av-cat__ico{width:46px;height:46px}
+    #av-cat-{{ sid }} .av-cat__ico svg{width:24px;height:24px}
+    #av-cat-{{ sid }} .av-cat__panel{grid-template-columns:1fr;padding:16px;gap:18px;border-radius:24px}
+    #av-cat-{{ sid }} .av-cat__arr{width:38px;height:38px;font-size:17px}
+    #av-cat-{{ sid }} .av-cat__btn{font-size:15px;letter-spacing:.04em}
+  }
+</style>
+<section class="av av--{{ section.settings.scheme }} av-cat" id="av-cat-{{ sid }}">
+  <div class="av__wrap">
+    <div class="av-cat__head">
+      {%- if section.settings.eyebrow != blank -%}<div class="av__eb">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2>{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.sub != blank -%}<p class="av-cat__sub">{{ section.settings.sub }}</p>{%- endif -%}
+    </div>
+
+    {%- if count == 0 -%}
+      <p class="av-cat__empty">Agregá productos con "Agregar bloque → Producto".</p>
+    {%- endif -%}
+
+    <div class="av-cat__tabs" role="tablist">
+      {%- assign first = true -%}
+      {%- for block in section.blocks -%}
+        {%- assign pr = block.settings.product -%}
+        {%- if pr == blank -%}{%- continue -%}{%- endif -%}
+        <button type="button" class="av-cat__tab{% if first %} is-on{% endif %}" role="tab" data-tab="{{ block.id }}" aria-selected="{% if first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
+          <span class="av-cat__ico">
+            {%- if block.settings.icon == 'foto' -%}
+              {%- if pr.featured_image -%}{{ pr.featured_image | image_url: width: 140 | image_tag: alt: '', loading: 'lazy' }}{%- endif -%}
+            {%- else -%}
+              {%- case block.settings.icon -%}
+                {%- when 'faja' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 3c0 4-2 6-2 10s3 8 7 8 7-4 7-8-2-6-2-10"/><path d="M9 11l3 2 3-2"/></svg>
+                {%- when 'frasco' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M8 7h8l1 14H7z"/></svg>
+                {%- when 'sol' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>
+                {%- when 'gota' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg>
+                {%- when 'rollon' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="8" width="6" height="13" rx="2"/><circle cx="12" cy="5" r="2"/></svg>
+                {%- when 'brillo' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg>
+                {%- when 'spray' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="7" y="10" width="8" height="11" rx="2"/><path d="M9 10V7h4v3M13 7h3M18 5v.01M20 7v.01M18 9v.01"/></svg>
+                {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </span>
+          {%- if block.settings.label != blank -%}{{ block.settings.label }}{%- else -%}{{ pr.title }}{%- endif -%}
+        </button>
+        {%- assign first = false -%}
+      {%- endfor -%}
+    </div>
+
+    {%- assign first = true -%}
+    {%- for block in section.blocks -%}
+      {%- assign pr = block.settings.product -%}
+      {%- if pr == blank -%}{%- continue -%}{%- endif -%}
+      <div class="av-cat__panel{% if first %} is-on{% endif %}" role="tabpanel" data-panel="{{ block.id }}">
+        <div class="av-cat__gal">
+          <div class="av-cat__track" data-track>
+            {%- assign shown_imgs = 0 -%}
+            {%- for m in pr.media -%}
+              {%- if m.media_type != 'image' -%}{%- continue -%}{%- endif -%}
+              {%- if shown_imgs >= section.settings.max_photos -%}{%- break -%}{%- endif -%}
+              <a href="{{ pr.url }}" tabindex="-1">{{ m.preview_image | image_url: width: 1000 | image_tag: alt: pr.title, loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw' }}</a>
+              {%- assign shown_imgs = shown_imgs | plus: 1 -%}
+            {%- endfor -%}
+            {%- if shown_imgs == 0 -%}<a href="{{ pr.url }}" tabindex="-1">{{ 'product-1' | placeholder_svg_tag }}</a>{%- endif -%}
+          </div>
+          {%- if shown_imgs > 1 -%}
+            <button type="button" class="av-cat__arr av-cat__arr--l" data-dir="-1" aria-label="Foto anterior">&#8592;</button>
+            <button type="button" class="av-cat__arr av-cat__arr--r" data-dir="1" aria-label="Foto siguiente">&#8594;</button>
+            <div class="av-cat__dots">{%- for i in (1..shown_imgs) -%}<i{% if forloop.first %} class="is-on"{% endif %}></i>{%- endfor -%}</div>
+          {%- endif -%}
+        </div>
+        <div class="av-cat__info-wrap">
+          <h3 class="av-cat__name">{%- if block.settings.title != blank -%}{{ block.settings.title }}{%- else -%}{{ pr.title }}{%- endif -%}</h3>
+          {%- if block.settings.phrase != blank -%}<p class="av-cat__phrase">{{ block.settings.phrase }}</p>{%- endif -%}
+          {%- if block.settings.info != blank -%}<p class="av-cat__info">{{ block.settings.info }}</p>{%- endif -%}
+          {%- if section.settings.show_price -%}
+            <p class="av-cat__price">
+              {%- if pr.available == false -%}{{ section.settings.soldout }}
+              {%- elsif pr.price_varies -%}<small>Desde</small>{{ pr.price_min | money_without_trailing_zeros }}
+              {%- else -%}{{ pr.price | money_without_trailing_zeros }}{%- endif -%}
+            </p>
+          {%- endif -%}
+          <a class="av-cat__btn" href="{{ pr.url }}">{{ section.settings.button_label }} <span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+      {%- assign first = false -%}
+    {%- endfor -%}
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('av-cat-{{ sid }}');
+    if (!root) return;
+    function show(id) {
+      root.querySelectorAll('.av-cat__tab').forEach(function (t) { var on = t.dataset.tab === id; t.classList.toggle('is-on', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+      root.querySelectorAll('.av-cat__panel').forEach(function (p) { p.classList.toggle('is-on', p.dataset.panel === id); });
+    }
+    root.querySelectorAll('.av-cat__tab').forEach(function (t) {
+      t.addEventListener('click', function () { show(t.dataset.tab); });
+    });
+    root.querySelectorAll('.av-cat__gal').forEach(function (g) {
+      var tr = g.querySelector('[data-track]'), dots = g.querySelectorAll('.av-cat__dots i');
+      function idx() { return Math.round(tr.scrollLeft / (tr.clientWidth || 1)); }
+      function upd() { var i = idx(); dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); }); }
+      g.querySelectorAll('.av-cat__arr').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var n = tr.children.length, i = idx() + Number(b.dataset.dir);
+          if (i < 0) i = n - 1; if (i > n - 1) i = 0;
+          tr.scrollTo({ left: i * tr.clientWidth, behavior: 'smooth' });
+        });
+      });
+      var t; tr.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(upd, 60); }, { passive: true });
+    });
+    document.addEventListener('shopify:block:select', function (e) {
+      if (root.contains(e.target) && e.target.dataset && e.target.dataset.tab) show(e.target.dataset.tab);
+    });
+  })();
+</script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Aurum · Mini catálogo",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Aurum Skin" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Elegí tu producto" },
+    { "type": "text", "id": "sub", "label": "Subtítulo", "default": "Tocá un producto para conocerlo." },
+    { "type": "checkbox", "id": "show_price", "label": "Mostrar precio", "default": true },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver producto" },
+    { "type": "text", "id": "soldout", "label": "Texto cuando no hay stock", "default": "Sin stock" },
+    { "type": "range", "id": "max_photos", "label": "Fotos por producto (máximo)", "min": 1, "max": 10, "step": 1, "default": 6 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Producto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto" },
+        { "type": "text", "id": "label", "label": "Nombre en la pestaña", "info": "Si lo dejás vacío, usa el nombre del producto." },
+        { "type": "select", "id": "icon", "label": "Ícono de la pestaña", "default": "corazon", "options": [
+          { "value": "foto", "label": "Foto del producto" },
+          { "value": "faja", "label": "Faja / silueta" },
+          { "value": "frasco", "label": "Frasco" },
+          { "value": "sol", "label": "Sol" },
+          { "value": "gota", "label": "Gota" },
+          { "value": "rollon", "label": "Roll-on" },
+          { "value": "brillo", "label": "Brillo" },
+          { "value": "spray", "label": "Spray" },
+          { "value": "corazon", "label": "Corazón" }
+        ] },
+        { "type": "text", "id": "title", "label": "Título grande", "info": "Si lo dejás vacío, usa el nombre del producto." },
+        { "type": "text", "id": "phrase", "label": "Frase corta", "default": "Contá en una línea qué hace este producto." },
+        { "type": "text", "id": "info", "label": "Dato clave (opcional)", "info": "Ej.: 10 tiras por sobre · 12 × 18 cm" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Aurum · Mini catálogo" } ]
+}
+{% endschema %}
