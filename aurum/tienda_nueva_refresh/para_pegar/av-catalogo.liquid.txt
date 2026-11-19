@@ -1,14 +1,14 @@
 {%- comment -%}
   Aurum v2 · Mini catálogo con pestañas (inicio).
-  Cada pestaña es un producto que elegís en Personalizar. Muestra fotos en carrusel, nombre, frase corta y precio,
-  y el botón lleva a la página del producto.
+  Cada pestaña es un producto (o una colección, ej.: Labios) que elegís en Personalizar.
+  Muestra fotos en carrusel, nombre, una frase corta y el precio. El botón lleva a la página del producto o de la colección.
 {%- endcomment -%}
 {{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign sid = section.id
   assign count = 0
   for block in section.blocks
-    if block.settings.product != blank
+    if block.settings.product != blank or block.settings.collection != blank
       assign count = count | plus: 1
     endif
   endfor
@@ -45,6 +45,11 @@
   #av-cat-{{ sid }} .av-cat__name{font-size:clamp(30px,3.4vw,44px);font-weight:800;letter-spacing:-.04em;margin:0;line-height:1}
   #av-cat-{{ sid }} .av-cat__phrase{font-size:clamp(15px,1.4vw,18px);opacity:.75;margin:12px 0 0;line-height:1.4}
   #av-cat-{{ sid }} .av-cat__info{margin:14px 0 0;font-weight:700;font-size:15px;color:#8E1B26}
+  #av-cat-{{ sid }} .av-cat__chk{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+  #av-cat-{{ sid }} .av-cat__chk li{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;line-height:1.3}
+  #av-cat-{{ sid }} .av-cat__chk li::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;background:#3B0408;color:#F9D4D3;display:grid;place-items:center;font-size:11px;font-weight:800}
+  #av-cat-{{ sid }} .av-cat__note{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:14px;font-weight:600;opacity:.85}
+  #av-cat-{{ sid }} .av-cat__note svg{flex:none;width:18px;height:18px}
   #av-cat-{{ sid }} .av-cat__price{margin:20px 0 0;font-size:clamp(28px,2.8vw,36px);font-weight:800;letter-spacing:-.03em}
   #av-cat-{{ sid }} .av-cat__price small{font-size:15px;font-weight:600;opacity:.7;letter-spacing:0;margin-right:6px}
   #av-cat-{{ sid }} .av-cat__btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;margin-top:22px;border-radius:999px;
@@ -71,18 +76,20 @@
     </div>
 
     {%- if count == 0 -%}
-      <p class="av-cat__empty">Agregá productos con "Agregar bloque → Producto".</p>
+      <p class="av-cat__empty">Elegí un producto o una colección en cada pestaña.</p>
     {%- endif -%}
 
     <div class="av-cat__tabs" role="tablist">
       {%- assign first = true -%}
       {%- for block in section.blocks -%}
         {%- assign pr = block.settings.product -%}
-        {%- if pr == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign co = block.settings.collection -%}
+        {%- if pr == blank and co == blank -%}{%- continue -%}{%- endif -%}
+        {%- if pr != blank -%}{%- assign thumb = pr.featured_image -%}{%- assign nm = pr.title -%}{%- else -%}{%- assign thumb = co.image | default: co.products.first.featured_image -%}{%- assign nm = co.title -%}{%- endif -%}
         <button type="button" class="av-cat__tab{% if first %} is-on{% endif %}" role="tab" data-tab="{{ block.id }}" aria-selected="{% if first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
           <span class="av-cat__ico">
             {%- if block.settings.icon == 'foto' -%}
-              {%- if pr.featured_image -%}{{ pr.featured_image | image_url: width: 140 | image_tag: alt: '', loading: 'lazy' }}{%- endif -%}
+              {%- if thumb -%}{{ thumb | image_url: width: 140 | image_tag: alt: '', loading: 'lazy' }}{%- endif -%}
             {%- else -%}
               {%- case block.settings.icon -%}
                 {%- when 'faja' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 3c0 4-2 6-2 10s3 8 7 8 7-4 7-8-2-6-2-10"/><path d="M9 11l3 2 3-2"/></svg>
@@ -91,12 +98,13 @@
                 {%- when 'gota' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg>
                 {%- when 'rollon' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="8" width="6" height="13" rx="2"/><circle cx="12" cy="5" r="2"/></svg>
                 {%- when 'brillo' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg>
+                {%- when 'labios' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 12c2.2-3.3 4.6-5 6.2-5 1.3 0 2.1.9 3.3.9s2-.9 3.3-.9c1.6 0 4 1.7 6.2 5-2.6 3.6-5.8 5.2-9.5 5.2S5.1 15.6 2.5 12z"/><path d="M2.5 12h19"/></svg>
                 {%- when 'spray' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="7" y="10" width="8" height="11" rx="2"/><path d="M9 10V7h4v3M13 7h3M18 5v.01M20 7v.01M18 9v.01"/></svg>
                 {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
               {%- endcase -%}
             {%- endif -%}
           </span>
-          {%- if block.settings.label != blank -%}{{ block.settings.label }}{%- else -%}{{ pr.title }}{%- endif -%}
+          {%- if block.settings.label != blank -%}{{ block.settings.label }}{%- else -%}{{ nm }}{%- endif -%}
         </button>
         {%- assign first = false -%}
       {%- endfor -%}
@@ -105,18 +113,33 @@
     {%- assign first = true -%}
     {%- for block in section.blocks -%}
       {%- assign pr = block.settings.product -%}
-      {%- if pr == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign co = block.settings.collection -%}
+      {%- if pr == blank and co == blank -%}{%- continue -%}{%- endif -%}
+      {%- if pr != blank -%}
+        {%- assign url = pr.url -%}{%- assign nm = pr.title -%}{%- assign btn = section.settings.button_label -%}
+      {%- else -%}
+        {%- assign url = co.url -%}{%- assign nm = co.title -%}{%- assign btn = section.settings.button_label_col -%}
+      {%- endif -%}
       <div class="av-cat__panel{% if first %} is-on{% endif %}" role="tabpanel" data-panel="{{ block.id }}">
         <div class="av-cat__gal">
           <div class="av-cat__track" data-track>
             {%- assign shown_imgs = 0 -%}
-            {%- for m in pr.media -%}
-              {%- if m.media_type != 'image' -%}{%- continue -%}{%- endif -%}
-              {%- if shown_imgs >= section.settings.max_photos -%}{%- break -%}{%- endif -%}
-              <a href="{{ pr.url }}" tabindex="-1">{{ m.preview_image | image_url: width: 1000 | image_tag: alt: pr.title, loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw' }}</a>
-              {%- assign shown_imgs = shown_imgs | plus: 1 -%}
-            {%- endfor -%}
-            {%- if shown_imgs == 0 -%}<a href="{{ pr.url }}" tabindex="-1">{{ 'product-1' | placeholder_svg_tag }}</a>{%- endif -%}
+            {%- if pr != blank -%}
+              {%- for m in pr.media -%}
+                {%- if m.media_type != 'image' -%}{%- continue -%}{%- endif -%}
+                {%- if shown_imgs >= section.settings.max_photos -%}{%- break -%}{%- endif -%}
+                <a href="{{ url }}" tabindex="-1">{{ m.preview_image | image_url: width: 1000 | image_tag: alt: nm, loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw' }}</a>
+                {%- assign shown_imgs = shown_imgs | plus: 1 -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for cp in co.products -%}
+                {%- if shown_imgs >= section.settings.max_photos -%}{%- break -%}{%- endif -%}
+                {%- if cp.featured_image == blank -%}{%- continue -%}{%- endif -%}
+                <a href="{{ cp.url }}" tabindex="-1">{{ cp.featured_image | image_url: width: 1000 | image_tag: alt: cp.title, loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw' }}</a>
+                {%- assign shown_imgs = shown_imgs | plus: 1 -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if shown_imgs == 0 -%}<a href="{{ url }}" tabindex="-1">{{ 'product-1' | placeholder_svg_tag }}</a>{%- endif -%}
           </div>
           {%- if shown_imgs > 1 -%}
             <button type="button" class="av-cat__arr av-cat__arr--l" data-dir="-1" aria-label="Foto anterior">&#8592;</button>
@@ -125,17 +148,31 @@
           {%- endif -%}
         </div>
         <div class="av-cat__info-wrap">
-          <h3 class="av-cat__name">{%- if block.settings.title != blank -%}{{ block.settings.title }}{%- else -%}{{ pr.title }}{%- endif -%}</h3>
+          <h3 class="av-cat__name">{%- if block.settings.title != blank -%}{{ block.settings.title }}{%- else -%}{{ nm }}{%- endif -%}</h3>
           {%- if block.settings.phrase != blank -%}<p class="av-cat__phrase">{{ block.settings.phrase }}</p>{%- endif -%}
           {%- if block.settings.info != blank -%}<p class="av-cat__info">{{ block.settings.info }}</p>{%- endif -%}
-          {%- if section.settings.show_price -%}
-            <p class="av-cat__price">
-              {%- if pr.available == false -%}{{ section.settings.soldout }}
-              {%- elsif pr.price_varies -%}<small>Desde</small>{{ pr.price_min | money_without_trailing_zeros }}
-              {%- else -%}{{ pr.price | money_without_trailing_zeros }}{%- endif -%}
-            </p>
+          {%- if block.settings.b1 != blank or block.settings.b2 != blank or block.settings.b3 != blank -%}
+            <ul class="av-cat__chk">
+              {%- if block.settings.b1 != blank -%}<li>{{ block.settings.b1 }}</li>{%- endif -%}
+              {%- if block.settings.b2 != blank -%}<li>{{ block.settings.b2 }}</li>{%- endif -%}
+              {%- if block.settings.b3 != blank -%}<li>{{ block.settings.b3 }}</li>{%- endif -%}
+            </ul>
           {%- endif -%}
-          <a class="av-cat__btn" href="{{ pr.url }}">{{ section.settings.button_label }} <span aria-hidden="true">&#8594;</span></a>
+          {%- if section.settings.show_price -%}
+            {%- if pr != blank -%}
+              <p class="av-cat__price">
+                {%- if pr.available == false -%}{{ section.settings.soldout }}
+                {%- elsif pr.price_varies -%}<small>Desde</small>{{ pr.price_min | money_without_trailing_zeros }}
+                {%- else -%}{{ pr.price | money_without_trailing_zeros }}{%- endif -%}
+              </p>
+            {%- else -%}
+              {%- assign minp = 0 -%}
+              {%- for cp in co.products limit: 50 -%}{%- if cp.available -%}{%- if minp == 0 or cp.price_min < minp -%}{%- assign minp = cp.price_min -%}{%- endif -%}{%- endif -%}{%- endfor -%}
+              {%- if minp > 0 -%}<p class="av-cat__price"><small>Desde</small>{{ minp | money_without_trailing_zeros }}</p>{%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
+          <a class="av-cat__btn" href="{{ url }}">{{ btn }} <span aria-hidden="true">&#8594;</span></a>
+          {%- if block.settings.note != blank -%}<p class="av-cat__note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>{{ block.settings.note }}</p>{%- endif -%}
         </div>
       </div>
       {%- assign first = false -%}
@@ -180,9 +217,10 @@
     { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
     { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Aurum Skin" },
     { "type": "text", "id": "title", "label": "Título", "default": "Elegí tu producto" },
-    { "type": "text", "id": "sub", "label": "Subtítulo", "default": "Tocá un producto para conocerlo." },
+    { "type": "text", "id": "sub", "label": "Subtítulo (opcional)" },
     { "type": "checkbox", "id": "show_price", "label": "Mostrar precio", "default": true },
-    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver producto" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón (producto)", "default": "Ver producto" },
+    { "type": "text", "id": "button_label_col", "label": "Texto del botón (colección)", "default": "Ver todos" },
     { "type": "text", "id": "soldout", "label": "Texto cuando no hay stock", "default": "Sin stock" },
     { "type": "range", "id": "max_photos", "label": "Fotos por producto (máximo)", "min": 1, "max": 10, "step": 1, "default": 6 }
   ],
@@ -192,6 +230,7 @@
       "name": "Producto",
       "settings": [
         { "type": "product", "id": "product", "label": "Producto" },
+        { "type": "collection", "id": "collection", "label": "O una colección", "info": "Usala si en esta pestaña van varios productos (ej.: Labios). Si elegís producto, se usa el producto." },
         { "type": "text", "id": "label", "label": "Nombre en la pestaña", "info": "Si lo dejás vacío, usa el nombre del producto." },
         { "type": "select", "id": "icon", "label": "Ícono de la pestaña", "default": "corazon", "options": [
           { "value": "foto", "label": "Foto del producto" },
@@ -199,17 +238,34 @@
           { "value": "frasco", "label": "Frasco" },
           { "value": "sol", "label": "Sol" },
           { "value": "gota", "label": "Gota" },
+          { "value": "labios", "label": "Labios" },
           { "value": "rollon", "label": "Roll-on" },
           { "value": "brillo", "label": "Brillo" },
           { "value": "spray", "label": "Spray" },
           { "value": "corazon", "label": "Corazón" }
         ] },
         { "type": "text", "id": "title", "label": "Título grande", "info": "Si lo dejás vacío, usa el nombre del producto." },
-        { "type": "text", "id": "phrase", "label": "Frase corta", "default": "Contá en una línea qué hace este producto." },
-        { "type": "text", "id": "info", "label": "Dato clave (opcional)", "info": "Ej.: 10 tiras por sobre · 12 × 18 cm" }
+        { "type": "text", "id": "phrase", "label": "Frase corta (una línea)" },
+        { "type": "text", "id": "info", "label": "Dato clave (opcional)", "info": "Ej.: 10 tiras por sobre · 12 × 18 cm" },
+        { "type": "text", "id": "b1", "label": "Beneficio 1 (opcional)" },
+        { "type": "text", "id": "b2", "label": "Beneficio 2 (opcional)" },
+        { "type": "text", "id": "b3", "label": "Beneficio 3 (opcional)" },
+        { "type": "text", "id": "note", "label": "Línea de envío (opcional)", "info": "Ej.: Envío gratis a domicilio a partir de 2 packs" }
       ]
     }
   ],
-  "presets": [ { "name": "Aurum · Mini catálogo" } ]
+  "presets": [
+    {
+      "name": "Aurum · Mini catálogo",
+      "blocks": [
+        { "type": "item", "settings": { "label": "Faja invisible", "icon": "faja", "phrase": "Levanta y alisa la piel al instante, sin fajas.", "info": "10 tiras por sobre · 12 × 18 cm", "b1": "Piernas, abdomen y brazos", "b2": "Invisible bajo la ropa", "b3": "Resiste agua y transpiración", "note": "Envío gratis a domicilio a partir de 2 packs" } },
+        { "type": "item", "settings": { "label": "Resaltador de bronceado", "icon": "frasco", "phrase": "Un bronceado parejo y luminoso." } },
+        { "type": "item", "settings": { "label": "Protector solar", "icon": "sol", "phrase": "Protege y unifica el tono." } },
+        { "type": "item", "settings": { "label": "Labios", "icon": "labios", "phrase": "Color y brillo para tus labios." } },
+        { "type": "item", "settings": { "label": "Sérum iluminador", "icon": "rollon", "phrase": "Luz natural en segundos." } },
+        { "type": "item", "settings": { "label": "Ultra Glitter", "icon": "brillo", "phrase": "Brillo para piel, cabello y ropa." } }
+      ]
+    }
+  ]
 }
 {% endschema %}
