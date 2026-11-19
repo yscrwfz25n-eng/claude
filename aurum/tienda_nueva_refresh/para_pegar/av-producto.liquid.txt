@@ -210,7 +210,7 @@
 <div id="av-src" data-kind="{{ kind }}" data-prices="{{ av_prices | escape }}">
   <ul class="av-bul" data-av-bul>
     {%- case kind -%}
-      {%- when 'res' -%}<li>Bronceado dorado al instante</li><li>Empareja la piel y disimula imperfecciones</li><li>Sale con agua y jabón</li>
+      {%- when 'res' -%}<li>Realza tu bronceado al instante</li><li>Brillo dorado que ilumina la piel</li><li>Sale con agua y jabón</li>
       {%- when 'glit' -%}<li>Brillo intenso al instante</li><li>Para piel, cabello y ropa</li><li>Spray fácil de aplicar</li>
       {%- when 'ser' -%}<li>Glow natural al instante</li><li>Aplicador roll-on, sin manos</li><li>Ideal para llevar en la cartera</li>
       {%- when 'lip' -%}<li>Hidrata y suaviza los labios</li><li>Brillo jugoso</li><li>Roll-on práctico para la cartera</li>
@@ -238,8 +238,8 @@
         <div class="av-acc__body">
           {%- case kind -%}
             {%- when 'res' -%}
-              <p>Con la piel limpia y seca, poné una pequeña cantidad en la palma o en un guante aplicador y distribuí con movimientos circulares, de a una zona por vez.</p>
-              <p>Empezá con poca cantidad y sumá capas hasta lograr el tono que te gusta. Lavate las manos al terminar y esperá unos minutos a que seque antes de vestirte.</p>
+              <p>Con la piel limpia y seca, poné una pequeña cantidad en la palma y distribuila con movimientos suaves sobre piernas, brazos, escote u hombros.</p>
+              <p>Empezá con poca cantidad y sumá más donde quieras más brillo. Lavate las manos al terminar y esperá unos minutos a que seque antes de vestirte.</p>
             {%- when 'glit' -%}
               <p>Agitá bien antes de usar. Rociá a unos 20 cm de distancia sobre la piel, el pelo o la ropa y dejá secar unos segundos.</p>
               <p>Si querés más brillo, sumá otra capa.</p>

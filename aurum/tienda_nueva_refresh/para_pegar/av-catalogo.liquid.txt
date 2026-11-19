@@ -259,7 +259,7 @@
       "name": "Aurum · Mini catálogo",
       "blocks": [
         { "type": "item", "settings": { "label": "Faja invisible", "icon": "faja", "phrase": "Levanta y alisa la piel al instante, sin fajas.", "info": "10 tiras por sobre · 12 × 18 cm", "b1": "Piernas, abdomen y brazos", "b2": "Invisible bajo la ropa", "b3": "Resiste agua y transpiración", "note": "Envío gratis a domicilio a partir de 2 packs" } },
-        { "type": "item", "settings": { "label": "Resaltador de bronceado", "icon": "frasco", "phrase": "Un bronceado parejo y luminoso." } },
+        { "type": "item", "settings": { "label": "Resaltador de bronceado", "icon": "frasco", "phrase": "Realza tu bronceado con un brillo dorado." } },
         { "type": "item", "settings": { "label": "Protector solar", "icon": "sol", "phrase": "Protege y unifica el tono." } },
         { "type": "item", "settings": { "label": "Labios", "icon": "labios", "phrase": "Color y brillo para tus labios." } },
         { "type": "item", "settings": { "label": "Sérum iluminador", "icon": "rollon", "phrase": "Luz natural en segundos." } },
