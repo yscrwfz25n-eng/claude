@@ -279,6 +279,8 @@
   {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
 </template>
 <style>
+  cart-drawer.drawer:not(.active){background-color:transparent!important;pointer-events:none!important}
+  cart-drawer.drawer:not(.active) .cart-drawer__overlay{background:transparent!important;pointer-events:none!important}
   cart-drawer .drawer__inner{background:#fff;font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;color:#3B0408;border-left:0}
   cart-drawer .drawer__header{padding:18px 0 12px;border:0}
   cart-drawer .drawer__heading{font:700 20px/1 "Inter Tight",sans-serif;letter-spacing:-.02em;color:#3B0408;display:flex;align-items:center;gap:8px}
