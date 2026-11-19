@@ -67,11 +67,6 @@
   /* Debajo del botón */
   .av-btn-price{margin-left:10px}
   .av-under{margin:12px 0 0;text-align:center;font:700 13px "Inter Tight",sans-serif;color:#3B0408}
-  .av-box{margin-top:14px;border:1px solid rgba(59,4,8,.15);border-radius:14px;background:#fff}
-  .av-box p{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:11px 12px;font:500 14px "Inter Tight",sans-serif;color:#3B0408}
-  .av-box p + p{border-top:1px solid rgba(59,4,8,.1)}
-  .av-box b{font-weight:800}
-  .av-box svg{width:18px;height:18px;flex:none}
   .av-pay{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 0;padding:0;list-style:none}
   .av-pay svg{width:38px;height:24px}
 
