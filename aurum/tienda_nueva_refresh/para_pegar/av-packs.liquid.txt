@@ -1,0 +1,133 @@
+{%- comment -%}
+  Aurum v2 · Elegí tu pack (inicio).
+  Las tiras, el precio por sobre y el ahorro se calculan solos desde las variantes del producto.
+  El botón muestra el precio del pack elegido y abre el carrito lateral.
+{%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- assign p = section.settings.product -%}
+{%- if p == blank -%}{%- assign p = all_products['faja-invisible'] -%}{%- endif -%}
+<style>
+  #av-pk-{{ section.id }} .av-pk2{display:grid;gap:12px;margin-top:22px}
+  #av-pk-{{ section.id }} .av-pk2__card{position:relative;display:flex;align-items:center;gap:14px;cursor:pointer;background:#fff;color:#3B0408;
+    border:2px solid rgba(59,4,8,.14);border-radius:18px;padding:16px 18px;transition:border-color .2s,background .2s}
+  #av-pk-{{ section.id }} .av-pk2__card:hover{border-color:rgba(59,4,8,.4)}
+  #av-pk-{{ section.id }} .av-pk2__card input{position:absolute;opacity:0;pointer-events:none}
+  #av-pk-{{ section.id }} .av-pk2__card:has(input:checked){border-color:#3B0408;background:#F9D4D3}
+  #av-pk-{{ section.id }} .av-pk2__card:has(input:disabled){opacity:.45;cursor:not-allowed}
+  #av-pk-{{ section.id }} .av-pk2__dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid rgba(59,4,8,.45);background:#fff;display:grid;place-items:center}
+  #av-pk-{{ section.id }} .av-pk2__card:has(input:checked) .av-pk2__dot{border-color:#3B0408}
+  #av-pk-{{ section.id }} .av-pk2__card:has(input:checked) .av-pk2__dot::after{content:"";width:9px;height:9px;border-radius:50%;background:#3B0408}
+  #av-pk-{{ section.id }} .av-pk2__txt{flex:1;min-width:0;font-size:15px;line-height:1.3}
+  #av-pk-{{ section.id }} .av-pk2__txt b{font-size:17px;font-weight:800}
+  #av-pk-{{ section.id }} .av-pk2__txt span{opacity:.65}
+  #av-pk-{{ section.id }} .av-pk2__txt small{display:block;font-size:13.5px;opacity:.75;margin-top:3px}
+  #av-pk-{{ section.id }} .av-pk2__price{flex:none;text-align:right}
+  #av-pk-{{ section.id }} .av-pk2__price b{display:block;font-size:19px;font-weight:800}
+  #av-pk-{{ section.id }} .av-pk2__save{display:inline-block;margin-top:5px;background:#3B0408;color:#F9D4D3;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  #av-pk-{{ section.id }} .av-pk2__badge{position:absolute;top:-11px;left:16px;background:#3B0408;color:#F9D4D3;font-size:10.5px;font-weight:800;line-height:1;
+    letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
+  #av-pk-{{ section.id }} .av-pk2__badge--off{background:#8E1B26}
+  #av-pk-{{ section.id }} .av__btn{width:100%;min-height:58px;margin-top:22px;gap:12px;white-space:nowrap;font:800 16px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  #av-pk-{{ section.id }} .av-pk2__bp{padding-left:12px;border-left:1.5px solid currentColor;opacity:.9}
+  #av-pk-{{ section.id }} .av-pk2__ship{margin:14px 0 0;font-size:14px;font-weight:700;line-height:1.45;text-align:center}
+  #av-pk-{{ section.id }} .av-pk2__pay{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;list-style:none;margin:12px 0 0;padding:0}
+  #av-pk-{{ section.id }} .av-pk2__pay svg{width:38px;height:24px}
+  #av-pk-{{ section.id }} .av__note{text-align:center;margin-top:10px}
+  @media (max-width:749px){
+    #av-pk-{{ section.id }} .av-pk2__card{padding:14px;gap:11px}
+    #av-pk-{{ section.id }} .av-pk2__txt b{font-size:15.5px}
+    #av-pk-{{ section.id }} .av-pk2__price b{font-size:17px}
+    #av-pk-{{ section.id }} .av__btn{font-size:15px;letter-spacing:.04em}
+  }
+</style>
+<section class="av av--{{ section.settings.scheme }} av-packs" id="packs">
+  <div class="av__wrap" id="av-pk-{{ section.id }}">
+    <div class="av-packs__img">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.title }}
+      {%- else -%}
+        <img src="{{ 'av-pack.jpg' | asset_url }}" alt="Faja invisible · Cinta lifting" loading="lazy" width="1000" height="1241">
+      {%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<div class="av__eb">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2>{{ section.settings.title }}</h2>
+      {%- if p == blank -%}
+        <p class="av__note" style="text-align:left">Elegí el producto Faja invisible en la configuración de esta sección.</p>
+      {%- else -%}
+        {%- assign base = p.variants.first.price -%}
+        {%- assign first_price = '' -%}
+        {%- form 'product', p -%}
+          <div class="av-pk2">
+          {%- for v in p.variants -%}
+            {%- assign n = v.title | split: ' ' | first | plus: 0 -%}
+            {%- if n < 1 -%}{%- assign n = forloop.index -%}{%- endif -%}
+            {%- assign per = v.price | divided_by: n | divided_by: 100 | times: 100 -%}
+            {%- assign tiras = n | times: section.settings.tiras -%}
+            {%- assign save = base | times: n | minus: v.price -%}
+            {%- assign on = false -%}
+            {%- if n == section.settings.default_pack and v.available -%}{%- assign on = true -%}{%- assign first_price = v.price | money_without_trailing_zeros -%}{%- endif -%}
+            <label class="av-pk2__card">
+              <input type="radio" name="id" value="{{ v.id }}" data-price="{{ v.price | money_without_trailing_zeros }}"{% if on %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+              <span class="av-pk2__dot"></span>
+              <span class="av-pk2__txt"><b>{{ v.title }}</b> <span>· {{ tiras }} tiras</span><small>{{ per | money_without_trailing_zeros }} por sobre</small></span>
+              <span class="av-pk2__price">
+                {%- if v.available -%}<b>{{ v.price | money_without_trailing_zeros }}</b>{%- else -%}<b>{{ section.settings.soldout }}</b>{%- endif -%}
+                {%- if save > 0 and v.available -%}<span class="av-pk2__save">Ahorrás {{ save | money_without_trailing_zeros }}</span>{%- endif -%}
+              </span>
+              {%- if v.available == false -%}<span class="av-pk2__badge av-pk2__badge--off">{{ section.settings.soldout }}</span>
+              {%- elsif n == section.settings.badge_pack and section.settings.badge != blank -%}<span class="av-pk2__badge">{{ section.settings.badge }}</span>{%- endif -%}
+            </label>
+          {%- endfor -%}
+          </div>
+          <input type="hidden" name="quantity" value="1">
+          {%- if first_price == '' -%}{%- assign first_price = p.selected_or_first_available_variant.price | money_without_trailing_zeros -%}{%- endif -%}
+          <button type="submit" class="av__btn"{% unless p.available %} disabled{% endunless %}><span>{{ section.settings.button_label }}</span><span class="av-pk2__bp" data-bp>{{ first_price }}</span></button>
+        {%- endform -%}
+        {%- if section.settings.ship != blank -%}<p class="av-pk2__ship">{{ section.settings.ship }}</p>{%- endif -%}
+        {%- if section.settings.show_pay and shop.enabled_payment_types.size > 0 -%}
+          <ul class="av-pk2__pay">{%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}</ul>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}<p class="av__note">{{ section.settings.note }}</p>{%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('av-pk-{{ section.id }}');
+    if (!root) return;
+    var bp = root.querySelector('[data-bp]');
+    var radios = root.querySelectorAll('input[name="id"]');
+    if (!root.querySelector('input[name="id"]:checked')) {
+      var firstOk = root.querySelector('input[name="id"]:not(:disabled)');
+      if (firstOk) firstOk.checked = true;
+    }
+    function upd() { var c = root.querySelector('input[name="id"]:checked'); if (c && bp) bp.textContent = c.dataset.price; }
+    radios.forEach(function (r) { r.addEventListener('change', upd); });
+    upd();
+  })();
+</script>
+{% schema %}
+{
+  "name": "Aurum · Packs Faja",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "product", "id": "product", "label": "Producto", "info": "Si lo dejás vacío, usa la Faja invisible." },
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Faja invisible · Cinta lifting" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Elegí tu pack" },
+    { "type": "range", "id": "tiras", "label": "Tiras por sobre", "min": 1, "max": 30, "step": 1, "default": 10 },
+    { "type": "range", "id": "default_pack", "label": "Pack elegido de entrada (cantidad de sobres)", "min": 1, "max": 5, "step": 1, "default": 2 },
+    { "type": "range", "id": "badge_pack", "label": "Pack con etiqueta (cantidad de sobres)", "min": 1, "max": 5, "step": 1, "default": 2 },
+    { "type": "text", "id": "badge", "label": "Etiqueta", "default": "Más popular" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Agregar al carrito" },
+    { "type": "text", "id": "soldout", "label": "Texto cuando no hay stock", "default": "Sin stock" },
+    { "type": "text", "id": "ship", "label": "Texto de envío (debajo del botón)", "default": "Envío gratis a sucursal en todos los packs. A domicilio, gratis desde 2 sobres." },
+    { "type": "checkbox", "id": "show_pay", "label": "Mostrar medios de pago", "default": true },
+    { "type": "text", "id": "note", "label": "Texto chico al final", "default": "Pagá con Mercado Pago en cuotas" }
+  ],
+  "presets": [ { "name": "Aurum · Packs Faja" } ]
+}
+{% endschema %}

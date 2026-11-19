@@ -324,7 +324,7 @@
   cart-drawer .cart-item__old-price{opacity:.55}
   cart-drawer .quantity{border-radius:999px;min-height:36px;width:120px!important;flex:none;display:flex!important;align-items:center}
   cart-drawer .quantity__button{width:38px!important;flex:0 0 38px!important}
-  cart-drawer .quantity__input{display:block!important;visibility:visible!important;flex:1 1 auto!important;width:40px!important;min-width:36px!important;height:34px;padding:0!important;text-align:center;
+  cart-drawer .quantity__input{display:block!important;flex:1 1 auto!important;width:40px!important;min-width:36px!important;height:34px;padding:0!important;text-align:center;
     font:700 16px/34px "Inter Tight",sans-serif!important;color:#3B0408!important;-webkit-text-fill-color:#3B0408;opacity:1!important;background:transparent}
   cart-drawer .quantity:before,cart-drawer .quantity:after{border-radius:999px;box-shadow:0 0 0 1px rgba(59,4,8,.2)}
   cart-drawer .drawer__footer{border-top:1px solid rgba(59,4,8,.12);padding-top:10px}
