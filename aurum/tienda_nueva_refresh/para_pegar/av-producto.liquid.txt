@@ -20,7 +20,9 @@
   #MainContent .product .product-form__input--pill input[type=radio]+label{border-radius:999px;border:2px solid #3B0408;color:#3B0408;background:transparent;font-weight:700}
   #MainContent .product .product-form__input--pill input[type=radio]:checked+label{background:#3B0408;color:#F9D4D3}
   #MainContent .product .product-form__submit{min-height:56px;border-radius:999px;background:#3B0408;color:#F9D4D3;
-    font:800 16px "Inter Tight",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+    font:800 16px "Inter Tight",sans-serif;letter-spacing:.06em;text-transform:uppercase;
+    display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;padding:0 20px}
+  #MainContent .product .product-form__submit > span{white-space:nowrap}
   #MainContent .product .product-form__submit::after,#MainContent .product .product-form__submit::before{display:none}
 
   /* ---------- Faja invisible ---------- */
@@ -65,7 +67,8 @@
   .av-pk__badge--off{background:#8E1B26}
 
   /* Debajo del botón */
-  .av-btn-price{margin-left:10px}
+  .av-btn-price{padding-left:12px;border-left:1.5px solid rgba(249,212,211,.45);letter-spacing:.02em}
+  @media (max-width:400px){#MainContent .product .product-form__submit{font-size:14px;letter-spacing:.03em;gap:10px}}
   .av-under{margin:12px 0 0;text-align:center;font:700 13px "Inter Tight",sans-serif;color:#3B0408}
   .av-pay{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 0;padding:0;list-style:none}
   .av-pay svg{width:38px;height:24px}
@@ -107,7 +110,7 @@
     {%- for v in product.variants -%}
       {%- assign n = v.title | split: ' ' | first | plus: 0 -%}
       {%- if n < 1 -%}{%- assign n = 1 -%}{%- endif -%}
-      {%- assign per = v.price | divided_by: n -%}
+      {%- assign per = v.price | divided_by: n | divided_by: 100 | times: 100 -%}
       {%- assign tiras = n | times: 10 -%}
       {%- assign save = base | times: n | minus: v.price -%}
       {%- assign img = v.featured_image | default: product.featured_image -%}
@@ -204,7 +207,7 @@
     var btn = root.querySelector('.product-form__submit');
     var btnPrice = null;
     if (btn) { btnPrice = document.createElement('span'); btnPrice.className = 'av-btn-price'; var first = btn.querySelector('span'); if (first) first.insertAdjacentElement('afterend', btnPrice); }
-    function setBtn(card) { if (btnPrice && card) btnPrice.textContent = '· ' + card.dataset.price; }
+    function setBtn(card) { if (btnPrice && card) btnPrice.textContent = card.dataset.price; }
 
     function radios() { return root.querySelectorAll('variant-selects input[type=radio]'); }
     function pick(value) {
