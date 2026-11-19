@@ -31,7 +31,6 @@
   </div>
 </section>
 <style>
-  /* El velo rosa se controla con "Velo rosa detrás del texto" en los dos estilos */
   #av-hero-{{ section.id }}::after{background:linear-gradient(90deg,rgba(252,228,227,var(--veil)) 0%,rgba(252,228,227,calc(var(--veil) * .85)) 38%,rgba(249,212,211,calc(var(--veil) * .5)) 62%,rgba(249,212,211,calc(var(--veil) * .35)) 100%)}
   #av-hero-{{ section.id }}.av-hero--sharp .av-hero__bg{inset:0;filter:none;background-position:right center}
   #av-hero-{{ section.id }}.av-hero--sharp::after{background:linear-gradient(90deg,rgba(252,228,227,var(--veil)) 0%,rgba(252,228,227,calc(var(--veil) * .85)) 30%,rgba(252,228,227,0) 58%)}
@@ -49,8 +48,8 @@
   "tag": "div",
   "settings": [
     { "type": "image_picker", "id": "bg", "label": "Fondo", "info": "Si lo dejás vacío usa el vestidor rosa." },
-    { "type": "select", "id": "bg_style", "label": "Estilo del fondo", "default": "blur", "options": [ { "value": "blur", "label": "Borroso (para el vestidor)" }, { "value": "sharp", "label": "Foto nítida (para fotos de campaña) · velo solo detrás del texto" } ] },
-    { "type": "range", "id": "veil", "label": "Velo rosa sobre la foto", "min": 0, "max": 95, "step": 5, "unit": "%", "default": 70, "info": "Más bajo = la foto se ve más fuerte. Más alto = el texto se lee mejor." },
+    { "type": "select", "id": "bg_style", "label": "Estilo del fondo", "default": "blur", "options": [ { "value": "blur", "label": "Borroso (para el vestidor)" }, { "value": "sharp", "label": "Foto nítida (para fotos de campaña)" } ] },
+    { "type": "range", "id": "veil", "label": "Velo rosa detrás del texto (foto nítida)", "min": 0, "max": 95, "step": 5, "unit": "%", "default": 70, "info": "Más bajo = la foto se ve más fuerte. Más alto = el texto se lee mejor." },
     { "type": "checkbox", "id": "show_basket", "label": "Mostrar la canasta que se balancea", "default": true },
     { "type": "image_picker", "id": "image", "label": "Producto que se balancea (PNG sin fondo)", "info": "El brazo tiene que tocar el borde de arriba de la imagen." },
     { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Nuevo · Faja invisible · Cinta lifting" },
