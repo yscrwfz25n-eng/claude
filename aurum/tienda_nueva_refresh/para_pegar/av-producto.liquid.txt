@@ -28,15 +28,15 @@
 
   /* ---------- Faja invisible ---------- */
   #av-src{display:none}
-  .av-faja #MainContent .product__info-container .product__description,
-  .av-faja #MainContent .product__info-container share-button,
-  .av-faja #MainContent .product__info-container .product-form__quantity,
-  .av-faja #MainContent .product__info-container .rating-wrapper,
-  .av-faja #MainContent .product__info-container .product__text,
-  .av-faja #MainContent .product__info-container > div > .price,
-  .av-faja #MainContent .product__info-container .product__tax,
+  .av-pp #MainContent .product__info-container .product__description,
+  .av-pp #MainContent .product__info-container share-button,
+  .av-pp #MainContent .product__info-container .product-form__quantity,
+  .av-pp #MainContent .product__info-container .rating-wrapper,
+  .av-pp #MainContent .product__info-container .product__text,
+  .av-pp #MainContent .product__info-container > div > .price,
+  .av-pp #MainContent .product__info-container .product__tax,
   .av-faja #MainContent .av-pk-ready variant-selects{display:none!important}
-  .av-faja #MainContent .product__title{text-align:center;margin-bottom:6px}
+  .av-pp #MainContent .product__title{text-align:center;margin-bottom:6px}
 
   /* 3 beneficios en píldoras */
   .av-bul{list-style:none;margin:14px 0 26px;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px}
@@ -91,13 +91,32 @@
   .av-acc__body ul:not(.av-acc__checks){margin:0 0 6px;padding-left:20px}
   .av-acc__body li + li{margin-top:6px}
   .av-acc__body h4{margin:0 0 8px;font:800 15px "Inter Tight",sans-serif}
+  .av-acc__body > :last-child{margin-bottom:0}
 </style>
 
-{%- unless product.handle contains 'faja' -%}
+{%- liquid
+  assign h = product.handle | downcase
+  assign kind = ''
+  if h contains 'spray'
+    assign kind = 'spray'
+  elsif h contains 'faja'
+    assign kind = 'faja'
+  elsif h contains 'maquillaje' or h contains 'resaltador' or h contains 'bronce'
+    assign kind = 'res'
+  elsif h contains 'glitter'
+    assign kind = 'glit'
+  elsif h contains 'serum' or h contains 'iluminador'
+    assign kind = 'ser'
+  elsif h contains 'lip' or h contains 'labio'
+    assign kind = 'lip'
+  endif
+-%}
+{%- capture av_prices -%}{ {%- for v in product.variants -%}"{{ v.id }}":"{{ v.price | money_without_trailing_zeros }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%} }{%- endcapture -%}
+{%- unless kind == 'faja' -%}
 <style>#MainContent [id*="__faja_"]{display:none!important}</style>
 {%- endunless -%}
-{%- if product.handle contains 'faja' -%}
-<div id="av-src">
+{%- if kind == 'faja' -%}
+<div id="av-src" data-kind="faja" data-prices="{{ av_prices | escape }}">
   <ul class="av-bul" data-av-bul>
     <li>Levanta y alisa la piel al instante</li>
     <li>Resiste agua y transpiración</li>
@@ -187,12 +206,92 @@
   </div>
 </div>
 
+{%- elsif kind != '' -%}
+<div id="av-src" data-kind="{{ kind }}" data-prices="{{ av_prices | escape }}">
+  <ul class="av-bul" data-av-bul>
+    {%- case kind -%}
+      {%- when 'res' -%}<li>Bronceado dorado al instante</li><li>Empareja la piel y disimula imperfecciones</li><li>Sale con agua y jabón</li>
+      {%- when 'glit' -%}<li>Brillo intenso al instante</li><li>Para piel, cabello y ropa</li><li>Spray fácil de aplicar</li>
+      {%- when 'ser' -%}<li>Glow natural al instante</li><li>Aplicador roll-on, sin manos</li><li>Ideal para llevar en la cartera</li>
+      {%- when 'lip' -%}<li>Hidrata y suaviza los labios</li><li>Brillo jugoso</li><li>Roll-on práctico para la cartera</li>
+      {%- when 'spray' -%}<li>Despega la cinta sin tirones</li><li>Suave con la piel</li><li>Para la Faja invisible</li>
+    {%- endcase -%}
+  </ul>
+
+  <div data-av-after>
+    <p class="av-under">Envíos a todo el país.<br>Pagá en cuotas con Mercado Pago.</p>
+    {%- if shop.enabled_payment_types.size > 0 -%}
+      <ul class="av-pay">
+        {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <div class="av-acc">
+      {%- if product.description != blank -%}
+      <details>
+        <summary>¿Qué es?</summary>
+        <div class="av-acc__body">{{ product.description }}</div>
+      </details>
+      {%- endif -%}
+      <details>
+        <summary>Cómo se aplica</summary>
+        <div class="av-acc__body">
+          {%- case kind -%}
+            {%- when 'res' -%}
+              <p>Con la piel limpia y seca, poné una pequeña cantidad en la palma o en un guante aplicador y distribuí con movimientos circulares, de a una zona por vez.</p>
+              <p>Empezá con poca cantidad y sumá capas hasta lograr el tono que te gusta. Lavate las manos al terminar y esperá unos minutos a que seque antes de vestirte.</p>
+            {%- when 'glit' -%}
+              <p>Agitá bien antes de usar. Rociá a unos 20 cm de distancia sobre la piel, el pelo o la ropa y dejá secar unos segundos.</p>
+              <p>Si querés más brillo, sumá otra capa.</p>
+            {%- when 'ser' -%}
+              <p>Deslizá el roll-on sobre pómulos, arco de cupido, clavículas u hombros y difuminá suavemente con la yema de los dedos.</p>
+              <p>Podés usarlo solo o sobre el maquillaje.</p>
+            {%- when 'lip' -%}
+              <p>Deslizá el roll-on sobre los labios limpios. Usalo solo o sobre tu labial favorito, y repetí las veces que quieras durante el día.</p>
+            {%- when 'spray' -%}
+              <p>Rociá sobre la cinta y sus bordes. Esperá entre 30 y 60 segundos y retirala despacio, en el sentido del vello.</p>
+              <p>Si hace falta, repetí. Después lavá la zona con agua tibia y jabón. Agitá antes de usar.</p>
+          {%- endcase -%}
+        </div>
+      </details>
+      {%- if kind == 'res' or kind == 'glit' -%}
+      <details>
+        <summary>Cómo se retira</summary>
+        <div class="av-acc__body">
+          <p>Con agua y jabón, en la ducha.{% if kind == 'glit' %} En el pelo, con tu shampoo de siempre.{% endif %}</p>
+        </div>
+      </details>
+      {%- endif -%}
+      <details>
+        <summary>Precauciones · leer antes de usar</summary>
+        <div class="av-acc__body">
+          <ul>
+            <li>Uso externo.</li>
+            <li>Probalo antes en una zona pequeña de la piel y suspendé el uso si aparece irritación.</li>
+            {%- case kind -%}
+              {%- when 'lip' -%}<li>No lo uses sobre labios lastimados o irritados.</li>
+              {%- when 'glit' -%}<li>No lo rocíes en la cara ni cerca de los ojos.</li><li>En la ropa, probalo antes en una parte que no se vea.</li>
+              {%- when 'res' -%}<li>No lo apliques sobre piel lastimada o irritada. Evitá el contacto con ojos y mucosas.</li><li>Hasta que seque, puede manchar la ropa clara.</li>
+              {%- else -%}<li>No lo apliques sobre piel lastimada o irritada. Evitá el contacto con los ojos.</li>
+            {%- endcase -%}
+            <li>Mantener fuera del alcance de los niños.</li>
+            <li>Guardalo en un lugar fresco, lejos del sol y del calor.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{%- if kind != '' -%}
 <script>
   (function () {
     var root = document.querySelector('#MainContent .product__info-container');
     var src = document.getElementById('av-src');
     if (!root || !src) return;
-    document.body.classList.add('av-faja');
+    document.body.classList.add('av-pp');
+    if (src.dataset.kind === 'faja') document.body.classList.add('av-faja');
     function top(el) { while (el && el.parentElement !== root) el = el.parentElement; return el; }
     function after(ref, el) { if (ref && el) ref.insertAdjacentElement('afterend', el); }
     var title = top(root.querySelector('.product__title'));
@@ -202,35 +301,49 @@
     var packs = src.querySelector('[data-av-packs]');
     var afterBuy = src.querySelector('[data-av-after]');
     after(title, bul);
-    if (buy) buy.insertAdjacentElement('beforebegin', wrap);
+    if (buy && wrap) buy.insertAdjacentElement('beforebegin', wrap);
     after(buy, afterBuy);
 
     var btn = root.querySelector('.product-form__submit');
     var btnPrice = null;
     if (btn) { btnPrice = document.createElement('span'); btnPrice.className = 'av-btn-price'; var first = btn.querySelector('span'); if (first) first.insertAdjacentElement('afterend', btnPrice); }
-    function setBtn(card) { if (btnPrice && card) btnPrice.textContent = card.dataset.price; }
+    function setBtn(txt) { if (btnPrice && txt) btnPrice.textContent = txt; }
 
-    function radios() { return root.querySelectorAll('variant-selects input[type=radio]'); }
-    function pick(value) {
-      var r = Array.prototype.find.call(radios(), function (x) { return x.value === value; });
-      if (r && !r.checked) r.click();
-      packs.querySelectorAll('.av-pk__card').forEach(function (k) { var on = k.dataset.value === value; k.classList.toggle('is-on', on); if (on) setBtn(k); });
+    var prices = {};
+    try { prices = JSON.parse(src.dataset.prices || '{}'); } catch (e) {}
+    function fromForm() {
+      var i = root.querySelector('form[action*="/cart/add"] input[name="id"]');
+      if (i && prices[i.value]) setBtn(prices[i.value]);
     }
-    if (!radios().length) { wrap.remove(); return; }
-    root.classList.add('av-pk-ready');
-    var checked = root.querySelector('variant-selects input[type=radio]:checked');
-    if (checked) pick(checked.value);
-    packs.addEventListener('click', function (e) {
-      var card = e.target.closest('.av-pk__card');
-      if (card && !card.disabled) pick(card.dataset.value);
-    });
 
-    /* 2 sobres elegido de entrada (salvo que vengan de un link con otro pack) */
-    if (!/[?&]variant=/.test(location.search) && window.customElements) {
-      customElements.whenDefined('variant-selects').then(function () {
-        var rec = packs.querySelector('.av-pk__card[data-n="2"]:not([disabled])');
-        if (rec) setTimeout(function () { pick(rec.dataset.value); }, 60);
+    if (wrap && packs) {
+      /* Faja: tarjetas de packs */
+      var radios = function () { return root.querySelectorAll('variant-selects input[type=radio]'); };
+      var pick = function (value) {
+        var r = Array.prototype.find.call(radios(), function (x) { return x.value === value; });
+        if (r && !r.checked) r.click();
+        packs.querySelectorAll('.av-pk__card').forEach(function (k) { var on = k.dataset.value === value; k.classList.toggle('is-on', on); if (on) setBtn(k.dataset.price); });
+      };
+      if (!radios().length) { wrap.remove(); fromForm(); return; }
+      root.classList.add('av-pk-ready');
+      var checked = root.querySelector('variant-selects input[type=radio]:checked');
+      if (checked) pick(checked.value);
+      packs.addEventListener('click', function (e) {
+        var card = e.target.closest('.av-pk__card');
+        if (card && !card.disabled) pick(card.dataset.value);
       });
+      /* 2 sobres elegido de entrada (salvo que vengan de un link con otro pack) */
+      if (!/[?&]variant=/.test(location.search) && window.customElements) {
+        customElements.whenDefined('variant-selects').then(function () {
+          var rec = packs.querySelector('.av-pk__card[data-n="2"]:not([disabled])');
+          if (rec) setTimeout(function () { pick(rec.dataset.value); }, 60);
+        });
+      }
+    } else {
+      /* Belleza: un precio, o variantes simples (tonos) */
+      fromForm();
+      root.addEventListener('change', function () { setTimeout(fromForm, 120); });
+      if (window.subscribe && window.PUB_SUB_EVENTS) { try { subscribe(PUB_SUB_EVENTS.variantChange, function () { setTimeout(fromForm, 60); }); } catch (e) {} }
     }
   })();
 </script>
