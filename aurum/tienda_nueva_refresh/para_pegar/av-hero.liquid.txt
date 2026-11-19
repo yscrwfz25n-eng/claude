@@ -7,7 +7,7 @@
     assign bg = 'av-hero-bg.jpg' | asset_url
   endif
 -%}
-<section class="av av-hero{% if section.settings.bg_style == 'sharp' %} av-hero--sharp{% endif %}{% unless section.settings.show_basket %} av-hero--nobasket{% endunless %}">
+<section class="av av-hero{% if section.settings.bg_style == 'sharp' %} av-hero--sharp{% endif %}{% unless section.settings.show_basket %} av-hero--nobasket{% endunless %}" style="--veil:{{ section.settings.veil | divided_by: 100.0 }}">
   <div class="av-hero__bg" style="background-image:url({{ bg }})"></div>
   <div class="av__wrap">
     <div class="av-hero__txt">
@@ -32,11 +32,11 @@
 </section>
 <style>
   .av-hero--sharp .av-hero__bg{inset:0;filter:none;background-position:right center}
-  .av-hero--sharp::after{background:linear-gradient(90deg,rgba(252,228,227,.96) 0%,rgba(252,228,227,.88) 30%,rgba(252,228,227,.25) 55%,rgba(252,228,227,0) 72%)}
+  .av-hero--sharp::after{background:linear-gradient(90deg,rgba(252,228,227,var(--veil)) 0%,rgba(252,228,227,calc(var(--veil) * .85)) 30%,rgba(252,228,227,0) 58%)}
   .av-hero--nobasket .av-hero__media{height:clamp(520px,46vw,720px)}
   @media (max-width:749px){
     .av-hero--sharp .av-hero__bg{background-position:center bottom}
-    .av-hero--sharp::after{background:linear-gradient(180deg,rgba(252,228,227,.96) 0%,rgba(252,228,227,.88) 42%,rgba(252,228,227,0) 68%)}
+    .av-hero--sharp::after{background:linear-gradient(180deg,rgba(252,228,227,var(--veil)) 0%,rgba(252,228,227,calc(var(--veil) * .85)) 40%,rgba(252,228,227,0) 62%)}
     .av-hero--nobasket .av-hero__media{height:340px;margin-top:0}
   }
 </style>
@@ -47,6 +47,7 @@
   "settings": [
     { "type": "image_picker", "id": "bg", "label": "Fondo", "info": "Si lo dejás vacío usa el vestidor rosa." },
     { "type": "select", "id": "bg_style", "label": "Estilo del fondo", "default": "blur", "options": [ { "value": "blur", "label": "Borroso (para el vestidor)" }, { "value": "sharp", "label": "Foto nítida (para fotos de campaña)" } ] },
+    { "type": "range", "id": "veil", "label": "Velo rosa detrás del texto (foto nítida)", "min": 0, "max": 95, "step": 5, "unit": "%", "default": 70, "info": "Más bajo = la foto se ve más fuerte. Más alto = el texto se lee mejor." },
     { "type": "checkbox", "id": "show_basket", "label": "Mostrar la canasta que se balancea", "default": true },
     { "type": "image_picker", "id": "image", "label": "Producto que se balancea (PNG sin fondo)", "info": "El brazo tiene que tocar el borde de arriba de la imagen." },
     { "type": "text", "id": "eyebrow", "label": "Texto chico arriba", "default": "Nuevo · Faja invisible · Cinta lifting" },
