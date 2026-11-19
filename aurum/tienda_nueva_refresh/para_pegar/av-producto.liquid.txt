@@ -241,12 +241,17 @@
 {%- if settings.cart_type == 'drawer' -%}
 {%- liquid
   assign faja = all_products['faja-invisible']
+  assign spray = all_products['spray-removedor']
   assign bel = collections['belleza']
   if bel == blank or bel.products_count == 0
     assign bel = collections['productos']
   endif
 -%}
-<template id="av-cd-ups">
+<template id="av-cd-ups" data-faja="{% if faja != blank %}{{ faja.id }}{% endif %}">
+  {%- if spray != blank and spray.available -%}
+    {%- assign sv = spray.selected_or_first_available_variant -%}
+    <div data-req="faja" data-label="¿Querés el spray para sacarla?" data-id="{{ sv.id }}" data-pid="{{ spray.id }}" data-title="{{ spray.title | escape }}" data-price="{{ sv.price | money_without_trailing_zeros | escape }}" data-img="{% if spray.featured_image %}{{ spray.featured_image | image_url: width: 160 }}{% endif %}"></div>
+  {%- endif -%}
   {%- if faja != blank and faja.available -%}
     {%- assign fv = faja.selected_or_first_available_variant -%}
     {%- for v in faja.variants -%}{%- assign n = v.title | split: ' ' | first | plus: 0 -%}{%- if n == 2 and v.available -%}{%- assign fv = v -%}{%- endif -%}{%- endfor -%}
@@ -254,7 +259,7 @@
   {%- endif -%}
   {%- if bel != blank -%}
     {%- for p in bel.products limit: 8 -%}
-      {%- if p.available and p.handle != 'faja-invisible' -%}
+      {%- if p.available and p.handle != 'faja-invisible' and p.handle != 'spray-removedor' -%}
         {%- assign pv = p.selected_or_first_available_variant -%}
         <div data-id="{{ pv.id }}" data-pid="{{ p.id }}" data-title="{{ p.title | escape }}" data-price="{{ pv.price | money_without_trailing_zeros | escape }}" data-img="{% if p.featured_image %}{{ p.featured_image | image_url: width: 160 }}{% endif %}"></div>
       {%- endif -%}
@@ -344,11 +349,17 @@
       var inCart = cart.items.map(function (i) { return String(i.product_id); });
       var tpl = document.getElementById('av-cd-ups');
       var cands = tpl ? Array.prototype.slice.call(tpl.content.querySelectorAll('[data-id]')) : [];
-      var pick = cands.find(function (c) { return inCart.indexOf(c.dataset.pid) === -1; });
+      var fajaId = tpl ? tpl.dataset.faja : '';
+      var hasFaja = fajaId && inCart.indexOf(fajaId) !== -1;
+      var pick = cands.find(function (c) {
+        if (inCart.indexOf(c.dataset.pid) !== -1) return false;
+        if (c.dataset.req === 'faja' && !hasFaja) return false;
+        return true;
+      });
       if (pick) {
         var up = document.createElement('div');
         up.className = 'av-cd-up';
-        up.innerHTML = '<p class="av-cd-up__lbl">★ Sumalo a tu pedido</p><div class="av-cd-up__row">' +
+        up.innerHTML = '<p class="av-cd-up__lbl">★ ' + esc(pick.dataset.label || 'Sumalo a tu pedido') + '</p><div class="av-cd-up__row">' +
           (pick.dataset.img ? '<img src="' + pick.dataset.img + '" alt="" width="58" height="58" loading="lazy">' : '') +
           '<div class="av-cd-up__txt"><b>' + esc(pick.dataset.title) + '</b><span>' + esc(pick.dataset.price) + '</span></div>' +
           '<button type="button" class="av-cd-up__btn" data-id="' + pick.dataset.id + '">+ Agregar</button></div>';
