@@ -289,18 +289,32 @@
   .av-cd-up__btn[disabled]{opacity:.6}
   .av-cd-lbl{font:800 10px "Inter Tight",sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:0 0 6px;opacity:.7}
   cart-drawer .drawer__inner,cart-drawer cart-drawer-items,cart-drawer .drawer__contents{overflow-x:hidden}
-  cart-drawer .drawer__contents > *,.av-cd-banner,.av-cd-up{box-sizing:border-box;max-width:100%}
+  cart-drawer .cart-drawer__form{width:100%;min-width:0}
+  cart-drawer .drawer__contents{width:100%;min-width:0;flex:1 1 100%}
+  cart-drawer .drawer__contents > *,.av-cd-banner,.av-cd-up{box-sizing:border-box;max-width:100%;min-width:0}
+  cart-drawer .cart-item__media{min-width:0}
+  cart-drawer .cart-item__details{min-width:0;overflow-wrap:anywhere}
   cart-drawer .cart-items{width:100%;border-collapse:separate;border-spacing:0}
   cart-drawer .cart-items thead{display:none}
-  cart-drawer .cart-item{box-sizing:border-box;width:100%;border:1px solid rgba(59,4,8,.12);border-radius:14px;padding:10px;margin-bottom:8px;background:#fff}
-  cart-drawer .cart-item > td{padding-top:0!important;min-width:0}
+  cart-drawer .cart-item{box-sizing:border-box;width:100%;display:grid!important;grid-template-columns:64px minmax(0,1fr) auto;grid-template-rows:auto auto;
+    column-gap:12px;row-gap:8px;align-items:start;border:1px solid rgba(59,4,8,.12);border-radius:14px;padding:10px;margin:0 0 8px!important;background:#fff}
+  cart-drawer .cart-item > td{padding:0!important;min-width:0}
+  cart-drawer .cart-item__media{grid-column:1;grid-row:1 / 3;width:64px}
+  cart-drawer .cart-item__media img,cart-drawer .cart-item__image{width:64px;height:auto;border-radius:10px}
+  cart-drawer .cart-item__details{grid-column:2;grid-row:1;min-width:0;overflow-wrap:anywhere}
+  cart-drawer .cart-item__details > div.product-option{display:none}
+  cart-drawer .cart-item__details dl{margin:4px 0 0}
+  cart-drawer .cart-item__totals{grid-column:3;grid-row:1}
+  cart-drawer .cart-items .cart-item__quantity{grid-column:2 / 4;grid-row:2;padding:0!important}
+  cart-drawer .cart-item__quantity-wrapper{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
   cart-drawer .cart-item__totals .price{white-space:nowrap}
-  cart-drawer .cart-item__image{border-radius:10px}
   cart-drawer .cart-item__name{font:600 14px/1.25 "Inter Tight",sans-serif;color:#3B0408;text-decoration:none}
   cart-drawer .cart-item .product-option{font-size:12.5px}
   cart-drawer .cart-item .price,cart-drawer .cart-item__final-price{font:800 14.5px "Inter Tight",sans-serif;color:#3B0408}
   cart-drawer .cart-item__old-price{opacity:.55}
-  cart-drawer .quantity{border-radius:999px;min-height:36px}
+  cart-drawer .quantity{border-radius:999px;min-height:34px;width:110px;flex:none}
+  cart-drawer .quantity__button{width:34px}
+  cart-drawer .quantity__input{min-width:0;font-weight:700;color:#3B0408}
   cart-drawer .quantity:before,cart-drawer .quantity:after{border-radius:999px;box-shadow:0 0 0 1px rgba(59,4,8,.2)}
   cart-drawer .drawer__footer{border-top:1px solid rgba(59,4,8,.12);padding-top:10px}
   cart-drawer .drawer__footer > details{display:none}
@@ -358,6 +372,7 @@
       banner.className = 'av-cd-banner';
       banner.innerHTML = ICON.truck + '<span>Envío gratis a sucursal en la <b>Faja invisible</b>. A domicilio, desde 2 sobres.</span>';
       scroll.insertAdjacentElement('afterbegin', banner);
+      var ci = CD.querySelector('cart-drawer-items'); if (ci) ci.scrollLeft = 0;
 
       var inCart = cart.items.map(function (i) { return String(i.product_id); });
       var tpl = document.getElementById('av-cd-ups');
