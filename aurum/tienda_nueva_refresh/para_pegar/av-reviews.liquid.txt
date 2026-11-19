@@ -1,0 +1,109 @@
+{%- comment -%} Aurum v2 · Reseñas reales de clientas, en carrusel (se desliza con el dedo o con las flechas) {%- endcomment -%}
+{{ 'aurum-v2.css' | asset_url | stylesheet_tag }}
+{%- assign shown = 0 -%}
+{%- for block in section.blocks -%}{%- if block.settings.text != blank -%}{%- assign shown = shown | plus: 1 -%}{%- endif -%}{%- endfor -%}
+{%- if shown > 0 or request.design_mode -%}
+<style>
+  #av-rv-{{ section.id }} .av-rv__top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+  #av-rv-{{ section.id }} .av-rv__nav{display:flex;gap:10px;flex:none}
+  #av-rv-{{ section.id }} .av-rv__btn{width:46px;height:46px;border-radius:50%;border:1.5px solid currentColor;background:transparent;color:inherit;
+    display:grid;place-items:center;cursor:pointer;font-size:20px;line-height:1;opacity:.9;transition:opacity .2s,background .2s}
+  #av-rv-{{ section.id }} .av-rv__btn:hover{background:rgba(249,212,211,.15)}
+  #av-rv-{{ section.id }} .av-rv__btn[disabled]{opacity:.3;cursor:default}
+  #av-rv-{{ section.id }} .av-revs__grid{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:22px;
+    margin-top:36px;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #av-rv-{{ section.id }} .av-revs__grid::-webkit-scrollbar{display:none}
+  #av-rv-{{ section.id }} .av-rev{flex:0 0 calc((100% - 44px) / 3);scroll-snap-align:start;box-sizing:border-box;display:flex;flex-direction:column}
+  #av-rv-{{ section.id }} .av-rev p{flex:1;margin:14px 0 0}
+  #av-rv-{{ section.id }} .av-rv__dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
+  #av-rv-{{ section.id }} .av-rv__dot{width:8px;height:8px;border-radius:999px;border:0;padding:0;color:inherit;background:currentColor;opacity:.3;cursor:pointer;transition:all .25s}
+  #av-rv-{{ section.id }} .av-rv__dot.is-on{width:24px;opacity:1}
+  @media (max-width:989px){#av-rv-{{ section.id }} .av-rev{flex-basis:calc((100% - 22px) / 2)}}
+  @media (max-width:749px){
+    #av-rv-{{ section.id }} .av-rv__nav{display:none}
+    #av-rv-{{ section.id }} .av-revs__grid{gap:14px;margin-inline:calc(-1*max(18px,4vw));padding-inline:max(18px,4vw);scroll-padding-inline:max(18px,4vw)}
+    #av-rv-{{ section.id }} .av-rev{flex-basis:86%}
+  }
+</style>
+<section class="av av--{{ section.settings.scheme }} av-revs" id="av-rv-{{ section.id }}">
+  <div class="av__wrap">
+    <div class="av-rv__top">
+      <h2 class="av__h2">{{ section.settings.title }}</h2>
+      <div class="av-rv__nav">
+        <button type="button" class="av-rv__btn" data-dir="-1" aria-label="Reseña anterior">&#8592;</button>
+        <button type="button" class="av-rv__btn" data-dir="1" aria-label="Reseña siguiente">&#8594;</button>
+      </div>
+    </div>
+    {%- if shown == 0 -%}<p class="av__note">Agregá reseñas reales con "Agregar bloque → Reseña". Sin reseñas, esta sección no se muestra.</p>{%- endif -%}
+    <div class="av-revs__grid" data-track>
+      {%- for block in section.blocks -%}
+        {%- if block.settings.text != blank -%}
+        <div class="av-rev" {{ block.shopify_attributes }}>
+          <div class="av-rev__s" aria-label="{{ block.settings.rating }} de 5">{%- for i in (1..5) -%}{% if i <= block.settings.rating %}★{% else %}☆{% endif %}{%- endfor -%}</div>
+          <p>{{ block.settings.text }}</p>
+          <b>{{ block.settings.name }}{% if block.settings.product != blank %} · {{ block.settings.product }}{% endif %}</b>
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="av-rv__dots" data-dots></div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('av-rv-{{ section.id }}');
+    if (!root) return;
+    var track = root.querySelector('[data-track]');
+    var dotsBox = root.querySelector('[data-dots]');
+    var prev = root.querySelector('[data-dir="-1"]'), next = root.querySelector('[data-dir="1"]');
+    var auto = {{ section.settings.autoplay | json }}, timer = null;
+    function cards() { return track.querySelectorAll('.av-rev'); }
+    function step() { var c = cards(); if (c.length < 2) return track.clientWidth; return c[1].offsetLeft - c[0].offsetLeft; }
+    function pages() { var c = cards().length, s = step(); var vis = Math.max(1, Math.round(track.clientWidth / s)); return Math.max(1, c - vis + 1); }
+    function current() { return Math.round(track.scrollLeft / step()); }
+    function update() {
+      var n = pages(), i = Math.min(current(), n - 1);
+      if (dotsBox.children.length !== n) {
+        dotsBox.innerHTML = '';
+        for (var k = 0; k < n; k++) {
+          var d = document.createElement('button'); d.type = 'button'; d.className = 'av-rv__dot'; d.setAttribute('aria-label', 'Ir a la reseña ' + (k + 1));
+          (function (k) { d.addEventListener('click', function () { go(k); }); })(k);
+          dotsBox.appendChild(d);
+        }
+      }
+      dotsBox.style.display = n > 1 ? '' : 'none';
+      Array.prototype.forEach.call(dotsBox.children, function (d, k) { d.classList.toggle('is-on', k === i); });
+      if (prev) prev.disabled = i <= 0;
+      if (next) next.disabled = i >= n - 1;
+    }
+    function go(i) { var n = pages(); if (i < 0) i = 0; if (i > n - 1) i = n - 1; track.scrollTo({ left: i * step(), behavior: 'smooth' }); }
+    root.querySelectorAll('.av-rv__btn').forEach(function (b) { b.addEventListener('click', function () { go(current() + Number(b.dataset.dir)); restart(); }); });
+    var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(update, 80); }, { passive: true });
+    window.addEventListener('resize', update);
+    function restart() {
+      if (!auto) return;
+      clearInterval(timer);
+      timer = setInterval(function () { var n = pages(), i = current(); go(i >= n - 1 ? 0 : i + 1); }, 5000);
+    }
+    track.addEventListener('pointerdown', function () { clearInterval(timer); });
+    update(); restart();
+  })();
+</script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Aurum · Reseñas",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "bordo", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "Lo que dicen nuestras clientas" },
+    { "type": "checkbox", "id": "autoplay", "label": "Pasar solas cada 5 segundos", "default": false }
+  ],
+  "blocks": [ { "type": "review", "name": "Reseña", "settings": [
+    { "type": "text", "id": "name", "label": "Nombre (ej.: Sofía M.)", "default": "Nombre" },
+    { "type": "text", "id": "product", "label": "Producto", "default": "Faja invisible" },
+    { "type": "range", "id": "rating", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+    { "type": "textarea", "id": "text", "label": "Opinión (textual, como la escribió la clienta)" } ] } ],
+  "presets": [ { "name": "Aurum · Reseñas" } ]
+}
+{% endschema %}
