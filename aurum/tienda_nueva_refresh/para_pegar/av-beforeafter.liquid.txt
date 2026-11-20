@@ -1,0 +1,159 @@
+{%- liquid
+  assign btn_label = section.settings.button_label | default: 'Quiero la mía'
+  assign btn_link = section.settings.button_link | default: '#MainContent'
+  if template.name == 'product' and btn_link == product.url
+    assign btn_link = '#MainContent'
+  endif
+-%}
+<section class="av av--{{ section.settings.scheme }} av-ba av-ba2" data-av-ba>
+  <div class="av__wrap">
+    <h2 class="av__h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.subtitle != blank -%}<p class="av-ba2__sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+    <div class="av-ba__tabs" role="tablist">
+      {%- for block in section.blocks -%}
+        <button class="av-ba__tab" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-av-tab="{{ forloop.index }}">{{ block.settings.zone }}</button>
+      {%- endfor -%}
+    </div>
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign z = block.settings.zone | downcase
+        assign lay = block.settings.layout
+        if lay == 'auto'
+          if z contains 'brazo'
+            assign lay = 'tb'
+          else
+            assign lay = 'lr'
+          endif
+        endif
+        assign d1 = 'Efecto lift al instante'
+        assign d2 = 'Se adapta a cada movimiento'
+        assign d3 = 'Invisible bajo la ropa'
+        if z contains 'pierna'
+          assign d1 = 'Alisa y levanta la piel del muslo'
+          assign d2 = 'Acompaña cada movimiento sin despegarse'
+          assign d3 = 'Invisible bajo jeans, shorts y vestidos'
+        elsif z contains 'abdomen' or z contains 'panza'
+          assign d1 = 'Abdomen más plano y parejo'
+          assign d2 = 'No aprieta ni marca como una faja'
+          assign d3 = 'Ideal para bodys y vestidos ajustados'
+        elsif z contains 'brazo'
+          assign d1 = 'Tensa la piel suelta del brazo'
+          assign d2 = 'Para musculosas y tops sin mangas'
+          assign d3 = 'Fina y cómoda bajo la ropa'
+        endif
+        assign b1 = block.settings.b1 | default: d1
+        assign b2 = block.settings.b2 | default: d2
+        assign b3 = block.settings.b3 | default: d3
+      -%}
+      <div class="av-ba__panel av-ba2__panel" data-av-panel="{{ forloop.index }}" {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+        <div class="av-ba__img av-ba2__img av-ba2__img--{{ lay }}">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: block.settings.zone, sizes: '(min-width: 990px) 600px, 100vw' }}
+          {%- elsif block.settings.fallback != blank -%}
+            <img src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.zone | escape }}" loading="lazy" width="844" height="846">
+          {%- endif -%}
+          {%- unless lay == 'none' -%}
+            {%- if section.settings.label_before != blank -%}<span class="av-pill av-ba2__pill av-ba2__pill--a">{{ section.settings.label_before }}</span>{%- endif -%}
+            {%- if section.settings.label_after != blank -%}<span class="av-pill av-ba2__pill av-ba2__pill--b">{{ section.settings.label_after }}</span>{%- endif -%}
+          {%- endunless -%}
+        </div>
+        <div class="av-ba2__card">
+          <span class="av-ba2__eb">{{ section.settings.eyebrow | default: 'Resultado en' }} {{ block.settings.zone | downcase }}</span>
+          <p class="av-ba2__quote">{{ block.settings.text }}</p>
+          <ul class="av-ba2__list">
+            {%- if b1 != '-' -%}<li>{{ b1 }}</li>{%- endif -%}
+            {%- if b2 != '-' -%}<li>{{ b2 }}</li>{%- endif -%}
+            {%- if b3 != '-' -%}<li>{{ b3 }}</li>{%- endif -%}
+          </ul>
+          {%- if block.settings.name != blank -%}<p class="av-ba2__name">{{ block.settings.name }}</p>{%- endif -%}
+          {%- if section.settings.show_button -%}
+            <div class="av-ba2__cta">
+              <a class="av__btn" href="{{ btn_link }}">{{ btn_label }}</a>
+              {%- if section.settings.cta_note != blank -%}<p class="av-ba2__ctanote">{{ section.settings.cta_note }}</p>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+    {%- if section.settings.note != blank -%}<p class="av__note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+<style>
+  .av-ba2__sub{text-align:center;font-size:clamp(16px,1.4vw,19px);opacity:.75;margin:10px auto 0;max-width:620px}
+  .av-ba2 .av-ba2__panel{align-items:stretch;gap:32px}
+  .av-ba2 .av-ba__tab{font-weight:700;font-size:18px}
+  .av-ba2__cta .av__btn{font-weight:700}
+  .av-ba2 .av-ba2__pill{top:16px;left:auto;right:auto;text-transform:lowercase}
+  .av-ba2__img--lr .av-ba2__pill--a{left:16px}
+  .av-ba2__img--lr .av-ba2__pill--b{right:16px}
+  .av-ba2__img--tb .av-ba2__pill--a{left:16px}
+  .av-ba2__img--tb .av-ba2__pill--b{left:16px;top:calc(50% + 16px)}
+  .av-ba2__card{display:flex;flex-direction:column;justify-content:center;gap:0;border-radius:30px;padding:clamp(28px,3.4vw,52px);background:rgba(255,255,255,.6)}
+  .av--rosa .av-ba2__card{background:rgba(255,255,255,.45)}
+  .av--bordo .av-ba2__card,.av--bordo2 .av-ba2__card{background:rgba(249,212,211,.08)}
+  .av-ba2__eb{align-self:flex-start;background:var(--w);color:var(--p);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
+  .av--bordo .av-ba2__eb,.av--bordo2 .av-ba2__eb{background:var(--p);color:var(--w)}
+  .av-ba2__quote{margin:20px 0 0;font-size:clamp(24px,2.5vw,36px);font-weight:700;line-height:1.15;letter-spacing:-.035em}
+  .av-ba2__list{list-style:none;margin:26px 0 0;padding:22px 0 0;border-top:1.5px solid currentColor;border-color:rgba(59,4,8,.15);display:grid;gap:14px}
+  .av--bordo .av-ba2__list,.av--bordo2 .av-ba2__list{border-color:rgba(249,212,211,.2)}
+  .av-ba2__list li{display:flex;align-items:center;gap:12px;font-size:clamp(16px,1.35vw,19px);font-weight:600;line-height:1.3}
+  .av-ba2__list li::before{content:"✓";flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--w);color:var(--p);font-size:14px;font-weight:700}
+  .av--bordo .av-ba2__list li::before,.av--bordo2 .av-ba2__list li::before{background:var(--p);color:var(--w)}
+  .av-ba2__name{margin:18px 0 0;font-size:15px;opacity:.7}
+  .av-ba2__cta{margin-top:30px}
+  .av-ba2__cta .av__btn{width:100%;margin:0}
+  .av-ba2__ctanote{margin:12px 0 0;text-align:center;font-size:14px;opacity:.7}
+  @media (max-width:749px){
+    .av-ba2 .av-ba2__panel{gap:16px}
+    .av-ba2 .av-ba__tabs{gap:8px;margin-top:24px}
+    .av-ba2 .av-ba__tab{padding:10px 20px;font-size:16px}
+    .av-ba2__card{border-radius:24px;padding:24px 20px;text-align:left}
+    .av-ba2 .av-ba2__pill{font-size:13px;padding:6px 12px;top:12px}
+    .av-ba2__img--lr .av-ba2__pill--a,.av-ba2__img--tb .av-ba2__pill--a,.av-ba2__img--tb .av-ba2__pill--b{left:12px}
+    .av-ba2__img--lr .av-ba2__pill--b{right:12px}
+    .av-ba2__img--tb .av-ba2__pill--b{top:calc(50% + 12px)}
+  }
+</style>
+<script>
+  document.querySelectorAll('[data-av-ba]').forEach(function(r){
+    r.querySelectorAll('[data-av-tab]').forEach(function(t){
+      t.addEventListener('click',function(){
+        r.querySelectorAll('[data-av-tab]').forEach(function(x){x.setAttribute('aria-selected',x===t)});
+        r.querySelectorAll('[data-av-panel]').forEach(function(p){p.hidden=p.dataset.avPanel!==t.dataset.avTab});
+      });
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Aurum · Antes y después",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Color de fondo", "default": "claro", "options": [ { "value": "claro", "label": "Rosa claro" }, { "value": "rosa", "label": "Rosa" }, { "value": "bordo", "label": "Bordó" }, { "value": "bordo2", "label": "Bordó rojizo" } ] },
+    { "type": "text", "id": "title", "label": "Título", "default": "Mirá la diferencia" },
+    { "type": "text", "id": "subtitle", "label": "Subtítulo (opcional)" },
+    { "type": "text", "id": "label_before", "label": "Etiqueta antes", "default": "antes" },
+    { "type": "text", "id": "label_after", "label": "Etiqueta después", "default": "después" },
+    { "type": "text", "id": "eyebrow", "label": "Texto de la etiqueta de zona", "default": "Resultado en" },
+    { "type": "checkbox", "id": "show_button", "label": "Mostrar botón", "default": true },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Quiero la mía" },
+    { "type": "url", "id": "button_link", "label": "Link del botón" },
+    { "type": "text", "id": "cta_note", "label": "Texto debajo del botón", "default": "Envíos a todo el país · Pagá en cuotas con Mercado Pago" },
+    { "type": "text", "id": "note", "label": "Aclaración", "default": "Resultados temporales, mientras la cinta está puesta." }
+  ],
+  "blocks": [ { "type": "item", "name": "Zona", "limit": 3, "settings": [
+    { "type": "text", "id": "zone", "label": "Zona", "default": "Piernas" },
+    { "type": "image_picker", "id": "image", "label": "Foto antes/después" },
+    { "type": "select", "id": "layout", "label": "Cómo está armada la foto", "default": "auto", "options": [ { "value": "auto", "label": "Automático" }, { "value": "lr", "label": "Antes a la izquierda, después a la derecha" }, { "value": "tb", "label": "Antes arriba, después abajo" }, { "value": "none", "label": "Sin etiquetas" } ] },
+    { "type": "text", "id": "fallback", "label": "Foto del tema (no tocar)" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Efecto lift al instante, sin que se note bajo la ropa." },
+    { "type": "text", "id": "b1", "label": "Beneficio 1 (vacío = automático, - = ocultar)" },
+    { "type": "text", "id": "b2", "label": "Beneficio 2 (vacío = automático, - = ocultar)" },
+    { "type": "text", "id": "b3", "label": "Beneficio 3 (vacío = automático, - = ocultar)" },
+    { "type": "text", "id": "name", "label": "Nombre o aclaración (opcional)" } ] } ],
+  "presets": [ { "name": "Aurum · Antes y después", "blocks": [
+    { "type": "item", "settings": { "zone": "Piernas", "fallback": "av-z-piernas-2.jpg", "text": "Piernas más lisas y firmes al instante, con la cinta puesta." } },
+    { "type": "item", "settings": { "zone": "Abdomen", "fallback": "av-z-abdomen-1.jpg", "text": "El abdomen se ve más plano y parejo bajo la ropa ajustada." } },
+    { "type": "item", "settings": { "zone": "Brazos", "fallback": "av-z-brazos-1.jpg", "text": "Brazos más firmes para usar musculosas sin pensarlo." } } ] } ]
+}
+{% endschema %}
