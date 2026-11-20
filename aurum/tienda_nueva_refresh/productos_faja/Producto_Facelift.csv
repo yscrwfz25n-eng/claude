@@ -1,0 +1,26 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Variant Weight Unit,SEO Title,SEO Description,Status
+facelift,Facelift · Cinta facial,"<p><strong>Facelift · Cinta facial</strong> son tiras finas y transparentes que tensan suavemente la piel del rostro para un efecto lifting al instante. Se esconden bajo el pelo, sin agujas ni cirugía.</p>
+<ul>
+<li>Efecto lifting al instante</li>
+<li>Sin agujas ni cirugía</li>
+<li>Se esconde bajo el pelo</li>
+<li>Podés maquillarte encima</li>
+</ul>
+<h3>Cómo se usa</h3>
+<ol>
+<li>Limpiá y secá la piel, sin cremas ni maquillaje en la zona donde va la tira.</li>
+<li>Despegá el protector sin tocar el lado del adhesivo.</li>
+<li>Pegá un extremo cerca de la sien, al lado del ojo, sin tocar el párpado.</li>
+<li>Estirá suavemente hacia arriba y pegá el otro extremo dentro de la línea del pelo.</li>
+<li>Cubrí con el pelo y, si querés, maquillate encima.</li>
+</ol>
+<h3>Cómo se saca</h3>
+<p>Rociala con el Spray removedor o mojala con agua tibia, sostené la piel y despegala despacio, sin tirones.</p>
+<h3>Contenido</h3>
+<p>Cada sobre trae 10 tiras de un solo uso.</p>
+<h3>Precauciones</h3>
+<p>Probá primero en una zona pequeña. No aplicar sobre heridas, piel irritada o quemada por el sol. No aplicar sobre párpados ni cerca de los ojos. No usar más de 16 horas seguidas ni para dormir. Si aparece picazón o enrojecimiento, retirar. Uso externo. El efecto es temporal, mientras la cinta está puesta.</p>",Aurum Skin,,Cinta lifting,"linea faja, facelift, cinta facial, nuevo",FALSE,Pack,1 sobre,FACE-1,30,,deny,manual,34999,,TRUE,TRUE,g,Facelift · Cinta facial | Aurum Skin,"Tiras faciales transparentes con efecto lifting al instante. Se esconden bajo el pelo, sin agujas ni cirugía.",draft
+facelift,,,,,,,,,2 sobres,FACE-2,60,,deny,manual,49999,,TRUE,TRUE,g,,,
+facelift,,,,,,,,,3 sobres,FACE-3,90,,deny,manual,64999,,TRUE,TRUE,g,,,
+facelift,,,,,,,,,4 sobres,FACE-4,120,,deny,manual,79999,,TRUE,TRUE,g,,,
+facelift,,,,,,,,,5 sobres,FACE-5,150,,deny,manual,94999,,TRUE,TRUE,g,,,
